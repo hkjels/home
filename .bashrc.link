@@ -18,9 +18,7 @@ shopt -s globstar 2> /dev/null
 
 
 # Source scripts
-if [[ -r "$HOME/.profile" ]] then
-  source "$HOME/.profile"
-fi
+source "$HOME/.profile"
 for file in $SHELLPATH/*.sh; do
   source $file;
 done

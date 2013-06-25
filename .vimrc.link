@@ -75,7 +75,7 @@
 
   Bundle 'dkasak/manpageview'
   " Bundle 'joonty/vdebug'
-  " Bundle 'vim-scripts/Superior-Haskell-Interaction-Mode-SHIM'
+  " Bundle 'Superior-Haskell-Interaction-Mode-SHIM'
 
 " }}}
 
@@ -102,7 +102,7 @@
   Bundle 'hkjels/z.vim'
   Bundle 'mileszs/ack.vim'
   Bundle 'scrooloose/nerdtree'
-  Bundle 'vim-scripts/a.vim'
+  Bundle 'a.vim'
 
   let NERDTreeShowHidden=1
 
@@ -343,6 +343,7 @@
   Bundle 'plasticboy/vim-markdown'
   Bundle 'tpope/vim-haml'
   Bundle 'wavded/vim-stylus'
+  Bundle 'AnsiEsc.vim'
 
   augroup filetypedetect
     au BufNewFile,BufRead *.conf set filetype=apache
@@ -356,6 +357,7 @@
     au BufNewFile,BufRead *.styl set filetype=stylus
     au BufNewFile,BufRead *.json set filetype=javascript
     au BufNewFile,BufRead *.vim set filetype=vim
+    au BufNewFile,BufRead *.{color,ansi,esc} set filetype=colored
   augroup END
 
   au FileType c setlocal omnifunc=ccomplete#Complete
@@ -366,6 +368,7 @@
   au FileType php setlocal omnifunc=phpcomplete#CompletePHP
   au FileType sql setlocal omnifunc=sqlcomplete#CompleteSQL
   au FileType vim setlocal foldenable foldlevelstart=0 foldmethod=marker
+  au FileType colored :AnsiEsc
 
   " Haskell
   let g:haddock_browser="open"
