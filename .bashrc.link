@@ -1,0 +1,45 @@
+
+#
+# Bash preferences
+# ================
+#
+
+
+# Path to .shell
+SHELLPATH="$HOME/.shell"
+
+
+# Shell built-in options
+shopt -s nocaseglob
+shopt -s cdspell
+shopt -s histappend
+shopt -s autocd 2> /dev/null
+shopt -s globstar 2> /dev/null
+
+
+# Source scripts
+if [[ -r "$HOME/.profile" ]] then
+  source "$HOME/.profile"
+fi
+for file in $SHELLPATH/*.sh; do
+  source $file;
+done
+
+
+# Vi key-bindings
+bashBindings
+
+
+# Prompt
+PS1=$'\[\e[0;36m\]\w \[\e[0;34m\]$(prompt_char)\[\e[00m \]'
+PS2='> '
+PS4='+ '
+
+
+# Jump using `z`
+. `brew --prefix`/etc/profile.d/z.sh
+
+
+# Github alias
+eval "$(hub alias -s)"
+

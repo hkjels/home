@@ -1,0 +1,555 @@
+"
+" .vimrc
+" ======
+"
+" __My personal preferences for vim, gvim and mvim.
+"
+" ### Worth noting
+"
+" * Uses Vundle to manage packages
+" * Arrow-keys are disabled in favor of hjkl
+" * Comes bundled with a bunch of great plugins
+"
+" Author: Henrik Kjelsberg <hkjels@me.com> (http://take.no/)
+" Version: 0.0.1
+"
+
+
+" Vundle --------------------------------------------------------------- {{{
+" @see https://github.com/gmarik/vundle
+
+  filetype off                    " Necessary to make Vundle happy
+  set rtp+=~/.vim/bundle/vundle/  " Path to bundles
+  call vundle#rc()                " Let Vundle to it's magic
+  Bundle 'gmarik/vundle'
+
+" }}}
+
+
+" System --------------------------------------------------------------- {{{
+
+  Bundle 'Shougo/vimproc.vim'
+  Bundle 'mhinz/vim-startify'
+  Bundle 'sjl/gundo.vim'
+  Bundle 'Shougo/unite.vim'
+  Bundle 'osyo-manga/unite-quickfix'
+  Bundle 'thinca/vim-unite-history'
+  Bundle 'jeffkreeftmeijer/vim-numbertoggle'
+
+  filetype plugin indent on
+  set shell=bash\ --login             " Bring on a familiar environment
+  set nocompatible                    " Turn off vi-compatibility
+  set exrc                            " Source .exrc files automatically
+  set nobk nowb                       " Turn off backup
+  set ttyfast                         " Faster repeated editing
+  set mouse=a                         " Enable mouse-input
+  set hidden                          " Allow un-saved buffers in background
+  set backspace=indent,eol,start      " Make backspace behave normally.
+  set directory=~/.vim/swap           " Swap files
+  set ffs=unix,dos,mac                " Default file types
+  set history=1000                    " Remember more commands and search history
+  set undolevels=1000                 " Use many muchos levels of undo
+  set modelines=0                     " Prevents modeline exploits
+  set autowriteall                    " Save when shifting focus
+  set autoread                        " Reload files changed outside of vim
+  set title                           " Change the terminal's title
+  set visualbell                      " No bells!
+  set noerrorbells                    " No whistles!
+
+  " Share system clipboard
+  if $TMUX == ''
+    set clipboard+=unnamed
+  endif
+
+  " Unite
+  call unite#custom#source('file,file/new,buffer,file_rec', 'matchers', 'matcher_fuzzy')
+  call unite#custom#source('file,file/new,buffer,file_rec', 'ignore_pattern', '/.git/')
+  let g:unite_source_grep_command = 'ack-grep'
+  let g:unite_source_grep_default_opts = '--no-heading --no-color -a'
+  let g:unite_source_grep_recursive_opt = ''
+
+" }}}
+
+
+" Debugging ------------------------------------------------------------ {{{
+
+  Bundle 'dkasak/manpageview'
+  " Bundle 'joonty/vdebug'
+  " Bundle 'vim-scripts/Superior-Haskell-Interaction-Mode-SHIM'
+
+" }}}
+
+
+" Git ------------------------------------------------------------------ {{{
+
+  Bundle 'airblade/vim-gitgutter'
+  Bundle 'gregsexton/gitv'
+  Bundle 'kablamo/vim-git-log'
+  Bundle 'mattn/gist-vim'
+  Bundle 'tpope/vim-fugitive'
+
+  " Gist
+  let g:gist_clip_command = 'pbcopy'
+  let g:gist_detect_filetype = 2
+  let g:gist_show_privates = 1
+
+" }}}
+
+
+" Navigation ----------------------------------------------------------- {{{
+
+  Bundle 'Lokaltog/vim-easymotion'
+  Bundle 'hkjels/z.vim'
+  Bundle 'mileszs/ack.vim'
+  Bundle 'scrooloose/nerdtree'
+  Bundle 'vim-scripts/a.vim'
+
+  let NERDTreeShowHidden=1
+
+" }}}
+
+
+" Completion ----------------------------------------------------------- {{{
+
+  Bundle 'Shougo/neocomplcache'
+  Bundle 'eagletmt/ghcmod-vim'
+  Bundle 'ujihisa/neco-ghc'
+
+  if has("wildmenu")
+    set wildmenu                                      " Completions in a menu
+    set wildmode=list:longest,full                    " Fine grained completion
+    set wildignore+=.hg,.git,.svn                     " Version control
+    set wildignore+=gen                               " Generated files
+    set wildignore+=*.aux,*.out,*.toc                 " LaTeX intermediate files
+    set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg    " Binary images
+    set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest  " Compiled object files
+    set wildignore+=*.sw?                             " Vim swap files
+    set wildignore+=*.DS_Store                        " MacOs meta-file
+    set wildignore+=*.luac                            " Lua byte code
+    set wildignore+=*.pyc                             " Python byte code
+    set wildignore+=**.class                          " Cursed Java class files
+    set wildignore+=node_modules                      " Node project-dependencies
+
+    " Case in-sensitive completion
+    if exists("&wildignorecase")
+        set wildignorecase
+    endif
+  endif
+
+" }}}
+
+
+" Aesthetics ----------------------------------------------------------- {{{
+
+  Bundle 'hkjels/focus.vim'
+  Bundle 'hkjels/status.vim'
+
+  syntax enable                       " Enable syntax highlighting
+  set background=dark                 " Use dark-theme
+  colorscheme focus                   " Color-scheme to use
+
+  set list listchars=tab:→\ ,trail:·  " Show 'invisible characters'
+  set hlsearch                        " Highlight search terms
+  set number                          " Show line-numbers
+  set colorcolumn=76                  " Practice short code
+  set nowrap                          " Don't wrap lines
+  set showmatch                       " Show matching parenthesis
+  set guicursor+=a:blinkon0           " Disable the blinking cursor
+  set scrolloff=10                    " Keep the cursor closter to center
+
+  " Hide toolbar when using graphical vim
+  if has('gui_running')
+    set guioptions=-t
+  endif
+
+  match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'  " Highlight VCS conflicts
+
+" }}}
+
+
+" Search --------------------------------------------------------------- {{{
+
+  set gdefault                        " Search with global by default
+  set ignorecase                      " Ignore case
+  set smartcase                       " Ignore case if pattern is lowercase
+  set incsearch                       " Show search matches as you type
+
+" }}}
+
+
+" Editing -------------------------------------------------------------- {{{
+
+  Bundle 'AndrewRadev/sideways.vim'
+  Bundle 'Raimondi/delimitMate'
+  Bundle 'atourino/jinja.vim'
+  Bundle 'chrisbra/NrrwRgn'
+  Bundle 'gcmt/breeze.vim'
+  Bundle 'hkjels/pretty.vim'
+  Bundle 'hlissner/vim-multiedit'
+  Bundle 'jceb/vim-shootingstar'
+  Bundle 'msanders/snipmate.vim'
+  Bundle 'scrooloose/syntastic'
+  Bundle 'tomtom/tcomment_vim'
+  Bundle 'tpope/vim-endwise'
+  Bundle 'tpope/vim-ragtag'
+  Bundle 'tpope/vim-speeddating'
+  Bundle 'tpope/vim-surround'
+  Bundle 'tpope/vim-unimpaired'
+  Bundle 'tsaleh/vim-align'
+
+  set spell                           " Use spell-checker
+  set encoding=utf-8                  " Default encoding
+  set ts=2 sw=2 sts=2 et sta          " Use two-space indentation by default
+  set shiftround
+  set cindent
+  set autoindent
+  set smartindent
+
+  " Absolute numbering when focus is lost.
+  :au FocusLost   * :set number
+  :au BufRead,FocusGained * :set relativenumber
+
+  " Absolute numbering in insert-mode
+  autocmd InsertEnter * :set number
+  autocmd InsertLeave * :set relativenumber
+
+  " SnipMate
+  let g:snippets_dir = "~/.vim/bundle/snipmate-snippets"
+
+  " Syntastic
+  set laststatus=2
+  let g:syntastic_enable_signs=1
+  let g:syntastic_auto_jump=0
+
+" }}}
+
+
+" Tags ----------------------------------------------------------------- {{{
+
+  Bundle 'majutsushi/tagbar'
+  Bundle 'tsukkee/unite-tag'
+
+  set tags=./tags;              " Store tags with each project
+
+  let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+  let g:tagbar_autoshowtag = 1
+  let g:tagbar_type_coffee = {
+    \ 'ctagstype' : 'coffee',
+    \ 'kinds'     : [
+      \ 'c:classes',
+      \ 'm:methods',
+      \ 'f:functions',
+      \ 'v:variables',
+      \ 'f:fields',
+    \ ]
+  \ }
+  let g:tagbar_type_markdown = {
+    \ 'ctagstype' : 'markdown',
+    \ 'kinds' : [
+      \ 'h:Heading_L1',
+      \ 'i:Heading_L2',
+      \ 'k:Heading_L3'
+    \ ]
+  \ }
+  let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+      \ 'm:modules',
+      \ 'c:classes',
+      \ 'd:describes',
+      \ 'C:contexts',
+      \ 'f:methods',
+      \ 'F:singleton methods'
+    \ ]
+  \ }
+  let g:tagbar_type_scala = {
+      \ 'ctagstype' : 'Scala',
+      \ 'kinds'     : [
+          \ 'p:packages:1',
+          \ 'V:values',
+          \ 'v:variables',
+          \ 'T:types',
+          \ 't:traits',
+          \ 'o:objects',
+          \ 'a:aclasses',
+          \ 'c:classes',
+          \ 'r:cclasses',
+          \ 'm:methods'
+      \ ]
+  \ }
+  if executable('lushtags')
+      let g:tagbar_type_haskell = {
+          \ 'ctagsbin' : 'lushtags',
+          \ 'ctagsargs' : '--ignore-parse-error --',
+          \ 'kinds' : [
+              \ 'm:module:0',
+              \ 'e:exports:1',
+              \ 'i:imports:1',
+              \ 't:declarations:0',
+              \ 'd:declarations:1',
+              \ 'n:declarations:1',
+              \ 'f:functions:0',
+              \ 'c:constructors:0'
+          \ ],
+          \ 'sro' : '.',
+          \ 'kind2scope' : {
+              \ 'd' : 'data',
+              \ 'n' : 'newtype',
+              \ 'c' : 'constructor',
+              \ 't' : 'type'
+          \ },
+          \ 'scope2kind' : {
+              \ 'data' : 'd',
+              \ 'newtype' : 'n',
+              \ 'constructor' : 'c',
+              \ 'type' : 't'
+          \ }
+      \ }
+  endif
+
+
+" }}}
+
+
+" Window management ---------------------------------------------------- {{{
+
+  au VimResized * exec "normal! \<c-w>="
+
+  set splitbelow
+  set splitright
+
+" }}}
+
+
+" Folds ---------------------------------------------------------------- {{{
+
+  set foldmethod=indent
+  set foldnestmax=3
+  set nofoldenable
+
+" }}}
+
+
+" Languages ------------------------------------------------------------ {{{
+
+  Bundle "vim-ruby/vim-ruby"
+  Bundle 'chrisbra/csv.vim'
+  Bundle 'digitaltoad/vim-jade'
+  Bundle 'guileen/vim-node'
+  Bundle 'jcf/vim-latex'
+  Bundle 'jelera/vim-javascript-syntax'
+  Bundle 'kchmck/vim-coffee-script'
+  Bundle 'leshill/vim-json'
+  Bundle 'lukerandall/haskellmode-vim'
+  Bundle 'plasticboy/vim-markdown'
+  Bundle 'tpope/vim-haml'
+  Bundle 'wavded/vim-stylus'
+
+  augroup filetypedetect
+    au BufNewFile,BufRead *.conf set filetype=apache
+    au BufNewFile,BufRead *.{csv,dat,dsv} set filetype=csv
+    au BufNewFile,BufRead *.coffee set filetype=coffee
+    au BufNewFile,BufRead *.hs compiler ghc
+    au BufNewFile,BufRead Gemfile, Rakefile, Vagrantfile, Thorfile set filetype=ruby
+    au BufNewFile,BufRead Procfile, Guardfile, config.ru, *.rake set filetype=ruby
+    au BufNewFile,BufRead *.jade set filetype=jade
+    au BufNewFile,BufRead *.{md,markdown,mdown,mkd} set filetype=markdown
+    au BufNewFile,BufRead *.styl set filetype=stylus
+    au BufNewFile,BufRead *.json set filetype=javascript
+    au BufNewFile,BufRead *.vim set filetype=vim
+  augroup END
+
+  au FileType c setlocal omnifunc=ccomplete#Complete
+  au FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  au FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+  au FileType javascript setlocal dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
+  au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  au FileType php setlocal omnifunc=phpcomplete#CompletePHP
+  au FileType sql setlocal omnifunc=sqlcomplete#CompleteSQL
+  au FileType vim setlocal foldenable foldlevelstart=0 foldmethod=marker
+
+  " Haskell
+  let g:haddock_browser="open"
+  let g:haddock_browser_callformat = "%s %s"
+
+  " Html
+  au FileType html set matchpairs+=<:>
+
+" }}}
+
+
+" Key-mappings --------------------------------------------------------- {{{
+
+  " Change leader
+  let mapleader = ","
+  let g:mapleader = ","
+
+  " Buffers
+  nmap <leader>b :ls<CR>:buffer<Space>
+
+  " Fugitive
+  nnoremap <Leader>gb :Gblame<cr>
+  nnoremap <Leader>gd :Gdiff<cr>
+  nnoremap <Leader>gs :Gstatus<cr>
+
+  " Unite mappings
+  nmap <space> [unite]
+  nnoremap [unite] <nop>
+  nnoremap [unite]f :Unite -start-insert file_mru file_rec/async:!<cr>
+  nnoremap [unite]b :Unite bookmark buffer<cr>
+  nnoremap [unite]/ :Unite -no-quit -buffer-name=search grep:.<cr>
+  nnoremap [unite]y :Unite history/yanks<cr>
+  nnoremap [unite]s :Unite -quick-match buffer<cr>
+  nnoremap [unite]t :Unite -buffer-name=tags tags tags/file<cr>
+
+  " Better focus on search matches
+  nnoremap n nzzzv
+  nnoremap N Nzzzv
+
+  " Remove highlighted search-query with
+  nnoremap <CR> :nohlsearch<CR>
+  nnoremap <silent> <leader>/ :nohlsearch<CR>
+
+  " Convert jade to html
+  if exists('g:jade')
+    fun! s:Jaded(str)
+      let str = a:str
+      let shift = matchstr(str, '\ ')
+      silent echo str !jade --pretty
+    endfun
+
+    vmap <leader>j :call s:Jaded(@)<cr><esc>
+  endif
+
+  " Normalize regular-expression searches
+  nnoremap / /\v
+  vnoremap / /\v
+
+  " Add todo
+  nnoremap <leader>t I<cr><esc>kiTODO <esc>:TComment<esc>A
+
+  " Sudo like a boss
+  cmap w!! w !sudo tee % >/dev/null
+  cmap x!! x !sudo tee % >/dev/null
+
+  " Navigate by row instead of line
+  nnoremap j gj
+  nnoremap k gk
+
+  " Expected behavior of yank
+  nnoremap Y y$
+
+  " Ack
+  cmap ack Ack! 
+  nnoremap <leader>a :Ack! 
+
+  " TagBar
+  nnoremap <silent> <F2> :TagbarToggle<CR>
+  nnoremap <silent> <F3> :!/usr/local/bin/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
+  " Set cwd to this file's path
+  nnoremap <Leader>cd :cd %:h<CR>
+
+  " Sideways
+  nnoremap <c-h> :SidewaysLeft<cr>
+  nnoremap <c-l> :SidewaysRight<cr>
+
+  " I would say it's ok to use the mouse when your reading
+  " browsing code.
+  :map <2-LeftMouse> :exe "tag ". expand("<cword>")<CR>
+
+  " Force the use of hjkl keys to move around
+  map <up> <nop>
+  map <down> <nop>
+  map <left> <nop>
+  map <right> <nop>
+  inoremap <left>  <nop>
+  inoremap <right> <nop>
+  inoremap <up>    <nop>
+  inoremap <down>  <nop>
+
+  " Staying focused
+  nnoremap <C-f> :call ToggleFocusMode#ToggleFocusMode()<cr>
+  nnoremap <leader>f :call ToggleSchemeFlavor#ToggleSchemeFlavor()<cr>
+  nnoremap <C-n> :call NumberToggle()<cr>
+
+  " Increment/decrement numbers
+  nnoremap + <c-a>
+  nnoremap - <c-x>
+
+  " Prevent de-select when indenting blocks
+  vnoremap < <gv
+  vnoremap > >gv
+
+  " Sparkup
+  let g:sparkupExecuteMapping = '<c-y>'
+  let g:sparkupNextMapping = '<c-k>'
+
+  " Quick-open directory
+  nmap <leader>ew :e <C-R>=expand('%:h').'/'<cr>
+  nmap <leader>es :sp <C-R>=expand('%:h').'/'<cr>
+  nmap <leader>ev :vsp <C-R>=expand('%:h').'/'<cr>
+  nmap <leader>et :tabe <C-R>=expand('%:h').'/'<cr>
+
+  " Window manipulation
+  map <c-w>+ :10winc ><cr>
+  map <c-w>- :10winc <<cr>
+  nnoremap <C-J> <C-W><C-J>
+  nnoremap <C-K> <C-W><C-K>
+  nnoremap <C-L> <C-W><C-L>
+  nnoremap <C-H> <C-W><C-H>
+
+  " Easy tab-switching
+  noremap <d-s-right> :tabnext<cr>
+  noremap <d-s-left> :tabprevious<cr>
+
+  if has("gui_macvim") && has("gui_running")
+    " Map Command-# to switch tabs
+    map  <D-0> 0gt
+    imap <D-0> <Esc>0gt
+    map  <D-1> 1gt
+    imap <D-1> <Esc>1gt
+    map  <D-2> 2gt
+    imap <D-2> <Esc>2gt
+    map  <D-3> 3gt
+    imap <D-3> <Esc>3gt
+    map  <D-4> 4gt
+    imap <D-4> <Esc>4gt
+    map  <D-5> 5gt
+    imap <D-5> <Esc>5gt
+    map  <D-6> 6gt
+    imap <D-6> <Esc>6gt
+    map  <D-7> 7gt
+    imap <D-7> <Esc>7gt
+    map  <D-8> 8gt
+    imap <D-8> <Esc>8gt
+    map  <D-9> 9gt
+    imap <D-9> <Esc>9gt
+  else
+    " Map Control-# to switch tabs
+    map  <C-0> 0gt
+    imap <C-0> <Esc>0gt
+    map  <C-1> 1gt
+    imap <C-1> <Esc>1gt
+    map  <C-2> 2gt
+    imap <C-2> <Esc>2gt
+    map  <C-3> 3gt
+    imap <C-3> <Esc>3gt
+    map  <C-4> 4gt
+    imap <C-4> <Esc>4gt
+    map  <C-5> 5gt
+    imap <C-5> <Esc>5gt
+    map  <C-6> 6gt
+    imap <C-6> <Esc>6gt
+    map  <C-7> 7gt
+    imap <C-7> <Esc>7gt
+    map  <C-8> 8gt
+    imap <C-8> <Esc>8gt
+    map  <C-9> 9gt
+    imap <C-9> <Esc>9gt
+  endif
+
+  " Allow undo for Insert Mode ^u (thanks, osse!) - see: :help i_CTRL-G_u
+  inoremap <C-u> <C-g>u<C-u>
+
+" }}}
+

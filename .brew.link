@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+
+# Make sure Homebrew is up to par
+
+brew update
+
+
+# Terribly useful stuff
+
+brew install        \
+  ack               \
+  aria2             \
+  bash              \
+  bash-completion2  \
+  ctags             \
+  ghc               \
+  gist              \
+  git               \
+  git-extras        \
+  git-now           \
+  haskell-platform  \
+  hub               \
+  node              \
+  pipeviewer        \
+  tmux              \
+  tree              \
+  vim               \
+  wget              \
+  wrk               \
+  z
+
+
+# Clean out the cellar
+
+brew cleanup
+

@@ -1,0 +1,33 @@
+
+# Some vi-like navigation
+set-window-option -g mode-keys vi
+
+# 256 color-support
+set -g default-terminal "screen-256color"
+
+# Keybindings to make resizing easier
+bind -r C-h resize-pane -L 5
+bind -r C-j resize-pane -D 5
+bind -r C-k resize-pane -U 5
+bind -r C-l resize-pane -R 5
+
+# Select panes like vim
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Clear-screen
+bind -n C-k send-keys -R \; clear-history
+
+# Automatic window-naming
+setw -g automatic-rename
+
+# Statusbar
+set -g status-fg colour48
+set -g status-bg colour36
+set -g status-left '#H:#S'
+set -g status-right '%a %b %d, %Y %H:%M'
+set-window-option -g window-status-current-fg colour230
+set-window-option -g window-status-current-bg colour1
+

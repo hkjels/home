@@ -1,0 +1,7 @@
+
+# Quick tab-completion
+set show-all-if-ambiguous on
+
+# Case in-sensitive completion
+set completion-ignore-case on
+
