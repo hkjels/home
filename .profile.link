@@ -1,0 +1,29 @@
+
+# Add to PATH
+
+export PATH=$PATH:/usr/local/sbin
+export PATH=$PATH:/usr/local/share/npm/bin
+
+
+# Locale
+
+export LANG="en_US"
+export LC_ALL="en_US.UTF-8"
+
+
+# Editor
+
+export EDITOR='vim'
+
+
+# History
+
+export HISTCONTROL=ignoredups
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+
+
+# Manpage
+
+export MANPAGER="less -X"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+

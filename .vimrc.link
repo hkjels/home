@@ -99,7 +99,6 @@
 " Navigation ----------------------------------------------------------- {{{
 
   Bundle 'Lokaltog/vim-easymotion'
-  Bundle 'hkjels/z.vim'
   Bundle 'mileszs/ack.vim'
   Bundle 'scrooloose/nerdtree'
   Bundle 'a.vim'
