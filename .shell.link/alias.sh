@@ -19,7 +19,7 @@ alias POST='burl POST'
 alias PUT='burl PUT'
 alias DEL='burl DELETE'
 alias HEAD='burl -I'
-alias mux='tmux attach || tmux new'
+alias mux='tmux -u attach || tmux -u new'
 
 
 # Date & time

@@ -12,7 +12,6 @@ brew install        \
   ack               \
   aria2             \
   bash              \
-  bash-completion2  \
   ctags             \
   ghc               \
   gist              \
@@ -21,8 +20,10 @@ brew install        \
   git-now           \
   haskell-platform  \
   hub               \
+  most              \
   node              \
   pipeviewer        \
+  python            \
   tmux              \
   tree              \
   vim               \

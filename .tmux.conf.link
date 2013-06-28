@@ -1,15 +1,27 @@
 
+# Make use of the native MacOs clip-board
+set-option -g default-command "reattach-to-user-namespace -l bash"
+
 # Some vi-like navigation
 set-window-option -g mode-keys vi
+
+# Allow mouse-input for scrolling history,
+# switching panes and resizing panes.
+setw -g mode-mouse on
+set-option -g mouse-select-pane on
+set -g mouse-resize-pane on
+
+# One indexed panes for easier switching
+set -g base-index 1
 
 # 256 color-support
 set -g default-terminal "screen-256color"
 
 # Keybindings to make resizing easier
-bind -r C-h resize-pane -L 5
-bind -r C-j resize-pane -D 5
-bind -r C-k resize-pane -U 5
-bind -r C-l resize-pane -R 5
+bind -r C-h resize-pane -L 10
+bind -r C-j resize-pane -D 10
+bind -r C-k resize-pane -U 10
+bind -r C-l resize-pane -R 10
 
 # Select panes like vim
 bind h select-pane -L
@@ -18,16 +30,24 @@ bind k select-pane -U
 bind l select-pane -R
 
 # Clear-screen
-bind -n C-k send-keys -R \; clear-history
+bind -n C-k send-keys -R Enter clear Enter\;
+
+# Refresh tmux
+bind-key r source-file ~/.tmux.conf
+
+# Open an ssh-connection in another window
+bind-key S command-prompt -p ssh: "new-window -n %1 'ssh %1'"
 
 # Automatic window-naming
 setw -g automatic-rename
 
 # Statusbar
+set-option -g status-utf8 on
 set -g status-fg colour48
 set -g status-bg colour36
-set -g status-left '#H:#S'
-set -g status-right '%a %b %d, %Y %H:%M'
+set -g status-left-length 20
+set -g status-left '#[default] Windows:'
+set -g status-right '| %a %b %d, %Y %H:%M'
 set-window-option -g window-status-current-fg colour230
 set-window-option -g window-status-current-bg colour1
 

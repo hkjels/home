@@ -13,6 +13,8 @@ SHELLPATH="$HOME/.shell"
 shopt -s nocaseglob
 shopt -s cdspell
 shopt -s histappend
+shopt -s checkwinsize
+shopt -s no_empty_cmd_completion
 shopt -s autocd 2> /dev/null
 shopt -s globstar 2> /dev/null
 
@@ -29,7 +31,7 @@ bashBindings
 
 
 # Prompt
-PS1=$'\[\e[0;36m\]\w \[\e[0;34m\]$(prompt_char)\[\e[00m \]'
+PS1=$'\[\e[0;36m\]\w \[\e[0;96m\]$(prompt_char)\[\e[00m \]'
 PS2='> '
 PS4='+ '
 
@@ -40,4 +42,8 @@ PS4='+ '
 
 # Github alias
 eval "$(hub alias -s)"
+
+
+# Bootstrap terminal with a multiplexer
+[[ $TERM = xterm* ]] && { mux && exit 0; }
 

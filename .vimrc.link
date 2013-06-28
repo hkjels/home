@@ -62,8 +62,8 @@
   endif
 
   " Unite
-  call unite#custom#source('file,file/new,buffer,file_rec', 'matchers', 'matcher_fuzzy')
-  call unite#custom#source('file,file/new,buffer,file_rec', 'ignore_pattern', '/.git/')
+  call unite#custom#source('file,file/new,buffer,file_rec,file_rec/async', 'matchers', 'matcher_fuzzy')
+  call unite#custom#source('file,file/new,buffer,file_rec,file_rec/async', 'ignore_pattern', '/.git/')
   let g:unite_source_grep_command = 'ack-grep'
   let g:unite_source_grep_default_opts = '--no-heading --no-color -a'
   let g:unite_source_grep_recursive_opt = ''
@@ -98,6 +98,7 @@
 
 " Navigation ----------------------------------------------------------- {{{
 
+  Bundle 'hkjels/z.vim'
   Bundle 'Lokaltog/vim-easymotion'
   Bundle 'mileszs/ack.vim'
   Bundle 'scrooloose/nerdtree'
@@ -168,10 +169,10 @@
 
 " Search --------------------------------------------------------------- {{{
 
-  set gdefault                        " Search with global by default
-  set ignorecase                      " Ignore case
-  set smartcase                       " Ignore case if pattern is lowercase
-  set incsearch                       " Show search matches as you type
+  set gdefault              " Search with global by default
+  set ignorecase            " Ignore case
+  set smartcase             " Ignore case if pattern is lowercase
+  set incsearch             " Show search matches as you type
 
 " }}}
 
@@ -396,12 +397,11 @@
   " Unite mappings
   nmap <space> [unite]
   nnoremap [unite] <nop>
-  nnoremap [unite]f :Unite -start-insert file_mru file_rec/async:!<cr>
-  nnoremap [unite]b :Unite bookmark buffer<cr>
+  nnoremap [unite]f :Unite -start-insert file_rec/async:!<cr>
+  nnoremap [unite]b :Unite -start-insert bookmark buffer<cr>
   nnoremap [unite]/ :Unite -no-quit -buffer-name=search grep:.<cr>
   nnoremap [unite]y :Unite history/yanks<cr>
-  nnoremap [unite]s :Unite -quick-match buffer<cr>
-  nnoremap [unite]t :Unite -buffer-name=tags tags tags/file<cr>
+  nnoremap [unite]t :Unite -start-insert -buffer-name=tags tags tags/file<cr>
 
   " Better focus on search matches
   nnoremap n nzzzv
