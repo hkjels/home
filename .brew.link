@@ -9,7 +9,7 @@ brew update
 # Terribly useful stuff
 
 brew install        \
-  ack               \
+  ag                \
   aria2             \
   bash              \
   ctags             \
