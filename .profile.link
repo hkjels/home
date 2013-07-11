@@ -1,10 +1,15 @@
 
+# Ruby
+
+export RUBY_BIN=$(brew --prefix ruby)/bin
+
+
 # Add to PATH
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=$RUBY_BIN:$PATH
 export PATH=$HOME/bin:$PATH
 export PATH=$PATH:/usr/local/share/npm/bin
-export PATH=$PATH:/usr/local/opt/ruby/bin
 
 
 # Locale
@@ -15,7 +20,8 @@ export LC_ALL="en_US.UTF-8"
 
 # Editor
 
-export EDITOR='vim'
+export VISUAL='vim'
+export EDITOR=$VISUAL
 
 
 # History

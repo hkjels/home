@@ -1,15 +1,25 @@
 
+# Use <c-a> to access tmux control
+unbind C-b
+set -g prefix C-a
+
 # Make use of the native MacOs clip-board
-set-option -g default-command "reattach-to-user-namespace -l bash"
+set -g default-command "reattach-to-user-namespace -l bash"
+bind C-c run "tmux show-buffer | reattach-to-user-namespace pbcopy"
+bind C-v run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
+bind -t vi-copy y copy-pipe 'reattach-to-user-namespace pbcopy'
+bind -t vi-copy v begin-selection
+bind -t vi-copy V rectangle-toggle
 
 # Some vi-like navigation
-set-window-option -g mode-keys vi
+setw -g mode-keys vi
 
 # Allow mouse-input for scrolling history,
 # switching panes and resizing panes.
-setw -g mode-mouse on
-set-option -g mouse-select-pane on
+set -g mode-mouse on
+set -g mouse-select-pane on
 set -g mouse-resize-pane on
+set -g mouse-select-window on
 
 # One indexed panes for easier switching
 set -g base-index 1
@@ -29,9 +39,6 @@ bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
 
-# Clear-screen
-bind -n C-k send-keys -R Enter clear Enter\;
-
 # Refresh tmux
 bind-key r source-file ~/.tmux.conf
 
@@ -42,11 +49,11 @@ bind-key S command-prompt -p ssh: "new-window -n %1 'ssh %1'"
 setw -g automatic-rename
 
 # Statusbar
-set-option -g status-utf8 on
+set -g status-utf8 on
 set -g status-fg colour48
 set -g status-bg colour36
 set -g status-left-length 20
-set -g status-left '#[default] Windows:'
+set -g status-left '#[default] Windows: '
 set -g status-right '| %a %b %d, %Y %H:%M'
 set-window-option -g window-status-current-fg colour230
 set-window-option -g window-status-current-bg colour1
