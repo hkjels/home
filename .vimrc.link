@@ -442,5 +442,11 @@
 
 " }}}
 
+" Load additional preferences
+let s:vimrc_local = expand('~/vimrc.local')
+if filereadable(s:vimrc_local)
+  source s:vimrc_local
+endif
+
 autocmd VimEnter * NeoBundleCheck
 

@@ -1,0 +1,45 @@
+
+[core]
+  pager         = most +s +'/---'
+  excludesfile  = ~/.gitignore
+  editor        = "$EDITOR -f"
+
+[alias]
+  am       = commit -v --amend
+  br       = branch
+  branches = branch -a
+  cb       = checkout -b
+  ci       = commit -v
+  co       = checkout
+  cl       = clone --recursive
+  d        = diff --word-diff
+  lc       = show -s --format='%ct' HEAD
+  lg       = log --graph --full-history --all --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=relative
+  m        = merge
+  rb       = rebase
+  rbi      = rebase -i origin/master
+  remotes  = remote -v
+  root     = !pwd
+  s        = status -s
+  sci      = dcommit -v
+  sf       = submodule foreach
+  srb      = svn rebase
+  st       = stash
+  sta      = stash apply
+  std      = stash drop
+  stls     = stash list
+  stp      = stash pop
+  sts      = stash save
+  stu      = stash unstaged
+  tags     = tag -l
+  undo     = reset --soft HEAD^
+  unstage  = reset HEAD --
+  update   = pull --rebase
+  ctags    = !.git/hooks/ctags
+
+[diff]
+  mnemonicprefix = true
+
+[include]
+  path = ~/.gitconfig.local
+

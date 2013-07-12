@@ -20,9 +20,9 @@ shopt -s globstar 2> /dev/null
 
 
 # Source scripts
-source "$HOME/.profile"
+[ -f ~/.profile ] && . ~/.profile
 for file in $SHELLPATH/*.sh; do
-  source $file;
+  . $file;
 done
 
 
@@ -53,5 +53,12 @@ if which tmux 2>&1 >/dev/null; then
   while test -z ${TMUX}; do
       tmux attach || break
   done
+
+  # Load additional tmux-preferences
+  [ -f ~/.tmux.conf.local ] && tmux source-file ~/.tmux.conf.local
 fi
+
+
+# Load additional bash-preferences
+[ -f ~/.bashrc.local ] && . ~/.bashrc.local
 

@@ -6,18 +6,15 @@
 
 
 # Path to .shell
-
 SHELLPATH="$HOME/.shell"
 
 
 # Autoload
-
 autoload -U compinit && compinit -i
 autoload -U colors && colors
 
 
 # `man zshoptions`
-
 setopt auto_cd
 setopt pushd_ignore_dups
 setopt always_to_end
@@ -33,12 +30,9 @@ setopt interactivecomments
 
 
 # Source scripts
-
-if [[ -r $HOME/.profile ]] then
-  source "$HOME/.profile"
-fi
+[ -f ~/.profile ] && . ~/.profile
 for file in $SHELLPATH/*.sh
-  source $file
+  . $file
 
 
 # Vi key-bindings
@@ -46,24 +40,24 @@ zshBindings
 
 
 # Prompt
-
 PROMPT=$'%{$fg[yellow]%}%~%{$reset_color%} %{$fg[red]%}$(prompt_char)%{$reset_color%} '
 RPROMPT=$'$(prompt_vc)'
 
 
 # Completion
-
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 zstyle ':completion:*:*:*:processes' command "ps -u `whoami` -o pid,user,comm -w -w"
 compdef g=git
 
 
 # Jump using `z`
-
 . `brew --prefix`/etc/profile.d/z.sh
 
 
 # Github alias
-
 eval "$(hub alias -s)"
+
+
+# Load additional preferences
+[ -f ~/.zshrc.local ] && . ~/.zshrc.local
 
