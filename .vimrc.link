@@ -6,9 +6,12 @@
 "
 " ### Worth noting
 "
-" * Uses Vundle to manage packages
-" * Arrow-keys are disabled in favor of hjkl
-" * Comes bundled with a bunch of great plugins
+" * Uses Neobundle to manage packages
+" * Relative line-numbers when not in insert-mode
+" * Sane version of search/replace
+" * Arrow-keys are remapped to switch between tabs or to move 
+"   between conflicts in diff-mode
+" * Leader is mapped to space
 "
 " Author: Henrik Kjelsberg <hkjels@me.com> (http://take.no/)
 " Version: 0.0.1
@@ -71,24 +74,25 @@
   endif
 
   " Unite
-  if neobundle#is_installed('unite')
-    call unite#filters#matcher_default#use(['matcher_fuzzy'])
-    let g:unite_enable_start_insert = 1
-    let g:unite_source_file_mru_limit = 200
-    let s:unite_affects = 'file,file/new,buffer,file_rec,file_rec/async'
-    let s:unite_ignore = '/\(pear\|thrift\|gen\|.git\|.DS_Store\|node_modules\|.jpg\|.png\)/'
-    call unite#custom#source(s:unite_affects, 'ignore_pattern', s:unite_ignore)
+  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+  let g:unite_enable_start_insert = 1
+  let g:unite_source_file_mru_limit = 200
+  let s:unite_affects = 'file,file/new,buffer,file_rec,file_rec/async'
+  let s:unite_ignore = '/\(pear\|thrift\|gen\|.git\|.DS_Store\|components\|node_modules\|.jpg\|.png\)/'
+  call unite#custom#source(s:unite_affects, 'ignore_pattern', s:unite_ignore)
 
-    " Silver-searcher
-    if executable('ag')
-      let g:unite_source_grep_command = 'ag'
-    " Ack-grep
-    elseif executable('ack')
-      let g:unite_source_grep_command = 'ack'
-    endif
-    let g:unite_source_grep_default_opts = '--nogroup --nocolor --column --smart-case'
-    let g:unite_source_grep_recursive_opt = ''
+  " Silver-searcher
+  if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+  " Ack-grep
+  elseif executable('ack')
+    let g:unite_source_grep_command = 'ack'
   endif
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column --smart-case --ignore pear'
+  let g:unite_source_grep_recursive_opt = ''
+
+  " Pager
+  let vimpager_disable_x11 = 1
 
 " }}}
 
@@ -111,11 +115,22 @@
   NeoBundle 'tpope/vim-fugitive'
 
   " Gist
-  if neobundle#is_installed('gist')
-    let g:gist_clip_command = 'pbcopy'
-    let g:gist_detect_filetype = 2
-    let g:gist_show_privates = 1
-  endif
+  let g:gist_clip_command = 'pbcopy'
+  let g:gist_detect_filetype = 2
+  let g:gist_show_privates = 1
+
+  " Gitv
+  let g:Gitv_TruncateCommitSubjects = 1
+
+  " Source .exrc
+  au BufRead * call s:SourceExrc()
+  fun! s:SourceExrc()
+    let root = system('git root')
+    let exrc = root . '/.exrc'
+    if filereadable(exrc)
+      so exrc
+    endif
+  endfun
 
 " }}}
 
@@ -126,14 +141,12 @@
   NeoBundle 'Lokaltog/vim-easymotion'
   NeoBundle 'Shougo/vimfiler.vim', { 'depends' : 'Shougo/unite.vim' }
 
-  " Vimfiler"
-  if neobundle#is_installed('vimfiler.vim')
-    let g:vimfiler_as_default_explorer = 1
-    let g:vimfiler_ignore_pattern = '^\%(.git\|.tags\|.DS_Store\)$'
-    let g:vimfiler_execute_file_list = {}
-    if has('mac')
-      let g:vimfiler_execute_file_list['md'] = 'qlmanage -p '
-    endif
+  " Vimfiler
+  let g:vimfiler_as_default_explorer = 1
+  let g:vimfiler_ignore_pattern = '^\%(.git\|.DS_Store\)$'
+  let g:vimfiler_execute_file_list = {}
+  if has('mac')
+    let g:vimfiler_quick_look_command = 'qlmanage -p'
   endif
 
 " }}}
@@ -141,9 +154,49 @@
 
 " Completion ----------------------------------------------------------- {{{
 
-  NeoBundle 'Shougo/neocomplcache'
+  NeoBundle 'Shougo/neocomplete', {'depends' :
+    \ [ 'Shougo/neosnippet.git',
+    \ ['rstacruz/sparkup', {'rtp': 'vim'}],
+    \ 'honza/vim-snippets',
+    \ ]}
   NeoBundle 'eagletmt/ghcmod-vim'
   NeoBundle 'ujihisa/neco-ghc'
+
+  if neobundle#is_sourced('neocomplete')
+    let g:acp_enableAtStartup = 0
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+
+    " Plugin key-mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+    " <TAB>: completion.
+    " inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+
+    " SuperTab like snippets behavior.
+    imap <silent><expr><TAB> neosnippet#expandable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : (pumvisible() ?
+      \ "\<C-e>" : "\<TAB>")
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)"
+      \: "\<TAB>"
+
+    " Enable omni completion.
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+
+    " Enable heavy omni completion.
+    if !exists('g:neocomplete#sources#omni#input_patterns')
+      let g:neocomplete#sources#omni#input_patterns = {}
+    endif
+    let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+    let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+  endif
 
   if has("wildmenu")
     set wildmenu                                      " Completions in a menu
@@ -176,9 +229,7 @@
 
   syntax enable                       " Enable syntax highlighting
   set background=dark                 " Use dark-theme
-  if neobundle#is_installed('focus.vim')
-    colorscheme focus                   " Color-scheme to use
-  endif
+  colorscheme focus                   " Color-scheme to use
 
   set list listchars=tab:→\ ,trail:·  " Show 'invisible characters'
   set hlsearch                        " Highlight search terms
@@ -214,7 +265,6 @@
 
   NeoBundle 'Raimondi/delimitMate'
   NeoBundle 'hlissner/vim-multiedit'
-  NeoBundle 'msanders/snipmate.vim'
   NeoBundle 'scrooloose/syntastic'
   NeoBundle 'tomtom/tcomment_vim'
   NeoBundle 'tpope/vim-endwise'
@@ -232,25 +282,10 @@
   set autoindent                  " Indent based on ruleset of language
   set smartindent                 " Indent first line according to previous
 
-  " Absolute numbering when focus is lost.
-  :au FocusLost           * :set number
-  :au BufRead,FocusGained * :set relativenumber
-
-  " Absolute numbering in insert-mode
-  autocmd InsertEnter * :set number
-  autocmd InsertLeave * :set relativenumber
-
-  " SnipMate
-  if neobundle#is_installed('snipmate.vim')
-    let g:snippets_dir = "~/.vim/bundle/snipmate-snippets"
-  endif
-
   " Syntastic
-  if neobundle#is_installed('syntastic')
-    set laststatus=2
-    let g:syntastic_enable_signs=1
-    let g:syntastic_auto_jump=0
-  endif
+  set laststatus=2
+  let g:syntastic_enable_signs=1
+  let g:syntastic_auto_jump=0
 
 " }}}
 
@@ -313,13 +348,7 @@
     au BufNewFile,BufRead *.{color,ansi,esc} set filetype=colored
   augroup END
 
-  au FileType c setlocal omnifunc=ccomplete#Complete
-  au FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  au FileType html setlocal omnifunc=htmlcomplete#CompleteTags
   au FileType javascript setlocal dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
-  au FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  au FileType php setlocal omnifunc=phpcomplete#CompletePHP
-  au FileType sql setlocal omnifunc=sqlcomplete#CompleteSQL
   au FileType vim setlocal foldenable foldlevelstart=0 foldmethod=marker
   au FileType colored :AnsiEsc
 
@@ -335,10 +364,13 @@
 
 " Abbreviations -------------------------------------------------------- {{{
 
-  " Fugitive
-  cabbrev gs Gstatus
-  cabbrev gd Gdiff
+  " Git
   cabbrev gb Gblame
+  cabbrev gc Gcommit
+  cabbrev gd Gdiff
+  cabbrev gl Gitv
+  cabbrev gp Git push
+  cabbrev gs Gstatus
 
 " }}}
 
@@ -346,7 +378,7 @@
 " Key-mappings --------------------------------------------------------- {{{
 
   " Change leader
-  let g:mapleader = ","
+  let g:mapleader = " "
   let g:maplocalleader = "\\"
 
   " Navigate by row instead of line
@@ -370,6 +402,13 @@
   vnoremap ? ?\v
   cnoremap s/ s/\v
   cnoremap s@ s@\v
+
+    " Diff
+  au BufEnter * if &diff | call s:DiffMappings()
+  fun! s:DiffMappings()
+    map <up> [c<cr>
+    map <down> ]c<cr>
+  endfun
 
   " Sudo like a boss
   cmap w!! w !sudo tee % >/dev/null
@@ -408,16 +447,14 @@
   nnoremap <left> :tabprevious<cr>
 
   " Unite mappings
-  if neobundle#is_installed('unite')
-    au FileType unite call s:UniteMappings()
-    fun! s:UniteMappings()
-      noremap <buffer><silent><expr> E unite#do_action('vsplit')
-    endfun
-    nnoremap <c-p>      :Unite -buffer-name=files file_rec/async:!<cr>
-    nnoremap <c-y>      :Unite -buffer-name=history history/yank:!<cr>
-    nnoremap <leader>o  :Unite -buffer-name=outline outline<cr>
-    nnoremap <leader>/  :Unite -buffer-name=search grep:.<cr>
-  endif
+  au FileType unite call s:UniteMappings()
+  fun! s:UniteMappings()
+    noremap <buffer><silent><expr> E unite#do_action('vsplit')
+  endfun
+  nnoremap <c-p>      :Unite -buffer-name=files file_rec/async:!<cr>
+  nnoremap <c-y>      :Unite -buffer-name=history history/yank:!<cr>
+  nnoremap <leader>o  :Unite -buffer-name=outline outline<cr>
+  nnoremap <leader>/  :Unite -buffer-name=search -no-quit grep:.<cr>
 
   " Relative/absolute line-numbers
   if exists('NumberToggle')
@@ -425,28 +462,27 @@
   endif
 
   " Speeddating - quick date/number manipulation
-  if neobundle#is_installed('vim-speeddating')
-    let g:speeddating_no_mappings = 1
-    nmap  +     <Plug>SpeedDatingUp
-    nmap  -     <Plug>SpeedDatingDown
-    xmap  +     <Plug>SpeedDatingUp
-    xmap  -     <Plug>SpeedDatingDown
-    nmap d+     <Plug>SpeedDatingNowUTC
-    nmap d-     <Plug>SpeedDatingNowLocal
-  endif
+  let g:speeddating_no_mappings = 1
+  nmap  +     <Plug>SpeedDatingUp
+  nmap  -     <Plug>SpeedDatingDown
+  xmap  +     <Plug>SpeedDatingUp
+  xmap  -     <Plug>SpeedDatingDown
+  nmap d+     <Plug>SpeedDatingNowUTC
+  nmap d-     <Plug>SpeedDatingNowLocal
 
   " EasyMotion
-  if neobundle#is_installed('vim-easymotion')
-    let g:EasyMotion_leader_key = '<leader>'
-  endif
+  let g:EasyMotion_leader_key = '<leader>'
 
 " }}}
 
-" Load additional preferences
-let s:vimrc_local = expand('~/vimrc.local')
-if filereadable(s:vimrc_local)
-  source s:vimrc_local
-endif
 
-autocmd VimEnter * NeoBundleCheck
+" Load additional preferences ------------------------------------------ {{{
+  let s:vimrc_local = expand('~/vimrc.local')
+  if filereadable(s:vimrc_local)
+    source s:vimrc_local
+  endif
+
+  autocmd VimEnter * NeoBundleCheck
+" }}}
+
 

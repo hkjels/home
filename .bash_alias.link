@@ -27,3 +27,8 @@ alias mux='tmux -u attach || tmux -u new'
 
 alias today="date '+%Y-%m-%d'"
 
+
+# Completion for aliases
+
+complete -o default -o nospace -F _git g
+

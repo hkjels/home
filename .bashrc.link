@@ -5,10 +5,6 @@
 #
 
 
-# Path to .shell
-SHELLPATH="$HOME/.shell"
-
-
 # Shell built-in options
 shopt -s nocaseglob
 shopt -s cdspell
@@ -21,9 +17,8 @@ shopt -s globstar 2> /dev/null
 
 # Source scripts
 [ -f ~/.profile ] && . ~/.profile
-for file in $SHELLPATH/*.sh; do
-  . $file;
-done
+. ~/.bash_alias
+. ~/.functions.sh
 
 
 # Vi key-bindings
@@ -37,26 +32,11 @@ PS4='+ '
 
 
 # Jump using `z`
-. `brew --prefix`/etc/profile.d/z.sh
+. $(brew --prefix)/etc/profile.d/z.sh
 
 
 # Github alias
 eval "$(hub alias -s)"
-
-
-# tmux
-if which tmux 2>&1 >/dev/null; then
-  # if no session is started, start a new session
-  test -z ${TMUX} && tmux
-
-  # when quitting tmux, try to attach
-  while test -z ${TMUX}; do
-      tmux attach || break
-  done
-
-  # Load additional tmux-preferences
-  [ -f ~/.tmux.conf.local ] && tmux source-file ~/.tmux.conf.local
-fi
 
 
 # Load additional bash-preferences

@@ -8,27 +8,33 @@ brew update
 
 # Terribly useful stuff
 
-brew install        \
-  ag                \
-  aria2             \
-  bash              \
-  ctags             \
-  ghc               \
-  gist              \
-  git               \
-  git-extras        \
-  git-now           \
-  haskell-platform  \
-  hub               \
-  most              \
-  node              \
-  pipeviewer        \
-  python            \
-  tmux              \
-  tree              \
-  vim               \
-  wget              \
-  wrk               \
+brew install                  \
+  ag                          \
+  aria2                       \
+  bash                        \
+  ctags                       \
+  ghc                         \
+  gist                        \
+  git                         \
+  git-extras                  \
+  git-now                     \
+  grok                        \
+  haskell-platform            \
+  hub                         \
+  logstash                    \
+  lua                         \
+  luajit                      \
+  most                        \
+  node                        \
+  pipeviewer                  \
+  python                      \
+  readline                    \
+  reattach-to-user-namespace  \
+  tmux                        \
+  tree                        \
+  vim --with-lua --HEAD       \
+  wget                        \
+  wrk                         \
   z
 
 

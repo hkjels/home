@@ -18,6 +18,7 @@
   m        = merge
   rb       = rebase
   rbi      = rebase -i origin/master
+  next     = !git add -A; git rebase --continue
   remotes  = remote -v
   root     = !pwd
   s        = status -s
@@ -37,9 +38,19 @@
   update   = pull --rebase
   ctags    = !.git/hooks/ctags
 
-[diff]
-  mnemonicprefix = true
-
 [include]
   path = ~/.gitconfig.local
+
+[credential]
+  helper = osxkeychain
+
+[diff]
+  mnemonicprefix = true
+  tool = vimdiff
+
+[difftool]
+  prompt = false
+
+[merge]
+  tool = vimdiff
 

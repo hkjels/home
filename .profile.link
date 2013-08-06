@@ -1,7 +1,8 @@
 
-# Ruby
+# Platform specific
 
 export RUBY_BIN=$(brew --prefix ruby)/bin
+export JSSHELL=$(brew --prefix node)/bin
 
 
 # Add to PATH
@@ -10,6 +11,7 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=$RUBY_BIN:$PATH
 export PATH=$HOME/bin:$PATH
 export PATH=$PATH:/usr/local/share/npm/bin
+export PATH=$PATH:$HOME/Projects/net/zedge/bin
 
 
 # Locale
@@ -32,6 +34,13 @@ export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
 # Manpage
 
-export MANPAGER="less -X"
+export PAGER="less -X"
+export MANPAGER=$PAGER
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+
+# Completion
+if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
+  . $(brew --prefix)/share/bash-completion/bash_completion
+fi
 
