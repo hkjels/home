@@ -67,6 +67,8 @@
   set title                           " Change the terminal's title
   set visualbell                      " No bells!
   set noerrorbells                    " No whistles!
+  set ttimeout                        " Use timeout for combined key-mappings
+  set ttimeoutlen=50                  " Time you have to complete a mapped key sequence
 
   " Share system clipboard
   if $TMUX == ''
@@ -238,7 +240,8 @@
   set nowrap                          " Don't wrap lines
   set showmatch                       " Show matching parenthesis
   set guicursor+=a:blinkon0           " Disable the blinking cursor
-  set scrolloff=10                    " Keep the cursor closter to center
+  set scrolloff=10                    " Keep the cursor close to center
+  set sidescrolloff=10                " and middle
 
   " Hide toolbar when using graphical vim
   if has('gui_running')
@@ -281,6 +284,7 @@
   set cindent                     " C indentation rules"
   set autoindent                  " Indent based on ruleset of language
   set smartindent                 " Indent first line according to previous
+  set smarttab                    " Use shiftwidth to emulate tabs
 
   " Syntastic
   set laststatus=2

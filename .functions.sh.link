@@ -129,3 +129,11 @@ function bashBindings() {
   set -o vi
 }
 
+
+# Start process in the background and hide `std(out|err)`
+
+function hide() {
+  local proc=$@
+  eval "$proc &> /dev/null &"
+}
+
