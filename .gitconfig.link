@@ -14,7 +14,7 @@
   cl       = clone --recursive
   d        = diff --word-diff
   lc       = show -s --format='%ct' HEAD
-  lg       = log --graph --full-history --all --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=relative
+  lg       =  log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=relative
   m        = merge
   rb       = rebase
   rbi      = rebase -i origin/master
@@ -38,9 +38,6 @@
   update   = pull --rebase
   ctags    = !.git/hooks/ctags
 
-[include]
-  path = ~/.gitconfig.local
-
 [credential]
   helper = osxkeychain
 
@@ -53,4 +50,14 @@
 
 [merge]
   tool = vimdiff
+
+[mergetool]
+  keepBackup = false
+  prompt = false
+
+[push]
+  default = upstream
+
+[include]
+  path = ~/.gitconfig.local
 

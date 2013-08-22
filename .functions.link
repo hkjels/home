@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 
 # Find file by name
 
@@ -22,27 +24,12 @@ function mcd() {
 }
 
 
-# Character to use as prefix at the prompt
+# Output colors and their numeric value
 
-function prompt_char() {
-  git branch >/dev/null 2>/dev/null && echo '±' && return
-  echo 'λ'
-}
-
-
-# Version control information
-# TODO #Color branch name by status
-
-function prompt_vc() {
-  BRANCH=$(command git rev-parse --abbrev-ref HEAD 2>/dev/null)
-  [ $BRANCH ] && echo "($BRANCH)" || return
-}
-
-
-# Find an html-element with the specified classname
-
-function class() {
-  ack "class=.+$1"
+function colors() {
+  for code in {0..255};
+    do echo -e "\e[38;05;${code}m $code";
+  done
 }
 
 
@@ -135,5 +122,31 @@ function bashBindings() {
 function hide() {
   local proc=$@
   eval "$proc &> /dev/null &"
+}
+
+
+# Colored manpages
+
+function man() {
+  env \
+    LESS_TERMCAP_mb=$(printf "${RED}") \
+    LESS_TERMCAP_md=$(printf "${RED}") \
+    LESS_TERMCAP_me=$(printf "${RESET}") \
+    LESS_TERMCAP_se=$(printf "${RESET}") \
+    LESS_TERMCAP_so=$(printf "${CYAN}") \
+    LESS_TERMCAP_ue=$(printf "${RESET}") \
+    LESS_TERMCAP_us=$(printf "${ORANGE}") \
+      man "$@"
+}
+
+
+function customvcprompt() {
+  if [[ -n "$(vcprompt)" ]]; then
+    [[ -n "$(vcprompt -f '%m')" ]] &&
+      echo -e "${RED}$(vcprompt -f '(%b) %m ')" ||
+      echo -e "${ORANGE}$(vcprompt -f '(%b) ')"
+    return
+  fi
+  echo -e "${BLUE}λ "
 }
 

@@ -1,38 +1,48 @@
+#!/usr/bin/env bash
 
-# Add to PATH
 
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-export PATH=$HOME/bin:$PATH
-export PATH=$PATH:/usr/local/share/npm/bin
-export PATH=$PATH:$HOME/Projects/net/zedge/bin
+# Path
+
+PATH=/usr/local/bin:/usr/local/sbin:$PATH
+PATH=$PATH:$HOME/bin
+PATH=$PATH:/usr/local/share/npm/bin
+export PATH
 
 
 # Locale
 
-export LANG="en_US"
-export LC_ALL="en_US.UTF-8"
+: ${LANG:="en_US.UTF-8"}
+: ${LANGUAGE:="en"}
+: ${LC_CTYPE:="en_US.UTF-8"}
+: ${LC_ALL:="en_US.UTF-8"}
+export LANG LANGUAGE LC_CTYPE LC_ALL
 
 
 # Editor
 
-export VISUAL='vim'
-export EDITOR=$VISUAL
+VISUAL='vim'
+EDITOR=$VISUAL
+export VISUAL EDITOR
 
 
 # History
 
-export HISTCONTROL=ignoredups
-export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+HISTSIZE=32768
+HISTFILESIZE=$HISTSIZE
+HISTCONTROL=ignoredups
+HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+export HISTSIZE HISTFILESIZE HISTCONTROL HISTIGNORE
 
 
 # Manpage
-
-export PAGER="less -X"
-export MANPAGER=$PAGER
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+PAGER="less -XFSiw"
+MANPAGER=$PAGER
+MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+export PAGER MANPAGER MANPATH
 
 
 # Completion
+
 if [ -f $(brew --prefix)/share/bash-completion/bash_completion ]; then
   . $(brew --prefix)/share/bash-completion/bash_completion
 fi

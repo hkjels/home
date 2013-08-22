@@ -5,3 +5,18 @@ set show-all-if-ambiguous on
 # Case in-sensitive completion
 set completion-ignore-case on
 
+# Postfix symlinked directories with `/`
+set mark-symlinked-directories on
+
+# Prevent re-completion if cursor is mid-line
+set skip-completed-text on
+
+# Completions with the use of space; i.e. `!! `
+$if Bash
+  Space: magic-space
+$endif
+
+# Search history using your current input
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+

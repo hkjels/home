@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+SILVER='\e[38;05;122m'
+CYAN='\e[38;05;50m'
+RED='\e[38;05;197m'
+BLUE='\e[38;05;32m'
+ORANGE='\e[38;05;214m'
+RESET='\e[0;0m'
+

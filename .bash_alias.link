@@ -9,6 +9,8 @@ alias ..='cd ..'
 alias ....='cd ../..'
 alias ......='cd ../../..'
 alias mkdir='mkdir -p'
+alias running='jobs -r'
+alias stopped='jobs -s'
 
 
 # Applications
@@ -20,7 +22,7 @@ alias POST='burl POST'
 alias PUT='burl PUT'
 alias DEL='burl DELETE'
 alias HEAD='burl -I'
-alias mux='tmux -u attach || tmux -u new'
+alias tmux='tmux -u attach || tmux'
 
 
 # Date & time

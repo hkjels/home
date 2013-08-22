@@ -4,7 +4,8 @@
 "
 " __My personal preferences for vim, gvim and mvim.
 "
-" ### Worth noting
+" Worth noting
+" ------------
 "
 " * Uses Neobundle to manage packages
 " * Relative line-numbers when not in insert-mode
@@ -12,6 +13,10 @@
 " * Arrow-keys are remapped to switch between tabs or to move 
 "   between conflicts in diff-mode
 " * Leader is mapped to space
+"
+" ### Needs fixing
+"
+" * Vimexplorer does'nt always open when `:vs dir` is executed
 "
 " Author: Henrik Kjelsberg <hkjels@me.com> (http://take.no/)
 " Version: 0.0.1
@@ -96,6 +101,9 @@
   " Pager
   let vimpager_disable_x11 = 1
 
+  " Create missing directories upon save
+  autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand('%:h')) | call mkdir(expand('%:h'), 'p') | endif
+
 " }}}
 
 
@@ -141,6 +149,7 @@
 
   NeoBundle 'hkjels/z.vim'
   NeoBundle 'Lokaltog/vim-easymotion'
+  NeoBundle 'kshenoy/vim-signature'
   NeoBundle 'Shougo/vimfiler.vim', { 'depends' : 'Shougo/unite.vim' }
 
   " Vimfiler
@@ -276,6 +285,7 @@
   NeoBundle 'tpope/vim-surround'
   NeoBundle 'tpope/vim-unimpaired'
   NeoBundle 'tsaleh/vim-align'
+  NeoBundle 'matze/vim-move'
 
   set spell                       " Use spell-checker
   set encoding=utf-8              " Default encoding
@@ -320,14 +330,28 @@
 
 " Languages ------------------------------------------------------------ {{{
 
-  NeoBundleLazy 'vim-ruby/vim-ruby', { 'autoload': { 'filetypes': ['rb'] } }
-  NeoBundleLazy 'chrisbra/csv.vim', { 'autoload': { 'filetypes': ['csv'] } }
-  NeoBundleLazy 'digitaltoad/vim-jade', { 'autoload': { 'filetypes': ['csv'] } }
+  NeoBundleLazy 'vim-ruby/vim-ruby', {
+    \   'autoload': {
+    \     'filetypes': [
+    \       'rb', 'Gemfile', 'Rakefile', 'Vagrantfile', 'Thorfile', 'rake',
+    \       'Procfile', 'Guardfile', 'config.ru'
+    \     ]
+    \   }
+    \ }
+  NeoBundleLazy 'chrisbra/csv.vim', {
+    \   'autoload': {
+    \     'filetypes': ['csv', 'dat', 'dsv']
+    \   }
+    \ }
+  NeoBundleLazy 'digitaltoad/vim-jade', {
+    \   'autoload': {
+    \     'filetypes': ['jade']
+    \   }
+    \ }
   NeoBundleLazy 'jcf/vim-latex', { 'autoload': { 'filetypes': ['tex'] } }
   NeoBundleLazy 'guileen/vim-node', { 'autoload': { 'filetypes': ['js'] } }
-  NeoBundleLazy 'jelera/vim-javascript-syntax', { 'autoload': { 'filetypes': ['js'] } }
+  NeoBundleLazy 'jelera/vim-javascript-syntax', { 'autoload': { 'filetypes': ['js', 'json'] } }
   NeoBundleLazy 'kchmck/vim-coffee-script', { 'autoload': { 'filetypes': ['coffee'] } }
-  NeoBundleLazy 'leshill/vim-json', { 'autoload': { 'filetypes': ['json'] } }
   NeoBundleLazy 'lukerandall/haskellmode-vim', { 'autoload': { 'filetypes': ['hs'] } }
   NeoBundleLazy 'plasticboy/vim-markdown', { 'autoload': { 'filetypes': ['md', 'markdown', 'mdown', 'mkd'] } }
   NeoBundleLazy 'tpope/vim-haml', { 'autoload': { 'filetypes': ['sass', 'scss', 'haml'] } }
@@ -335,28 +359,21 @@
   NeoBundleLazy 'AnsiEsc.vim', { 'autoload': { 'filetypes': ['color', 'ansi', 'esc'] } }
   NeoBundleLazy 'shawncplus/phpcomplete.vim', { 'autoload': { 'filetypes': ['php'] } }
 
-  let g:ruby_path=$RUBY_BIN
 
   augroup filetypedetect
     au BufNewFile,BufRead *.conf set filetype=apache
-    au BufNewFile,BufRead *.{csv,dat,dsv} set filetype=csv
-    au BufNewFile,BufRead *.coffee set filetype=coffee
-    au BufNewFile,BufRead *.hs compiler ghc
-    au BufNewFile,BufRead Gemfile, Rakefile, Vagrantfile, Thorfile set filetype=ruby
-    au BufNewFile,BufRead Procfile, Guardfile, config.ru, *.rake set filetype=ruby
-    au BufNewFile,BufRead *.jade set filetype=jade
-    au BufNewFile,BufRead *.{md,markdown,mdown,mkd} set filetype=markdown
-    au BufNewFile,BufRead *.styl set filetype=stylus
     au BufNewFile,BufRead *.json set filetype=javascript
-    au BufNewFile,BufRead *.vim set filetype=vim
     au BufNewFile,BufRead *.{color,ansi,esc} set filetype=colored
+    au BufNewFile,BufRead *.{md,markdown,mdown,mkd} set filetype=markdown
   augroup END
 
-  au FileType javascript setlocal dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
-  au FileType vim setlocal foldenable foldlevelstart=0 foldmethod=marker
   au FileType colored :AnsiEsc
+  au FileType javascript setlocal dictionary+=$HOME/.vim/bundle/vim-node/dict/node.dict
+  au FileType markdown setlocal nofoldenable
+  au FileType vim setlocal foldenable foldlevelstart=0 foldmethod=marker
 
   " Haskell
+  au FileType haskell compiler ghc
   let g:haddock_browser="open"
   let g:haddock_browser_callformat = "%s %s"
 
@@ -450,6 +467,19 @@
   nnoremap <right> :tabnext<cr>
   nnoremap <left> :tabprevious<cr>
 
+  " Jump to colorcolumn
+  map <leader>c :call cursor(line("."), &colorcolumn)<cr>
+
+  " Quick-edit .vimrc
+  nmap <leader>vim :e ~/.vimrc<cr>
+
+  " Moving code
+  let g:move_map_keys = 0
+  vmap <up> <Plug>MoveBlockUp
+  vmap <down> <Plug>MoveBlockDown
+  nmap <up> <Plug>MoveLineUp
+  nmap <down> <Plug>MoveLineDown
+
   " Unite mappings
   au FileType unite call s:UniteMappings()
   fun! s:UniteMappings()
@@ -459,7 +489,6 @@
   nnoremap <c-y>      :Unite -buffer-name=history history/yank:!<cr>
   nnoremap <leader>o  :Unite -buffer-name=outline outline<cr>
   nnoremap <leader>/  :Unite -buffer-name=search -no-quit grep:.<cr>
-
   " Relative/absolute line-numbers
   if exists('NumberToggle')
     nnoremap <leader>n :call NumberToggle()<cr>
@@ -475,7 +504,7 @@
   nmap d-     <Plug>SpeedDatingNowLocal
 
   " EasyMotion
-  let g:EasyMotion_leader_key = '<leader>'
+  let g:EasyMotion_leader_key = '<leader><leader>'
 
 " }}}
 
