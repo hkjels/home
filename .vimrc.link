@@ -53,27 +53,10 @@
   NeoBundle 'osyo-manga/unite-quickfix'
   NeoBundle 'thinca/vim-unite-history'
   NeoBundle 'jeffkreeftmeijer/vim-numbertoggle'
+  NeoBundle 'hkjels/natural.vim'
 
-  filetype plugin indent on
   set shell=bash\ --login             " Bring on a familiar environment
-  set exrc                            " Source .exrc files automatically
-  set nobk nowb                       " Turn off backup
-  set ttyfast                         " Faster repeated editing
-  set mouse=a                         " Enable mouse-input
-  set hidden                          " Allow un-saved buffers in background
-  set backspace=indent,eol,start      " Make backspace behave normally.
-  set directory=~/.vim/swap           " Swap files
-  set ffs=unix,dos,mac                " Default file types
-  set history=1000                    " Remember more commands and search history
-  set undolevels=1000                 " Use many muchos levels of undo
-  set modelines=0                     " Prevents modeline exploits
-  set autowriteall                    " Save when shifting focus
-  set autoread                        " Reload files changed outside of vim
   set title                           " Change the terminal's title
-  set visualbell                      " No bells!
-  set noerrorbells                    " No whistles!
-  set ttimeout                        " Use timeout for combined key-mappings
-  set ttimeoutlen=50                  " Time you have to complete a mapped key sequence
 
   " Share system clipboard
   if $TMUX == ''
@@ -107,15 +90,6 @@
 " }}}
 
 
-" Debugging ------------------------------------------------------------ {{{
-
-  " Bundle 'dkasak/manpageview'
-  " Bundle 'joonty/vdebug'
-  " Bundle 'Superior-Haskell-Interaction-Mode-SHIM'
-
-" }}}
-
-
 " Git ------------------------------------------------------------------ {{{
 
   NeoBundle 'airblade/vim-gitgutter'
@@ -131,16 +105,6 @@
 
   " Gitv
   let g:Gitv_TruncateCommitSubjects = 1
-
-  " Source .exrc
-  au BufRead * call s:SourceExrc()
-  fun! s:SourceExrc()
-    let root = system('git root')
-    let exrc = root . '/.exrc'
-    if filereadable(exrc)
-      so exrc
-    endif
-  endfun
 
 " }}}
 
@@ -212,7 +176,6 @@
   if has("wildmenu")
     set wildmenu                                      " Completions in a menu
     set wildmode=list:longest,full                    " Fine grained completion
-    set wildignore+=.hg,.git,.svn                     " Version control
     set wildignore+=gen                               " Generated files
     set wildignore+=*.aux,*.out,*.toc                 " LaTeX intermediate files
     set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg    " Binary images
@@ -223,11 +186,6 @@
     set wildignore+=*.pyc                             " Python byte code
     set wildignore+=**.class                          " Cursed Java class files
     set wildignore+=node_modules                      " Node project-dependencies
-
-    " Case-insensitive completion
-    if exists("&wildignorecase")
-        set wildignorecase
-    endif
   endif
 
 " }}}
@@ -242,33 +200,8 @@
   set background=dark                 " Use dark-theme
   colorscheme focus                   " Color-scheme to use
 
-  set list listchars=tab:→\ ,trail:·  " Show 'invisible characters'
-  set hlsearch                        " Highlight search terms
-  set number                          " Show line-numbers
-  set colorcolumn=76                  " Practice short code
-  set nowrap                          " Don't wrap lines
-  set showmatch                       " Show matching parenthesis
-  set guicursor+=a:blinkon0           " Disable the blinking cursor
-  set scrolloff=10                    " Keep the cursor close to center
-  set sidescrolloff=10                " and middle
-
-  " Hide toolbar when using graphical vim
-  if has('gui_running')
-    set guioptions=-t
-  endif
-
   " Highlight VCS conflicts
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" }}}
-
-
-" Search --------------------------------------------------------------- {{{
-
-  set gdefault              " Search with global by default
-  set ignorecase            " Ignore case
-  set smartcase             " Ignore case if pattern is lowercase
-  set incsearch             " Show search matches as you type
 
 " }}}
 
@@ -286,15 +219,6 @@
   NeoBundle 'tpope/vim-unimpaired'
   NeoBundle 'tsaleh/vim-align'
   NeoBundle 'matze/vim-move'
-
-  set spell                       " Use spell-checker
-  set encoding=utf-8              " Default encoding
-  set ts=2 sw=2 sts=2 et sta      " Use two-space indentation by default
-  set shiftround                  " Round indent to multiple of shiftwidth
-  set cindent                     " C indentation rules"
-  set autoindent                  " Indent based on ruleset of language
-  set smartindent                 " Indent first line according to previous
-  set smarttab                    " Use shiftwidth to emulate tabs
 
   " Syntastic
   set laststatus=2
@@ -402,29 +326,7 @@
   let g:mapleader = " "
   let g:maplocalleader = "\\"
 
-  " Navigate by row instead of line
-  nnoremap j gj
-  nnoremap k gk
-
-  " Expected behavior of yank
-  nnoremap Y y$
-
-  " Better focus on search matches
-  nnoremap n nzzzv
-  nnoremap N Nzzzv
-
-  " Remove highlighted search-query with enter-key
-  nnoremap <cr> :nohlsearch<cr>
-
-  " Normalize regular-expression searches
-  nnoremap / /\v
-  vnoremap / /\v
-  nnoremap ? ?\v
-  vnoremap ? ?\v
-  cnoremap s/ s/\v
-  cnoremap s@ s@\v
-
-    " Diff
+  " Diff
   au BufEnter * if &diff | call s:DiffMappings()
   fun! s:DiffMappings()
     map <up> [c<cr>
@@ -434,10 +336,6 @@
   " Sudo like a boss
   cmap w!! w !sudo tee % >/dev/null
   cmap x!! x !sudo tee % >/dev/null
-
-  " Prevent de-select when indenting blocks
-  vnoremap < <gv
-  vnoremap > >gv
 
   " Window manipulation
   map <c-h> :wincmd h<cr>
@@ -510,12 +408,12 @@
 
 
 " Load additional preferences ------------------------------------------ {{{
+
   let s:vimrc_local = expand('~/vimrc.local')
   if filereadable(s:vimrc_local)
     source s:vimrc_local
   endif
-
   autocmd VimEnter * NeoBundleCheck
-" }}}
 
+" }}}
 

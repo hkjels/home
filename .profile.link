@@ -5,7 +5,9 @@
 
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 PATH=$PATH:$HOME/bin
+PATH=$PATH:$HOME/.cabal/bin
 PATH=$PATH:/usr/local/share/npm/bin
+PATH=$PATH:/usr/local/heroku/bin
 export PATH
 
 
