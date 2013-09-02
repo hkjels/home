@@ -40,6 +40,7 @@
 
 " System --------------------------------------------------------------- {{{
 
+  NeoBundle 'hkjels/natural.vim'
   NeoBundle 'Shougo/vimproc.vim', {
     \ 'build' : {
     \     'mac' : 'make -f make_mac.mak',
@@ -53,7 +54,6 @@
   NeoBundle 'osyo-manga/unite-quickfix'
   NeoBundle 'thinca/vim-unite-history'
   NeoBundle 'jeffkreeftmeijer/vim-numbertoggle'
-  NeoBundle 'hkjels/natural.vim'
 
   set shell=bash\ --login             " Bring on a familiar environment
   set title                           " Change the terminal's title
@@ -219,6 +219,12 @@
   NeoBundle 'tpope/vim-unimpaired'
   NeoBundle 'tsaleh/vim-align'
   NeoBundle 'matze/vim-move'
+
+  " Default tabsize
+  set tabstop=2                 " Number of spaces a tab counts for
+  set shiftwidth=2              " Width to shift on indent operations
+  set expandtab                 " Use space instead of tabs in insert-mode
+  set smarttab                  " Insert blanks according to shiftwidth in start of lines
 
   " Syntastic
   set laststatus=2
