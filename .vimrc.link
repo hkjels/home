@@ -314,6 +314,7 @@
     au BufNewFile,BufRead *.{scss,sass} set filetype=sass
     au BufNewFile,BufRead *.{color,ansi,esc} set filetype=colored
     au BufNewFile,BufRead *.{md,markdown,mdown,mkd} set filetype=markdown
+    au BufNewFile,BufRead *.hs set filetype=haskell
   augroup END
 
   au FileType colored :AnsiEsc
@@ -322,7 +323,7 @@
   au FileType vim setlocal foldenable foldlevelstart=0 foldmethod=marker
 
   " Haskell
-  au FileType haskell compiler ghc
+  au FileType haskell compiler /usr/local/bin/ghc
   let g:haddock_browser="open"
   let g:haddock_browser_callformat="%s %s"
 

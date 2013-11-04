@@ -12,6 +12,7 @@ brew install                  \
   ag                          \
   aria2                       \
   bash                        \
+  clipper                     \
   ctags                       \
   ghc                         \
   gist                        \
@@ -29,7 +30,6 @@ brew install                  \
   pipeviewer                  \
   python                      \
   readline                    \
-  reattach-to-user-namespace  \
   tmux                        \
   tree                        \
   vcprompt                    \
@@ -42,4 +42,9 @@ brew install                  \
 # Clean out the cellar
 
 brew cleanup
+
+
+# Launchctl
+
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.clipper.plist
 
