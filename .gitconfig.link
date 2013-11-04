@@ -49,15 +49,22 @@
   prompt = false
 
 [merge]
-  tool = vimdiff
+  tool = opendiff
+
+[mergetool "splice"]
+  cmd = "vim -D -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+  trustExitCode = true
 
 [mergetool]
   keepBackup = false
   prompt = false
 
 [push]
-  default = upstream
+  default = simple
 
 [include]
   path = ~/.gitconfig.local
+
+[branch]
+  autosetuprebase = always
 

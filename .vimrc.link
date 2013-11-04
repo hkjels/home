@@ -27,6 +27,8 @@
 " @see https://github.com/Shougo/neobundle.vim
 
   set nocompatible                              " Improved!
+  set exrc                                      " Source .exrc files automatically
+  set nosecure                                  " Powerful .exrc´s. Kind of dangerous
   filetype off                                  " Necessary to make NeoBundle happy
   if has('vim_starting')
     set rtp+=~/.vim/bundle/neobundle.vim/       " Path to bundles
@@ -54,6 +56,7 @@
   NeoBundle 'osyo-manga/unite-quickfix'
   NeoBundle 'thinca/vim-unite-history'
   NeoBundle 'jeffkreeftmeijer/vim-numbertoggle'
+  NeoBundle 'sjl/vitality.vim'
 
   set shell=bash\ --login             " Bring on a familiar environment
   set title                           " Change the terminal's title
@@ -65,24 +68,24 @@
 
   " Unite
   call unite#filters#matcher_default#use(['matcher_fuzzy'])
-  let g:unite_enable_start_insert = 1
-  let g:unite_source_file_mru_limit = 200
-  let s:unite_affects = 'file,file/new,buffer,file_rec,file_rec/async'
-  let s:unite_ignore = '/\(pear\|thrift\|gen\|.git\|.DS_Store\|components\|node_modules\|.jpg\|.png\)/'
+  let g:unite_enable_start_insert=1
+  let g:unite_source_file_mru_limit=200
+  let s:unite_affects='file,file/new,buffer,file_rec,file_rec/async'
+  let s:unite_ignore='/\(pear\|thrift\|gen\|.git\|.DS_Store\|components\|node_modules\|.jpg\|.png\)/'
   call unite#custom#source(s:unite_affects, 'ignore_pattern', s:unite_ignore)
 
   " Silver-searcher
   if executable('ag')
-    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_command='ag'
   " Ack-grep
   elseif executable('ack')
-    let g:unite_source_grep_command = 'ack'
+    let g:unite_source_grep_command='ack'
   endif
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column --smart-case --ignore pear'
-  let g:unite_source_grep_recursive_opt = ''
+  let g:unite_source_grep_default_opts='--nogroup --nocolor --column --smart-case --ignore pear'
+  let g:unite_source_grep_recursive_opt=''
 
   " Pager
-  let vimpager_disable_x11 = 1
+  let vimpager_disable_x11=1
 
   " Create missing directories upon save
   autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand('%:h')) | call mkdir(expand('%:h'), 'p') | endif
@@ -97,14 +100,15 @@
   NeoBundle 'kablamo/vim-git-log'
   NeoBundle 'mattn/gist-vim'
   NeoBundle 'tpope/vim-fugitive'
+  NeoBundle 'sjl/splice.vim'
 
   " Gist
-  let g:gist_clip_command = 'pbcopy'
-  let g:gist_detect_filetype = 2
-  let g:gist_show_privates = 1
+  let g:gist_clip_command='pbcopy'
+  let g:gist_detect_filetype=2
+  let g:gist_show_privates=1
 
   " Gitv
-  let g:Gitv_TruncateCommitSubjects = 1
+  let g:Gitv_TruncateCommitSubjects=1
 
 " }}}
 
@@ -117,11 +121,11 @@
   NeoBundle 'Shougo/vimfiler.vim', { 'depends' : 'Shougo/unite.vim' }
 
   " Vimfiler
-  let g:vimfiler_as_default_explorer = 1
-  let g:vimfiler_ignore_pattern = '^\%(.git\|.DS_Store\)$'
-  let g:vimfiler_execute_file_list = {}
+  let g:vimfiler_as_default_explorer=1
+  let g:vimfiler_ignore_pattern='^\%(.git\|.DS_Store\)$'
+  let g:vimfiler_execute_file_list={}
   if has('mac')
-    let g:vimfiler_quick_look_command = 'qlmanage -p'
+    let g:vimfiler_quick_look_command='qlmanage -p'
   endif
 
 " }}}
@@ -138,9 +142,9 @@
   NeoBundle 'ujihisa/neco-ghc'
 
   if neobundle#is_sourced('neocomplete')
-    let g:acp_enableAtStartup = 0
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_smart_case = 1
+    let g:acp_enableAtStartup=0
+    let g:neocomplete#enable_at_startup=1
+    let g:neocomplete#enable_smart_case=1
 
     " Plugin key-mappings.
     imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -167,10 +171,11 @@
 
     " Enable heavy omni completion.
     if !exists('g:neocomplete#sources#omni#input_patterns')
-      let g:neocomplete#sources#omni#input_patterns = {}
+      let g:neocomplete#sources#omni#input_patterns={}
     endif
-    let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-    let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+    let g:neocomplete#sources#omni#input_patterns.c='[^.[:digit:] *\t]\%(\.\|->\)'
+    let g:neocomplete#sources#omni#input_patterns.cpp='[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+    let g:neocomplete#sources#omni#input_patterns.php='[^. \t]->\h\w*\|\h\w*::'
   endif
 
   if has("wildmenu")
@@ -194,7 +199,11 @@
 " Aesthetics ----------------------------------------------------------- {{{
 
   NeoBundle 'hkjels/focus.vim'
-  NeoBundle 'hkjels/status.vim'
+  NeoBundle 'hkjels/status.vim', {'depends': [
+    \ 'osyo-manga/vim-anzu',
+    \ 'tpope/vim-fugitive',
+    \ 'scrooloose/syntastic'
+    \ ]}
 
   syntax enable                       " Enable syntax highlighting
   set background=dark                 " Use dark-theme
@@ -208,6 +217,7 @@
 
 " Editing -------------------------------------------------------------- {{{
 
+  NeoBundle 'Shougo/context_filetype.vim'
   NeoBundle 'Raimondi/delimitMate'
   NeoBundle 'hlissner/vim-multiedit'
   NeoBundle 'scrooloose/syntastic'
@@ -219,6 +229,13 @@
   NeoBundle 'tpope/vim-unimpaired'
   NeoBundle 'tsaleh/vim-align'
   NeoBundle 'matze/vim-move'
+  NeoBundle 'osyo-manga/vim-watchdogs'
+  NeoBundle 'osyo-manga/vim-marching'
+
+  " C completion
+  let g:marching_clang_command="/usr/bin/clang"
+  let g:marching_enable_neocomplete=1
+  let g:marching_clang_command_option="-std=c++1y"
 
   " Default tabsize
   set tabstop=2                 " Number of spaces a tab counts for
@@ -293,6 +310,8 @@
   augroup filetypedetect
     au BufNewFile,BufRead *.conf set filetype=apache
     au BufNewFile,BufRead *.json set filetype=javascript
+    au BufNewFile,BufRead *.php set filetype=php
+    au BufNewFile,BufRead *.{scss,sass} set filetype=sass
     au BufNewFile,BufRead *.{color,ansi,esc} set filetype=colored
     au BufNewFile,BufRead *.{md,markdown,mdown,mkd} set filetype=markdown
   augroup END
@@ -305,7 +324,7 @@
   " Haskell
   au FileType haskell compiler ghc
   let g:haddock_browser="open"
-  let g:haddock_browser_callformat = "%s %s"
+  let g:haddock_browser_callformat="%s %s"
 
   " Html
   au FileType html set matchpairs+=<:>
@@ -329,8 +348,8 @@
 " Key-mappings --------------------------------------------------------- {{{
 
   " Change leader
-  let g:mapleader = " "
-  let g:maplocalleader = "\\"
+  let g:mapleader=" "
+  let g:maplocalleader="\\"
 
   " Diff
   au BufEnter * if &diff | call s:DiffMappings()
@@ -367,6 +386,12 @@
   inoremap <up>    <nop>
   inoremap <down>  <nop>
 
+  " Anzu
+  nmap n <Plug>(anzu-n-with-echo)
+  nmap N <Plug>(anzu-N-with-echo)
+  nmap * <Plug>(anzu-star-with-echo)
+  nmap # <Plug>(anzu-sharp-with-echo)
+
   " Tab switching
   nnoremap <right> :tabnext<cr>
   nnoremap <left> :tabprevious<cr>
@@ -377,8 +402,11 @@
   " Quick-edit .vimrc
   nmap <leader>vim :e ~/.vimrc<cr>
 
+  " Completion
+  imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
+
   " Moving code
-  let g:move_map_keys = 0
+  let g:move_map_keys=0
   vmap <up> <Plug>MoveBlockUp
   vmap <down> <Plug>MoveBlockDown
   nmap <up> <Plug>MoveLineUp
@@ -399,7 +427,7 @@
   endif
 
   " Speeddating - quick date/number manipulation
-  let g:speeddating_no_mappings = 1
+  let g:speeddating_no_mappings=1
   nmap  +     <Plug>SpeedDatingUp
   nmap  -     <Plug>SpeedDatingDown
   xmap  +     <Plug>SpeedDatingUp
@@ -408,14 +436,14 @@
   nmap d-     <Plug>SpeedDatingNowLocal
 
   " EasyMotion
-  let g:EasyMotion_leader_key = '<leader><leader>'
+  let g:EasyMotion_leader_key='<leader><leader>'
 
 " }}}
 
 
 " Load additional preferences ------------------------------------------ {{{
 
-  let s:vimrc_local = expand('~/vimrc.local')
+  let s:vimrc_local=expand('~/vimrc.local')
   if filereadable(s:vimrc_local)
     source s:vimrc_local
   endif

@@ -4,6 +4,7 @@
 alias _='sudo'
 alias la='ls -lah'
 alias ll='ls -1'
+alias ls='ls -hGl'
 alias -- -='cd -'
 alias ..='cd ..'
 alias ....='cd ../..'
@@ -23,6 +24,10 @@ alias PUT='burl PUT'
 alias DEL='burl DELETE'
 alias HEAD='burl -I'
 alias tmux='tmux -u attach || tmux'
+if [[ `node -v` =~ ^v0.11 ]]; then
+  alias node="node --harmony-generators"
+  alias node-dev="node-dev --harmony-generators"
+fi
 
 
 # Date & time

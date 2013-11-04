@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-SILVER='\e[38;05;122m'
-CYAN='\e[38;05;50m'
-RED='\e[38;05;197m'
-BLUE='\e[38;05;32m'
-ORANGE='\e[38;05;214m'
-RESET='\e[0;0m'
+export BLACK=$(tput setaf 0)
+export RED=$(tput setaf 1)
+export GREEN=$(tput setaf 2)
+export YELLOW=$(tput setaf 3)
+export BLUE=$(tput setaf 4)
+export MAGENTA=$(tput setaf 5)
+export CYAN=$(tput setaf 6)
+export WHITE=$(tput setaf 7)
+export BOLD=$(tput bold)
+export RESET=$(tput sgr0)
 

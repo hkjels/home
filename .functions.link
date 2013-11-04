@@ -27,8 +27,9 @@ function mcd() {
 # Output colors and their numeric value
 
 function colors() {
-  for code in {0..255};
-    do echo -e "\e[38;05;${code}m $code";
+  for code in {0..255}; do
+    printf "\e[38;05;${code}m $code";
+    (( code % 15 == 0 )) && echo "";
   done
 }
 
@@ -130,23 +131,24 @@ function hide() {
 function man() {
   env \
     LESS_TERMCAP_mb=$(printf "${RED}") \
-    LESS_TERMCAP_md=$(printf "${RED}") \
+    LESS_TERMCAP_md=$(printf "${BLUE}") \
     LESS_TERMCAP_me=$(printf "${RESET}") \
     LESS_TERMCAP_se=$(printf "${RESET}") \
     LESS_TERMCAP_so=$(printf "${CYAN}") \
     LESS_TERMCAP_ue=$(printf "${RESET}") \
-    LESS_TERMCAP_us=$(printf "${ORANGE}") \
+    LESS_TERMCAP_us=$(printf "${YELLOW}") \
       man "$@"
 }
 
 
+# Version-control status
+
 function customvcprompt() {
   if [[ -n "$(vcprompt)" ]]; then
     [[ -n "$(vcprompt -f '%m')" ]] &&
-      echo -e "${RED}$(vcprompt -f '(%b) %m ')" ||
-      echo -e "${ORANGE}$(vcprompt -f '(%b) ')"
-    return
+      printf "${RED}$(vcprompt -f '(%b) %m ')" ||
+      printf "${MAGENTA}$(vcprompt -f '(%b) ')"
+    printf "${RESET}"
   fi
-  echo -e "${BLUE}λ "
 }
 
