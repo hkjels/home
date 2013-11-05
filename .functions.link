@@ -152,3 +152,10 @@ function customvcprompt() {
   fi
 }
 
+
+# NuGet CLI
+
+function nuget() {
+  mono --runtime=v4.0 $HOME/bin/nuget.exe $*
+}
+
