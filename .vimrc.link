@@ -119,6 +119,7 @@
   NeoBundle 'Lokaltog/vim-easymotion'
   NeoBundle 'kshenoy/vim-signature'
   NeoBundle 'Shougo/vimfiler.vim', { 'depends' : 'Shougo/unite.vim' }
+  NeoBundle 'christoomey/vim-tmux-navigator'
 
   " Vimfiler
   let g:vimfiler_as_default_explorer=1
@@ -369,14 +370,6 @@
   " Sudo like a boss
   cmap w!! w !sudo tee % >/dev/null
   cmap x!! x !sudo tee % >/dev/null
-
-  " Window manipulation
-  map <c-h> :wincmd h<cr>
-  map <c-j> :wincmd j<cr>
-  map <c-k> :wincmd k<cr>
-  map <c-l> :wincmd l<cr>
-  map <c-w>+ :10winc ><cr>
-  map <c-w>- :10winc <<cr>
 
   " Quick-open directory in a new buffer
   nmap <leader>e :e <c-r>=expand('%:h').'/'<cr><cr>
