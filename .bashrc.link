@@ -24,6 +24,7 @@ shopt -s globstar 2> /dev/null
 . ~/.bash_alias
 . ~/.colors
 . ~/.functions
+. ~/.prompt
 
 
 # Vi key-bindings
@@ -31,28 +32,7 @@ shopt -s globstar 2> /dev/null
 bashBindings
 
 
-# Prompt λ
-
-PS1="\["
-PS1+="${YELLOW}\$([ \j -gt 0 ] && echo '[\j] ') ${RESET}"     # Jobs
-PS1+="${CYAN}\w ${RESET}"                                     # Path
-PS1+="\$(customvcprompt)"                                     # VC
-PS1+="\n ${BLUE}λ ${RESET}"
-PS1+="\]"
-
-
-# Jump using `z`
-
-. $(brew --prefix)/etc/profile.d/z.sh
-
-
-# Github alias
-
-eval "$(hub alias -s)"
-
-
 # Load additional bash-preferences
 
 [ -f ~/.bashrc.local ] && . ~/.bashrc.local
-
 

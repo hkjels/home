@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-# Find file by name
+# Quick-find file by name
 
 function f() {
   find . -iname "$1" -print
@@ -11,7 +11,7 @@ function f() {
 # Open file/directory
 
 function o() {
-  if [[ -n $1 ]]; then open $1
+  if [[ -n $* ]]; then open $*
   else open .
   fi
 }
@@ -37,7 +37,7 @@ function colors() {
 # Helper to extract different archives
 # Stolen from zshuery
 
-function ex() {
+function extract() {
   if [[ -f $1 ]]; then
     case $1 in
       *.tar.bz2) tar xvjf $1;;
@@ -54,7 +54,7 @@ function ex() {
       *.Z) uncompress $1;;
       *.7z) 7z x $1;;
       *.dmg) hdiutul mount $1;; # mount OS X disk images
-      *) echo "'$1' cannot be extracted via >ex<";;
+      *) echo "'$1' cannot be extracted via >extract<";;
     esac
   else
     echo "'$1' is not a valid file"
@@ -69,7 +69,8 @@ function myip() {
 }
 
 
-# Jump directly to the root of a git-project with `cd ^`
+# Normal `cd` except you can jump directly to the root of a git-project
+# with `cd ^`
 
 function cd {
   case $1 in
@@ -138,18 +139,6 @@ function man() {
     LESS_TERMCAP_ue=$(printf "${RESET}") \
     LESS_TERMCAP_us=$(printf "${YELLOW}") \
       man "$@"
-}
-
-
-# Version-control status
-
-function customvcprompt() {
-  if [[ -n "$(vcprompt)" ]]; then
-    [[ -n "$(vcprompt -f '%m')" ]] &&
-      printf "${RED}$(vcprompt -f '(%b) %m ')" ||
-      printf "${MAGENTA}$(vcprompt -f '(%b) ')"
-    printf "${RESET}"
-  fi
 }
 
 
