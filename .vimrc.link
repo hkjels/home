@@ -131,6 +131,13 @@
 " }}}
 
 
+" Help ----------------------------------------------------------------- {{{
+
+  NeoBundle 'rizzatti/dash.vim', {'depends' : ['rizzatti/funcoo.vim']}
+
+" }}}
+
+
 " Completion ----------------------------------------------------------- {{{
 
   NeoBundle 'Shougo/neocomplete', {'depends' :
