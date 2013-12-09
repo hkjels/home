@@ -9,7 +9,6 @@
 "
 " * Uses Neobundle to manage packages
 " * Relative line-numbers when not in insert-mode
-" * Sane version of search/replace
 " * Arrow-keys are remapped to switch between tabs or to move 
 "   between conflicts in diff-mode
 " * Leader is mapped to space
@@ -120,6 +119,7 @@
   NeoBundle 'kshenoy/vim-signature'
   NeoBundle 'Shougo/vimfiler.vim', { 'depends' : 'Shougo/unite.vim' }
   NeoBundle 'christoomey/vim-tmux-navigator'
+  NeoBundle 'othree/eregex.vim'
 
   " Vimfiler
   let g:vimfiler_as_default_explorer=1
@@ -206,16 +206,15 @@
 
 " Aesthetics ----------------------------------------------------------- {{{
 
-  NeoBundle 'hkjels/focus.vim'
-  NeoBundle 'hkjels/status.vim', {'depends': [
-    \ 'osyo-manga/vim-anzu',
-    \ 'tpope/vim-fugitive',
-    \ 'scrooloose/syntastic'
-    \ ]}
+  NeoBundle 'altercation/vim-colors-solarized'
+  NeoBundle 'bling/vim-airline'
+  NeoBundle 'edkolev/tmuxline.vim'
 
   syntax enable                       " Enable syntax highlighting
   set background=dark                 " Use dark-theme
-  colorscheme focus                   " Color-scheme to use
+  colorscheme solarized               " Color-scheme to use
+  let g:airline_powerline_fonts = 1
+  let g:tmuxline_preset = 'full'
 
   " Highlight VCS conflicts
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -426,6 +425,9 @@
   if exists('NumberToggle')
     nnoremap <leader>n :call NumberToggle()<cr>
   endif
+
+  " Clipper
+  nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
 
   " Speeddating - quick date/number manipulation
   let g:speeddating_no_mappings=1
