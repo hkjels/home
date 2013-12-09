@@ -141,15 +141,12 @@
 
 " Completion ----------------------------------------------------------- {{{
 
-  NeoBundle 'Shougo/neocomplete', {
-    \   'depends': [
-    \     'Shougo/neosnippet.git',
-    \     ['rstacruz/sparkup', {'rtp': 'vim'}],
-    \     'honza/vim-snippets'
-    \   ]
-    \ }
-  NeoBundle 'eagletmt/ghcmod-vim'
-  NeoBundle 'ujihisa/neco-ghc'
+  NeoBundle 'Shougo/neocomplete', {'depends' :
+    \ [ 'Shougo/neosnippet.git',
+    \ ['rstacruz/sparkup', {'rtp': 'vim'}],
+    \ 'honza/vim-snippets',
+    \ ]}
+  NeoBundleLazy 'eagletmt/neco-ghc', { 'autoload': { 'filetypes': ['haskell'] } }
 
   if neobundle#is_sourced('neocomplete')
     let g:acp_enableAtStartup=0
@@ -306,6 +303,7 @@
     \     'filetypes': ['jade']
     \   }
     \ }
+  NeoBundleLazy 'eagletmt/ghcmod-vim', { 'autoload': { 'filetypes': ['haskell'] } }
   NeoBundleLazy 'jcf/vim-latex', { 'autoload': { 'filetypes': ['tex'] } }
   NeoBundleLazy 'guileen/vim-node', { 'autoload': { 'filetypes': ['js'] } }
   NeoBundleLazy 'jelera/vim-javascript-syntax', { 'autoload': { 'filetypes': ['js', 'json'] } }
