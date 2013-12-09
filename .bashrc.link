@@ -20,8 +20,8 @@ shopt -s globstar 2> /dev/null
 
 # Source scripts
 
-[ -f ~/.profile ] && . ~/.profile
-. ~/.bash_alias
+. ~/.profile
+. ~/.aliases
 . ~/.colors
 . ~/.functions
 . ~/.prompt

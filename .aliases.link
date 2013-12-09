@@ -9,9 +9,12 @@ alias -- -='cd -'
 alias ..='cd ..'
 alias ....='cd ../..'
 alias ......='cd ../../..'
+alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias running='jobs -r'
 alias stopped='jobs -s'
+alias h='historywget -c'
+alias wget='wget -c'
 
 
 # Applications
@@ -23,6 +26,7 @@ alias POST='burl POST'
 alias PUT='burl PUT'
 alias DEL='burl DELETE'
 alias HEAD='burl -I'
+alias clip="nc localhost 8377"
 alias tmux='tmux -u attach || tmux'
 if [[ `node -v` =~ ^v0.11 ]]; then
   alias node="node --harmony-generators"
