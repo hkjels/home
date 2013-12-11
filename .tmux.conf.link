@@ -6,11 +6,14 @@ set -g prefix C-a
 # Make use of the native MacOs clip-board
 bind -t vi-copy v begin-selection
 bind -t vi-copy V rectangle-toggle
-bind-key -t vi-copy Enter copy-pipe "nc localhost 8377"
-bind-key y run-shell "tmux save-buffer - | nc localhost 8377"
+bind -t vi-copy Enter copy-pipe "nc localhost 8377"
+bind y run-shell "tmux save-buffer - | nc localhost 8377"
 
 # Some vi-like navigation
 setw -g mode-keys vi
+
+#supposedly fixes pausing in vim
+set-option -sg escape-time 1
 
 # Allow mouse-input for scrolling history,
 # switching panes and resizing panes.
@@ -26,21 +29,26 @@ set -g default-terminal "screen-256color"
 set -g base-index 1
 
 # Smart pane switching with awareness of vim splits
-bind h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"
-bind j run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-j) || tmux select-pane -D"
-bind k run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-k) || tmux select-pane -U"
-bind l run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-l) || tmux select-pane -R"
-bind \ run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys 'C-\\') || tmux select-pane -l"
+bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"
+bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-j) || tmux select-pane -D"
+bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-k) || tmux select-pane -U"
+bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-k) || tmux select-pane -U"
+bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-l) || tmux select-pane -R"
+bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys 'C-\\') || tmux select-pane -l"
 
 # Refresh tmux
-bind-key r source-file ~/.tmux.conf
+bind r source-file ~/.tmux.conf
 
 # Open an ssh-connection in another window
-bind-key S command-prompt -p ssh: "new-window -n %1 'ssh %1'"
+bind S command-prompt -p ssh: "new-window -n %1 'ssh %1'"
 
 # Automatic window-naming
 setw -g automatic-rename
 
 # Statusbar
 source $HOME/.tmux-status.conf
+
+# toggle statusbar (hidden by default)
+set -g status off
+bind b set-option status
 
