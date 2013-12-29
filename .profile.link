@@ -10,13 +10,6 @@ LC_ALL="en_US.UTF-8"
 export LANG LANGUAGE LC_CTYPE LC_ALL
 
 
-# Editor
-
-VISUAL='vim'
-EDITOR=$VISUAL
-export VISUAL EDITOR
-
-
 # History
 
 HISTSIZE=32768
