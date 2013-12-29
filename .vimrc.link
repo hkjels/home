@@ -117,17 +117,17 @@
   NeoBundle 'hkjels/z.vim'
   NeoBundle 'Lokaltog/vim-easymotion'
   NeoBundle 'kshenoy/vim-signature'
-  NeoBundle 'Shougo/vimfiler.vim', { 'depends' : 'Shougo/unite.vim' }
+  NeoBundle 'Shougo/vimfiler.vim', {
+    \   'depends': 'Shougo/unite.vim',
+    \   'autoload': {
+    \     'ignore_pattern': '^\%(.git\|.DS_Store\)$'
+    \   }
+    \ }
   NeoBundle 'christoomey/vim-tmux-navigator'
   NeoBundle 'othree/eregex.vim'
+  NeoBundle 'ivyl/vim-bling'
 
-  " Vimfiler
   let g:vimfiler_as_default_explorer=1
-  let g:vimfiler_ignore_pattern='^\%(.git\|.DS_Store\)$'
-  let g:vimfiler_execute_file_list={}
-  if has('mac')
-    let g:vimfiler_quick_look_command='qlmanage -p'
-  endif
 
 " }}}
 
@@ -141,11 +141,13 @@
 
 " Completion ----------------------------------------------------------- {{{
 
-  NeoBundle 'Shougo/neocomplete', {'depends' :
-    \ [ 'Shougo/neosnippet.git',
-    \ ['rstacruz/sparkup', {'rtp': 'vim'}],
-    \ 'honza/vim-snippets',
-    \ ]}
+  NeoBundle 'Shougo/neocomplete', {
+    \   'depends': [
+    \     'Shougo/neosnippet.git',
+    \     ['rstacruz/sparkup', {'rtp': 'vim'}],
+    \     'honza/vim-snippets'
+    \   ]
+    \ }
   NeoBundle 'eagletmt/ghcmod-vim'
   NeoBundle 'ujihisa/neco-ghc'
 
@@ -209,6 +211,7 @@
   NeoBundle 'altercation/vim-colors-solarized'
   NeoBundle 'bling/vim-airline'
   NeoBundle 'edkolev/tmuxline.vim'
+  NeoBundle 'chreekat/vim-paren-crosshairs'
 
   syntax enable                       " Enable syntax highlighting
   set background=dark                 " Use dark-theme
@@ -228,12 +231,13 @@
   NeoBundle 'Raimondi/delimitMate'
   NeoBundle 'hlissner/vim-multiedit'
   NeoBundle 'scrooloose/syntastic'
-  NeoBundle 'tomtom/tcomment_vim'
+  NeoBundle 'tpope/vim-commentary'
   NeoBundle 'tpope/vim-endwise'
   NeoBundle 'tpope/vim-ragtag'
   NeoBundle 'tpope/vim-speeddating'
   NeoBundle 'tpope/vim-surround'
   NeoBundle 'tpope/vim-unimpaired'
+  NeoBundle 'tpope/vim-repeat'
   NeoBundle 'tsaleh/vim-align'
   NeoBundle 'matze/vim-move'
   NeoBundle 'osyo-manga/vim-watchdogs'
@@ -386,12 +390,6 @@
   inoremap <up>    <nop>
   inoremap <down>  <nop>
 
-  " Anzu
-  nmap n <Plug>(anzu-n-with-echo)
-  nmap N <Plug>(anzu-N-with-echo)
-  nmap * <Plug>(anzu-star-with-echo)
-  nmap # <Plug>(anzu-sharp-with-echo)
-
   " Tab switching
   nnoremap <right> :tabnext<cr>
   nnoremap <left> :tabprevious<cr>
@@ -419,6 +417,7 @@
   endfun
   nnoremap <c-p>      :Unite -buffer-name=files file_rec/async:!<cr>
   nnoremap <c-y>      :Unite -buffer-name=history history/yank:!<cr>
+  nnoremap <leader>b  :Unite -buffer-name=buffers buffer:!<cr>
   nnoremap <leader>o  :Unite -buffer-name=outline outline<cr>
   nnoremap <leader>/  :Unite -buffer-name=search -no-quit grep:.<cr>
   " Relative/absolute line-numbers
