@@ -15,6 +15,10 @@ alias running='jobs -r'
 alias stopped='jobs -s'
 alias h='historywget -c'
 alias wget='wget -c'
+alias pair='tmux -S /tmp/shared'
+alias install='make install'
+alias test='make test'
+alias build='make build'
 
 
 # Applications
