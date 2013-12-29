@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+case $- in
+  *i*) ;;
+    *) return;;
+esac
+
 
 #
 # Bash preferences
