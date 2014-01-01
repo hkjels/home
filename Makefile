@@ -6,7 +6,7 @@ DST:=$(patsubst %.link,~/%,$(SRC))
 
 install: symlinks
 	@echo '    If you have any preferences to add, create ~/.[app].local'
-	@echo '    files, where `app` is one of bashrc, vimrc, gitconfig.'
+	@echo '    files, where `app` is one of bashrc, vimrc, gitconfig, etc.'
 	@echo ''
 	@echo '    You will need to change your shell for completion to work'
 	@echo '    properly.'
@@ -30,7 +30,7 @@ brew:
 	@echo ""
 
 vim:
-	@mkdir -p ~/.vim/bundle
+	@mkdir -p ~/.vim/{bundle,backup,swap}
 	@git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 	@vim +NeoBundleInstall +qall
 	@echo ""
