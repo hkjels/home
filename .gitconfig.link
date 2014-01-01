@@ -69,4 +69,5 @@
   autosetuprebase = always
 
 [hub]
-	protocol = https
+  protocol = https
+

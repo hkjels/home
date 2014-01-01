@@ -8,6 +8,7 @@ bind -t vi-copy v begin-selection
 bind -t vi-copy V rectangle-toggle
 bind -t vi-copy Enter copy-pipe "nc localhost 8377"
 bind y run-shell "tmux save-buffer - | nc localhost 8377"
+bind-key -t vi-copy Enter copy-pipe "nc localhost 8377"
 
 # Some vi-like navigation
 setw -g mode-keys vi
