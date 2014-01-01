@@ -43,6 +43,7 @@
 
   NeoBundle 'hkjels/natural.vim'
   NeoBundle 'hkjels/language.vim'
+  NeoBundle 'hkjels/scm.vim'
   NeoBundle 'Shougo/vimproc.vim', { 'build' : { 'mac' : 'make -f make_mac.mak' } }
   NeoBundle 'mhinz/vim-startify'
   NeoBundle 'sjl/gundo.vim'
@@ -84,12 +85,7 @@
 
 " Git ------------------------------------------------------------------ {{{
 
-  NeoBundle 'airblade/vim-gitgutter'  " Display changes in a gutter
-  NeoBundle 'gregsexton/gitv'         " Repository viewer
-  NeoBundle 'kablamo/vim-git-log'     " For browsing git logs
   NeoBundle 'mattn/gist-vim', { 'depends': ['mattn/webapi-vim'] }   " Publish to gist
-  NeoBundle 'tpope/vim-fugitive'      " Git UI
-  NeoBundle 'sjl/splice.vim'          " Simplify three-way merge
 
   " Gist
   let g:gist_clip_command='pbcopy'
@@ -196,34 +192,11 @@
 " }}}
 
 
-" Abbreviations -------------------------------------------------------- {{{
-
-  " Git
-  cabbrev gb Gblame
-  cabbrev gc Gcommit
-  cabbrev gd Gdiff
-  cabbrev gl Gitv
-  cabbrev gp Git push
-  cabbrev gs Gstatus
-
-" }}}
-
-
 " Key-mappings --------------------------------------------------------- {{{
 
   " Change leader
   let g:mapleader=" "
   let g:maplocalleader="\\"
-
-  " Diff
-  au BufEnter * if &diff | call s:DiffMappings()
-  fun! s:DiffMappings()
-    map <up> [c<cr>
-    map <down> ]c<cr>
-  endfun
-
-  " Copy to clipper
-  nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
 
   " Sudo like a boss
   cmap w!! w !sudo tee % >/dev/null
@@ -275,6 +248,7 @@
   nnoremap <leader>b  :Unite -buffer-name=buffers buffer:!<cr>
   nnoremap <leader>o  :Unite -buffer-name=outline outline<cr>
   nnoremap <leader>/  :Unite -buffer-name=search -no-quit grep:.<cr>
+
   " Relative/absolute line-numbers
   if exists('NumberToggle')
     nnoremap <leader>n :call NumberToggle()<cr>
