@@ -49,7 +49,7 @@
   prompt = false
 
 [merge]
-  tool = opendiff
+  tool = splice
 
 [mergetool "splice"]
   cmd = "vim -D -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
