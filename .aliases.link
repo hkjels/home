@@ -41,6 +41,7 @@ fi
 # Date & time
 
 alias today="date '+%Y-%m-%d'"
+alias timestamp="date '+%s'"
 
 
 # Completion for aliases
