@@ -16,6 +16,7 @@
 " ### Needs fixing
 "
 " * Vimexplorer does'nt always open when `:vs dir` is executed
+" * Vimexplorer <C-l> is bound to refresh, so pane-switching is broken
 "
 " Author: Henrik Kjelsberg <hkjels@me.com> (http://take.no/)
 " Version: 0.0.1
@@ -83,7 +84,7 @@
 " }}}
 
 
-" Git ------------------------------------------------------------------ {{{
+" Gist ----------------------------------------------------------------- {{{
 
   NeoBundle 'mattn/gist-vim', { 'depends': ['mattn/webapi-vim'] }   " Publish to gist
 
@@ -91,9 +92,6 @@
   let g:gist_clip_command='pbcopy'
   let g:gist_detect_filetype=2
   let g:gist_show_privates=1
-
-  " Gitv
-  let g:Gitv_TruncateCommitSubjects=1
 
 " }}}
 
@@ -136,6 +134,7 @@
   colorscheme solarized               " Color-scheme to use
   let g:airline_powerline_fonts = 1
   let g:tmuxline_preset = 'full'
+  highlight SignColumn ctermbg=0
 
   " Highlight VCS conflicts
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -156,11 +155,6 @@
   NeoBundle 'tpope/vim-repeat'            " Repeat plugin commands with `.`
   NeoBundle 'tsaleh/vim-align'            " Align by whitespace
   NeoBundle 'matze/vim-move'              " Move lines Up/Down
-
-  " C completion
-  let g:marching_clang_command="/usr/bin/clang"
-  let g:marching_enable_neocomplete=1
-  let g:marching_clang_command_option="-std=c++1y"
 
   " Default tabsize
   set tabstop=2                 " Number of spaces a tab counts for
@@ -227,9 +221,6 @@
 
   " Quick-edit .vimrc
   nmap <leader>vim :e ~/.vimrc<cr>
-
-  " Completion
-  imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
 
   " Moving code
   let g:move_map_keys=0
