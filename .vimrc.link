@@ -16,7 +16,6 @@
 " ### Needs fixing
 "
 " * Vimexplorer does'nt always open when `:vs dir` is executed
-" * Vimexplorer <C-l> is bound to refresh, so pane-switching is broken
 "
 " Author: Henrik Kjelsberg <hkjels@me.com> (http://take.no/)
 " Version: 0.0.1
@@ -110,8 +109,19 @@
   NeoBundle 'othree/eregex.vim'
   NeoBundle 'ivyl/vim-bling'
 
-  let g:vimfiler_as_default_explorer=1
+  let g:vimfiler_as_default_explorer = 1
+  let g:vimfiler_safe_mode_by_default = 0
+  let g:vimfiler_execute_file_list = {}
+  for s:ft in split('pdf,png,jpg,gif', ',')
+    let g:vimfiler_execute_file_list[s:ft] = 'open'
+  endfor
 
+  augroup Vimfiler
+    autocmd!
+    autocmd FileType vimfiler nunmap <buffer> <C-l>
+    autocmd FileType vimfiler nnoremap <buffer> <C-l> <ESC><C-w>l
+    autocmd FileType vimfiler nmap <buffer> <F5> <Plug>(vimfiler_redraw_screen)
+  augroup END
 " }}}
 
 
