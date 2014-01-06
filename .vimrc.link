@@ -46,12 +46,12 @@
   NeoBundle 'hkjels/scm.vim'
   NeoBundle 'Shougo/vimproc.vim', { 'build' : { 'mac' : 'make -f make_mac.mak' } }
   NeoBundle 'mhinz/vim-startify'
-  NeoBundle 'sjl/gundo.vim'
   NeoBundle 'Shougo/unite.vim'
   NeoBundle 'h1mesuke/unite-outline'
   NeoBundle 'osyo-manga/unite-quickfix'
   NeoBundle 'thinca/vim-unite-history'
   NeoBundle 'jeffkreeftmeijer/vim-numbertoggle'
+  NeoBundleLazy 'sjl/gundo.vim', {'autoload': {'commands': [{'name': 'GundoToggle'}]}}
 
   set shell=bash\ --login             " Bring on a familiar environment
   set title                           " Change the terminal's title
@@ -122,12 +122,14 @@
     autocmd FileType vimfiler nnoremap <buffer> <C-l> <ESC><C-w>l
     autocmd FileType vimfiler nmap <buffer> <F5> <Plug>(vimfiler_redraw_screen)
   augroup END
+
 " }}}
 
 
 " Help ----------------------------------------------------------------- {{{
 
   NeoBundle 'rizzatti/dash.vim', { 'depends' : ['rizzatti/funcoo.vim'] }
+  NeoBundle 'Shougo/unite-help', { 'unite_sources': 'help' }
 
 " }}}
 
@@ -257,6 +259,9 @@
 
   " Clipper
   nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
+
+  " Gundo
+  nnoremap <Leader>g :<C-u>GundoToggle<CR>
 
   " Speeddating - quick date/number manipulation
   let g:speeddating_no_mappings=1
