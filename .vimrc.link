@@ -15,7 +15,7 @@
 "
 " ### Needs fixing
 "
-" * Vimexplorer does'nt always open when `:vs dir` is executed
+" * TODO #Vimfiler needs to be launched twice to show a directory
 "
 " Author: Henrik Kjelsberg <hkjels@me.com> (http://take.no/)
 " Version: 0.0.1
@@ -24,7 +24,6 @@
 
 " NeoBundle ------------------------------------------------------------ {{{
 " @see https://github.com/Shougo/neobundle.vim
-
   set nocompatible                              " Be improved!
   set exrc                                      " Source .exrc files automatically
   set nosecure                                  " Powerful .exrc´s. PS. Kind of dangerous!
@@ -33,114 +32,101 @@
     set rtp+=~/.vim/bundle/neobundle.vim/       " Path to bundles
   endif
   call neobundle#rc(expand('~/.vim/bundle/'))   " Let NeoBundle do it's magic
-
   NeoBundleFetch 'Shougo/neobundle.vim'
-
 " }}}
 
 
 " System --------------------------------------------------------------- {{{
-
-  NeoBundle 'hkjels/natural.vim'
-  NeoBundle 'hkjels/language.vim'
-  NeoBundle 'hkjels/scm.vim'
-  NeoBundle 'Shougo/vimproc.vim', { 'build' : { 'mac' : 'make -f make_mac.mak' } }
-  NeoBundle 'mhinz/vim-startify'
-  NeoBundle 'Shougo/unite.vim'
-  NeoBundle 'h1mesuke/unite-outline'
-  NeoBundle 'osyo-manga/unite-quickfix'
-  NeoBundle 'thinca/vim-unite-history'
-  NeoBundle 'jeffkreeftmeijer/vim-numbertoggle'
-  NeoBundleLazy 'sjl/gundo.vim', {'autoload': {'commands': [{'name': 'GundoToggle'}]}}
-
   set shell=bash\ --login             " Bring on a familiar environment
-  set title                           " Change the terminal's title
+  NeoBundle 'Shougo/unite.vim', { 'depends': [
+        \   ['Shougo/vimproc.vim', {
+        \   'build' : { 'mac' : 'make -f make_mac.mak' } }]
+        \ ]}                                    " Fast async interfaces
+  NeoBundle 'hkjels/natural.vim'                " More natural & consistent defaults
+  NeoBundle 'hkjels/language.vim'               " Syntax-(highlight|check) and completion
+  NeoBundle 'hkjels/scm.vim'                    " Everything related to VC
+  NeoBundle 'mhinz/vim-startify'                " Fancy startscreen
+  NeoBundle 'h1mesuke/unite-outline'            " Document outline
+  NeoBundle 'osyo-manga/unite-quickfix'         " Better interaction with quickfix-windows
+  NeoBundle 'thinca/vim-unite-history'          " Command and search-history with unite interface
+  NeoBundle 'jeffkreeftmeijer/vim-numbertoggle' " Toggle between relative/absolute line-numbers
+  NeoBundleLazy 'sjl/gundo.vim', {'autoload': {'commands': [{'name': 'GundoToggle'}]}}    " Tree overview of undo´s
+  NeoBundle 'mattn/gist-vim', { 'depends': ['mattn/webapi-vim'] }                         " Publish to gist
 
   " Unite
-  call unite#filters#matcher_default#use(['matcher_fuzzy'])
-  let g:unite_enable_start_insert=1
-  let g:unite_source_file_mru_limit=200
-  let s:unite_affects='file,file/new,buffer,file_rec,file_rec/async'
-  let s:unite_ignore='/\(pear\|thrift\|gen\|.git\|.DS_Store\|components\|node_modules\|.jpg\|.png\)/'
-  call unite#custom#source(s:unite_affects, 'ignore_pattern', s:unite_ignore)
-
-  " Silver-searcher
-  if executable('ag')
-    let g:unite_source_grep_command='ag'
-  " Ack-grep
-  elseif executable('ack')
-    let g:unite_source_grep_command='ack'
-  endif
-  let g:unite_source_grep_default_opts='--nogroup --nocolor --column --smart-case'
-  let g:unite_source_grep_recursive_opt=''
-
-  " Pager
-  let vimpager_disable_x11=1
-
-  " Create missing directories upon save
-  autocmd BufWritePre * if expand("<afile>")!~#'^\w\+:/' && !isdirectory(expand('%:h')) | call mkdir(expand('%:h'), 'p') | endif
-
-" }}}
-
-
-" Gist ----------------------------------------------------------------- {{{
-
-  NeoBundle 'mattn/gist-vim', { 'depends': ['mattn/webapi-vim'] }   " Publish to gist
+  let s:bundle=neobundle#get('unite.vim')
+  function! s:bundle.hooks.on_source(bundle)
+    let g:unite_enable_start_insert=1
+    let g:unite_source_file_mru_limit=200
+    let s:unite_affects='file,file/new,buffer,file_rec,file_rec/async'
+    let s:unite_ignore='/^\%(.git\|.DS_Store\|components\|node_modules\|.jpg\|.png\|.gif\)$/'
+    call unite#filters#matcher_default#use(['matcher_fuzzy'])
+    call unite#custom#source(s:unite_affects, 'ignore_pattern', s:unite_ignore)
+    if executable('ag')
+      let g:unite_source_grep_command='ag'    " Silver-searcher
+    elseif executable('ack')
+      let g:unite_source_grep_command='ack'   " Ack-grep
+    else 
+      let g:unite_source_grep_command='grep'  " Normal grep
+    endif
+    let g:unite_source_grep_default_opts='--nogroup --nocolor --column --smart-case'
+    let g:unite_source_grep_recursive_opt=''
+  endfunction
+  unlet s:bundle
 
   " Gist
-  let g:gist_clip_command='pbcopy'
-  let g:gist_detect_filetype=2
-  let g:gist_show_privates=1
-
+  let s:bundle = neobundle#get('gist-vim')
+  function! s:bundle.hooks.on_source(bundle)
+    let g:gist_clip_command='clipper'
+    let g:gist_detect_filetype=2
+    let g:gist_show_privates=1
+  endfunction
+  unlet s:bundle
 " }}}
 
 
 " Navigation ----------------------------------------------------------- {{{
+  NeoBundle 'Lokaltog/vim-easymotion'           " Jump to character with visual-aid
+  NeoBundle 'kshenoy/vim-signature'             " Displays marks in a gutter
+  NeoBundle 'christoomey/vim-tmux-navigator'    " Easy navigation between tmux <-> vim
+  NeoBundle 'othree/eregex.vim'                 " Ruby-styled RegExp search
+  NeoBundle 'ivyl/vim-bling'                    " Highlight the incremented search-cursor
+  NeoBundle 'Shougo/vimfiler.vim', { 'autoload':
+        \   { 'ignore_pattern': expand("s:unite_ignore") }
+        \ }                                     " File-explorer
 
-  NeoBundle 'Lokaltog/vim-easymotion'
-  NeoBundle 'kshenoy/vim-signature'
-  NeoBundle 'Shougo/vimfiler.vim', {
-    \   'depends': ['Shougo/unite.vim'],
-    \   'autoload': {
-    \     'ignore_pattern': '^\%(.git\|.DS_Store\)$'
-    \   }
-    \ }
-  NeoBundle 'christoomey/vim-tmux-navigator'
-  NeoBundle 'othree/eregex.vim'
-  NeoBundle 'ivyl/vim-bling'
-
-  let g:vimfiler_as_default_explorer = 1
-  let g:vimfiler_safe_mode_by_default = 0
-  let g:vimfiler_execute_file_list = {}
-  for s:ft in split('pdf,png,jpg,gif', ',')
-    let g:vimfiler_execute_file_list[s:ft] = 'open'
-  endfor
-
-  augroup Vimfiler
-    autocmd!
-    autocmd FileType vimfiler nunmap <buffer> <C-l>
-    autocmd FileType vimfiler nnoremap <buffer> <C-l> <ESC><C-w>l
-    autocmd FileType vimfiler nmap <buffer> <F5> <Plug>(vimfiler_redraw_screen)
-  augroup END
-
+  " Vimfiler
+  let s:bundle = neobundle#get('vimfiler.vim')
+  function! s:bundle.hooks.on_source(bundle)
+    let g:vimfiler_as_default_explorer = 1
+    let g:vimfiler_safe_mode_by_default = 0
+    let g:vimfiler_execute_file_list = {}
+    for s:ft in split('pdf,png,jpg,gif', ',')
+      let g:vimfiler_execute_file_list[s:ft] = 'open'
+    endfor
+    augroup Vimfiler
+      autocmd!
+      autocmd FileType vimfiler nunmap <buffer> <TAB>
+      autocmd FileType vimfiler nunmap <buffer> <C-l>
+      autocmd FileType vimfiler nnoremap <buffer> <C-l> <ESC><C-w>l
+      autocmd FileType vimfiler nmap <buffer> <F5> <Plug>(vimfiler_redraw_screen)
+    augroup END
+  endfunction
+  unlet s:bundle
 " }}}
 
 
 " Help ----------------------------------------------------------------- {{{
-
-  NeoBundle 'rizzatti/dash.vim', { 'depends' : ['rizzatti/funcoo.vim'] }
-  NeoBundle 'Shougo/unite-help', { 'unite_sources': 'help' }
-
+  NeoBundle 'rizzatti/dash.vim', { 'depends' : ['rizzatti/funcoo.vim'] }  " Language references
+  NeoBundle 'Shougo/unite-help', { 'unite_sources': 'help' }              " Unite interface of help
 " }}}
 
 
 " Aesthetics ----------------------------------------------------------- {{{
-
   NeoBundle 'altercation/vim-colors-solarized'  " Color-scheme
   NeoBundle 'bling/vim-airline'                 " Sexy statusline
   NeoBundle 'edkolev/tmuxline.vim'              " Theme tmux-status like vim-status
   NeoBundle 'chreekat/vim-paren-crosshairs'     " Show crosshair when mouse is over a paren
-
   syntax enable                       " Enable syntax highlighting
   set background=dark                 " Use dark-theme
   colorscheme solarized               " Color-scheme to use
@@ -151,11 +137,12 @@
   " Highlight VCS conflicts
   match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
+  " Invert colorscheme
+  command! -bar InvertColorScheme :let &background = (&background=="light"?"dark":"light")
 " }}}
 
 
 " Editing -------------------------------------------------------------- {{{
-
   NeoBundle 'hlissner/vim-multiedit'      " Edit using multiple cursors
   NeoBundle 'Raimondi/delimitMate'        " Add end-delimiters
   NeoBundle 'tpope/vim-commentary'        " Quickly comment/un-comment
@@ -173,28 +160,18 @@
   set shiftwidth=2              " Width to shift on indent operations
   set expandtab                 " Use space instead of tabs in insert-mode
   set smarttab                  " Insert blanks according to shiftwidth in start of lines
-
-  " Syntastic
-  set laststatus=2
-  let g:syntastic_enable_signs=1
-  let g:syntastic_auto_jump=0
-
 " }}}
 
 
 " Tags ----------------------------------------------------------------- {{{
-
   set tags=.git/tags  " Store tags with each project
-
 " }}}
 
 
 " Folds ---------------------------------------------------------------- {{{
-
   set foldmethod=indent
   set foldnestmax=3
   set nofoldenable
-
 " }}}
 
 
@@ -203,10 +180,6 @@
   " Change leader
   let g:mapleader=" "
   let g:maplocalleader="\\"
-
-  " Sudo like a boss
-  cmap w!! w !sudo tee % >/dev/null
-  cmap x!! x !sudo tee % >/dev/null
 
   " Quick-open directory in a new buffer
   nmap <leader>e :e <c-r>=expand('%:h').'/'<cr><cr>
@@ -228,8 +201,8 @@
   nnoremap <right> :tabnext<cr>
   nnoremap <left> :tabprevious<cr>
 
-  " Jump to colorcolumn
-  map <leader>c :call cursor(line("."), &colorcolumn)<cr>
+  " Invert colorshcheme
+  map <leader>c :InvertColorScheme<cr>
 
   " Quick-edit .vimrc
   nmap <leader>vim :e ~/.vimrc<cr>
@@ -252,6 +225,9 @@
   nnoremap <leader>o  :Unite -buffer-name=outline outline<cr>
   nnoremap <leader>/  :Unite -buffer-name=search -no-quit grep:.<cr>
 
+  " Search/replace word below cursor
+  nnoremap <expr> s* ':%substitute/\<' . expand('<cword>') . '\>/'
+
   " Relative/absolute line-numbers
   if exists('NumberToggle')
     nnoremap <leader>n :call NumberToggle()<cr>
@@ -263,6 +239,9 @@
   " Gundo
   nnoremap <Leader>g :<C-u>GundoToggle<CR>
 
+  " History
+  nnoremap <leader>h :Unite history<cr>
+
   " Speeddating - quick date/number manipulation
   let g:speeddating_no_mappings=1
   nmap  +     <Plug>SpeedDatingUp
@@ -271,20 +250,14 @@
   xmap  -     <Plug>SpeedDatingDown
   nmap d+     <Plug>SpeedDatingNowUTC
   nmap d-     <Plug>SpeedDatingNowLocal
-
-  " EasyMotion
-  let g:EasyMotion_leader_key='<leader><leader>'
-
 " }}}
 
 
 " Load additional preferences ------------------------------------------ {{{
-
   let s:vimrc_local=expand('~/vimrc.local')
   if filereadable(s:vimrc_local)
     source s:vimrc_local
   endif
   autocmd VimEnter * NeoBundleCheck
-
 " }}}
 
