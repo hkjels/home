@@ -34,10 +34,11 @@ shopt -s globstar 2> /dev/null
 
 # Vi key-bindings
 
-bashBindings
+set -o vi
 
 
 # Load additional bash-preferences
 
+eval "$(direnv hook $0)"
 [ -f ~/.bashrc.local ] && . ~/.bashrc.local
 

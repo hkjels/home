@@ -1,185 +1,66 @@
+
 "
 " .vimrc
-" ======
 "
-" __My personal preferences for vim, gvim and mvim.
-"
-" Worth noting
-" ------------
-"
-" * Uses Neobundle to manage packages
-" * Relative line-numbers when not in insert-mode
-" * Arrow-keys are remapped to switch between tabs or to move 
-"   between conflicts in diff-mode
-" * Leader is mapped to space
-"
-" ### Needs fixing
-"
-" * TODO #Vimfiler needs to be launched twice to show a directory
-"
-" Author: Henrik Kjelsberg <hkjels@me.com> (http://take.no/)
-" Version: 0.0.1
+" Author: Henrik Kjelsberg (https://github.com/hkjels/)
+" Version: 0.1.0
+" License: MIT
 "
 
-
-" NeoBundle ------------------------------------------------------------ {{{
-" @see https://github.com/Shougo/neobundle.vim
-  set nocompatible                              " Be improved!
-  set exrc                                      " Source .exrc files automatically
-  set nosecure                                  " Powerful .exrc´s. PS. Kind of dangerous!
-  filetype off                                  " Necessary to make NeoBundle happy
+" NeoBundle initialization---------------------------------------------- {{{
   if has('vim_starting')
-    set rtp+=~/.vim/bundle/neobundle.vim/       " Path to bundles
+    set nocompatible
+    set runtimepath+=~/.vim/bundle/neobundle.vim
   endif
-  call neobundle#rc(expand('~/.vim/bundle/'))   " Let NeoBundle do it's magic
+  call neobundle#rc(expand('~/.vim/bundle'))
   NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 
+" Bundle dependencies -------------------------------------------------- {{{
+  NeoBundle 'hkjels/natural.vim'                  " Sane defaults
+  NeoBundle 'hkjels/aestetics.vim', {'force': 1}  " All things color
+  NeoBundle 'hkjels/united.vim', {'force': 1}     " Bundle of unite-interfaces
+  NeoBundle 'hkjels/language.vim', {'force': 1}   " Syntax/Check/Completion etc
+  NeoBundle 'jeffkreeftmeijer/vim-numbertoggle'   " Toggle between relative/absolute line-numbers
+  NeoBundle 'Lokaltog/vim-easymotion'             " Jump to character with visual-aid
+  NeoBundle 'kshenoy/vim-signature'               " Displays marks in a gutter
+  NeoBundle 'christoomey/vim-tmux-navigator'      " Easy navigation between tmux <-> vim
+  NeoBundle 'tpope/vim-unimpaired'                " Quick navigation shortcuts
+  NeoBundle 'tpope/vim-repeat'                    " Repeat plugin commands with `.`
+  NeoBundleLazy 'sjl/gundo.vim', {
+    \   'autoload': {'commands': [{'name': 'GundoToggle'}]},
+    \ }                                           " Tree overview of undo´s
+  NeoBundleLazy 'Shougo/vim-vcs', {
+    \   'depends' : 'thinca/vim-openbuf',
+    \   'autoload' : {'commands' : 'Vcs'},
+    \ }                                           " Source control management
 
-" System --------------------------------------------------------------- {{{
-  set shell=bash\ --login             " Bring on a familiar environment
-  NeoBundle 'Shougo/unite.vim', { 'depends': [
-        \   ['Shougo/vimproc.vim', {
-        \   'build' : { 'mac' : 'make -f make_mac.mak' } }]
-        \ ]}                                    " Fast async interfaces
-  NeoBundle 'hkjels/natural.vim'                " More natural & consistent defaults
-  NeoBundle 'hkjels/language.vim'               " Syntax-(highlight|check) and completion
-  NeoBundle 'hkjels/scm.vim'                    " Everything related to VC
-  NeoBundle 'mhinz/vim-startify'                " Fancy startscreen
-  NeoBundle 'h1mesuke/unite-outline'            " Document outline
-  NeoBundle 'osyo-manga/unite-quickfix'         " Better interaction with quickfix-windows
-  NeoBundle 'thinca/vim-unite-history'          " Command and search-history with unite interface
-  NeoBundle 'jeffkreeftmeijer/vim-numbertoggle' " Toggle between relative/absolute line-numbers
-  NeoBundleLazy 'sjl/gundo.vim', {'autoload': {'commands': [{'name': 'GundoToggle'}]}}    " Tree overview of undo´s
-  NeoBundle 'mattn/gist-vim', { 'depends': ['mattn/webapi-vim'] }                         " Publish to gist
-
-  " Unite
-  let s:bundle=neobundle#get('unite.vim')
-  function! s:bundle.hooks.on_source(bundle)
-    let g:unite_enable_start_insert=1
-    let g:unite_source_file_mru_limit=200
-    let s:unite_affects='file,file/new,buffer,file_rec,file_rec/async'
-    let s:unite_ignore='/^\%(.git\|.DS_Store\|components\|node_modules\|.jpg\|.png\|.gif\)$/'
-    call unite#filters#matcher_default#use(['matcher_fuzzy'])
-    call unite#custom#source(s:unite_affects, 'ignore_pattern', s:unite_ignore)
-    if executable('ag')
-      let g:unite_source_grep_command='ag'    " Silver-searcher
-    elseif executable('ack')
-      let g:unite_source_grep_command='ack'   " Ack-grep
-    else 
-      let g:unite_source_grep_command='grep'  " Normal grep
-    endif
-    let g:unite_source_grep_default_opts='--nogroup --nocolor --column --smart-case'
-    let g:unite_source_grep_recursive_opt=''
-  endfunction
-  unlet s:bundle
-
-  " Gist
-  let s:bundle = neobundle#get('gist-vim')
-  function! s:bundle.hooks.on_source(bundle)
-    let g:gist_clip_command='clipper'
-    let g:gist_detect_filetype=2
-    let g:gist_show_privates=1
-  endfunction
-  unlet s:bundle
-" }}}
-
-
-" Navigation ----------------------------------------------------------- {{{
-  NeoBundle 'Lokaltog/vim-easymotion'           " Jump to character with visual-aid
-  NeoBundle 'kshenoy/vim-signature'             " Displays marks in a gutter
-  NeoBundle 'christoomey/vim-tmux-navigator'    " Easy navigation between tmux <-> vim
-  NeoBundle 'othree/eregex.vim'                 " Ruby-styled RegExp search
-  NeoBundle 'ivyl/vim-bling'                    " Highlight the incremented search-cursor
-  NeoBundle 'Shougo/vimfiler.vim', { 'autoload':
-        \   { 'ignore_pattern': expand("s:unite_ignore") }
-        \ }                                     " File-explorer
-
-  " Vimfiler
-  let s:bundle = neobundle#get('vimfiler.vim')
-  function! s:bundle.hooks.on_source(bundle)
-    let g:vimfiler_as_default_explorer = 1
-    let g:vimfiler_safe_mode_by_default = 0
-    let g:vimfiler_execute_file_list = {}
-    for s:ft in split('pdf,png,jpg,gif', ',')
-      let g:vimfiler_execute_file_list[s:ft] = 'open'
-    endfor
-    augroup Vimfiler
-      autocmd!
-      autocmd FileType vimfiler nunmap <buffer> <TAB>
-      autocmd FileType vimfiler nunmap <buffer> <C-l>
-      autocmd FileType vimfiler nnoremap <buffer> <C-l> <ESC><C-w>l
-      autocmd FileType vimfiler nmap <buffer> <F5> <Plug>(vimfiler_redraw_screen)
-    augroup END
-  endfunction
-  unlet s:bundle
-" }}}
-
-
-" Help ----------------------------------------------------------------- {{{
-  NeoBundle 'rizzatti/dash.vim', { 'depends' : ['rizzatti/funcoo.vim'] }  " Language references
-  NeoBundle 'Shougo/unite-help', { 'unite_sources': 'help' }              " Unite interface of help
-" }}}
-
-
-" Aesthetics ----------------------------------------------------------- {{{
-  NeoBundle 'altercation/vim-colors-solarized'  " Color-scheme
-  NeoBundle 'bling/vim-airline'                 " Sexy statusline
-  NeoBundle 'edkolev/tmuxline.vim'              " Theme tmux-status like vim-status
-  NeoBundle 'chreekat/vim-paren-crosshairs'     " Show crosshair when mouse is over a paren
-  syntax enable                       " Enable syntax highlighting
-  set background=dark                 " Use dark-theme
-  colorscheme solarized               " Color-scheme to use
-  let g:airline_powerline_fonts = 1
-  let g:tmuxline_preset = 'full'
-  highlight SignColumn ctermbg=0
-
-  " Highlight VCS conflicts
-  match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-  " Invert colorscheme
-  command! -bar InvertColorScheme :let &background = (&background=="light"?"dark":"light")
-" }}}
-
-
-" Editing -------------------------------------------------------------- {{{
-  NeoBundle 'hlissner/vim-multiedit'      " Edit using multiple cursors
-  NeoBundle 'Raimondi/delimitMate'        " Add end-delimiters
-  NeoBundle 'tpope/vim-commentary'        " Quickly comment/un-comment
-  NeoBundle 'tpope/vim-endwise'           " Adds ending to block
-  NeoBundle 'tpope/vim-ragtag'            " Simplify xml editing
-  NeoBundle 'tpope/vim-speeddating'       " Quick incrementation of a variety of values
-  NeoBundle 'tpope/vim-surround'          " Surround text with specified delimiter
-  NeoBundle 'tpope/vim-unimpaired'        " Quick navigation shortcuts
-  NeoBundle 'tpope/vim-repeat'            " Repeat plugin commands with `.`
-  NeoBundle 'tsaleh/vim-align'            " Align by whitespace
-  NeoBundle 'matze/vim-move'              " Move lines Up/Down
-
-  " Default tabsize
+" Override defaults ---------------------------------------------------- {{{
   set tabstop=2                 " Number of spaces a tab counts for
   set shiftwidth=2              " Width to shift on indent operations
   set expandtab                 " Use space instead of tabs in insert-mode
   set smarttab                  " Insert blanks according to shiftwidth in start of lines
-" }}}
-
-
-" Tags ----------------------------------------------------------------- {{{
-  set tags=.git/tags  " Store tags with each project
-" }}}
-
-
-" Folds ---------------------------------------------------------------- {{{
-  set foldmethod=indent
-  set foldnestmax=3
-  set nofoldenable
-" }}}
-
-
-" Key-mappings --------------------------------------------------------- {{{
+  set tags=.git/tags            " Store tags with each project
+  set foldmethod=indent         " Fold by indentation-level
+  set foldnestmax=3             " Number of nested folds
+  set nofoldenable              " Don´t fold when opening files
 
   " Change leader
   let g:mapleader=" "
   let g:maplocalleader="\\"
+
+  " Speeddating
+  let s:bundle = neobundle#get('vim-speeddating')
+  function! s:bundle.hooks.on_source(bundle)
+    let g:speeddating_no_mappings=1
+    nmap  +     <Plug>SpeedDatingUp
+    nmap  -     <Plug>SpeedDatingDown
+    xmap  +     <Plug>SpeedDatingUp
+    xmap  -     <Plug>SpeedDatingDown
+    nmap d+     <Plug>SpeedDatingNowUTC
+    nmap d-     <Plug>SpeedDatingNowLocal
+  endfunction
+  unlet s:bundle
 
   " Quick-open directory in a new buffer
   nmap <leader>e :e <c-r>=expand('%:h').'/'<cr><cr>
@@ -204,37 +85,11 @@
   " Invert colorshcheme
   map <leader>c :InvertColorScheme<cr>
 
-  " Quick-edit .vimrc
-  nmap <leader>vim :e ~/.vimrc<cr>
-
-  " Moving code
-  let g:move_map_keys=0
-  vmap <up> <Plug>MoveBlockUp
-  vmap <down> <Plug>MoveBlockDown
-  nmap <up> <Plug>MoveLineUp
-  nmap <down> <Plug>MoveLineDown
-
-  " Unite mappings
-  au FileType unite call s:UniteMappings()
-  fun! s:UniteMappings()
-    noremap <buffer><silent><expr> E unite#do_action('vsplit')
-  endfun
-  nnoremap <c-p>      :Unite -buffer-name=files file_rec/async:!<cr>
-  nnoremap <c-y>      :Unite -buffer-name=history history/yank:!<cr>
-  nnoremap <leader>b  :Unite -buffer-name=buffers buffer:!<cr>
-  nnoremap <leader>o  :Unite -buffer-name=outline outline<cr>
-  nnoremap <leader>/  :Unite -buffer-name=search -no-quit grep:.<cr>
-
   " Search/replace word below cursor
   nnoremap <expr> s* ':%substitute/\<' . expand('<cword>') . '\>/'
 
   " Relative/absolute line-numbers
-  if exists('NumberToggle')
-    nnoremap <leader>n :call NumberToggle()<cr>
-  endif
-
-  " Clipper
-  nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
+  nnoremap <leader>n :call NumberToggle()<cr>
 
   " Gundo
   nnoremap <Leader>g :<C-u>GundoToggle<CR>
@@ -242,22 +97,12 @@
   " History
   nnoremap <leader>h :Unite history<cr>
 
-  " Speeddating - quick date/number manipulation
-  let g:speeddating_no_mappings=1
-  nmap  +     <Plug>SpeedDatingUp
-  nmap  -     <Plug>SpeedDatingDown
-  xmap  +     <Plug>SpeedDatingUp
-  xmap  -     <Plug>SpeedDatingDown
-  nmap d+     <Plug>SpeedDatingNowUTC
-  nmap d-     <Plug>SpeedDatingNowLocal
 " }}}
 
-
-" Load additional preferences ------------------------------------------ {{{
-  let s:vimrc_local=expand('~/vimrc.local')
-  if filereadable(s:vimrc_local)
-    source s:vimrc_local
+" NeoBundle verification ----------------------------------------------- {{{
+  NeoBundleCheck
+  if !has('vim_starting')
+    call neobundle#call_hook('on_source')
   endif
-  autocmd VimEnter * NeoBundleCheck
 " }}}
 

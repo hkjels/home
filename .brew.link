@@ -17,6 +17,7 @@ brew install                  \
   bash-completion2            \
   clipper                     \
   ctags                       \
+  direnv                      \
   ghc                         \
   gist                        \
   git                         \
