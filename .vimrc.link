@@ -49,19 +49,6 @@
   let g:mapleader=" "
   let g:maplocalleader="\\"
 
-  " Speeddating
-  let s:bundle = neobundle#get('vim-speeddating')
-  function! s:bundle.hooks.on_source(bundle)
-    let g:speeddating_no_mappings=1
-    nmap  +     <Plug>SpeedDatingUp
-    nmap  -     <Plug>SpeedDatingDown
-    xmap  +     <Plug>SpeedDatingUp
-    xmap  -     <Plug>SpeedDatingDown
-    nmap d+     <Plug>SpeedDatingNowUTC
-    nmap d-     <Plug>SpeedDatingNowLocal
-  endfunction
-  unlet s:bundle
-
   " Quick-open directory in a new buffer
   nmap <leader>e :e <c-r>=expand('%:h').'/'<cr><cr>
   nmap <leader>sp :sp <c-r>=expand('%:h').'/'<cr><cr>
