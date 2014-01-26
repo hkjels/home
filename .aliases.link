@@ -11,6 +11,9 @@ alias ....='cd ../..'
 alias ......='cd ../../..'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
+
+# Native
+
 alias running='jobs -r'
 alias stopped='jobs -s'
 alias h='historywget -c'
@@ -19,7 +22,6 @@ alias pair='tmux -S /tmp/shared'
 alias install='make install'
 alias test='make test'
 alias build='make build'
-
 
 # Applications
 
@@ -32,17 +34,15 @@ alias DEL='burl DELETE'
 alias HEAD='burl -I'
 alias clip="nc localhost 8377"
 alias tmux='tmux -u attach || tmux'
-if [[ `node -v` =~ ^v0.11 ]]; then
-  alias node="node --harmony-generators"
-  alias node-dev="node-dev --harmony-generators"
+if [[ $(node -v) =~ ^v0.11 ]]; then
+  alias node="node --harmony"
+  alias node-dev="node-dev --harmony"
 fi
-
 
 # Date & time
 
 alias today="date '+%Y-%m-%d'"
 alias timestamp="date '+%s'"
-
 
 # Completion for aliases
 
