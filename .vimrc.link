@@ -34,6 +34,11 @@
     \   'depends' : 'thinca/vim-openbuf',
     \   'autoload' : {'commands' : 'Vcs'},
     \ }                                           " Source control management
+" }}}
+
+  " TODO Move to `language.vim`
+
+  autocmd FileType help setlocal textwidth=0
 
 " Override defaults ---------------------------------------------------- {{{
   set tabstop=2                 " Number of spaces a tab counts for
@@ -44,6 +49,7 @@
   set foldmethod=indent         " Fold by indentation-level
   set foldnestmax=3             " Number of nested folds
   set nofoldenable              " Don´t fold when opening files
+  set keywordprg=:help          " Command to execute with `K`
 
   " Change leader
   let g:mapleader=" "
@@ -83,6 +89,10 @@
 
   " History
   nnoremap <leader>h :Unite history<cr>
+
+  " Help
+  nnoremap <leader>H    :<C-u>Unite -buffer-name=help help<cr>
+  nnoremap <leader> *H  :<C-u>UniteWithCursorWord help<CR>
 
 " }}}
 
