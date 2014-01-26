@@ -37,6 +37,7 @@
   unstage  = reset HEAD --
   update   = pull --rebase
   ctags    = !.git/hooks/ctags
+  standup  = log --since '1 day ago' --oneline --author 'hkjels@me.com'
 
 [credential]
   helper = osxkeychain
