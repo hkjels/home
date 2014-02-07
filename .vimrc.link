@@ -21,6 +21,7 @@
   NeoBundle 'hkjels/aestetics.vim', {'force': 1}  " All things color
   NeoBundle 'hkjels/united.vim', {'force': 1}     " Bundle of unite-interfaces
   NeoBundle 'hkjels/language.vim', {'force': 1}   " Syntax/Check/Completion etc
+  NeoBundle 'hkjels/scm.vim', {'force': 1}        " Source control
   NeoBundle 'jeffkreeftmeijer/vim-numbertoggle'   " Toggle between relative/absolute line-numbers
   NeoBundle 'Lokaltog/vim-easymotion'             " Jump to character with visual-aid
   NeoBundle 'kshenoy/vim-signature'               " Displays marks in a gutter
@@ -38,6 +39,7 @@
 
   " TODO Move to `language.vim`
 
+  autocmd BufNewFile,BufRead *.{mcss,css} setlocal filetype=css
   autocmd FileType help setlocal textwidth=0
 
 " Override defaults ---------------------------------------------------- {{{

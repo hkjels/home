@@ -15,6 +15,7 @@ brew install                  \
   aria2                       \
   bash                        \
   bash-completion2            \
+  burl                        \
   clipper                     \
   ctags                       \
   direnv                      \
@@ -23,6 +24,7 @@ brew install                  \
   git                         \
   git-extras                  \
   git-now                     \
+  grc                         \
   grok                        \
   haskell-platform            \
   hub                         \
