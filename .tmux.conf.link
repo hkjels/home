@@ -6,9 +6,7 @@ set -g prefix C-a
 # Make use of the native MacOs clip-board
 bind -t vi-copy v begin-selection
 bind -t vi-copy V rectangle-toggle
-bind -t vi-copy Enter copy-pipe "nc localhost 8377"
-bind y run-shell "tmux save-buffer - | nc localhost 8377"
-bind-key -t vi-copy Enter copy-pipe "nc localhost 8377"
+bind -t vi-copy y copy-pipe "nc localhost 8377"
 
 # Some vi-like navigation
 setw -g mode-keys vi
@@ -18,10 +16,11 @@ set-option -sg escape-time 1
 
 # Allow mouse-input for scrolling history,
 # switching panes and resizing panes.
-set -g mode-mouse on
+setw -g mode-mouse on
 set -g mouse-select-pane on
 set -g mouse-resize-pane on
 set -g mouse-select-window on
+set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 
 # Improved colors
 set -g default-terminal "screen-256color"
