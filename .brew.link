@@ -12,6 +12,7 @@ brew update
 
 brew install                  \
   ag                          \
+  align                       \
   aria2                       \
   bash                        \
   bash-completion2            \
@@ -28,6 +29,7 @@ brew install                  \
   grok                        \
   haskell-platform            \
   hub                         \
+  hr                          \
   logstash                    \
   lua                         \
   luajit                      \
@@ -36,6 +38,7 @@ brew install                  \
   pipeviewer                  \
   python                      \
   readline                    \
+  tag                         \
   tmux                        \
   tree                        \
   vcprompt                    \

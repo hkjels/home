@@ -21,7 +21,7 @@ alias wget='wget -c'
 alias pair='tmux -S /tmp/shared'
 alias install='make install'
 alias test='make test'
-alias build='make build'
+alias clean='make clean'
 alias sys="grc tail -100 /var/log/system.log"
 
 # Applications
@@ -39,6 +39,7 @@ if [[ $(node -v) =~ ^v0.11 ]]; then
   alias node="node --harmony"
   alias node-dev="node-dev --harmony"
 fi
+alias hr='echo ; hr -; echo ;'
 
 # Date & time
 
