@@ -104,6 +104,11 @@ function man() {
       man "$@"
 }
 
+# Always use tmux for ssh
+
+function ssht(){
+  ssh $* -t 'tmux a || tmux || /bin/bash'
+}
 
 # NuGet CLI
 

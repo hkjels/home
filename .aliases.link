@@ -23,6 +23,7 @@ alias install='make install'
 alias test='make test'
 alias clean='make clean'
 alias sys="grc tail -100 /var/log/system.log"
+alias ssh="ssht"
 
 # Applications
 
