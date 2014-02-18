@@ -37,10 +37,6 @@
     \ }                                           " Source control management
 " }}}
 
-  " TODO Move to `language.vim`
-
-  autocmd BufNewFile,BufRead *.{mcss,css} setlocal filetype=css
-  autocmd FileType help setlocal textwidth=0
 
 " Override defaults ---------------------------------------------------- {{{
   set tabstop=2                 " Number of spaces a tab counts for
@@ -52,6 +48,12 @@
   set foldnestmax=3             " Number of nested folds
   set nofoldenable              " Don´t fold when opening files
   set keywordprg=:help          " Command to execute with `K`
+
+  " Mouse support
+  if has("mouse")
+    set mouse=a
+    set mousehide
+  endif
 
   " Change leader
   let g:mapleader=" "
@@ -95,6 +97,9 @@
   " Help
   nnoremap <leader>H    :<C-u>Unite -buffer-name=help help<cr>
   nnoremap <leader> *H  :<C-u>UniteWithCursorWord help<CR>
+
+  " Clipper
+  nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
 
 " }}}
 
