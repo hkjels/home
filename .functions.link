@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
 
 
-# Quick-find file by name
-
-function f() {
-  find . -iname "$1" -print
-}
-
-
 # Open file/directory
 
 function o() {

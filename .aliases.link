@@ -17,6 +17,8 @@ alias sys="grc tail -100 /var/log/system.log"
 alias e=$EDITOR
 alias which='type -p'
 alias clip="nc localhost 8377"
+alias c="clear"
+alias f="find . -iname"
 
 # Make
 alias install='make install'
