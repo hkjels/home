@@ -1,6 +1,4 @@
 
-# File system
-
 alias _='sudo'
 alias la='ls -lah'
 alias ll='ls -1'
@@ -11,43 +9,44 @@ alias ....='cd ../..'
 alias ......='cd ../../..'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
-
-# Native
-
 alias running='jobs -r'
 alias stopped='jobs -s'
-alias h='historywget -c'
+alias h='history -c'
 alias wget='wget -c'
-alias pair='tmux -S /tmp/shared'
+alias sys="grc tail -100 /var/log/system.log"
+alias e=$EDITOR
+alias which='type -p'
+alias clip="nc localhost 8377"
+
+# Make
 alias install='make install'
 alias test='make test'
 alias clean='make clean'
-alias sys="grc tail -100 /var/log/system.log"
-alias ssh="ssht"
 
-# Applications
-
-alias e=$EDITOR
-alias g='git'
+# Burl
 alias GET='burl GET'
 alias POST='burl POST'
 alias PUT='burl PUT'
 alias DEL='burl DELETE'
 alias HEAD='burl -I'
-alias clip="nc localhost 8377"
-alias tmux='tmux -u attach || tmux'
+
+# Tmux
+alias tmux='tmux -u attach || tmux -2'
+alias tmuxls='ls $TMPDIR/tmux*/'
+alias pair='tmux new-session -s pair'
+alias ssh="ssht"
+
+# Node
 if [[ $(node -v) =~ ^v0.11 ]]; then
   alias node="node --harmony"
   alias node-dev="node-dev --harmony"
 fi
+
 alias hr='echo ; hr -; echo ;'
-
-# Date & time
-
 alias today="date '+%Y-%m-%d'"
 alias timestamp="date '+%s'"
 
-# Completion for aliases
-
+# Git
+alias g='git'
 complete -o default -o nospace -F _git g
 
