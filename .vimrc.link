@@ -28,6 +28,9 @@
   NeoBundle 'christoomey/vim-tmux-navigator'      " Easy navigation between tmux <-> vim
   NeoBundle 'tpope/vim-unimpaired'                " Quick navigation shortcuts
   NeoBundle 'tpope/vim-repeat'                    " Repeat plugin commands with `.`
+  NeoBundleLazy 'junegunn/goyo.vim', {
+    \   'autoload': {'commands': [{'name': 'Goyo'}]},
+    \ }                                           " Distraction free editing
   NeoBundleLazy 'sjl/gundo.vim', {
     \   'autoload': {'commands': [{'name': 'GundoToggle'}]},
     \ }                                           " Tree overview of undo´s
@@ -48,6 +51,7 @@
   set foldnestmax=3             " Number of nested folds
   set nofoldenable              " Don´t fold when opening files
   set keywordprg=:help          " Command to execute with `K`
+  set synmaxcol=200             " Highlight only column 1-[200]
 
   " Mouse support
   if has("mouse")
@@ -58,6 +62,8 @@
   " Change leader
   let g:mapleader=" "
   let g:maplocalleader="\\"
+
+  set pastetoggle=<F9>
 
   " Quick-open directory in a new buffer
   nmap <leader>e :e <c-r>=expand('%:h').'/'<cr><cr>
@@ -87,6 +93,9 @@
 
   " Relative/absolute line-numbers
   nnoremap <leader>n :call NumberToggle()<cr>
+
+  " Goyo
+  nnoremap <Leader>K :Goyo<cr>
 
   " Gundo
   nnoremap <Leader>g :<C-u>GundoToggle<CR>
