@@ -12,6 +12,12 @@ esac
 #
 
 
+# System defaults
+
+export PLATFORM=$(uname -s)
+[ -f /etc/bashrc ] && . /etc/bashrc
+
+
 # Shell built-in options
 
 shopt -s nocaseglob
@@ -21,6 +27,11 @@ shopt -s checkwinsize
 shopt -s no_empty_cmd_completion
 shopt -s autocd 2> /dev/null
 shopt -s globstar 2> /dev/null
+
+
+# Less for binary files
+
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 
 # Source scripts

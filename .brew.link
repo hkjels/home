@@ -30,6 +30,7 @@ brew install                  \
   haskell-platform            \
   hub                         \
   hr                          \
+  lesspipe                    \
   logstash                    \
   lua                         \
   luajit                      \
