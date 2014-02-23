@@ -6,6 +6,7 @@
 
 [alias]
   am       = commit -v --amend
+  sh       = !git-sh
   br       = branch
   branches = branch -a
   cb       = checkout -b

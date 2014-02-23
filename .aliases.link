@@ -1,4 +1,5 @@
 
+# Convenience
 alias _='sudo'
 alias la='ls -lah'
 alias ll='ls -1'
@@ -34,7 +35,6 @@ alias HEAD='burl -I'
 
 # Tmux
 alias tmux='tmux -u attach || tmux -2'
-alias tmuxls='ls $TMPDIR/tmux*/'
 alias pair='tmux new-session -s pair'
 alias ssh="ssht"
 
