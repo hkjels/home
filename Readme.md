@@ -1,7 +1,6 @@
 
 # ~
 
-
 These are my personal [dotfiles](http://dotfiles.github.io/). I keep a tidy
 home, so it might be a good source for inspiration. `Home` includes
 preferences for bash, vim, git, etc. If you give them a shot and you and you

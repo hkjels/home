@@ -6,6 +6,14 @@ case $- in
 esac
 
 
+# Detect login shell
+
+case "$0" in
+  -*) LOGIN=yes ;;
+  *)  unset LOGIN ;;
+esac
+
+
 #
 # Bash preferences
 # ================
