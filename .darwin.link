@@ -49,6 +49,7 @@
     vim --with-lua --HEAD       \
     wget                        \
     wrk                         \
+    q                           \
     z
 
   # Clean out the cellar
