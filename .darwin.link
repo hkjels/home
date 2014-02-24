@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+#
+# Homebrew
+#
+
+  # Install homebrew
+  [[ -z $(type brew) ]] && ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+
+  # Make sure Homebrew is up to par
+  brew update
+
+  # Terribly useful stuff
+  brew install                  \
+    ag                          \
+    align                       \
+    aria2                       \
+    bash                        \
+    bash-completion2            \
+    burl                        \
+    clipper                     \
+    ctags                       \
+    direnv                      \
+    ghc                         \
+    gist                        \
+    git                         \
+    git-extras                  \
+    git-now                     \
+    gitsh                       \
+    grc                         \
+    grok                        \
+    haskell-platform            \
+    hub                         \
+    hr                          \
+    lesspipe                    \
+    logstash                    \
+    lua                         \
+    luajit                      \
+    mongodb                     \
+    most                        \
+    node                        \
+    pipeviewer                  \
+    python                      \
+    readline                    \
+    tag                         \
+    tmux                        \
+    tree                        \
+    vcprompt                    \
+    vim --with-lua --HEAD       \
+    wget                        \
+    wrk                         \
+    z
+
+  # Clean out the cellar
+
+  brew cleanup
+
+  # Launchctl
+
+  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.clipper.plist
+  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
+
+
+#
+# Convenience
+#
+
+  # Avoid creating .DS_Store files on network volumes
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+  # Allow text selection in Quick Look
+  defaults write com.apple.finder QLEnableTextSelection -bool true
+
+  # Disable Dashboard
+  defaults write com.apple.dashboard mcx-disabled -bool true
+
+
+#
+# Dock
+#
+
+  # Automatically hide and show the Dock
+  defaults write com.apple.dock autohide -bool true
+
+  # Make Dock icons of hidden applications translucent
+  defaults write com.apple.dock showhidden -bool true
+
+  # Set the icon size of Dock items to 36 pixels
+  defaults write com.apple.dock tilesize -int 36
+
+  # Enable magnification of Dock items
+  defaults write com.apple.dock magnification -bool true
+
+
+#
+# Hardware
+#
+
+  # Enable subpixel font rendering on non-Apple LCDs
+  defaults write NSGlobalDomain AppleFontSmoothing -int 2
+
+  # Enable tap to click (Trackpad) for this user and for the login screen
+  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+  defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+  defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+  # Disable "natural" scroll
+  defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
+  # Prevent Time Machine from prompting to use new hard drives as backup volume
+  defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+  # Set a blazingly fast keyboard repeat rate
+  defaults write NSGlobalDomain KeyRepeat -int 0
+

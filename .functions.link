@@ -62,8 +62,8 @@ function myip() {
 }
 
 
-# Normal `cd` except you can jump directly to the root of a git-project
-# with `cd ^`
+# Augments `cd` with ability to jump directly to the
+# root of a git-project using `cd ^`.
 
 function cd {
   case $1 in

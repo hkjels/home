@@ -1,32 +1,34 @@
 
-PWD=$(shell pwd)
-SRC:=$(wildcard .*.link)
-DST:=$(patsubst %.link,~/%,$(SRC))
+OS := $(shell uname -s | tr '[:upper:]' '[:lower:]')
+SRC:= $(wildcard .*.link)
+DST:= $(patsubst %.link,~/%,$(SRC))
 
 
-install: symlinks
-	@echo '    If you have any preferences to add, create ~/.[app].local'
-	@echo '    files, where `app` is one of bashrc, vimrc, gitconfig, etc.'
+install: symlinks apps vim
 	@echo ''
-	@echo '    You will need to change your shell for completion to work'
-	@echo '    properly.'
+	@echo '    Everything was successfully installed! If you bump into any issues,'
+	@echo '    please let me know: [https://github.com/hkjels/home/issues].'
+	@echo '    Any personal preferences should be added to `~/.[app].local` files,'
+	@echo '    where [app] is one of `bashrc`, `vimrc`, `gitconfig`, etc.'
 	@echo ''
-	@echo '    sudo chsh -s $(brew --prefix bash)/bin/bash'
+	@echo '    You will need to change your shell for everything to work as expected:'
+	@echo ''
+	@echo '    `sudo chsh -s $(brew --prefix bash)/bin/bash`'
+	@echo ''
+	@echo '    Have a nice day!'
 	@echo ''
 
 symlinks: $(DST)
 	@echo ""
-	@echo "    ==============================="
-	@echo "    All symlinks have been created."
-	@echo "    ==============================="
+	@echo "    Symlinks have been created."
+	@echo "    ==========================="
 	@echo ""
 
-brew:
-	@. ~/.brew
+apps:
+	@. ~/.$(OS)
 	@echo ""
-	@echo "    =============================================="
-	@echo "    Homebrew and applications have been installed."
-	@echo "    =============================================="
+	@echo "    Applications have been installed."
+	@echo "    ================================="
 	@echo ""
 
 vim:
@@ -34,7 +36,6 @@ vim:
 	@git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 	@vim +NeoBundleInstall +qall
 	@echo ""
-	@echo "    =========================================="
 	@echo "    Vim and all of it's bundles are installed."
 	@echo "    =========================================="
 	@echo ""
