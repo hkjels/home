@@ -20,13 +20,16 @@
     burl                        \
     clipper                     \
     ctags                       \
+    drake                       \
     direnv                      \
+    ffmpeg                      \
     ghc                         \
     gist                        \
-    git                         \
+    git --with-pcre             \
     git-extras                  \
     git-now                     \
     gitsh                       \
+    graphicsmagick              \
     grc                         \
     grok                        \
     haskell-platform            \
@@ -61,6 +64,11 @@
   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.clipper.plist
   launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
 
+#
+# Node packages
+#
+
+. .npms
 
 #
 # Convenience
