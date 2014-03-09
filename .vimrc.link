@@ -28,6 +28,8 @@
   NeoBundle 'christoomey/vim-tmux-navigator'      " Easy navigation between tmux <-> vim
   NeoBundle 'tpope/vim-unimpaired'                " Quick navigation shortcuts
   NeoBundle 'tpope/vim-repeat'                    " Repeat plugin commands with `.`
+  NeoBundle 'gcmt/wildfire.vim'                   " Quick-select nearest text-object
+  NeoBundle 'jaxbot/github-issues.vim'            " Completion of github-issues on commit
   NeoBundleLazy 'junegunn/goyo.vim', {
     \   'autoload': {'commands': [{'name': 'Goyo'}]},
     \ }                                           " Distraction free editing
