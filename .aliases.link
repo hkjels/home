@@ -4,6 +4,7 @@ alias _='sudo'
 alias la='ls -lah'
 alias ll='ls -1'
 alias ls='ls -hGl'
+alias l.='ls -d .* --color=auto'
 alias -- -='cd -'
 alias ..='cd ..'
 alias ....='cd ../..'
@@ -20,6 +21,10 @@ alias which='type -p'
 alias clip="nc localhost 8377"
 alias c="clear"
 alias f="find . -iname"
+alias grep='grep --color=auto'
+alias path='echo -e ${PATH//:/\\n}'
+alias du='du -ch'
+alias du1='du -ch -d 1'
 
 # Make
 alias install='make install'

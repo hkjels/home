@@ -5,29 +5,34 @@
   editor        = "$EDITOR -f"
 
 [alias]
-  am       = commit -v --amend
-  sh       = !git-sh
+  am       = commit -v --amend --no-edit
   br       = branch
   branches = branch -a
   cb       = checkout -b
   ci       = commit -v
-  co       = checkout
   cl       = clone --recursive
+  co       = checkout
+  ctags    = !.git/hooks/ctags
   d        = diff --word-diff
+  g        = grep --break --heading --line-number
   lc       = show -s --format='%ct' HEAD
   lg       =  log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=relative
   m        = merge
+  next     = !git add -A; git rebase --continue
+  p        = pull
+  pr       = pull --rebase
   rb       = rebase
   rbi      = rebase -i origin/master
-  next     = !git add -A; git rebase --continue
   remotes  = remote -v
   root     = !pwd
   s        = status -s
   sci      = dcommit -v
   sf       = submodule foreach
+  sh       = !git-sh
   srb      = svn rebase
   st       = stash
   sta      = stash apply
+  standup  = log --since '1 day ago' --oneline --author 'hkjels@me.com'
   std      = stash drop
   stls     = stash list
   stp      = stash pop
@@ -37,8 +42,6 @@
   undo     = reset --soft HEAD^
   unstage  = reset HEAD --
   update   = pull --rebase
-  ctags    = !.git/hooks/ctags
-  standup  = log --since '1 day ago' --oneline --author 'hkjels@me.com'
 
 [credential]
   helper = osxkeychain
@@ -72,4 +75,8 @@
 
 [hub]
   protocol = https
+
+[grep]
+  extendRegexp = true
+  lineNumber = true
 
