@@ -28,6 +28,11 @@ set -g default-terminal "screen-256color"
 # One indexed panes for easier switching
 set -g base-index 1
 
+# Open new panes and windows in the `CWD`
+bind '"' split-window -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
+
 # Zoom
 bind + resize-pane -Z
 
