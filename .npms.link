@@ -1,0 +1,16 @@
+#!/use/bin/env bash
+
+npm install -g      \
+  autosave          \
+  browsersync       \
+  component         \
+  component-graph   \
+  component-size    \
+  json              \
+  metalsmith        \
+  mocha             \
+  myth              \
+  serve             \
+  stylestats        \
+  up
+
