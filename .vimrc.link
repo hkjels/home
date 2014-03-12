@@ -73,6 +73,9 @@
   nmap <leader>vs :vs <c-r>=expand('%:h').'/'<cr><cr>
   nmap <leader>t :tabe <c-r>=expand('%:h').'/'<cr><cr>
 
+  " Toggle virtualedit-mode, so you can surpass line-ending or not
+  nmap <leader>v :let &ve=&ve=="" ? "all" : "block" <bar> set ve?<cr>
+
   " Prevent the use of arrow-keys as screen-navigation
   map <up> <nop>
   map <down> <nop>
