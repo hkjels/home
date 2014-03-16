@@ -16,7 +16,8 @@
   d        = diff --word-diff
   g        = grep --break --heading --line-number
   lc       = show -s --format='%ct' HEAD
-  lg       =  log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=relative
+  lg       = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=relative
+  nl       = !git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=relative | nl
   m        = merge
   next     = !git add -A; git rebase --continue
   p        = pull
