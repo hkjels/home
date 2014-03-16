@@ -2,23 +2,18 @@
 
 
 # Open file/directory
-
 function o() {
   if [[ -n $* ]]; then open $*
   else open .
   fi
 }
 
-
 # Make directory and `cd` into it
-
 function mcd() {
   mkdir -p "$1" && cd "$1"
 }
 
-
 # Output colors and their numeric value
-
 function colors() {
   for code in {0..255}; do
     printf "\e[38;05;${code}m $code";
@@ -26,45 +21,35 @@ function colors() {
   done
 }
 
-
-# Helper to extract different archives
-# Stolen from zshuery
-
-function extract() {
-  if [[ -f $1 ]]; then
-    case $1 in
-      *.tar.bz2) tar xvjf $1;;
-      *.tar.gz) tar xvzf $1;;
-      *.tar.xz) tar xvJf $1;;
-      *.tar.lzma) tar --lzma xvf $1;;
-      *.bz2) bunzip $1;;
-      *.rar) unrar $1;;
-      *.gz) gunzip $1;;
-      *.tar) tar xvf $1;;
-      *.tbz2) tar xvjf $1;;
-      *.tgz) tar xvzf $1;;
-      *.zip) unzip $1;;
-      *.Z) uncompress $1;;
-      *.7z) 7z x $1;;
-      *.dmg) hdiutul mount $1;; # mount OS X disk images
-      *) echo "'$1' cannot be extracted via >extract<";;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
+# Extract any archive
+extract() {
+    if [ -f $1 ] ; then
+      case $1 in
+        *.tar.bz2)   tar xjf $1     ;;
+        *.tar.gz)    tar xzf $1     ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar e $1     ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xf $1      ;;
+        *.tbz2)      tar xjf $1     ;;
+        *.tgz)       tar xzf $1     ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)     echo "'$1' cannot be extracted via extract()" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
 }
 
-
 # Retrieve public IP-address
-
 function myip() {
   wget http://ipecho.net/plain -O - -q ; echo
 }
 
-
 # Augments `cd` with ability to jump directly to the
 # root of a git-project using `cd ^`.
-
 function cd {
   case $1 in
     ^ )
@@ -74,17 +59,13 @@ function cd {
   esac
 }
 
-
 # Start process in the background and hide `std(out|err)`
-
 function hide() {
   local proc=$@
   eval "$proc &> /dev/null &"
 }
 
-
 # Colored manpages
-
 function man() {
   env \
     LESS_TERMCAP_mb=$(printf "${RED}") \
@@ -97,15 +78,19 @@ function man() {
       man "$@"
 }
 
-# Always use tmux for ssh
-
+# Use tmux with ssh-connections
 function ssht(){
   ssh $* -t 'tmux a || tmux || /bin/bash'
 }
 
-# NuGet CLI
+# Copy public-key to remote
+function auth() {
+  ssh "$1" 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' \
+    < ~/.ssh/id_dsa.pub
+}
 
-function nuget() {
-  mono --runtime=v4.0 $HOME/bin/nuget.exe $*
+# Tail with search-highlight
+t() {
+  tail -f $1 | perl -pe "s/$2/\e[1;31;43m$&\e[0m/g"
 }
 
