@@ -68,7 +68,7 @@
 # Node packages
 #
 
-. .npms
+~/.npms
 
 #
 # Convenience

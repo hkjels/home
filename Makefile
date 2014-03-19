@@ -32,9 +32,11 @@ apps:
 	@echo ""
 
 vim:
-	@mkdir -p ~/.vim/{bundle,backup,swap}
-	@git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-	@vim +NeoBundleInstall +qall
+	@mkdir -p ~/.vim/{autoload,backup,swap}
+	@curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
+	@vim +PlugInstall +qall
+	@cd ~/.vim/plugged/vimproc.vim && make
+	@cd ~/.vim/plugged/tern_for_vim && npm install
 	@echo ""
 	@echo "    Vim and all of it's bundles are installed."
 	@echo "    =========================================="

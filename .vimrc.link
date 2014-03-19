@@ -1,71 +1,113 @@
 
-"
-" .vimrc
-"
-" Author: Henrik Kjelsberg (https://github.com/hkjels/)
-" Version: 0.1.0
-" License: MIT
-"
+" Plug-ins ------------------------------------------------------------- {{{
+  call plug#begin('~/.vim/plugged')
 
-" NeoBundle initialization---------------------------------------------- {{{
-  if has('vim_starting')
-    set nocompatible
-    set runtimepath+=~/.vim/bundle/neobundle.vim
+  Plug 'hkjels/natural.vim'
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-sleuth'
+  Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
+  Plug 'Shougo/unite.vim'
+  Plug 'Shougo/vimproc.vim'
+  Plug 'h1mesuke/unite-outline'
+  Plug 'Shougo/unite-help'
+  Plug 'thinca/vim-unite-history'
+
+  " SCM
+  Plug 'tpope/vim-git'
+  Plug 'tpope/vim-fugitive'
+  Plug 'mhinz/vim-signify'
+
+  " Navigation
+  Plug 'tpope/vim-vinegar'
+  Plug 'jeffkreeftmeijer/vim-numbertoggle'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'kshenoy/vim-signature'
+
+  " Editing
+  Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
+  Plug 'Raimondi/delimitMate'
+  Plug 'tsaleh/vim-align'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-ragtag'
+  Plug 'tpope/vim-speeddating'
+  Plug 'tpope/vim-surround'
+  Plug 'scrooloose/syntastic'
+  Plug 'Shougo/context_filetype.vim'
+  Plug 'osyo-manga/vim-watchdogs'
+  Plug 'kana/vim-textobj-user'
+
+  " File-type
+  Plug 'tpope/vim-markdown'
+  Plug 'chrisbra/csv.vim'
+  Plug 'AnsiEsc.vim'
+
+  " Completions
+  Plug 'honza/vim-snippets'
+  Plug 'Shougo/neocomplete'
+  Plug 'marijnh/tern_for_vim'
+  Plug 'guileen/vim-node'
+
+  " Aesthetics
+  Plug 'altercation/vim-colors-solarized'
+  Plug 'bling/vim-airline'
+  Plug 'edkolev/tmuxline.vim'
+  Plug 'ivyl/vim-bling'
+
+  call plug#end()
+" }}}
+
+" Plug-in configurations ----------------------------------------------- {{{
+  " Netrw
+  let g:netrw_list_hide= '.*\.swp$'   " Hide files in `netrw`
+
+  " Unite
+  let g:unite_enable_start_insert = 1
+  let g:unite_source_file_rec_max_cache_files = 0
+  if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+  else
+    let g:unite_source_grep_command = 'grep'
   endif
-  call neobundle#rc(expand('~/.vim/bundle'))
-  NeoBundleFetch 'Shougo/neobundle.vim'
-" }}}
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column --smart-case'
+  let g:unite_source_grep_recursive_opt = ''
+  let s:unite_affects = 'file,file/new,buffer,file_rec,file_rec/async'
+  let s:unite_ignore = '/^\%(.git\|.DS_Store\|components\|node_modules\|.jpg\|.png\|.gif\)$/'
+  call unite#filters#matcher_default#use(['matcher_fuzzy'])
+  call unite#custom#source(s:unite_affects, 'max_candidates', 0)
+  call unite#custom#source(s:unite_affects, 'ignore_pattern', s:unite_ignore)
 
-" Bundle dependencies -------------------------------------------------- {{{
-  NeoBundle 'hkjels/natural.vim'                  " Sane defaults
-  NeoBundle 'hkjels/aestetics.vim', {'force': 1}  " All things color
-  NeoBundle 'hkjels/united.vim', {'force': 1}     " Bundle of unite-interfaces
-  NeoBundle 'hkjels/language.vim', {'force': 1}   " Syntax/Check/Completion etc
-  NeoBundle 'hkjels/scm.vim', {'force': 1}        " Source control
-  NeoBundle 'jeffkreeftmeijer/vim-numbertoggle'   " Toggle between relative/absolute line-numbers
-  NeoBundle 'Lokaltog/vim-easymotion'             " Jump to character with visual-aid
-  NeoBundle 'kshenoy/vim-signature'               " Displays marks in a gutter
-  NeoBundle 'christoomey/vim-tmux-navigator'      " Easy navigation between tmux <-> vim
-  NeoBundle 'tpope/vim-unimpaired'                " Quick navigation shortcuts
-  NeoBundle 'tpope/vim-repeat'                    " Repeat plugin commands with `.`
-  NeoBundle 'gcmt/wildfire.vim'                   " Quick-select nearest text-object
-  NeoBundle 'jaxbot/github-issues.vim'            " Completion of github-issues on commit
-  NeoBundleLazy 'junegunn/goyo.vim', {
-    \   'autoload': {'commands': [{'name': 'Goyo'}]},
-    \ }                                           " Distraction free editing
-  NeoBundleLazy 'sjl/gundo.vim', {
-    \   'autoload': {'commands': [{'name': 'GundoToggle'}]},
-    \ }                                           " Tree overview of undo´s
-  NeoBundleLazy 'Shougo/vim-vcs', {
-    \   'depends' : 'thinca/vim-openbuf',
-    \   'autoload' : {'commands' : 'Vcs'},
-    \ }                                           " Source control management
+  " Completion
+  let g:neocomplete#sources#omni#functions=get(g:, 'neocomplete#sources#omni#functions', {})
+  let g:neocomplete#sources#omni#functions.javascript='tern#Complete'
 " }}}
-
 
 " Override defaults ---------------------------------------------------- {{{
-  set tabstop=2                 " Number of spaces a tab counts for
-  set shiftwidth=2              " Width to shift on indent operations
-  set expandtab                 " Use space instead of tabs in insert-mode
-  set smarttab                  " Insert blanks according to shiftwidth in start of lines
-  set tags=.git/tags            " Store tags with each project
-  set foldmethod=indent         " Fold by indentation-level
-  set foldnestmax=3             " Number of nested folds
-  set nofoldenable              " Don´t fold when opening files
-  set keywordprg=:help          " Command to execute with `K`
-  set synmaxcol=200             " Highlight only column 1-[200]
+  syntax enable                       " Enable syntax-highlighting
+  set tabstop=2                       " Number of spaces a tab counts for
+  set shiftwidth=2                    " Width to shift on indent operations
+  set expandtab                       " Use space instead of tabs in insert-mode
+  set smarttab                        " Insert blanks according to shiftwidth in start of lines
+  set tags=.git/tags                  " Store tags with each project
+  set foldmethod=indent               " Fold by indentation-level
+  set foldnestmax=3                   " Number of nested folds
+  set nofoldenable                    " Don´t fold when opening files
+  set keywordprg=:help                " Command to execute with `K`
+  set synmaxcol=200                   " Highlight only column 1-[200]
+  set pastetoggle=<F9>                " Toggle paste-mode
+  set background=dark                 " Color-scheme variant
+  colorscheme solarized               " Active color-scheme
 
   " Mouse support
   if has("mouse")
     set mouse=a
     set mousehide
   endif
+" }}}
 
-  " Change leader
-  let g:mapleader=" "
-  let g:maplocalleader="\\"
-
-  set pastetoggle=<F9>
+" Key bindings --------------------------------------------------------- {{{
+  let g:mapleader=' '                 " Sets <leader> to <space>
+  let g:maplocalleader='\\'           " <localleader> to \
 
   " Quick-open directory in a new buffer
   nmap <leader>e :e <c-r>=expand('%:h').'/'<cr><cr>
@@ -73,7 +115,7 @@
   nmap <leader>vs :vs <c-r>=expand('%:h').'/'<cr><cr>
   nmap <leader>t :tabe <c-r>=expand('%:h').'/'<cr><cr>
 
-  " Toggle virtualedit-mode, so you can surpass line-ending or not
+  " Toggle virtualedit-mode, so you can surpass line-endings or not
   nmap <leader>v :let &ve=&ve=="" ? "all" : "block" <bar> set ve?<cr>
 
   " Prevent the use of arrow-keys as screen-navigation
@@ -87,10 +129,11 @@
   inoremap <down>  <nop>
 
   " Tab switching
-  nnoremap <right> :tabnext<cr>
   nnoremap <left> :tabprevious<cr>
+  nnoremap <right> :tabnext<cr>
 
-  " Invert colorshcheme
+  " Invert brightness of color-scheme
+  command! -bar InvertColorScheme :let &background = (&background=="light"?"dark":"light")
   map <leader>c :InvertColorScheme<cr>
 
   " Search/replace word below cursor
@@ -99,28 +142,40 @@
   " Relative/absolute line-numbers
   nnoremap <leader>n :call NumberToggle()<cr>
 
+  " Unite
+  nnoremap <c-p>        :Unite -buffer-name=files file_rec/async:!<cr>
+  nnoremap <c-y>        :Unite -buffer-name=history history/yank:!<cr>
+  nnoremap <leader>b    :Unite -buffer-name=buffers buffer:!<cr>
+  nnoremap <leader>o    :Unite -buffer-name=outline outline<cr>
+  nnoremap <leader>/    :Unite -buffer-name=search -no-quit grep:.<cr>
+  nnoremap <leader>h    :Unite -buffer-name=history history<cr>
+  nnoremap <leader>H    :Unite -buffer-name=help help<cr>
+  nnoremap <leader> *H  :UniteWithCursorWord -buffer-name=help help<CR>
+
   " Goyo
   nnoremap <Leader>K :Goyo<cr>
 
   " Gundo
   nnoremap <Leader>g :<C-u>GundoToggle<CR>
 
-  " History
-  nnoremap <leader>h :Unite history<cr>
-
-  " Help
-  nnoremap <leader>H    :<C-u>Unite -buffer-name=help help<cr>
-  nnoremap <leader> *H  :<C-u>UniteWithCursorWord help<CR>
-
   " Clipper
   nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
 
+  " Move between changes in diff-mode using arrow-keys
+  au BufEnter * if &diff | call s:DiffMappings()
+  fun! s:DiffMappings()
+    map <up> [c<cr>
+    map <down> ]c<cr>
+  endfun
 " }}}
 
-" NeoBundle verification ----------------------------------------------- {{{
-  NeoBundleCheck
-  if !has('vim_starting')
-    call neobundle#call_hook('on_source')
-  endif
+" Abbreviations -------------------------------------------------------- {{{
+  " Git
+  cabbrev gb Gblame
+  cabbrev gc Gcommit
+  cabbrev gd Gdiff
+  cabbrev gl Gitv
+  cabbrev gp Git push
+  cabbrev gs Gstatus
 " }}}
 
