@@ -8,29 +8,36 @@
 " Plug-ins ------------------------------------------------------------- {{{
   call plug#begin('~/.vim/plugged')
 
+  " Settings
   Plug 'hkjels/natural.vim'
+
+  " File
   Plug 'tpope/vim-eunuch'
-  Plug 'tpope/vim-sleuth'
-  Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
-  Plug 'Shougo/unite.vim'
+  Plug 'tpope/vim-dispatch'
+
+  " UI
   Plug 'Shougo/vimproc.vim'
-  Plug 'h1mesuke/unite-outline'
-  Plug 'Shougo/unite-help'
-  Plug 'thinca/vim-unite-history'
+  Plug 'Shougo/unite.vim'
 
   " SCM
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-fugitive'
+  Plug 'gregsexton/gitv'
   Plug 'mhinz/vim-signify'
 
   " Navigation
+  Plug 'h1mesuke/unite-outline'
+  Plug 'Shougo/unite-help'
+  Plug 'thinca/vim-unite-history'
   Plug 'tpope/vim-vinegar'
   Plug 'jeffkreeftmeijer/vim-numbertoggle'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'kshenoy/vim-signature'
 
   " Editing
+  Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
   Plug 'junegunn/goyo.vim', {'on': 'Goyo'}
+  Plug 'tpope/vim-sleuth'
   Plug 'Raimondi/delimitMate'
   Plug 'tsaleh/vim-align'
   Plug 'tpope/vim-commentary'
@@ -45,6 +52,7 @@
 
   " File-type
   Plug 'tpope/vim-markdown'
+  Plug 'elzr/vim-json'
   Plug 'chrisbra/csv.vim'
   Plug 'AnsiEsc.vim'
 
@@ -53,12 +61,14 @@
   Plug 'Shougo/neocomplete'
   Plug 'marijnh/tern_for_vim'
   Plug 'guileen/vim-node'
+  Plug 'osyo-manga/vim-marching'
 
   " Aesthetics
   Plug 'altercation/vim-colors-solarized'
   Plug 'bling/vim-airline'
   Plug 'edkolev/tmuxline.vim'
   Plug 'ivyl/vim-bling'
+  Plug 'ap/vim-css-color'
 
   call plug#end()
 " }}}
@@ -84,8 +94,13 @@
   call unite#custom#source(s:unite_affects, 'ignore_pattern', s:unite_ignore)
 
   " Completion
+  let g:neocomplete#enable_at_startup=1
+  let g:neocomplete#enable_smart_case=1
   let g:neocomplete#sources#omni#functions=get(g:, 'neocomplete#sources#omni#functions', {})
   let g:neocomplete#sources#omni#functions.javascript='tern#Complete'
+  let g:marching_clang_command="/usr/bin/clang"
+  let g:marching_enable_neocomplete=1
+  let g:marching_clang_command_option="-std=c++1y"
 
   " Markdown
   let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'ruby']
