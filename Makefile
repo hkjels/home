@@ -49,7 +49,7 @@ uninstall:
 	rm $(DST)
 
 update:
-	@g pull --rebase
+	@git pull --rebase
 	@cat History.md
 
 
