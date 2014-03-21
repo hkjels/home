@@ -26,6 +26,9 @@
   Plug 'mhinz/vim-signify'
   Plug 'jaxbot/github-issues.vim'
 
+  " Environment
+  Plug 'buztard/vim-nomad'
+
   " Navigation
   Plug 'h1mesuke/unite-outline'
   Plug 'Shougo/unite-help'
@@ -190,7 +193,6 @@
   nnoremap <leader>/    :Unite -buffer-name=search -no-quit grep:.<cr>
   nnoremap <leader>h    :Unite -buffer-name=history history<cr>
   nnoremap <leader>H    :Unite -buffer-name=help help<cr>
-  nnoremap <leader> *H  :UniteWithCursorWord -buffer-name=help help<CR>
 
   " Goyo
   nnoremap <Leader>K :Goyo<cr>
