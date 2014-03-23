@@ -1,8 +1,16 @@
 
 "
-" File:         .vimrc
-" Description:  My personal vim-settings
-" Author:       Henrik Kjelsberg
+" Author: Henrik Kjelsberg <hkjels@me.com>
+" See:    http://vim.guru/
+"
+" Annoyances & anti-patterns
+" ==========================
+" * Documentation for languages should be browsable inside of `vim`
+" * I'm hitting `<esc>` way too often
+" * Re-apply ctags use
+" * Generating ctags should be in parallel and automated
+" * Netrw does not automatically refresh
+" * I forget to toggle paste-mode
 "
 
 " Plug-ins ------------------------------------------------------------- {{{
@@ -15,7 +23,9 @@
   Plug 'tpope/vim-eunuch'
   Plug 'tpope/vim-dispatch'
 
-  " UI
+  " Library
+  " Reminder: fire of `:BenchVimrc` if vim-startup is slow
+  Plug 'mattn/benchvimrc-vim'
   Plug 'Shougo/vimproc.vim'
   Plug 'Shougo/unite.vim'
 
@@ -80,7 +90,7 @@
 
 " Plug-in configurations ----------------------------------------------- {{{
   " Netrw
-  let g:netrw_list_hide= '.*$'   " Hide files in `netrw`
+  let g:netrw_list_hide= '\.*$'   " Hide files in `netrw`
 
   " Unite
   let g:unite_enable_start_insert = 1
@@ -125,7 +135,7 @@
   set shiftwidth=2                    " Width to shift on indent operations
   set expandtab                       " Use space instead of tabs in insert-mode
   set smarttab                        " Insert blanks according to shiftwidth in start of lines
-  set tags=.git/tags                  " Store tags with each project
+  set tags+=.git/tags;.tags           " Store tags with each project
   set foldmethod=indent               " Fold by indentation-level
   set foldnestmax=3                   " Number of nested folds
   set nofoldenable                    " Don´t fold when opening files
@@ -162,9 +172,9 @@
   xmap s <Plug>(smalls)
 
   " Prevent the use of arrow-keys as screen-navigation
-  map <up> <nop>
-  map <down> <nop>
-  map <left> <nop>
+  map <up>    <nop>
+  map <down>  <nop>
+  map <left>  <nop>
   map <right> <nop>
   inoremap <left>  <nop>
   inoremap <right> <nop>
@@ -186,13 +196,14 @@
   nnoremap <leader>n :call NumberToggle()<cr>
 
   " Unite
-  nnoremap <c-p>        :Unite -buffer-name=files file_rec/async:!<cr>
-  nnoremap <c-y>        :Unite -buffer-name=history history/yank:!<cr>
-  nnoremap <leader>b    :Unite -buffer-name=buffers buffer:!<cr>
-  nnoremap <leader>o    :Unite -buffer-name=outline outline<cr>
-  nnoremap <leader>/    :Unite -buffer-name=search -no-quit grep:.<cr>
-  nnoremap <leader>h    :Unite -buffer-name=history history<cr>
-  nnoremap <leader>H    :Unite -buffer-name=help help<cr>
+  nnoremap <leader>o    :<C-u>Unite -buffer-name=files file_rec/async:!<cr>
+  nnoremap <leader>y    :<C-u>Unite -buffer-name=history history/yank:!<cr>
+  nnoremap <leader>b    :<C-u>Unite -buffer-name=buffers buffer:!<cr>
+  nnoremap <leader>m    :<C-u>Unite -buffer-name=outline outline<cr>
+  nnoremap <leader>/    :<C-u>Unite -buffer-name=search -no-quit grep:.<cr>
+  nnoremap <leader>h    :<C-u>Unite -buffer-name=history history/command:!<cr>
+  nnoremap <leader>H    :<C-u>Unite -buffer-name=help help<cr>
+  nnoremap <Leader>ub   :<C-u>Unite -buffer-name=bookmarks bookmark<cr>
 
   " Goyo
   nnoremap <Leader>K :Goyo<cr>
@@ -201,7 +212,7 @@
   nnoremap <Leader>g :<C-u>GundoToggle<CR>
 
   " Clipper
-  nnoremap <leader>y :call system('nc localhost 8377', @0)<CR>
+  nnoremap <leader>Y :call system('nc localhost 8377', @0)<CR>
 
   " Move between changes in diff-mode using arrow-keys
   au BufEnter * if &diff | call s:DiffMappings()
@@ -209,6 +220,7 @@
     map <up> [c<cr>
     map <down> ]c<cr>
   endfun
+
 " }}}
 
 " Abbreviations -------------------------------------------------------- {{{
