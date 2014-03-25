@@ -1,5 +1,6 @@
 
 "
+" A proper vim-runcom
 " Author: Henrik Kjelsberg <hkjels@me.com>
 " See:    http://vim.guru/
 "
@@ -7,9 +8,6 @@
 " ==========================
 " * Documentation for languages should be browsable inside of `vim`
 " * I'm hitting `<esc>` way too often
-" * Re-apply ctags use
-" * Generating ctags should be in parallel and automated
-" * Netrw does not automatically refresh
 " * I forget to toggle paste-mode
 "
 
@@ -90,9 +88,12 @@
 
 " Plug-in configurations ----------------------------------------------- {{{
   " Netrw
-  let g:netrw_list_hide= '\.*$'   " Hide files in `netrw`
+  let g:netrw_list_hide= '^\.,^tags$'   " Hide files in `netrw`
+  let g:netrw_fastbrowse=1
+  let g:netrw_liststyle=3
 
   " Unite
+  let g:unite_source_history_yank_enable = 1
   let g:unite_enable_start_insert = 1
   let g:unite_source_file_rec_max_cache_files = 0
   if executable('ag')
@@ -158,9 +159,9 @@
   let g:maplocalleader='\\'           " <localleader> to \
 
   " Quick-open directory in a new buffer
-  nmap <leader>e :e <c-r>=expand('%:h').'/'<cr><cr>
-  nmap <leader>sp :sp <c-r>=expand('%:h').'/'<cr><cr>
-  nmap <leader>vs :vs <c-r>=expand('%:h').'/'<cr><cr>
+  nmap <leader>e :Explore<cr>
+  nmap <leader>sp :Sexplore<cr>
+  nmap <leader>vs :Vexplore<cr>
   nmap <leader>t :tabe <c-r>=expand('%:h').'/'<cr><cr>
 
   " Toggle virtualedit-mode, so you can surpass line-endings or not
@@ -195,9 +196,13 @@
   " Relative/absolute line-numbers
   nnoremap <leader>n :call NumberToggle()<cr>
 
+  " Tags
+  map tt <c-]>
+  map TT <c-[>
+
   " Unite
   nnoremap <leader>o    :<C-u>Unite -buffer-name=files file_rec/async:!<cr>
-  nnoremap <leader>y    :<C-u>Unite -buffer-name=history history/yank:!<cr>
+  nnoremap <leader>y    :<C-u>Unite -buffer-name=yankring history/yank:!<cr>
   nnoremap <leader>b    :<C-u>Unite -buffer-name=buffers buffer:!<cr>
   nnoremap <leader>m    :<C-u>Unite -buffer-name=outline outline<cr>
   nnoremap <leader>/    :<C-u>Unite -buffer-name=search -no-quit grep:.<cr>
@@ -220,7 +225,10 @@
     map <up> [c<cr>
     map <down> ]c<cr>
   endfun
+" }}}
 
+" Auto-commands -------------------------------------------------------- {{{
+  autocmd FocusLost * silent! wall
 " }}}
 
 " Abbreviations -------------------------------------------------------- {{{
