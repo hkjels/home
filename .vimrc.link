@@ -143,15 +143,11 @@
   set keywordprg=:help                " Command to execute with `K`
   set synmaxcol=200                   " Highlight only column 1-[200]
   set pastetoggle=<F9>                " Toggle paste-mode
+  set mouse=a                         " Enable mouse
+  set mousehide                       " Hide pointer when typing
   set laststatus=2                    " Always display the status-line
   set background=dark                 " Color-scheme variant
   colorscheme solarized               " Active color-scheme
-
-  " Mouse support
-  if has("mouse")
-    set mouse=a
-    set mousehide
-  endif
 " }}}
 
 " Key bindings --------------------------------------------------------- {{{
