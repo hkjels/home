@@ -44,9 +44,16 @@ alias pair='tmux new-session -s pair'
 alias ssh="ssht"
 
 # Node
-if [[ $(node -v) =~ ^v0.11 ]]; then
-  alias node="node --harmony"
-  alias node-dev="node-dev --harmony"
+if [ -x node ]; then
+  if [[ $(node -v) =~ ^v0.11 ]]; then
+    alias node="node --harmony"
+    alias node-dev="node-dev --harmony"
+  fi
+elif [ -x nodejs ]; then
+  if [[ $(nodejs -v) =~ ^v0.11 ]]; then
+    alias node="nodejs --harmony"
+    alias node-dev="nodejs-dev --harmony"
+  fi
 fi
 
 alias hr='echo ; hr -; echo ;'
