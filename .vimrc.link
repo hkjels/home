@@ -88,9 +88,8 @@
 
 " Plug-in configurations ----------------------------------------------- {{{
   " Netrw
-  let g:netrw_list_hide= '^\.,^tags$'   " Hide files in `netrw`
-  let g:netrw_fastbrowse=1
-  let g:netrw_liststyle=3
+  let g:netrw_list_hide= '^\.,^tags$'
+  autocmd FileType netrw nmap <buffer> <backspace> -
 
   " Unite
   let g:unite_source_history_yank_enable = 1
@@ -108,6 +107,13 @@
   call unite#filters#matcher_default#use(['matcher_fuzzy'])
   call unite#custom#source(s:unite_affects, 'max_candidates', 0)
   call unite#custom#source(s:unite_affects, 'ignore_pattern', s:unite_ignore)
+  autocmd FileType unite call s:unite_settings()
+  function! s:unite_settings()
+    imap <buffer> <f5> <Plug>(unite_redraw)
+    nnoremap <buffer> <f5> <Plug>(unite_redraw)
+    nnoremap <buffer><expr> s unite#do_action('split')
+    nnoremap <buffer><expr> v unite#do_action('vsplit')
+  endfunction
 
   " Completion
   let g:neocomplete#enable_at_startup=1
@@ -207,13 +213,13 @@
   nnoremap <Leader>ub   :<C-u>Unite -buffer-name=bookmarks bookmark<cr>
 
   " Goyo
-  nnoremap <Leader>K :Goyo<cr>
+  nnoremap <leader>K :Goyo<cr>
 
   " Gundo
-  nnoremap <Leader>g :<C-u>GundoToggle<CR>
+  nnoremap <leader>g :<C-u>GundoToggle<cr>
 
   " Clipper
-  nnoremap <leader>Y :call system('nc localhost 8377', @0)<CR>
+  nnoremap <leader>Y :call system('nc localhost 8377', @0)<cr>
 
   " Move between changes in diff-mode using arrow-keys
   au BufEnter * if &diff | call s:DiffMappings()
@@ -221,6 +227,9 @@
     map <up> [c<cr>
     map <down> ]c<cr>
   endfun
+
+  " Help
+  autocmd FileType help nmap <buffer> <Return> <C-]>
 " }}}
 
 " Auto-commands -------------------------------------------------------- {{{
