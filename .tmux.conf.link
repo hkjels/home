@@ -16,11 +16,10 @@ set-option -sg escape-time 1
 
 # Allow mouse-input for scrolling history,
 # switching panes and resizing panes.
-setw -g mode-mouse on
+set -g mode-mouse on
 set -g mouse-select-pane on
 set -g mouse-resize-pane on
 set -g mouse-select-window on
-set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 
 # Improved colors
 set -g default-terminal "screen-256color"
@@ -32,9 +31,6 @@ set -g base-index 1
 bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
-
-# Zoom
-bind + resize-pane -Z
 
 # Smart pane switching with awareness of vim splits
 bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"
