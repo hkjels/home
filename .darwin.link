@@ -83,7 +83,6 @@
   # Disable Dashboard
   defaults write com.apple.dashboard mcx-disabled -bool true
 
-
 #
 # Dock
 #
@@ -99,7 +98,6 @@
 
   # Enable magnification of Dock items
   defaults write com.apple.dock magnification -bool true
-
 
 #
 # Hardware
@@ -121,4 +119,13 @@
 
   # Set a blazingly fast keyboard repeat rate
   defaults write NSGlobalDomain KeyRepeat -int 0
+
+#
+# Webkit
+#
+
+  # Enable the Develop menu and the Web Inspector in Safari
+  defaults write com.apple.Safari IncludeDevelopMenu -bool true
+  defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+  defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
 
