@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-npm install -g      \
-  autosave          \
-  browsersync       \
-  component         \
-  component-graph   \
-  component-size    \
-  json              \
-  metalsmith        \
-  mocha             \
-  myth              \
-  serve             \
-  stylestats        \
-  up
+npm install -g autosave
+npm install -g browsersync
+npm install -g component
+npm install -g component-graph
+npm install -g component-size
+npm install -g json
+npm install -g metalsmith
+npm install -g mocha
+npm install -g myth
+npm install -g serve
+npm install -g stylestats
+npm install -g logo-cli
+npm install -g up
 
