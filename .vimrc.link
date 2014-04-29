@@ -33,6 +33,7 @@
   Plug 'gregsexton/gitv'
   Plug 'mhinz/vim-signify'
   Plug 'jaxbot/github-issues.vim'
+  Plug 'sjl/splice.vim'
 
   " Environment
   Plug 'buztard/vim-nomad'
