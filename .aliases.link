@@ -1,6 +1,6 @@
 
 # Convenience
-alias _='sudo'
+alias _='sudo '
 alias la='ls -lah'
 alias ll='ls -1'
 alias ls='ls -hGl'
