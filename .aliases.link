@@ -62,5 +62,6 @@ alias timestamp="date '+%s'"
 
 # Git
 alias g='git'
+source /usr/local/etc/bash_completion.d/git-completion.bash
 complete -o default -o nospace -F _git g
 
