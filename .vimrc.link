@@ -47,6 +47,7 @@
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'kshenoy/vim-signature'
   Plug 't9md/vim-smalls'
+  Plug 'tpope/vim-projectionist'
 
   " Editing
   Plug 'sjl/gundo.vim', {'on': 'GundoToggle'}
