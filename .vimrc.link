@@ -160,6 +160,7 @@
   set laststatus=2                    " Always display the status-line
   set background=dark                 " Color-scheme variant
   colorscheme solarized               " Active color-scheme
+  highlight SignColumn ctermbg=0      " Solarized bugfix
 " }}}
 
 " Key bindings --------------------------------------------------------- {{{
