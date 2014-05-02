@@ -94,3 +94,11 @@ t() {
   tail -f $1 | perl -pe "s/$2/\e[1;31;43m$&\e[0m/g"
 }
 
+# fd - cd to fuzzy-found directory
+fd() {
+  local dir
+  dir=$(find ${1:-*} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+

@@ -23,6 +23,7 @@
     drake                       \
     direnv                      \
     ffmpeg                      \
+    fzf                         \
     ghc                         \
     gist                        \
     git --with-pcre             \

@@ -59,5 +59,6 @@ set -o vi
 # Load additional bash-preferences
 
 [ -x /usr/local/bin/direnv ] && eval "$(direnv hook $0)"
+[ -f ~/.fzf.bash ] && . ~/.fzf.bash
 [ -f ~/.bashrc.local ] && . ~/.bashrc.local
 
