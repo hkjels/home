@@ -1,4 +1,8 @@
 
+# Autocompletion
+[ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
+
+# Load .bashrc
 [ -f ~/.bashrc ] && . ~/.bashrc
 [ -f ~/.profile ] && . ~/.profile
 

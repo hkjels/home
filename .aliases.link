@@ -66,5 +66,5 @@ alias today="date '+%Y-%m-%d'"
 alias timestamp="date '+%s'"
 
 # Git
-alias g='hub'
+alias g='hub '
 
