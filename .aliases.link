@@ -5,6 +5,7 @@ alias la='ls -lah'
 alias ll='ls -1'
 alias ls='ls -hGl'
 alias l.='ls -d .* --color=auto'
+alias ~='cd ~'
 alias -- -='cd -'
 alias ..='cd ..'
 alias ....='cd ../..'
@@ -25,6 +26,9 @@ alias grep='grep --color=auto'
 alias path='echo -e ${PATH//:/\\n}'
 alias du='du -ch'
 alias du1='du -ch -d 1'
+alias wifip='ipconfig getifaddr en1'
+alias wireip='ipconfig getifaddr en0'
+alias :q='exit'
 
 # Make
 alias install='make install'
@@ -61,7 +65,5 @@ alias today="date '+%Y-%m-%d'"
 alias timestamp="date '+%s'"
 
 # Git
-alias g='git'
-source /usr/local/etc/bash_completion.d/git-completion.bash
-complete -o default -o nospace -F _git g
+alias g='hub'
 
