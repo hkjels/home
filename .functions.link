@@ -53,7 +53,7 @@ function myip() {
 function cd {
   case $1 in
     ^ )
-      builtin cd $(git root) ;;
+      builtin cd "$(git root)" ;;
     * )
       builtin cd "$@" ;;
   esac
