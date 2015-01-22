@@ -1,43 +1,21 @@
 
-# Use <c-a> to access tmux control
-unbind C-b
-set -g prefix C-a
+# More sensible
+set -g @almost-sensible 'on'
 
-# Make use of the native MacOs clip-board
-bind -t vi-copy v begin-selection
-bind -t vi-copy V rectangle-toggle
-bind -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
-
-# Update default binding of `Enter` to also use copy-pipe
-unbind -t vi-copy Enter
-bind-key -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
-
-# Enable native Mac OS X copy/paste
-set-option -g default-command "/bin/bash -c 'which reattach-to-user-namespace >/dev/null && exec reattach-to-user-namespace $SHELL -l || exec $SHELL -l'"
-
-# Some vi-like navigation
-setw -g mode-keys vi
-
-#supposedly fixes pausing in vim
-set-option -sg escape-time 1
-
-# Allow mouse-input for scrolling history,
-# switching panes and resizing panes.
-set -g mode-mouse on
-set -g mouse-select-pane on
-set -g mouse-resize-pane on
-set -g mouse-select-window on
-
-# Improved colors
-set -g default-terminal "screen-256color"
+# Plugins
+set -g @tpm_plugins '             \
+  tmux-plugins/tpm                \
+  tmux-plugins/tmux-sensible      \
+  tmux-plugins/tmux-yank          \
+  tmux-plugins/tmux-pain-control  \
+  tmux-plugins/tmux-copycat       \
+  tmux-plugins/tmux-open          \
+  tmux-plugins/tmux-resurrect     \
+  JindrichPilar/tmux-timekeeper   \
+'
 
 # One indexed panes for easier switching
 set -g base-index 1
-
-# Open new panes and windows in the `CWD`
-bind '"' split-window -c "#{pane_current_path}"
-bind % split-window -h -c "#{pane_current_path}"
-bind c new-window -c "#{pane_current_path}"
 
 # Smart pane switching with awareness of vim splits
 bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-h) || tmux select-pane -L"
@@ -60,7 +38,6 @@ setw -g automatic-rename on
 # Statusbar
 source $HOME/.tmux-status.conf
 
-# toggle statusbar (hidden by default)
-set -g status off
-bind b set-option status
+# Initialize package-manager
+run-shell '~/.tmux/plugins/tpm/tpm'
 

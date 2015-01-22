@@ -49,14 +49,15 @@ function myip() {
 }
 
 # Augments `cd` with ability to jump directly to the
-# root of a git-project using `cd ^`.
+# root of a git-project using `cdi ^`.
 function cd {
   case $1 in
-    ^ )
+    :/ )
       builtin cd "$(git root)" ;;
     * )
       builtin cd "$@" ;;
   esac
+  ls -1
 }
 
 # Start process in the background and hide `std(out|err)`
@@ -90,6 +91,7 @@ function auth() {
 }
 
 # Tail with search-highlight
+# (socket regular-expression)
 t() {
   tail -f $1 | perl -pe "s/$2/\e[1;31;43m$&\e[0m/g"
 }
