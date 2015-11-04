@@ -7,7 +7,6 @@
 " Annoyances & anti-patterns
 " ==========================
 " * Documentation for languages should be browsable inside of `vim`
-" * I'm hitting `<esc>` way too often
 "
 
 " Plug-ins ------------------------------------------------------------- {{{
@@ -168,7 +167,7 @@
   set laststatus=2                    " Always display the status-line
   set clipboard=unnamed               " Yank and paste with the system clipboard
   colorscheme solarized               " Active color-scheme
-  highlight SignColumn ctermbg=0      " Solarized bugfix
+  " highlight SignColumn ctermbg=0      " Solarized bugfix
 " }}}
 
 " Key bindings --------------------------------------------------------- {{{

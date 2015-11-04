@@ -22,6 +22,7 @@
   next     = !git add -A; git rebase --continue
   p        = pull
   pr       = pull --rebase
+  rm       = remove-commit
   rb       = rebase
   rba      = rebase --abort
   rbc      = rebase --continue
@@ -44,6 +45,16 @@
   undo     = reset --soft HEAD^
   unstage  = reset HEAD --
   update   = pull --rebase
+  today    = log --since=7am
+  mysprint = log --since=1.week --author='Henrik Kjelsberg'
+  sprint   = log --format='[%an] %s' --since=1.week
+  mt       = mergetool
+
+[color]
+  ui     = true
+  branch = auto
+  diff   = auto
+  status = auto
 
 [credential]
   helper = osxkeychain
@@ -56,21 +67,26 @@
   prompt = false
 
 [merge]
-  tool = splice
-
-[mergetool "splice"]
-  cmd = "vim $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
-  trustExitCode = true
+tool = openmerge
+;; [merge]
+;;   tool = splice
+;; 
+;; [mergetool "splice"]
+;;   cmd = "vim $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
+;;   trustExitCode = true
 
 [mergetool]
   keepBackup = false
   prompt = false
 
 [push]
-  default = simple
+  default = tracking
 
 [include]
   path = ~/.gitconfig.local
+
+[gc]
+  auto = 1
 
 [branch]
   autosetuprebase = always
@@ -83,3 +99,7 @@
   clean = git-media-clean %f
   smudge = git-media-smudge %f
 
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true

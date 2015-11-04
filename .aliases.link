@@ -18,6 +18,7 @@ alias h='history -c'
 alias wget='wget -c'
 alias sys="grc tail -100 /var/log/system.log"
 alias e=$EDITOR
+# alias e="$EDITOR -c 'set background=$([[ $(/usr/local/opt/terminal-holylight/holylight-checker) -gt 1000000 ]] && echo \'light\' || echo \'dark\')'"
 alias which='type -p'
 alias clip="nc localhost 8377"
 alias c="clear"
@@ -29,6 +30,7 @@ alias du1='du -ch -d 1'
 alias wifip='ipconfig getifaddr en1'
 alias wireip='ipconfig getifaddr en0'
 alias :q='exit'
+alias l='lunchy'
 
 # Make
 alias install='make install'
@@ -43,9 +45,8 @@ alias DEL='burl DELETE'
 alias HEAD='burl -I'
 
 # Tmux
-alias tmux='tmux -u attach || tmux -2'
+alias tmux='tmux -2 '
 alias pair='tmux new-session -s pair'
-alias ssh="ssht"
 
 # Node
 if [ -x node ]; then

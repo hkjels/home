@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+
+# Only run for Interactive shell
 
 case $- in
   *i*) ;;
@@ -44,7 +45,6 @@ shopt -s globstar 2> /dev/null
 
 # Source scripts
 
-. ~/.profile
 . ~/.aliases
 . ~/.colors
 . ~/.functions
@@ -53,7 +53,7 @@ shopt -s globstar 2> /dev/null
 
 # Vi key-bindings
 
-set -o vi
+[ $LOGIN ] && set -o vi
 
 
 # Load additional bash-preferences
@@ -62,4 +62,3 @@ set -o vi
 [ -f ~/.fzf.bash ] && . ~/.fzf.bash
 [ -f ~/.bashrc.local ] && . ~/.bashrc.local
 
-source ~/.fzf.bash

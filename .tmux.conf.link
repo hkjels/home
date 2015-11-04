@@ -1,18 +1,20 @@
 
 # More sensible
-set -g @almost-sensible 'on'
+set -g @almost-sensible "on"
 
 # Plugins
-set -g @tpm_plugins '             \
-  tmux-plugins/tpm                \
-  tmux-plugins/tmux-sensible      \
-  tmux-plugins/tmux-yank          \
-  tmux-plugins/tmux-pain-control  \
-  tmux-plugins/tmux-copycat       \
-  tmux-plugins/tmux-open          \
-  tmux-plugins/tmux-resurrect     \
-  JindrichPilar/tmux-timekeeper   \
-'
+set -g @tpm_plugins "                 \
+  tmux-plugins/tpm                    \
+  tmux-plugins/tmux-copycat           \
+  tmux-plugins/tmux-open              \
+  tmux-plugins/tmux-pain-control      \
+  tmux-plugins/tmux-prefix-highlight  \
+  tmux-plugins/tmux-resurrect         \
+  tmux-plugins/tmux-sensible          \
+  tmux-plugins/tmux-yank              \
+  JindrichPilar/tmux-timekeeper       \
+  seebi/tmux-colors-solarized         \
+"
 
 # One indexed panes for easier switching
 set -g base-index 1
@@ -35,9 +37,16 @@ bind S command-prompt -p ssh: "new-window -n %1 'ssh %1'"
 # Automatic window-naming
 setw -g automatic-rename on
 
-# Statusbar
-source $HOME/.tmux-status.conf
+# Theme
+set -g @colors-solarized "dark"
+set -g status-utf8 on
+set -g status-interval 5
+set -g status-justify centre
+set -g status-attr dim
+set-window-option -g window-status-current-format "| #I:#W "
+set -g status-left "#{prefix_highlight}"
+set -g status-right ""
 
 # Initialize package-manager
-run-shell '~/.tmux/plugins/tpm/tpm'
+run-shell "~/.tmux/plugins/tpm/tpm"
 

@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
+# Jobs
+PS1="\[$YELLOW\]\$([ \j -gt 0 ] && echo '[\j] ') \[$RESET\]"
 
-# Prompt λ
+# Path
+PS1+="\[$CYAN\]\w \[$RESET\]"
 
-PS1="\["
-PS1+="\[$YELLOW\]\$([ \j -gt 0 ] && echo '[\j] ') \[$RESET\]"                 # Jobs
-PS1+="\[$CYAN\]\w \[$RESET\]"                                                 # Path
-PS1+="\$(vcprompt -f \"\[$CYAN\](%n@%b) \[$YELLOW\]%u\[$RED\]%m\[$RESET\]\")" # VC
-PS1+="\n \[$BOLD\]\[$RED\]λ \[$RESET\]"                                       # Command-line
-PS1+="\]"
+# VC
+PS1+="\$(vcprompt -f \"\[$CYAN\](%n@%b) \[$YELLOW\]%u\[$RED\]%m\[$RESET\]\")"
 
+# Prompt character λ
+PS1+="\n \[$BOLD\]\[$RED\]λ \[$RESET\]"

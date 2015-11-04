@@ -1,4 +1,5 @@
 
-# Load .bashrc
 [ -f ~/.bashrc ] && . ~/.bashrc
+[ -f ~/.profile ] && . ~/.profile
 
+if [ -e /Users/Henrik/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/Henrik/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
