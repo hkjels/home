@@ -27,6 +27,13 @@ export PLATFORM=$(uname -s)
 [ -f /etc/bashrc ] && . /etc/bashrc
 
 
+# Only store unique entries in history
+
+HISTCONTROL=erasedups:ignorespace
+HISTSIZE=10000
+export HISTCONTROL HISTSIZE
+
+
 # Shell built-in options
 
 shopt -s nocaseglob

@@ -33,9 +33,3 @@
 --regex-clojure=/\([ \t]*intern[ \t]+([-[:alnum:]*+!_:\/.?]+)/\1/v,intern/
 --regex-clojure=/\([ \t]*ns[ \t]+([-[:alnum:]*+!_:\/.?]+)/\1/n,namespace/
 
---langmap=php:.php
---PHP-kinds=+cf-v
---regex-PHP=/abstract\s+class\s+([^ ]+)/\1/c/
---regex-PHP=/interface\s+([^ ]+)/\1/c/
---regex-PHP=/(public\s+|static\s+|abstract\s+|protected\s+|private\s+)function\s+\&?\s*([^ (]+)/\2/f/
-
