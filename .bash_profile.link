@@ -1,9 +1,15 @@
 
-# Autocompletion
-[ -f $(brew --prefix)/etc/bash_completion ] && . $(brew --prefix)/etc/bash_completion
 
 # Load .bashrc
 [ -f ~/.bashrc ] && . ~/.bashrc
 [ -f ~/.profile ] && . ~/.profile
 
-if [ -e /Users/Henrik/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/Henrik/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+# Nix
+# if [ -e /Users/Henrik/.nix-profile/etc/profile.d/nix.sh ]; then
+#   . /Users/Henrik/.nix-profile/etc/profile.d/nix.sh;
+# fi
+
+# Autocompletion
+# if [ -f $(brew --prefix)/etc/bash_completion ]; then
+#   . $(brew --prefix)/etc/bash_completion
+# fi

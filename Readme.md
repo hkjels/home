@@ -3,9 +3,9 @@
 
 These are my personal [dotfiles](http://dotfiles.github.io/). I keep a tidy
 home, so it might be a good source for inspiration. `Home` includes
-preferences for bash, vim, git, etc. If you give them a shot and you and you
-feel something is utterly horrible by default, give me a nudge. If it's just
-details, you can always use your own local overrides.
+preferences for bash, vim, git, etc. If you give them a shot and you
+feel something is utterly horrible by default, give me a nudge. If
+it's just details, you can always use your own local overrides.
 
 
 ### Installation

@@ -27,10 +27,11 @@ alias grep='grep --color=auto'
 alias path='echo -e ${PATH//:/\\n}'
 alias du='du -ch'
 alias du1='du -ch -d 1'
-alias wifip='ipconfig getifaddr en1'
+alias ip='ipconfig getifaddr en1'
 alias wireip='ipconfig getifaddr en0'
 alias :q='exit'
 alias l='lunchy'
+alias ql='qlmanage -p'
 
 # Make
 alias install='make install'

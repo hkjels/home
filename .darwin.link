@@ -10,6 +10,9 @@
   # Make sure Homebrew is up to par
   brew update
 
+  # Install x-code command-line tools
+  xcode-select --install
+
   # Terribly useful stuff
   brew install ag
   brew install align
@@ -79,14 +82,22 @@
 # Convenience
 #
 
-  # Avoid creating .DS_Store files on network volumes
+  # Avoid creating .DS_Store files on network volumes and USB-drives
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
   # Allow text selection in Quick Look
   defaults write com.apple.finder QLEnableTextSelection -bool true
 
   # Disable Dashboard
   defaults write com.apple.dashboard mcx-disabled -bool true
+
+#
+# Sketch
+#
+
+  # Output compact svg's
+  defaults write com.bohemiancoding.sketch3 exportCompactSVG -bool yes
 
 #
 # Dock

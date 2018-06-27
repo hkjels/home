@@ -43,8 +43,15 @@ extract() {
      fi
 }
 
+# Retrieve local IP-address
+function ip() {
+    [[ -n $(ipconfig getifaddr en0) ]] \
+        && ipconfig getifaddr en0      \
+        || ipconfig getifaddr en1
+}
+
 # Retrieve public IP-address
-function myip() {
+function remoteip() {
   wget http://ipecho.net/plain -O - -q ; echo
 }
 

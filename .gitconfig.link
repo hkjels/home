@@ -5,49 +5,53 @@
   editor        = "$EDITOR -f"
 
 [alias]
-  am       = commit -v --amend --no-edit
-  br       = branch
-  branches = branch -a
-  cb       = checkout -b
-  ci       = commit -v
-  cl       = clone --recursive
-  co       = checkout
-  ctags    = !.git/hooks/ctags
-  d        = diff --word-diff
-  g        = grep --break --heading --line-number
-  lc       = show -s --format='%ct' HEAD
-  lg       = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=relative
-  m        = merge
-  next     = !git add -A; git rebase --continue
-  p        = pull
-  pr       = pull --rebase
-  rm       = remove-commit
-  rb       = rebase
-  rba      = rebase --abort
-  rbc      = rebase --continue
-  rbi      = rebase -i origin/master
-  remotes  = remote -v
-  root     = !pwd
-  s        = status -sb
-  sci      = dcommit -v
-  sf       = submodule foreach
-  sh       = !git-sh
-  st       = stash
-  sta      = stash apply
-  standup  = log --since '1 day ago' --oneline --author 'hkjels@me.com'
-  std      = stash drop
-  stls     = stash list
-  stp      = stash pop
-  sts      = stash save
-  stu      = stash unstaged
-  tags     = tag -l
-  undo     = reset --soft HEAD^
-  unstage  = reset HEAD --
-  update   = pull --rebase
-  today    = log --since=7am
-  mysprint = log --since=1.week --author='Henrik Kjelsberg'
-  sprint   = log --format='[%an] %s' --since=1.week
-  mt       = mergetool
+  am             = commit -v --amend --no-edit
+  br             = branch -a
+  cb             = checkout -b
+  ci             = commit -v
+  cl             = clone --recursive
+  co             = checkout
+  cp             = ! git rev-parse HEAD | tr -d '\\r' | pbcopy
+  ctags          = !.git/hooks/ctags
+  d              = diff --word-diff
+  g              = grep --break --heading --line-number
+  lc             = show -s --format='%ct' HEAD
+  lg             = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset' --abbrev-commit --date=relative
+  m              = merge
+  next           = !git add -A; git rebase --continue
+  p              = pull
+  pr             = pull --rebase
+  rm             = remove-commit
+  rb             = rebase
+  rba            = rebase --abort
+  rbc            = rebase --continue
+  rbi            = rebase -i origin/master
+  remotes        = remote -v
+  root           = !pwd
+  s              = status -sb
+  sci            = dcommit -v
+  sa             = submodule add
+  sf             = submodule foreach
+  sr             = submodule remove
+  sh             = !git-sh
+  sha            = !fcs
+  st             = stash
+  sta            = stash apply
+  standup        = log --since '1 day ago' --oneline --author 'hkjels@me.com'
+  std            = stash drop
+  stls           = stash list
+  stp            = stash pop
+  sts            = stash save
+  stu            = stash unstaged
+  tags           = tag -l
+  undo           = reset --soft HEAD^
+  unstage        = reset HEAD --
+  update         = pull --rebase
+  today          = log --since=7am
+  mysprint       = log --since=1.week --author='Henrik Kjelsberg'
+  sprint         = log --format='[%an] %s' --since=1.week
+  mt             = mergetool
+  appraise       = !/Users/Henrik/.go/bin/git-appraise
 
 [color]
   ui     = true
@@ -79,7 +83,7 @@ tool = openmerge
   prompt = false
 
 [push]
-  default = tracking
+  default = current
 
 [include]
   path = ~/.gitconfig.local
@@ -95,10 +99,34 @@ tool = openmerge
   lineNumber = true
 
 [filter "media"]
-  clean = git-media-clean %f
-  smudge = git-media-smudge %f
+	clean = git media clean %f
+	smudge = git media smudge %f
+	required = true
 
 [filter "lfs"]
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+
+[pager]
+	diff = diff-so-fancy | less --tabs=1,5 -RFX
+	show = diff-so-fancy | less --tabs=1,5 -RFX
+
+[magit]
+	hideCampaign = true
+
+[apply]
+  whitespace = nowarn
+
+[diff "clojure"]
+  xfuncname = (^\\(.*|\\s*\\(defn.*)
+
+[diff "rust"]
+      xfuncname = "^[ \t]*(pub|)[ \t]*((fn|struct|enum|impl|trait|mod)[^;]*)$"
+
+[diff "ecmascript"]
+        xfuncname = "^((.*function.*)|([ \t]+it\\(.*))$"
+[commit]
+	template = /Users/Henrik/.git_commit_msg
+[icdiff]
+	options = --highlight --line-numbers

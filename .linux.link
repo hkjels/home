@@ -3,21 +3,17 @@
 #
 # Apt-get
 #
-
-  # Terribly useful stuff
-  sudo apt-get install silversearcher-ag
-  sudo apt-get install exuberant-ctags
-  sudo apt-get install nodejs
-  sudo apt-get install npm
-  sudo apt-get install pv
-  sudo apt-get install ruby
-  sudo apt-get install tmux
-  sudo apt-get install tree
-  sudo apt-get install vim-nox
+sudo apt-get install silversearcher-ag
+sudo apt-get install exuberant-ctags
+sudo apt-get install nodejs
+sudo apt-get install npm
+sudo apt-get install pv
+sudo apt-get install ruby
+sudo apt-get install tmux
+sudo apt-get install tree
+sudo apt-get install vim-nox
 
 #
 # Node packages
 #
-
 ~/.npms
-

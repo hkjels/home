@@ -1,30 +1,20 @@
-
 # Locale
-
 export LANG="en_US.UTF-8"
 export LANGUAGE="en"
 export LC_CTYPE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-
 # History
-
 export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL="erasedups:ignoreboth"
 
-
 # Manpage
-
 export PAGER="less -XFSiw"
 export MANPAGER=$PAGER
 
-
 # Input
-
 bind -f ~/.inputrc
 
-
 # Source local
-
-[ -f ~/.profile.local ] && . ~/.profile.local
+[ -f ~/.profile.local ] && source ~/.profile.local
