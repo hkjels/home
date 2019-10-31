@@ -5,11 +5,16 @@
 [ -f ~/.profile ] && . ~/.profile
 
 # Nix
-# if [ -e /Users/Henrik/.nix-profile/etc/profile.d/nix.sh ]; then
-#   . /Users/Henrik/.nix-profile/etc/profile.d/nix.sh;
-# fi
+#if [ -e /Users/Henrik/.nix-profile/etc/profile.d/nix.sh ]; then
+#  . /Users/Henrik/.nix-profile/etc/profile.d/nix.sh;
+#fi
 
 # Autocompletion
-# if [ -f $(brew --prefix)/etc/bash_completion ]; then
-#   . $(brew --prefix)/etc/bash_completion
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+# History-completion with McFly
+# if [[ -f "$(brew --prefix)/opt/mcfly/mcfly.bash" ]]; then
+#   source "$(brew --prefix)/opt/mcfly/mcfly.bash"
 # fi
+

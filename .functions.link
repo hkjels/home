@@ -63,6 +63,9 @@ function cd {
       # FIXME for some reason globbing doesn't work
       local dir="$(git root)/${1:2}"
       builtin cd "$dir" ;;
+    -* )
+      local dir="$(pwd | tr '/' '\n' | ghead -n $1 | tr '\n' '/')"
+      builtin "$dir" ;;
     * )
       builtin cd "$@" ;;
   esac
@@ -220,3 +223,32 @@ fco() {
     fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return
   git checkout $(echo "$target" | awk '{print $2}')
 }
+
+# jc - change the status of a ticket in Jira
+jc() {
+    local id ticket transition
+    ticket=$(jira mine | fzf)
+    id=$(echo $ticket | sed -e "s/:.*//g")
+    if [[ -n $id ]]; then
+      transition=$(jira transitions $id | fzf | sed -e 's/[^:]*://g' -e 's/^[[:space:]]//g')
+      [[ -n $transition ]] && jira transition "$transition" "$id"
+    fi
+}
+
+jg() {
+    local id ticket
+    ticket=$(jira unassigned | fzf)
+    id=$(echo $ticket | sed -e "s/:.*//g")
+    [[ -n $id ]] && jira assign --default "$id"
+}
+
+
+# json - traverse and format json-structures
+json() {
+  if [[ -e $1 ]]; then
+    jq . $1
+  else
+    jq $*
+  fi
+}
+

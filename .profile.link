@@ -1,3 +1,7 @@
+# Editor
+export EDITOR="emacsclient -c"
+export VISUAL=$EDITOR
+
 # Locale
 export LANG="en_US.UTF-8"
 export LANGUAGE="en"
@@ -10,11 +14,14 @@ export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL="erasedups:ignoreboth"
 
 # Manpage
-export PAGER="less -XFSiw"
+export PAGER="less -RXFSiw"
 export MANPAGER=$PAGER
 
 # Input
 bind -f ~/.inputrc
+
+# Correct the last run command
+eval $(thefuck --alias)
 
 # Source local
 [ -f ~/.profile.local ] && source ~/.profile.local

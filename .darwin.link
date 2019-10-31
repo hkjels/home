@@ -92,6 +92,12 @@
   # Disable Dashboard
   defaults write com.apple.dashboard mcx-disabled -bool true
 
+  # Don't rearrange spaces automatically
+  defaults write com.apple.dock mru-spaces -bool false
+
+  # Prevent generation of .DS_Store files on network volumes
+  defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
 #
 # Sketch
 #
@@ -145,3 +151,10 @@
   defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
   defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
 
+
+#
+# Mail
+#
+
+  # Display attachments as icons instead of full preview
+  defaults write com.apple.mail DisableInlineAttachmentViewing -bool true

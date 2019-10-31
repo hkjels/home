@@ -1,15 +1,23 @@
+;;  ___________________ 
+;; < Git configuration >
+;;  ------------------- 
+;;         \   ^__^
+;;          \  (oo)\_______
+;;             (__)\       )\/\
+;;                 ||----w |
+;;                 ||     ||
 
 [core]
-  pager         = most +s +'/---'
+	pager = delta --dark
   excludesfile  = ~/.gitignore
-  editor        = "$EDITOR -f"
 
 [alias]
-  am             = commit -v --amend --no-edit
+  amm            = commit -v --amend --no-edit
   br             = branch -a
   cb             = checkout -b
   ci             = commit -v
   cl             = clone --recursive
+  clone          = clone --recursive
   co             = checkout
   cp             = ! git rev-parse HEAD | tr -d '\\r' | pbcopy
   ctags          = !.git/hooks/ctags
@@ -22,6 +30,7 @@
   p              = pull
   pr             = pull --rebase
   rm             = remove-commit
+  perfect        = rebase -i @{u}
   rb             = rebase
   rba            = rebase --abort
   rbc            = rebase --continue
@@ -37,7 +46,7 @@
   sha            = !fcs
   st             = stash
   sta            = stash apply
-  standup        = log --since '1 day ago' --oneline --author 'hkjels@me.com'
+  standup        = log --since '1 day ago' --oneline --author 'Henrik Kjerringvåg'
   std            = stash drop
   stls           = stash list
   stp            = stash pop
@@ -48,10 +57,14 @@
   unstage        = reset HEAD --
   update         = pull --rebase
   today          = log --since=7am
-  mysprint       = log --since=1.week --author='Henrik Kjelsberg'
+  mysprint       = log --since=1.week --author='Henrik Kjerringvåg'
+  pf             = push --force-with-lease
   sprint         = log --format='[%an] %s' --since=1.week
   mt             = mergetool
-  appraise       = !/Users/Henrik/.go/bin/git-appraise
+  appraise       = !git-appraise
+  f              = !git-fresh
+  ignored        = check-ignore -v
+  rm-r           = push origin --delete
 
 [color]
   ui     = true
@@ -64,13 +77,12 @@
 
 [diff]
   mnemonicprefix = true
-  tool = vimdiff
 
 [difftool]
   prompt = false
 
 [merge]
-tool = openmerge
+  tool = opendiff
 ;; [merge]
 ;;   tool = splice
 ;; 
@@ -85,8 +97,8 @@ tool = openmerge
 [push]
   default = current
 
-[include]
-  path = ~/.gitconfig.local
+[pull]
+  rebase = true
 
 [gc]
   auto = 1
@@ -99,21 +111,18 @@ tool = openmerge
   lineNumber = true
 
 [filter "media"]
-	clean = git media clean %f
-	smudge = git media smudge %f
-	required = true
+  clean = git media clean %f
+  smudge = git media smudge %f
+  required = true
 
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
-
-[pager]
-	diff = diff-so-fancy | less --tabs=1,5 -RFX
-	show = diff-so-fancy | less --tabs=1,5 -RFX
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+  process = git-lfs filter-process
 
 [magit]
-	hideCampaign = true
+  hideCampaign = true
 
 [apply]
   whitespace = nowarn
@@ -122,11 +131,16 @@ tool = openmerge
   xfuncname = (^\\(.*|\\s*\\(defn.*)
 
 [diff "rust"]
-      xfuncname = "^[ \t]*(pub|)[ \t]*((fn|struct|enum|impl|trait|mod)[^;]*)$"
+  xfuncname = "^[ \t]*(pub|)[ \t]*((fn|struct|enum|impl|trait|mod)[^;]*)$"
 
 [diff "ecmascript"]
-        xfuncname = "^((.*function.*)|([ \t]+it\\(.*))$"
-[commit]
-	template = /Users/Henrik/.git_commit_msg
+  xfuncname = "^((.*function.*)|([ \t]+it\\(.*))$"
+
 [icdiff]
-	options = --highlight --line-numbers
+  options = --highlight --line-numbers
+
+[hub]
+  protocol = https
+
+[include]
+  path = ~/.gitconfig.local

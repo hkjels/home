@@ -1,10 +1,10 @@
 
 # Convenience
 alias _='sudo '
-alias la='ls -lah'
-alias ll='ls -1'
-alias ls='ls -hGl'
-alias l.='ls -d .* --color=auto'
+alias ls='lsd '
+alias ll='ls -l'
+alias la='ls -la'
+alias lt='ls --tree'
 alias ~='cd ~'
 alias -- -='cd -'
 alias ..='cd ..'
@@ -17,21 +17,52 @@ alias stopped='jobs -s'
 alias h='history -c'
 alias wget='wget -c'
 alias sys="grc tail -100 /var/log/system.log"
-alias e=$EDITOR
-# alias e="$EDITOR -c 'set background=$([[ $(/usr/local/opt/terminal-holylight/holylight-checker) -gt 1000000 ]] && echo \'light\' || echo \'dark\')'"
 alias which='type -p'
 alias clip="nc localhost 8377"
 alias c="clear"
 alias f="find . -iname"
+alias h?="history | grep "
 alias grep='grep --color=auto'
 alias path='echo -e ${PATH//:/\\n}'
+alias df='df -h'
 alias du='du -ch'
 alias du1='du -ch -d 1'
-alias ip='ipconfig getifaddr en1'
-alias wireip='ipconfig getifaddr en0'
+alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias localip="ipconfig getifaddr en0"
 alias :q='exit'
 alias l='lunchy'
 alias ql='qlmanage -p'
+alias s='rg -S'
+alias sd='rga'
+alias sloc='sloccount'
+alias cpu-temp='osx-cpu-temp'
+# alias e="$EDITOR -c 'set background=$([[ $(/usr/local/opt/terminal-holylight/holylight-checker) -gt 1000000 ]] && echo \'light\' || echo \'dark\')'"
+alias e="$EDITOR "
+alias hr='echo ; hr -; echo ;'
+alias today="date '+%Y-%m-%d'"
+alias timestamp="date '+%s'"
+alias cat='bat'
+alias g='hub'
+
+if [ -e /usr/bin/xdg-open ]; then
+  alias open="xdg-open"
+fi
+if [ -n "$(command -v xclip)" ]; then
+  alias pbcopy="xclip -selection clipboard"
+  alias pbpaste="xclip -selection clipboard -o"
+elif [ -n "$(command -v xsel)" ]; then
+  alias pbcopy="xsel --clipboard --input"
+  alias pbpaste="xsel --clipboard --output"
+fi
+
+# Homebrew
+alias bu='brew update '
+alias bh='brew home'
+alias bi='brew install '
+alias bs='brew search '
+alias bc='brew cask '
+alias bch='brew cask home'
+alias bci='brew cask install'
 
 # Make
 alias install='make install'
@@ -48,24 +79,3 @@ alias HEAD='burl -I'
 # Tmux
 alias tmux='tmux -2 '
 alias pair='tmux new-session -s pair'
-
-# Node
-if [ -x node ]; then
-  if [[ $(node -v) =~ ^v0.11 ]]; then
-    alias node="node --harmony"
-    alias node-dev="node-dev --harmony"
-  fi
-elif [ -x nodejs ]; then
-  if [[ $(nodejs -v) =~ ^v0.11 ]]; then
-    alias node="nodejs --harmony"
-    alias node-dev="nodejs-dev --harmony"
-  fi
-fi
-
-alias hr='echo ; hr -; echo ;'
-alias today="date '+%Y-%m-%d'"
-alias timestamp="date '+%s'"
-
-# Git
-alias g='hub '
-
