@@ -1,0 +1,288 @@
+#+title: Prelude
+This document serves the purpose of sharing information and functions
+with the entire project. Once you load the project into Emacs, some of
+these code-blocks will be executed to handle tangling and publishing
+properly.
+
+* Publishing
+
+To generate the documentation from these org-files, you can execute
+~org-publish-all~. That will create a ~docs~ directory with a ~pdf~ and a
+some ~html~ . That's it really!
+#+name: publish
+#+begin_src emacs-lisp :results silent
+(setq org-publish-project-alist
+      `(("home-html-docs"
+         :base-directory ,default-directory
+         :publishing-directory ,(expand-file-name "docs" default-directory)
+         :publishing-function org-html-publish-to-html
+         :section-numbers nil
+         :htmlize-output-type "css"
+         :htmlized-source t
+         :recursive t
+         :exclude "README\\.org\\|configuration\\.org"
+         :with-toc t
+         :auto-sitemap nil
+         :html-head "<link rel=\"stylesheet\" href=\"css/docs.css\"><script src=\"js/docs.js\"></script>")
+        ("home-pdf-docs"
+         :base-directory ,default-directory
+         :publishing-directory ,(expand-file-name "docs" default-directory)
+         :publishing-function org-latex-publish-to-pdf
+         :exclude "README\\.org\\|configuration\\.org"
+         :recursive nil
+         :section-numbers nil
+         :with-toc t)))
+
+(setq org-export-html-style-include-scripts ""
+      org-export-html-style-include-default ""
+      org-html-style ""
+      org-html-style-default ""
+      org-html-mathjax-template ""
+      org-html-postamble nil
+      org-html-htmlize-output-type 'css
+      ;; Ignore auxiliary files made when publishing pdf's
+      org-latex-logfiles-extensions
+      (quote ("lof" "lot" "tex" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb"
+              "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl"))
+      ;; Enforce correct indentation
+      org-indent-indentation-per-level 0
+      org-src-preserve-indentation nil
+      org-edit-src-content-indentation 0
+      org-adapt-indentation nil)
+#+end_src
+
+* Tangling Functions
+
+These functions allows us to tangle the entire project in one go. You
+execute ~tangle-project~ and that will recursively tangle each org-file
+of the repository.
+Source: [[http://turingmachine.org/bl/2013-05-29-recursively-listing-directories-in-elisp.html][Recursively list directories]]
+#+name: tangle
+#+begin_src emacs-lisp :results silent
+(defun directory-files-recursive (directory match maxdepth)
+  "List files in DIRECTORY and in its sub-directories.
+   Return files that match the regular expression MATCH. Recurse only
+   to depth MAXDEPTH. If zero or negative, then do not recurse"
+  (let* ((files-list '())
+         (current-directory-list
+          (directory-files directory t)))
+    (while current-directory-list
+      (let ((f (car current-directory-list)))
+        (cond
+         ((and
+           (file-regular-p f)
+           (file-readable-p f)
+           (string-match match f))
+          (setq files-list (cons f files-list)))
+         ((and
+           (file-directory-p f)
+           (file-readable-p f)
+           (not (string-equal ".." (substring f -2)))
+           (not (string-equal "." (substring f -1)))
+           (> maxdepth 0))
+          (setq files-list (append files-list (directory-files-recursive f match (- maxdepth -1))))
+          (setq files-list (cons f files-list)))
+         (t)))
+      (setq current-directory-list (cdr current-directory-list)))
+    files-list))
+
+(defun tangle-project ()
+  (interactive)
+  (mapcar (lambda (f)
+            (when (not (file-directory-p f))
+              (org-babel-tangle-file f)))
+          (directory-files-recursive (file-name-directory (buffer-file-name)) "\\.org$" 20)))
+#+end_src
+* Documentation
+** Styles
+
+#+begin_src css :tangle docs/css/docs.css :mkdirp yes
+:root {
+  --background: hsl(45,40%,95%);
+  --foreground: hsl(0,0%,28%);
+}
+
+:root {
+  font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 2em;
+}
+body,
+p,
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.5em;
+}
+
+
+,* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+blockquote {
+  border-left: 0.5rem solid hsla(30,5%,60%,0.3);
+  margin-left: 0;
+  padding-left: 2em;
+}
+
+#content {
+  display: grid;
+  grid-template-areas: "toc"
+                       "title"
+                       "subtitle"
+                       "main";
+  grid-template-rows: 2vh 48vh 50vh auto;
+}
+
+main {
+  grid-area: main;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1vw;
+  position: relative;
+  width: 95vw;
+}
+
+.outline-2:last-child {
+  background: var(--foreground);
+  color: var(--background);
+  margin-top: 3em;
+  padding: 3em;
+}
+.outline-2:last-child h2 {
+  background: transparent;
+}
+
+.title {
+  font-size: 14vh;
+  grid-area: title;
+  text-align: center;
+}
+
+#content > p {
+  font-size: 2em;
+  line-height: 1.5em;
+  max-width: 80rem;
+  grid-area: subtitle;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#table-of-contents {
+  grid-area: toc;
+}
+#table-of-contents a {
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+#table-of-contents h2 {
+  display: none;
+}
+#table-of-contents ul {
+  position: absolute;
+  right: 2em;
+}
+#table-of-contents a {
+  color: var(--foreground);
+}
+
+table {
+  border-color: hsl(0,0%,95%);
+  table-layout: fixed;
+  margin-bottom: 2em;
+  width: 100%;
+}
+th {
+  text-align: left;
+}
+td + td {
+  width: 70%;
+}
+
+a {
+  color: hsl(100,40%,50%);
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+li {
+  display: inline-block;
+  padding: 2em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 2em;
+}
+
+h2 {
+  background: var(--background);
+  border-bottom: 0.5px solid hsl(0,0%,90%);
+  position: sticky;
+  top: -1px;
+  width: 100%;
+  margin: 0;
+  padding: 1em 0;
+  z-index: 10;
+}
+
+.outline-2 {
+  position: relative;
+}
+.figure {
+  position: absolute;
+  left: -9rem;
+}
+
+.org-src-container {
+  overflow: auto;
+}
+
+pre.src {
+  border: none;
+  box-shadow: none;
+  margin: 0;
+}
+
+.org-string {
+  color: #77aa71;
+}
+
+.org-comment {
+  color: #c57a6d;
+}
+#+end_src
+** Scripts
+
+#+begin_src javascript :tangle docs/js/docs.js :mkdirp yes
+function DOMReady() {
+}
+
+addEventListener('DOMContentLoaded', DOMReady);
+#+end_src
+
+# Local Variables:
+# org-confirm-babel-evaluate: nil
+# eval: (progn (org-babel-lob-ingest (expand-file-name "src/license.org" default-directory)) (org-sbe "publish") (org-sbe "tangle"))
+# End:

@@ -1,0 +1,175 @@
+:root {
+  --background: hsl(45,40%,95%);
+  --foreground: hsl(0,0%,28%);
+}
+
+:root {
+  font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 2em;
+}
+body,
+p,
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.5em;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+blockquote {
+  border-left: 0.5rem solid hsla(30,5%,60%,0.3);
+  margin-left: 0;
+  padding-left: 2em;
+}
+
+#content {
+  display: grid;
+  grid-template-areas: "toc"
+                       "title"
+                       "subtitle"
+                       "main";
+  grid-template-rows: 2vh 48vh 50vh auto;
+}
+
+main {
+  grid-area: main;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1vw;
+  position: relative;
+  width: 95vw;
+}
+
+.outline-2:last-child {
+  background: var(--foreground);
+  color: var(--background);
+  margin-top: 3em;
+  padding: 3em;
+}
+.outline-2:last-child h2 {
+  background: transparent;
+}
+
+.title {
+  font-size: 14vh;
+  grid-area: title;
+  text-align: center;
+}
+
+#content > p {
+  font-size: 2em;
+  line-height: 1.5em;
+  max-width: 80rem;
+  grid-area: subtitle;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#table-of-contents {
+  grid-area: toc;
+}
+#table-of-contents a {
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+#table-of-contents h2 {
+  display: none;
+}
+#table-of-contents ul {
+  position: absolute;
+  right: 2em;
+}
+#table-of-contents a {
+  color: var(--foreground);
+}
+
+table {
+  border-color: hsl(0,0%,95%);
+  table-layout: fixed;
+  margin-bottom: 2em;
+  width: 100%;
+}
+th {
+  text-align: left;
+}
+td + td {
+  width: 70%;
+}
+
+a {
+  color: hsl(100,40%,50%);
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+li {
+  display: inline-block;
+  padding: 2em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 2em;
+}
+
+h2 {
+  background: var(--background);
+  border-bottom: 0.5px solid hsl(0,0%,90%);
+  position: sticky;
+  top: -1px;
+  width: 100%;
+  margin: 0;
+  padding: 1em 0;
+  z-index: 10;
+}
+
+.outline-2 {
+  position: relative;
+}
+.figure {
+  position: absolute;
+  left: -9rem;
+}
+
+.org-src-container {
+  overflow: auto;
+}
+
+pre.src {
+  border: none;
+  box-shadow: none;
+  margin: 0;
+}
+
+.org-string {
+  color: #77aa71;
+}
+
+.org-comment {
+  color: #c57a6d;
+}

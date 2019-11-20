@@ -1,8 +1,17 @@
+* Tmux
+
+** Configuration
+:properties:
+:header-args: :noweb yes :tangle-mode (identity #o444) :comments both :mkdirp yes
+:end:
+
+#+begin_src conf :tangle ~/.tmux.conf
+# <<license>>
 
 set -g prefix C-space
 bind Space last-window
 set -g mode-keys vi
-set -g history-limit 5000
+set -g history-limit 10000
 
 # Plugins
 set -g @tpm_plugins "                 \
@@ -14,8 +23,6 @@ set -g @tpm_plugins "                 \
   tmux-plugins/tmux-resurrect         \
   tmux-plugins/tmux-sensible          \
   tmux-plugins/tmux-yank              \
-  JindrichPilar/tmux-timekeeper       \
-  seebi/tmux-colors-solarized         \
 "
 
 # One indexed panes for easier switching
@@ -45,7 +52,6 @@ setw -g automatic-rename on
 setw -g automatic-rename-format '#{b:pane_current_path}'
 
 # Theme
-set -g @colors-solarized "dark"
 set -g status-interval 5
 set -g status-justify centre
 set-window-option -g window-status-current-format "| #I:#W "
@@ -54,4 +60,4 @@ set -g status-right ""
 
 # Initialize package-manager
 run-shell "~/.tmux/plugins/tpm/tpm"
-
+#+end_src

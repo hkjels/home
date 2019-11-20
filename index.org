@@ -1,0 +1,20 @@
+#+title: Home
+#+exclude_tags: noexport
+#+options: toc:1
+
+Welcome to my humble home. I like to keep it tidy just in case
+someone extraordinary; such as yourself, come to visit.
+
+#+html: <main>
+
+#+begin_quote
+Truth be told, my home is under heavy renovation in a transition to
+org-mode. So although the repo is tidy, it's missing a few bits and
+pieces.
+#+end_quote
+
+#+include: "src/shell.org"
+#+include: "src/git.org"
+#+include: "src/tmux.org"
+#+include: "src/license.org"
+#+html: </main>

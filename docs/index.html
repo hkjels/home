@@ -1,0 +1,1485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-11-19 Tue 23:39 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Home</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Henrik Kjerringvåg" />
+<link rel="stylesheet" href="css/docs.css"><script src="js/docs.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Home</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org22ed588">Shell</a></li>
+<li><a href="#org2135ecf">Git</a></li>
+<li><a href="#org3c44892">Tmux</a></li>
+<li><a href="#orgdb86057">License</a></li>
+</ul>
+</div>
+</div>
+<p>
+Welcome to my humble home. I like to keep it tidy just in case
+someone extraordinary; such as yourself, come to visit.
+</p>
+
+<main>
+
+<blockquote>
+<p>
+Truth be told, my home is under heavy renovation in a transition to
+org-mode. So although the repo tidy, it's missing a few bits and
+pieces still.
+</p>
+</blockquote>
+
+<div id="outline-container-org22ed588" class="outline-2">
+<h2 id="org22ed588">Shell</h2>
+<div class="outline-text-2" id="text-org22ed588">
+<p>
+Most of my configuration is shared amongst various shell's. I
+typically use <code>eshell</code>, but I like to keep functioning <code>bash</code> and <code>zsh</code>
+shells around.
+<i>At the moment, only the shared part is documented.</i>
+</p>
+</div>
+
+<div id="outline-container-org97b70b9" class="outline-3">
+<h3 id="org97b70b9">Environment</h3>
+<div class="outline-text-3" id="text-org97b70b9">
+<p>
+Before doing much, we need some environment-variables set. The most
+important one here is the <code>PATH</code>-variable. It's used by your shell
+whenever your trying to execute a program. It will look for that
+program in all the paths specified in the path-variable.
+</p>
+
+<p>
+I prefer the old way of maintaning path-variables. Below is the full
+list of paths for my systems. If you're on MacOS only, you might want
+to use <code>path_helper</code>. It's suppose to be easier atleast.
+</p>
+
+<table id="orgf131934" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">ANDROID<sub>HOME</sub></td>
+<td class="org-left">$HOME/Library/Android/sdk</td>
+</tr>
+
+<tr>
+<td class="org-left">JAVA<sub>HOME</sub></td>
+<td class="org-left">$(/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java<sub>home</sub>)</td>
+</tr>
+
+<tr>
+<td class="org-left">CLASSPATH</td>
+<td class="org-left">$HOME/Projects/Github/hkjels/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$HOME/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/sbin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/sbin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/X11/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/local/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/local/sbin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/local/opt/texinfo/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/local/opt/libxml2/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/Library/TeX/texbin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/opt/X11/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$HOME/.cargo</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$ANDROID<sub>HOME</sub>/platform-tools</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$ANDROID<sub>HOME</sub>/tools</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$ANDROID<sub>HOME</sub>/emulator</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$ANDROID<sub>HOME</sub>/tools/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$JAVA<sub>HOME</sub>/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">MANPATH</td>
+<td class="org-left">/usr/share/man</td>
+</tr>
+
+<tr>
+<td class="org-left">MANPATH</td>
+<td class="org-left">/usr/local/share/man</td>
+</tr>
+
+<tr>
+<td class="org-left">MANPATH</td>
+<td class="org-left">/opt/X11/share/man</td>
+</tr>
+
+<tr>
+<td class="org-left">MANPATH</td>
+<td class="org-left"><i>Library/TeX/Distributions</i>.DefaultTeX/Contents/Man</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org17c53b4" class="outline-3">
+<h3 id="org17c53b4">Login</h3>
+<div class="outline-text-3" id="text-org17c53b4">
+<p>
+Login shell is what you get when you log onto your computer. This is
+when you would like environment variables to be set.
+</p>
+
+<table id="orge12c6fa" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">EDITOR</td>
+<td class="org-left">emacsclient -c</td>
+</tr>
+
+<tr>
+<td class="org-left">VISUAL</td>
+<td class="org-left">$EDITOR</td>
+</tr>
+
+<tr>
+<td class="org-left">LANG</td>
+<td class="org-left">en<sub>US.UTF</sub>-8</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>ALL</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>COLLATE</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>CTYPE</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>MESSAGES</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>MONETARY</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>NUMERIC</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>TIME</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">PAGER</td>
+<td class="org-left">less -RXFSiw</td>
+</tr>
+
+<tr>
+<td class="org-left">MANPAGER</td>
+<td class="org-left">$PAGER</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org81d2b66" class="outline-3">
+<h3 id="org81d2b66">Interactive</h3>
+<div class="outline-text-3" id="text-org81d2b66">
+<p>
+An interactive shell is what you get when you boot up a
+terminal. Typically you would want utility-functions, aliases and
+coloring to become available at this point.
+</p>
+
+<p>
+To get a goodlooking prompt I use <a href="https://starship.rs">Starship.</a>  It's a fast and
+feature-full command-prompt. It's also very customizable, so I've
+finally scrapped my old hacky personal one.
+</p>
+</div>
+<div id="outline-container-orgc01ec7f" class="outline-4">
+<h4 id="orgc01ec7f">Functions</h4>
+<div class="outline-text-4" id="text-orgc01ec7f">
+<p>
+I've added a bunch of functions to my configuration that I've found
+helpfull over the years. Most of these are all available directly from the
+shell as small programs.
+<i>I haven't kept track of which of these I've created myself or which
+I've found on the great interweb unfortunately.</i><br />
+</p>
+
+<p>
+<a href="https://www-zeuthen.desy.de/~friebel/unix/lesspipe.html">Lesspipe</a> is an input-filter for <code>less</code> that makes it possible to view
+the content of binaries and archives.
+<br />
+<br />
+<a href="https://github.com/github/hub">Hub</a> makes it easier to work with projects that are hosted on
+Github. It is aliased to override the <code>git</code>-command, but everything else
+is git as usual.
+<br />
+<br />
+<a href="https://github.com/nvbn/thefuck">Thefuck</a> will try to correct your last run command. Just write <code>fuck</code> and
+it will do it's best.
+<br />
+<br />
+<code>o</code> is a wrapper of <code>open</code> on MacOS and <code>xdg-open</code> on linux. If it's not
+given any arguments, it will open the current directory.
+<br />
+<br />
+<code>mcd</code> is a quick way of creating a directory and moving into that
+directory in one go.
+<br />
+<br />
+<code>extract</code> can be used to extract various types of archives without
+additional arguments.
+<br />
+<br />
+<code>ip</code> will output your local ip-address.
+<br />
+<br />
+<code>remoteip</code> outputs your remote ip-address
+<br />
+<br />
+I hi-jack <code>cd</code>, so that I can easily jump to the root of a git
+repository by issuing <code>cd :/</code>. It will also list the content of the
+directory once changed.
+<br />
+<br />
+<code>hide</code> sends a process to the background and hides <code>std(out|err);</code> "deamonize".
+<br />
+<br />
+<code>ssht</code> opens an ssh-connection in a tmux-pane.
+<br />
+<br />
+<code>auth</code> copies my public ssh-key to the active remote ssh.
+<br />
+<br />
+<code>ts</code> will tail a file or socket. The second argument should be a regex
+that you would like to highlight.
+<br />
+<br />
+<code>j</code> is a wrapper of <a href="https://github.com/rupa/z/">z</a> with some additional help from <a href="https://github.com/junegunn/fzf">fzf</a> if you don't
+provide any arguments. Navigating this way is very efficient.
+<br />
+<br />
+<code>fd</code> lists all subdirectories. That list is filtered by <a href="https://github.com/junegunn/fzf">fzf</a> and you cd
+into the candidate you choose.
+<br />
+<br />
+At my current workplace, we use Jira. I've made a few functions that
+makes it a little less annoying <br />
+<code>jc</code>, you can think of as (j)ira-(c)hange. It is for changing the status of a ticket.
+<br />
+<br />
+<code>jg</code>, you can think of as (j)ira-(g)rab. It will list tickets that are
+not assigned to anyone, so you can choose one that you would like to
+work on.
+<br />
+<br />
+<code>json</code> is a wrapper of <a href="https://stedolan.github.io/jq/">jq</a> where giving it just a json-file will output
+it nicely instead of barfing out.
+<br />
+<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org5b99fef" class="outline-4">
+<h4 id="org5b99fef">Aliases</h4>
+<div class="outline-text-4" id="text-org5b99fef">
+<table id="org1f812f1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#x2013; -</td>
+<td class="org-left">cd -</td>
+</tr>
+
+<tr>
+<td class="org-left">..</td>
+<td class="org-left">cd ..</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2026;.</td>
+<td class="org-left">cd ../..</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2026;&#x2026;</td>
+<td class="org-left">cd ../../..</td>
+</tr>
+
+<tr>
+<td class="org-left">:q</td>
+<td class="org-left">exit</td>
+</tr>
+
+<tr>
+<td class="org-left">_</td>
+<td class="org-left">sudo</td>
+</tr>
+
+<tr>
+<td class="org-left">c</td>
+<td class="org-left">clear</td>
+</tr>
+
+<tr>
+<td class="org-left">cat</td>
+<td class="org-left">bat</td>
+</tr>
+
+<tr>
+<td class="org-left">clip</td>
+<td class="org-left">nc localhost 8377</td>
+</tr>
+
+<tr>
+<td class="org-left">cpu-temp</td>
+<td class="org-left">osx-cpu-temp</td>
+</tr>
+
+<tr>
+<td class="org-left">df</td>
+<td class="org-left">df -h</td>
+</tr>
+
+<tr>
+<td class="org-left">du</td>
+<td class="org-left">du -ch</td>
+</tr>
+
+<tr>
+<td class="org-left">du1</td>
+<td class="org-left">du -ch -d 1</td>
+</tr>
+
+<tr>
+<td class="org-left">e</td>
+<td class="org-left">$EDITOR</td>
+</tr>
+
+<tr>
+<td class="org-left">f</td>
+<td class="org-left">find . -iname</td>
+</tr>
+
+<tr>
+<td class="org-left">git</td>
+<td class="org-left">hub</td>
+</tr>
+
+<tr>
+<td class="org-left">grep</td>
+<td class="org-left">grep &#x2013;color=auto</td>
+</tr>
+
+<tr>
+<td class="org-left">hr</td>
+<td class="org-left">echo ; hr -; echo ;</td>
+</tr>
+
+<tr>
+<td class="org-left">ip</td>
+<td class="org-left">dig +short myip.opendns.com @resolver1.opendns.com</td>
+</tr>
+
+<tr>
+<td class="org-left">l</td>
+<td class="org-left">lunchy</td>
+</tr>
+
+<tr>
+<td class="org-left">la</td>
+<td class="org-left">ls -la</td>
+</tr>
+
+<tr>
+<td class="org-left">ll</td>
+<td class="org-left">ls -l</td>
+</tr>
+
+<tr>
+<td class="org-left">localip</td>
+<td class="org-left">ipconfig getifaddr en0</td>
+</tr>
+
+<tr>
+<td class="org-left">ls</td>
+<td class="org-left">lsd</td>
+</tr>
+
+<tr>
+<td class="org-left">lt</td>
+<td class="org-left">ls &#x2013;tree</td>
+</tr>
+
+<tr>
+<td class="org-left">manpath</td>
+<td class="org-left">echo -e ${MANPATH//:/\\n}</td>
+</tr>
+
+<tr>
+<td class="org-left">mkdir</td>
+<td class="org-left">mkdir -p</td>
+</tr>
+
+<tr>
+<td class="org-left">mv</td>
+<td class="org-left">mv -i</td>
+</tr>
+
+<tr>
+<td class="org-left">path</td>
+<td class="org-left">echo -e ${PATH//:/\\n}</td>
+</tr>
+
+<tr>
+<td class="org-left">ql</td>
+<td class="org-left">qlmanage -p</td>
+</tr>
+
+<tr>
+<td class="org-left">running</td>
+<td class="org-left">jobs -r</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">rg -S</td>
+</tr>
+
+<tr>
+<td class="org-left">sd</td>
+<td class="org-left">rga</td>
+</tr>
+
+<tr>
+<td class="org-left">sloc</td>
+<td class="org-left">sloccount</td>
+</tr>
+
+<tr>
+<td class="org-left">stopped</td>
+<td class="org-left">jobs -s</td>
+</tr>
+
+<tr>
+<td class="org-left">sys</td>
+<td class="org-left">grc tail -100 "/var/log/system.log"</td>
+</tr>
+
+<tr>
+<td class="org-left">timestamp</td>
+<td class="org-left">date "+%s"</td>
+</tr>
+
+<tr>
+<td class="org-left">tmux</td>
+<td class="org-left">tmux -2</td>
+</tr>
+
+<tr>
+<td class="org-left">today</td>
+<td class="org-left">date "+%Y-%m-%d"</td>
+</tr>
+
+<tr>
+<td class="org-left">wget</td>
+<td class="org-left">wget -c</td>
+</tr>
+
+<tr>
+<td class="org-left">~</td>
+<td class="org-left">cd ~</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2135ecf" class="outline-2">
+<h2 id="org2135ecf">Git</h2>
+<div class="outline-text-2" id="text-org2135ecf">
+
+<div class="figure">
+<p><img src="images/git.png" alt="git.png" width="48px" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-org804deca" class="outline-3">
+<h3 id="org804deca">Core</h3>
+<div class="outline-text-3" id="text-org804deca">
+<table id="org4d15b6f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">commitGraph</td>
+<td class="org-left">true</td>
+</tr>
+
+<tr>
+<td class="org-left">pager</td>
+<td class="org-left">delta &#x2013;dark</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org58a530f" class="outline-3">
+<h3 id="org58a530f">Alias</h3>
+<div class="outline-text-3" id="text-org58a530f">
+<table id="orge3e5c36" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">amm</td>
+<td class="org-left">commit -v &#x2013;amend &#x2013;no-edit</td>
+</tr>
+
+<tr>
+<td class="org-left">appraise</td>
+<td class="org-left">!git-appraise</td>
+</tr>
+
+<tr>
+<td class="org-left">br</td>
+<td class="org-left">branch -a</td>
+</tr>
+
+<tr>
+<td class="org-left">cb</td>
+<td class="org-left">checkout -b</td>
+</tr>
+
+<tr>
+<td class="org-left">ci</td>
+<td class="org-left">commit -v</td>
+</tr>
+
+<tr>
+<td class="org-left">cl</td>
+<td class="org-left">clone &#x2013;recursive</td>
+</tr>
+
+<tr>
+<td class="org-left">clone</td>
+<td class="org-left">clone &#x2013;recursive</td>
+</tr>
+
+<tr>
+<td class="org-left">co</td>
+<td class="org-left">checkout</td>
+</tr>
+
+<tr>
+<td class="org-left">cp</td>
+<td class="org-left">!git rev-parse HEAD ¦ tr -d "\\r" ¦ pbcopy</td>
+</tr>
+
+<tr>
+<td class="org-left">create-graph</td>
+<td class="org-left">commit-graph write &#x2013;reachable</td>
+</tr>
+
+<tr>
+<td class="org-left">ctags</td>
+<td class="org-left">!.git/hooks/ctags</td>
+</tr>
+
+<tr>
+<td class="org-left">d</td>
+<td class="org-left">diff &#x2013;word-diff</td>
+</tr>
+
+<tr>
+<td class="org-left">f</td>
+<td class="org-left">!git-fresh</td>
+</tr>
+
+<tr>
+<td class="org-left">g</td>
+<td class="org-left">grep &#x2013;break &#x2013;heading &#x2013;line-number</td>
+</tr>
+
+<tr>
+<td class="org-left">ignored</td>
+<td class="org-left">check-ignore -v</td>
+</tr>
+
+<tr>
+<td class="org-left">lc</td>
+<td class="org-left">show -s &#x2013;format="%ct" HEAD</td>
+</tr>
+
+<tr>
+<td class="org-left">lg</td>
+<td class="org-left">log &#x2013;graph &#x2013;pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' &#x2013;abbrev-commit</td>
+</tr>
+
+<tr>
+<td class="org-left">m</td>
+<td class="org-left">merge</td>
+</tr>
+
+<tr>
+<td class="org-left">mt</td>
+<td class="org-left">mergetool</td>
+</tr>
+
+<tr>
+<td class="org-left">mysprint</td>
+<td class="org-left">log &#x2013;since 1.week &#x2013;author "$(git config user.name)"</td>
+</tr>
+
+<tr>
+<td class="org-left">next</td>
+<td class="org-left">!git add -A; git rebase &#x2013;continue</td>
+</tr>
+
+<tr>
+<td class="org-left">p</td>
+<td class="org-left">pull</td>
+</tr>
+
+<tr>
+<td class="org-left">perfect</td>
+<td class="org-left">rebase -i @{u}</td>
+</tr>
+
+<tr>
+<td class="org-left">pf</td>
+<td class="org-left">push &#x2013;force-with-lease</td>
+</tr>
+
+<tr>
+<td class="org-left">pr</td>
+<td class="org-left">pull &#x2013;rebase</td>
+</tr>
+
+<tr>
+<td class="org-left">rb</td>
+<td class="org-left">rebase</td>
+</tr>
+
+<tr>
+<td class="org-left">rba</td>
+<td class="org-left">rebase &#x2013;abort</td>
+</tr>
+
+<tr>
+<td class="org-left">rbc</td>
+<td class="org-left">rebase &#x2013;continue</td>
+</tr>
+
+<tr>
+<td class="org-left">rbi</td>
+<td class="org-left">rebase -i origin/master</td>
+</tr>
+
+<tr>
+<td class="org-left">remotes</td>
+<td class="org-left">remote -v</td>
+</tr>
+
+<tr>
+<td class="org-left">rm</td>
+<td class="org-left">remove-commit</td>
+</tr>
+
+<tr>
+<td class="org-left">rm-r</td>
+<td class="org-left">push origin &#x2013;delete</td>
+</tr>
+
+<tr>
+<td class="org-left">root</td>
+<td class="org-left">!pwd</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">status -sb</td>
+</tr>
+
+<tr>
+<td class="org-left">sa</td>
+<td class="org-left">submodule add</td>
+</tr>
+
+<tr>
+<td class="org-left">sci</td>
+<td class="org-left">dcommit -v</td>
+</tr>
+
+<tr>
+<td class="org-left">sf</td>
+<td class="org-left">submodule foreach</td>
+</tr>
+
+<tr>
+<td class="org-left">sh</td>
+<td class="org-left">!git-sh</td>
+</tr>
+
+<tr>
+<td class="org-left">sha</td>
+<td class="org-left">!fcs</td>
+</tr>
+
+<tr>
+<td class="org-left">sprint</td>
+<td class="org-left">log &#x2013;format "[%an] %s" &#x2013;since 1.week</td>
+</tr>
+
+<tr>
+<td class="org-left">sr</td>
+<td class="org-left">submodule remove</td>
+</tr>
+
+<tr>
+<td class="org-left">st</td>
+<td class="org-left">stash</td>
+</tr>
+
+<tr>
+<td class="org-left">sta</td>
+<td class="org-left">stash apply</td>
+</tr>
+
+<tr>
+<td class="org-left">standup</td>
+<td class="org-left">log &#x2013;since "1 day ago" &#x2013;oneline &#x2013;author "$(git config user.name)"</td>
+</tr>
+
+<tr>
+<td class="org-left">std</td>
+<td class="org-left">stash drop</td>
+</tr>
+
+<tr>
+<td class="org-left">stls</td>
+<td class="org-left">stash list</td>
+</tr>
+
+<tr>
+<td class="org-left">stp</td>
+<td class="org-left">stash pop</td>
+</tr>
+
+<tr>
+<td class="org-left">sts</td>
+<td class="org-left">stash save</td>
+</tr>
+
+<tr>
+<td class="org-left">stu</td>
+<td class="org-left">stash unstaged</td>
+</tr>
+
+<tr>
+<td class="org-left">tags</td>
+<td class="org-left">tag -l</td>
+</tr>
+
+<tr>
+<td class="org-left">today</td>
+<td class="org-left">log &#x2013;since 7am</td>
+</tr>
+
+<tr>
+<td class="org-left">undo</td>
+<td class="org-left">reset &#x2013;soft HEAD^</td>
+</tr>
+
+<tr>
+<td class="org-left">unstage</td>
+<td class="org-left">reset HEAD --</td>
+</tr>
+
+<tr>
+<td class="org-left">update</td>
+<td class="org-left">pull &#x2013;rebase</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgd28b459" class="outline-3">
+<h3 id="orgd28b459">Color</h3>
+<div class="outline-text-3" id="text-orgd28b459">
+<table id="org8f9d46c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">ui</td>
+<td class="org-left">true</td>
+</tr>
+
+<tr>
+<td class="org-left">branch</td>
+<td class="org-left">auto</td>
+</tr>
+
+<tr>
+<td class="org-left">diff</td>
+<td class="org-left">auto</td>
+</tr>
+
+<tr>
+<td class="org-left">status</td>
+<td class="org-left">auto</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org5650043" class="outline-3">
+<h3 id="org5650043">Credential</h3>
+<div class="outline-text-3" id="text-org5650043">
+<table id="org94c7da2" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">helper</td>
+<td class="org-left">osxkeychain</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgc858443" class="outline-3">
+<h3 id="orgc858443">Diff</h3>
+<div class="outline-text-3" id="text-orgc858443">
+<table id="orgd66cd91" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">mnemonicprefix</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orge71b6b8" class="outline-3">
+<h3 id="orge71b6b8">Push</h3>
+<div class="outline-text-3" id="text-orge71b6b8">
+<table id="org5552897" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">default</td>
+<td class="org-left">current</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org3ec7418" class="outline-3">
+<h3 id="org3ec7418">Pull</h3>
+<div class="outline-text-3" id="text-org3ec7418">
+<table id="org26957b7" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">rebase</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgd0ca530" class="outline-3">
+<h3 id="orgd0ca530">Fetch</h3>
+<div class="outline-text-3" id="text-orgd0ca530">
+<table id="org2902e42" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">writeCommitGraph</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org21e1cbb" class="outline-3">
+<h3 id="org21e1cbb">GC</h3>
+<div class="outline-text-3" id="text-org21e1cbb">
+<table id="org7493691" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">auto</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">writeCommitGraph</td>
+<td class="org-right">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgb638d96" class="outline-3">
+<h3 id="orgb638d96">Branch</h3>
+<div class="outline-text-3" id="text-orgb638d96">
+<table id="orgeb20846" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">autosetuprebase</td>
+<td class="org-left">always</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgae94795" class="outline-3">
+<h3 id="orgae94795">Github</h3>
+<div class="outline-text-3" id="text-orgae94795">
+<table id="orga2e93a6" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">protocol</td>
+<td class="org-left">https</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org8a6ac9c" class="outline-3">
+<h3 id="org8a6ac9c">Grep</h3>
+<div class="outline-text-3" id="text-org8a6ac9c">
+<table id="orgf502d30" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">extendRegexp</td>
+<td class="org-left">true</td>
+</tr>
+
+<tr>
+<td class="org-left">lineNumber</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org3e474ac" class="outline-3">
+<h3 id="org3e474ac">Filters</h3>
+<div class="outline-text-3" id="text-org3e474ac">
+<table id="orgdea0123" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">clean</td>
+<td class="org-left">git media clean %f</td>
+</tr>
+
+<tr>
+<td class="org-left">smudge</td>
+<td class="org-left">git media smudge %f</td>
+</tr>
+
+<tr>
+<td class="org-left">required</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+
+<table id="orgdcf6dad" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">clean</td>
+<td class="org-left">git-lfs clean &#x2013; %f</td>
+</tr>
+
+<tr>
+<td class="org-left">smudge</td>
+<td class="org-left">git-lfs smudge &#x2013; %f</td>
+</tr>
+
+<tr>
+<td class="org-left">required</td>
+<td class="org-left">true</td>
+</tr>
+
+<tr>
+<td class="org-left">process</td>
+<td class="org-left">git-lfs filter-process</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org779bd03" class="outline-3">
+<h3 id="org779bd03">Magit</h3>
+<div class="outline-text-3" id="text-org779bd03">
+<table id="org2e77f49" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">hideCampaign</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org46a27d6" class="outline-3">
+<h3 id="org46a27d6">Apply</h3>
+<div class="outline-text-3" id="text-org46a27d6">
+<table id="org4349263" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">whitespace</td>
+<td class="org-left">nowarn</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org93204f4" class="outline-3">
+<h3 id="org93204f4">Diff</h3>
+<div class="outline-text-3" id="text-org93204f4">
+<table id="orgf8b8f6f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">xfuncname</td>
+<td class="org-left">(^\\(.* ¦ \\s*\\(defn.*)</td>
+</tr>
+</tbody>
+</table>
+
+<table id="orgeb2fc57" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">xfuncname</td>
+<td class="org-left">'^[ \t]*(pub¦)[ \t]*((fn¦struct¦enum¦impl¦trait¦mod)[^;]*)$'</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org454ed7c" class="outline-3">
+<h3 id="org454ed7c">Include</h3>
+<div class="outline-text-3" id="text-org454ed7c">
+<table id="org0cccd55" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">path</td>
+<td class="org-left">~/.gitconfig.local</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="outline-container-org3c44892" class="outline-2">
+<h2 id="org3c44892">Tmux</h2>
+<div class="outline-text-2" id="text-org3c44892">
+</div>
+<div id="outline-container-org946ca45" class="outline-3">
+<h3 id="org946ca45">Configuration</h3>
+<div class="outline-text-3" id="text-org946ca45">
+<div class="org-src-container">
+<pre class="src src-conf"><span class="org-comment-delimiter"># </span><span class="org-comment">Home. *nix configuration files</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Copyright (C) 2019  Henrik Kjerringv&#229;g</span>
+<span class="org-comment-delimiter"># </span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">This program is free software: you can redistribute it and/or modify</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">it under the terms of the GNU General Public License as published by</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">(at your option) any later version.</span>
+<span class="org-comment-delimiter"># </span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">This program is distributed in the hope that it will be useful,</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">GNU General Public License for more details.</span>
+<span class="org-comment-delimiter"># </span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">You should have received a copy of the GNU General Public License</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">along with this program.  If not, see <a href="https://www.gnu.org/licenses/">&lt;https://www.gnu.org/licenses/&gt;</a>.</span>
+
+set -g prefix C-space
+bind Space last-window
+set -g mode-keys vi
+set -g history-limit 10000
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Plugins</span>
+set -g @tpm_plugins <span class="org-string">"                 \</span>
+<span class="org-string">  tmux-plugins/tpm                    \</span>
+<span class="org-string">  tmux-plugins/tmux-copycat           \</span>
+<span class="org-string">  tmux-plugins/tmux-open              \</span>
+<span class="org-string">  tmux-plugins/tmux-pain-control      \</span>
+<span class="org-string">  tmux-plugins/tmux-prefix-highlight  \</span>
+<span class="org-string">  tmux-plugins/tmux-resurrect         \</span>
+<span class="org-string">  tmux-plugins/tmux-sensible          \</span>
+<span class="org-string">  tmux-plugins/tmux-yank              \</span>
+<span class="org-string">"</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">One indexed panes for easier switching</span>
+set -g base-index 1
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Smart pane switching with awareness of vim splits</span>
+bind -n C-h run <span class="org-string">"(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-h) || tmux select-pane -L"</span>
+bind -n C-j run <span class="org-string">"(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-j) || tmux select-pane -D"</span>
+bind -n C-k run <span class="org-string">"(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-k) || tmux select-pane -U"</span>
+bind -n C-l run <span class="org-string">"(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-l) || tmux select-pane -R"</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Vim clipboard</span>
+set -g default-shell $SHELL
+set -g default-command <span class="org-string">"reattach-to-user-namespace -l ${SHELL}"</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Synchronize panes</span>
+bind * set-window-option synchronize-pane
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Refresh tmux</span>
+bind r source-file ~/.tmux.conf
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Open an ssh-connection in another window</span>
+bind S command-prompt -p ssh: <span class="org-string">"new-window -n %1 'ssh %1'"</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Automatic window-naming</span>
+setw -g automatic-rename on
+setw -g automatic-rename-format <span class="org-string">'#{b:pane_current_path}'</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Theme</span>
+set -g status-interval 5
+set -g status-justify centre
+set-window-option -g window-status-current-format <span class="org-string">"| #I:#W "</span>
+set -g status-left <span class="org-string">"#{prefix_highlight}"</span>
+set -g status-right <span class="org-string">""</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Initialize package-manager</span>
+run-shell <span class="org-string">"~/.tmux/plugins/tpm/tpm"</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdb86057" class="outline-2">
+<h2 id="orgdb86057">License</h2>
+<div class="outline-text-2" id="text-orgdb86057">
+<div class="org-src-container">
+<pre class="src src-text" id="org2da8a9c">Home. *nix configuration files
+Copyright (C) 2019  Henrik Kjerringv&#229;g
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <a href="https://www.gnu.org/licenses/">&lt;https://www.gnu.org/licenses/&gt;</a>.
+</pre>
+</div>
+</main>
+</div>
+</div>
+</div>
+</body>
+</html>

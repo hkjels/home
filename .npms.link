@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-npm install -g browsersync
-npm install -g serve
-npm install -g stylestats
-

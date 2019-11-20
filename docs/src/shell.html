@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-11-19 Tue 23:38 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Henrik Kjerringvåg" />
+<link rel="stylesheet" href="css/docs.css"><script src="js/docs.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge8514fb">Shell</a>
+<ul>
+<li><a href="#orgb90e786">Environment</a></li>
+<li><a href="#org9a87b9c">Login</a></li>
+<li><a href="#orga16987e">Interactive</a>
+<ul>
+<li><a href="#orga2eb6ea">Functions</a></li>
+<li><a href="#org339214b">Aliases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge8514fb" class="outline-2">
+<h2 id="orge8514fb">Shell</h2>
+<div class="outline-text-2" id="text-orge8514fb">
+<p>
+Most of my configuration is shared amongst various shell's. I
+typically use <code>eshell</code>, but I like to keep functioning <code>bash</code> and <code>zsh</code>
+shells around.
+<i>At the moment, only the shared part is documented.</i>
+</p>
+</div>
+
+<div id="outline-container-orgb90e786" class="outline-3">
+<h3 id="orgb90e786">Environment</h3>
+<div class="outline-text-3" id="text-orgb90e786">
+<p>
+Before doing much, we need some environment-variables set. The most
+important one here is the <code>PATH</code>-variable. It's used by your shell
+whenever your trying to execute a program. It will look for that
+program in all the paths specified in the path-variable.
+</p>
+
+<p>
+I prefer the old way of maintaning path-variables. Below is the full
+list of paths for my systems. If you're on MacOS only, you might want
+to use <code>path_helper</code>. It's suppose to be easier atleast.
+</p>
+
+<table id="org3a1d312" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">ANDROID<sub>HOME</sub></td>
+<td class="org-left">$HOME/Library/Android/sdk</td>
+</tr>
+
+<tr>
+<td class="org-left">JAVA<sub>HOME</sub></td>
+<td class="org-left">$(/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java<sub>home</sub>)</td>
+</tr>
+
+<tr>
+<td class="org-left">CLASSPATH</td>
+<td class="org-left">$HOME/Projects/Github/hkjels/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$HOME/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/sbin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/sbin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/X11/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/local/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/local/sbin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/local/opt/texinfo/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/local/opt/libxml2/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/Library/TeX/texbin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/opt/X11/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$HOME/.cargo</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$ANDROID<sub>HOME</sub>/platform-tools</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$ANDROID<sub>HOME</sub>/tools</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$ANDROID<sub>HOME</sub>/emulator</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$ANDROID<sub>HOME</sub>/tools/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$JAVA<sub>HOME</sub>/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">MANPATH</td>
+<td class="org-left">/usr/share/man</td>
+</tr>
+
+<tr>
+<td class="org-left">MANPATH</td>
+<td class="org-left">/usr/local/share/man</td>
+</tr>
+
+<tr>
+<td class="org-left">MANPATH</td>
+<td class="org-left">/opt/X11/share/man</td>
+</tr>
+
+<tr>
+<td class="org-left">MANPATH</td>
+<td class="org-left"><i>Library/TeX/Distributions</i>.DefaultTeX/Contents/Man</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org9a87b9c" class="outline-3">
+<h3 id="org9a87b9c">Login</h3>
+<div class="outline-text-3" id="text-org9a87b9c">
+<p>
+Login shell is what you get when you log onto your computer. This is
+when you would like environment variables to be set.
+</p>
+
+<table id="org4d5898e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">EDITOR</td>
+<td class="org-left">emacsclient -c</td>
+</tr>
+
+<tr>
+<td class="org-left">VISUAL</td>
+<td class="org-left">$EDITOR</td>
+</tr>
+
+<tr>
+<td class="org-left">LANG</td>
+<td class="org-left">en<sub>US.UTF</sub>-8</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>ALL</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>COLLATE</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>CTYPE</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>MESSAGES</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>MONETARY</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>NUMERIC</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">LC<sub>TIME</sub></td>
+<td class="org-left">$LANG</td>
+</tr>
+
+<tr>
+<td class="org-left">PAGER</td>
+<td class="org-left">less -RXFSiw</td>
+</tr>
+
+<tr>
+<td class="org-left">MANPAGER</td>
+<td class="org-left">$PAGER</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orga16987e" class="outline-3">
+<h3 id="orga16987e">Interactive</h3>
+<div class="outline-text-3" id="text-orga16987e">
+<p>
+An interactive shell is what you get when you boot up a
+terminal. Typically you would want utility-functions, aliases and
+coloring to become available at this point.
+</p>
+
+<p>
+To get a goodlooking prompt I use <a href="https://starship.rs">Starship.</a>  It's a fast and
+feature-full command-prompt. It's also very customizable, so I've
+finally scrapped my old hacky personal one.
+</p>
+</div>
+<div id="outline-container-orga2eb6ea" class="outline-4">
+<h4 id="orga2eb6ea">Functions</h4>
+<div class="outline-text-4" id="text-orga2eb6ea">
+<p>
+I've added a bunch of functions to my configuration that I've found
+helpfull over the years. Most of these are all available directly from the
+shell as small programs.
+<i>I haven't kept track of which of these I've created myself or which
+I've found on the great interweb unfortunately.</i><br />
+</p>
+
+<p>
+<a href="https://www-zeuthen.desy.de/~friebel/unix/lesspipe.html">Lesspipe</a> is an input-filter for <code>less</code> that makes it possible to view
+the content of binaries and archives.
+<br />
+<br />
+<a href="https://github.com/github/hub">Hub</a> makes it easier to work with projects that are hosted on
+Github. It is aliased to override the <code>git</code>-command, but everything else
+is git as usual.
+<br />
+<br />
+<a href="https://github.com/nvbn/thefuck">Thefuck</a> will try to correct your last run command. Just write <code>fuck</code> and
+it will do it's best.
+<br />
+<br />
+<code>o</code> is a wrapper of <code>open</code> on MacOS and <code>xdg-open</code> on linux. If it's not
+given any arguments, it will open the current directory.
+<br />
+<br />
+<code>mcd</code> is a quick way of creating a directory and moving into that
+directory in one go.
+<br />
+<br />
+<code>extract</code> can be used to extract various types of archives without
+additional arguments.
+<br />
+<br />
+<code>ip</code> will output your local ip-address.
+<br />
+<br />
+<code>remoteip</code> outputs your remote ip-address
+<br />
+<br />
+I hi-jack <code>cd</code>, so that I can easily jump to the root of a git
+repository by issuing <code>cd :/</code>. It will also list the content of the
+directory once changed.
+<br />
+<br />
+<code>hide</code> sends a process to the background and hides <code>std(out|err);</code> "deamonize".
+<br />
+<br />
+<code>ssht</code> opens an ssh-connection in a tmux-pane.
+<br />
+<br />
+<code>auth</code> copies my public ssh-key to the active remote ssh.
+<br />
+<br />
+<code>ts</code> will tail a file or socket. The second argument should be a regex
+that you would like to highlight.
+<br />
+<br />
+<code>j</code> is a wrapper of <a href="https://github.com/rupa/z/">z</a> with some additional help from <a href="https://github.com/junegunn/fzf">fzf</a> if you don't
+provide any arguments. Navigating this way is very efficient.
+<br />
+<br />
+<code>fd</code> lists all subdirectories. That list is filtered by <a href="https://github.com/junegunn/fzf">fzf</a> and you cd
+into the candidate you choose.
+<br />
+<br />
+At my current workplace, we use Jira. I've made a few functions that
+makes it a little less annoying <br />
+<code>jc</code>, you can think of as (j)ira-(c)hange. It is for changing the status of a ticket.
+<br />
+<br />
+<code>jg</code>, you can think of as (j)ira-(g)rab. It will list tickets that are
+not assigned to anyone, so you can choose one that you would like to
+work on.
+<br />
+<br />
+<code>json</code> is a wrapper of <a href="https://stedolan.github.io/jq/">jq</a> where giving it just a json-file will output
+it nicely instead of barfing out.
+<br />
+<br />
+</p>
+</div>
+</div>
+<div id="outline-container-org339214b" class="outline-4">
+<h4 id="org339214b">Aliases</h4>
+<div class="outline-text-4" id="text-org339214b">
+<table id="orgdeaaead" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">&#x2013; -</td>
+<td class="org-left">cd -</td>
+</tr>
+
+<tr>
+<td class="org-left">..</td>
+<td class="org-left">cd ..</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2026;.</td>
+<td class="org-left">cd ../..</td>
+</tr>
+
+<tr>
+<td class="org-left">&#x2026;&#x2026;</td>
+<td class="org-left">cd ../../..</td>
+</tr>
+
+<tr>
+<td class="org-left">:q</td>
+<td class="org-left">exit</td>
+</tr>
+
+<tr>
+<td class="org-left">_</td>
+<td class="org-left">sudo</td>
+</tr>
+
+<tr>
+<td class="org-left">c</td>
+<td class="org-left">clear</td>
+</tr>
+
+<tr>
+<td class="org-left">cat</td>
+<td class="org-left">bat</td>
+</tr>
+
+<tr>
+<td class="org-left">clip</td>
+<td class="org-left">nc localhost 8377</td>
+</tr>
+
+<tr>
+<td class="org-left">cpu-temp</td>
+<td class="org-left">osx-cpu-temp</td>
+</tr>
+
+<tr>
+<td class="org-left">df</td>
+<td class="org-left">df -h</td>
+</tr>
+
+<tr>
+<td class="org-left">du</td>
+<td class="org-left">du -ch</td>
+</tr>
+
+<tr>
+<td class="org-left">du1</td>
+<td class="org-left">du -ch -d 1</td>
+</tr>
+
+<tr>
+<td class="org-left">e</td>
+<td class="org-left">$EDITOR</td>
+</tr>
+
+<tr>
+<td class="org-left">f</td>
+<td class="org-left">find . -iname</td>
+</tr>
+
+<tr>
+<td class="org-left">git</td>
+<td class="org-left">hub</td>
+</tr>
+
+<tr>
+<td class="org-left">grep</td>
+<td class="org-left">grep &#x2013;color=auto</td>
+</tr>
+
+<tr>
+<td class="org-left">hr</td>
+<td class="org-left">echo ; hr -; echo ;</td>
+</tr>
+
+<tr>
+<td class="org-left">ip</td>
+<td class="org-left">dig +short myip.opendns.com @resolver1.opendns.com</td>
+</tr>
+
+<tr>
+<td class="org-left">l</td>
+<td class="org-left">lunchy</td>
+</tr>
+
+<tr>
+<td class="org-left">la</td>
+<td class="org-left">ls -la</td>
+</tr>
+
+<tr>
+<td class="org-left">ll</td>
+<td class="org-left">ls -l</td>
+</tr>
+
+<tr>
+<td class="org-left">localip</td>
+<td class="org-left">ipconfig getifaddr en0</td>
+</tr>
+
+<tr>
+<td class="org-left">ls</td>
+<td class="org-left">lsd</td>
+</tr>
+
+<tr>
+<td class="org-left">lt</td>
+<td class="org-left">ls &#x2013;tree</td>
+</tr>
+
+<tr>
+<td class="org-left">manpath</td>
+<td class="org-left">echo -e ${MANPATH//:/\\n}</td>
+</tr>
+
+<tr>
+<td class="org-left">mkdir</td>
+<td class="org-left">mkdir -p</td>
+</tr>
+
+<tr>
+<td class="org-left">mv</td>
+<td class="org-left">mv -i</td>
+</tr>
+
+<tr>
+<td class="org-left">path</td>
+<td class="org-left">echo -e ${PATH//:/\\n}</td>
+</tr>
+
+<tr>
+<td class="org-left">ql</td>
+<td class="org-left">qlmanage -p</td>
+</tr>
+
+<tr>
+<td class="org-left">running</td>
+<td class="org-left">jobs -r</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">rg -S</td>
+</tr>
+
+<tr>
+<td class="org-left">sd</td>
+<td class="org-left">rga</td>
+</tr>
+
+<tr>
+<td class="org-left">sloc</td>
+<td class="org-left">sloccount</td>
+</tr>
+
+<tr>
+<td class="org-left">stopped</td>
+<td class="org-left">jobs -s</td>
+</tr>
+
+<tr>
+<td class="org-left">sys</td>
+<td class="org-left">grc tail -100 "/var/log/system.log"</td>
+</tr>
+
+<tr>
+<td class="org-left">timestamp</td>
+<td class="org-left">date "+%s"</td>
+</tr>
+
+<tr>
+<td class="org-left">tmux</td>
+<td class="org-left">tmux -2</td>
+</tr>
+
+<tr>
+<td class="org-left">today</td>
+<td class="org-left">date "+%Y-%m-%d"</td>
+</tr>
+
+<tr>
+<td class="org-left">wget</td>
+<td class="org-left">wget -c</td>
+</tr>
+
+<tr>
+<td class="org-left">~</td>
+<td class="org-left">cd ~</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

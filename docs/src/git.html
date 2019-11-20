@@ -1,0 +1,1017 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-11-19 Tue 22:15 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Henrik Kjerringvåg" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="css/docs.css"><script src="js/docs.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org33b6e61">Git</a>
+<ul>
+<li><a href="#orga54d30e">Core</a></li>
+<li><a href="#org7b1e68b">Alias</a></li>
+<li><a href="#org053a956">Color</a></li>
+<li><a href="#org7bc5658">Credential</a></li>
+<li><a href="#org6be80bb">Diff</a></li>
+<li><a href="#orgfa43f5f">Push</a></li>
+<li><a href="#org4f0e595">Pull</a></li>
+<li><a href="#orga658a4a">Fetch</a></li>
+<li><a href="#orgbbbbb83">GC</a></li>
+<li><a href="#org0ca56d6">Branch</a></li>
+<li><a href="#org814536f">Github</a></li>
+<li><a href="#orgc3d885e">Grep</a></li>
+<li><a href="#org10fa7ea">Filters</a></li>
+<li><a href="#org456f7a5">Magit</a></li>
+<li><a href="#orgd99f76d">Apply</a></li>
+<li><a href="#org7f394e8">Diff</a></li>
+<li><a href="#org6e254b6">Include</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org33b6e61" class="outline-2">
+<h2 id="org33b6e61">Git</h2>
+<div class="outline-text-2" id="text-org33b6e61">
+
+<div class="figure">
+<p><img src="../images/git.png" alt="git.png" width="48px" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga54d30e" class="outline-3">
+<h3 id="orga54d30e">Core</h3>
+<div class="outline-text-3" id="text-orga54d30e">
+<table id="orgef483db" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">commitGraph</td>
+<td class="org-left">true</td>
+</tr>
+
+<tr>
+<td class="org-left">pager</td>
+<td class="org-left">delta &#x2013;dark</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org7b1e68b" class="outline-3">
+<h3 id="org7b1e68b">Alias</h3>
+<div class="outline-text-3" id="text-org7b1e68b">
+<table id="orge93a166" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">amm</td>
+<td class="org-left">commit -v &#x2013;amend &#x2013;no-edit</td>
+</tr>
+
+<tr>
+<td class="org-left">appraise</td>
+<td class="org-left">!git-appraise</td>
+</tr>
+
+<tr>
+<td class="org-left">br</td>
+<td class="org-left">branch -a</td>
+</tr>
+
+<tr>
+<td class="org-left">cb</td>
+<td class="org-left">checkout -b</td>
+</tr>
+
+<tr>
+<td class="org-left">ci</td>
+<td class="org-left">commit -v</td>
+</tr>
+
+<tr>
+<td class="org-left">cl</td>
+<td class="org-left">clone &#x2013;recursive</td>
+</tr>
+
+<tr>
+<td class="org-left">clone</td>
+<td class="org-left">clone &#x2013;recursive</td>
+</tr>
+
+<tr>
+<td class="org-left">co</td>
+<td class="org-left">checkout</td>
+</tr>
+
+<tr>
+<td class="org-left">cp</td>
+<td class="org-left">!git rev-parse HEAD ¦ tr -d "\\r" ¦ pbcopy</td>
+</tr>
+
+<tr>
+<td class="org-left">create-graph</td>
+<td class="org-left">commit-graph write &#x2013;reachable</td>
+</tr>
+
+<tr>
+<td class="org-left">ctags</td>
+<td class="org-left">!.git/hooks/ctags</td>
+</tr>
+
+<tr>
+<td class="org-left">d</td>
+<td class="org-left">diff &#x2013;word-diff</td>
+</tr>
+
+<tr>
+<td class="org-left">f</td>
+<td class="org-left">!git-fresh</td>
+</tr>
+
+<tr>
+<td class="org-left">g</td>
+<td class="org-left">grep &#x2013;break &#x2013;heading &#x2013;line-number</td>
+</tr>
+
+<tr>
+<td class="org-left">ignored</td>
+<td class="org-left">check-ignore -v</td>
+</tr>
+
+<tr>
+<td class="org-left">lc</td>
+<td class="org-left">show -s &#x2013;format="%ct" HEAD</td>
+</tr>
+
+<tr>
+<td class="org-left">lg</td>
+<td class="org-left">log &#x2013;graph &#x2013;pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' &#x2013;abbrev-commit</td>
+</tr>
+
+<tr>
+<td class="org-left">m</td>
+<td class="org-left">merge</td>
+</tr>
+
+<tr>
+<td class="org-left">mt</td>
+<td class="org-left">mergetool</td>
+</tr>
+
+<tr>
+<td class="org-left">mysprint</td>
+<td class="org-left">log &#x2013;since 1.week &#x2013;author "$(git config user.name)"</td>
+</tr>
+
+<tr>
+<td class="org-left">next</td>
+<td class="org-left">!git add -A; git rebase &#x2013;continue</td>
+</tr>
+
+<tr>
+<td class="org-left">p</td>
+<td class="org-left">pull</td>
+</tr>
+
+<tr>
+<td class="org-left">perfect</td>
+<td class="org-left">rebase -i @{u}</td>
+</tr>
+
+<tr>
+<td class="org-left">pf</td>
+<td class="org-left">push &#x2013;force-with-lease</td>
+</tr>
+
+<tr>
+<td class="org-left">pr</td>
+<td class="org-left">pull &#x2013;rebase</td>
+</tr>
+
+<tr>
+<td class="org-left">rb</td>
+<td class="org-left">rebase</td>
+</tr>
+
+<tr>
+<td class="org-left">rba</td>
+<td class="org-left">rebase &#x2013;abort</td>
+</tr>
+
+<tr>
+<td class="org-left">rbc</td>
+<td class="org-left">rebase &#x2013;continue</td>
+</tr>
+
+<tr>
+<td class="org-left">rbi</td>
+<td class="org-left">rebase -i origin/master</td>
+</tr>
+
+<tr>
+<td class="org-left">remotes</td>
+<td class="org-left">remote -v</td>
+</tr>
+
+<tr>
+<td class="org-left">rm</td>
+<td class="org-left">remove-commit</td>
+</tr>
+
+<tr>
+<td class="org-left">rm-r</td>
+<td class="org-left">push origin &#x2013;delete</td>
+</tr>
+
+<tr>
+<td class="org-left">root</td>
+<td class="org-left">!pwd</td>
+</tr>
+
+<tr>
+<td class="org-left">s</td>
+<td class="org-left">status -sb</td>
+</tr>
+
+<tr>
+<td class="org-left">sa</td>
+<td class="org-left">submodule add</td>
+</tr>
+
+<tr>
+<td class="org-left">sci</td>
+<td class="org-left">dcommit -v</td>
+</tr>
+
+<tr>
+<td class="org-left">sf</td>
+<td class="org-left">submodule foreach</td>
+</tr>
+
+<tr>
+<td class="org-left">sh</td>
+<td class="org-left">!git-sh</td>
+</tr>
+
+<tr>
+<td class="org-left">sha</td>
+<td class="org-left">!fcs</td>
+</tr>
+
+<tr>
+<td class="org-left">sprint</td>
+<td class="org-left">log &#x2013;format "[%an] %s" &#x2013;since 1.week</td>
+</tr>
+
+<tr>
+<td class="org-left">sr</td>
+<td class="org-left">submodule remove</td>
+</tr>
+
+<tr>
+<td class="org-left">st</td>
+<td class="org-left">stash</td>
+</tr>
+
+<tr>
+<td class="org-left">sta</td>
+<td class="org-left">stash apply</td>
+</tr>
+
+<tr>
+<td class="org-left">standup</td>
+<td class="org-left">log &#x2013;since "1 day ago" &#x2013;oneline &#x2013;author "$(git config user.name)"</td>
+</tr>
+
+<tr>
+<td class="org-left">std</td>
+<td class="org-left">stash drop</td>
+</tr>
+
+<tr>
+<td class="org-left">stls</td>
+<td class="org-left">stash list</td>
+</tr>
+
+<tr>
+<td class="org-left">stp</td>
+<td class="org-left">stash pop</td>
+</tr>
+
+<tr>
+<td class="org-left">sts</td>
+<td class="org-left">stash save</td>
+</tr>
+
+<tr>
+<td class="org-left">stu</td>
+<td class="org-left">stash unstaged</td>
+</tr>
+
+<tr>
+<td class="org-left">tags</td>
+<td class="org-left">tag -l</td>
+</tr>
+
+<tr>
+<td class="org-left">today</td>
+<td class="org-left">log &#x2013;since 7am</td>
+</tr>
+
+<tr>
+<td class="org-left">undo</td>
+<td class="org-left">reset &#x2013;soft HEAD^</td>
+</tr>
+
+<tr>
+<td class="org-left">unstage</td>
+<td class="org-left">reset HEAD --</td>
+</tr>
+
+<tr>
+<td class="org-left">update</td>
+<td class="org-left">pull &#x2013;rebase</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org053a956" class="outline-3">
+<h3 id="org053a956">Color</h3>
+<div class="outline-text-3" id="text-org053a956">
+<table id="orge45aa5c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">ui</td>
+<td class="org-left">true</td>
+</tr>
+
+<tr>
+<td class="org-left">branch</td>
+<td class="org-left">auto</td>
+</tr>
+
+<tr>
+<td class="org-left">diff</td>
+<td class="org-left">auto</td>
+</tr>
+
+<tr>
+<td class="org-left">status</td>
+<td class="org-left">auto</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org7bc5658" class="outline-3">
+<h3 id="org7bc5658">Credential</h3>
+<div class="outline-text-3" id="text-org7bc5658">
+<table id="orgdffe1b2" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">helper</td>
+<td class="org-left">osxkeychain</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org6be80bb" class="outline-3">
+<h3 id="org6be80bb">Diff</h3>
+<div class="outline-text-3" id="text-org6be80bb">
+<table id="orgce945e2" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">mnemonicprefix</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgfa43f5f" class="outline-3">
+<h3 id="orgfa43f5f">Push</h3>
+<div class="outline-text-3" id="text-orgfa43f5f">
+<table id="orge31b420" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">default</td>
+<td class="org-left">current</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org4f0e595" class="outline-3">
+<h3 id="org4f0e595">Pull</h3>
+<div class="outline-text-3" id="text-org4f0e595">
+<table id="orgd8e1a89" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">rebase</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orga658a4a" class="outline-3">
+<h3 id="orga658a4a">Fetch</h3>
+<div class="outline-text-3" id="text-orga658a4a">
+<table id="orga7e9288" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">writeCommitGraph</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgbbbbb83" class="outline-3">
+<h3 id="orgbbbbb83">GC</h3>
+<div class="outline-text-3" id="text-orgbbbbb83">
+<table id="org585b936" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">auto</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">writeCommitGraph</td>
+<td class="org-right">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org0ca56d6" class="outline-3">
+<h3 id="org0ca56d6">Branch</h3>
+<div class="outline-text-3" id="text-org0ca56d6">
+<table id="orgfecc51d" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">autosetuprebase</td>
+<td class="org-left">always</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org814536f" class="outline-3">
+<h3 id="org814536f">Github</h3>
+<div class="outline-text-3" id="text-org814536f">
+<table id="org7f24f1e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">protocol</td>
+<td class="org-left">https</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgc3d885e" class="outline-3">
+<h3 id="orgc3d885e">Grep</h3>
+<div class="outline-text-3" id="text-orgc3d885e">
+<table id="orgb66b869" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">extendRegexp</td>
+<td class="org-left">true</td>
+</tr>
+
+<tr>
+<td class="org-left">lineNumber</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org10fa7ea" class="outline-3">
+<h3 id="org10fa7ea">Filters</h3>
+<div class="outline-text-3" id="text-org10fa7ea">
+<table id="org3e7d7de" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">clean</td>
+<td class="org-left">git media clean %f</td>
+</tr>
+
+<tr>
+<td class="org-left">smudge</td>
+<td class="org-left">git media smudge %f</td>
+</tr>
+
+<tr>
+<td class="org-left">required</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+
+<table id="org030c3eb" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">clean</td>
+<td class="org-left">git-lfs clean &#x2013; %f</td>
+</tr>
+
+<tr>
+<td class="org-left">smudge</td>
+<td class="org-left">git-lfs smudge &#x2013; %f</td>
+</tr>
+
+<tr>
+<td class="org-left">required</td>
+<td class="org-left">true</td>
+</tr>
+
+<tr>
+<td class="org-left">process</td>
+<td class="org-left">git-lfs filter-process</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org456f7a5" class="outline-3">
+<h3 id="org456f7a5">Magit</h3>
+<div class="outline-text-3" id="text-org456f7a5">
+<table id="org62730bb" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">hideCampaign</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgd99f76d" class="outline-3">
+<h3 id="orgd99f76d">Apply</h3>
+<div class="outline-text-3" id="text-orgd99f76d">
+<table id="orge91f8c4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">whitespace</td>
+<td class="org-left">nowarn</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org7f394e8" class="outline-3">
+<h3 id="org7f394e8">Diff</h3>
+<div class="outline-text-3" id="text-org7f394e8">
+<table id="org7d0c269" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">xfuncname</td>
+<td class="org-left">(^\\(.* ¦ \\s*\\(defn.*)</td>
+</tr>
+</tbody>
+</table>
+
+<table id="org5b9f29e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">xfuncname</td>
+<td class="org-left">'^[ \t]*(pub¦)[ \t]*((fn¦struct¦enum¦impl¦trait¦mod)[^;]*)$'</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org6e254b6" class="outline-3">
+<h3 id="org6e254b6">Include</h3>
+<div class="outline-text-3" id="text-org6e254b6">
+<table id="org8935c40" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">path</td>
+<td class="org-left">~/.gitconfig.local</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

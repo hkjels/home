@@ -1,0 +1,554 @@
+* Shell
+:properties:
+:header-args: :noweb yes :tangle-mode (identity #o444) :comments link :exports none :mkdirp yes
+:end:
+Most of my configuration is shared amongst various shell's. I
+typically use ~eshell~, but I like to keep functioning ~bash~ and ~zsh~
+shells around.
+/At the moment, only the shared part is documented./
+
+#+begin_src shell :tangle ~/.profile
+# <<license>>
+source ~/shell/env
+source ~/shell/login
+#+end_src
+
+** Environment
+
+Before doing much, we need some environment-variables set. The most
+important one here is the ~PATH~-variable. It's used by your shell
+whenever your trying to execute a program. It will look for that
+program in all the paths specified in the path-variable.
+
+I prefer the old way of maintaning path-variables. Below is the full
+list of paths for my systems. If you're on MacOS only, you might want
+to use ~path_helper~. It's suppose to be easier atleast.
+
+#+name: path-definitions
+| ANDROID_HOME | $HOME/Library/Android/sdk                                                                |
+| JAVA_HOME    | $(/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java_home)       |
+| CLASSPATH    | $HOME/Projects/Github/hkjels/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository |
+| PATH         | $HOME/bin                                                                                |
+| PATH         | /bin                                                                                     |
+| PATH         | /sbin                                                                                    |
+| PATH         | /usr/bin                                                                                 |
+| PATH         | /usr/sbin                                                                                |
+| PATH         | /usr/X11/bin                                                                             |
+| PATH         | /usr/local/bin                                                                           |
+| PATH         | /usr/local/sbin                                                                          |
+| PATH         | /usr/local/opt/texinfo/bin                                                               |
+| PATH         | /usr/local/opt/libxml2/bin                                                               |
+| PATH         | /Library/TeX/texbin                                                                      |
+| PATH         | /opt/X11/bin                                                                             |
+| PATH         | $HOME/.cargo                                                                             |
+| PATH         | $ANDROID_HOME/platform-tools                                                             |
+| PATH         | $ANDROID_HOME/tools                                                                      |
+| PATH         | $ANDROID_HOME/emulator                                                                   |
+| PATH         | $ANDROID_HOME/tools/bin                                                                  |
+| PATH         | $JAVA_HOME/bin                                                                           |
+| MANPATH      | /usr/share/man                                                                           |
+| MANPATH      | /usr/local/share/man                                                                     |
+| MANPATH      | /opt/X11/share/man                                                                       |
+| MANPATH      | /Library/TeX/Distributions/.DefaultTeX/Contents/Man                                        |
+
+#+name: paths
+#+begin_src emacs-lisp :var path-definitions=path-definitions
+(mapconcat 'identity
+           (mapcar (lambda (path)
+           (if (> (safe-length (cdr path)) 1)
+               (format "export %s=%s" (car path) (mapconcat 'identity (mapcar 'car (mapcar 'cdr (cdr path))) ":"))
+             (format "export %s=%s" (car path) (mapconcat 'identity (cdr (cadr path)) "")))) (seq-group-by 'car path-definitions)) "\n")
+#+end_src
+
+#+begin_src shell :tangle ~/shell/env
+# <<license>>
+<<paths()>>
+#+end_src
+
+** Login
+
+Login shell is what you get when you log onto your computer. This is
+when you would like environment variables to be set.
+
+#+name: env-definitions
+| EDITOR      | emacsclient -c |
+| VISUAL      | $EDITOR        |
+| LANG        | en_US.UTF-8    |
+| LC_ALL      | $LANG          |
+| LC_COLLATE  | $LANG          |
+| LC_CTYPE    | $LANG          |
+| LC_MESSAGES | $LANG          |
+| LC_MONETARY | $LANG          |
+| LC_NUMERIC  | $LANG          |
+| LC_TIME     | $LANG          |
+| PAGER       | less -RXFSiw   |
+| MANPAGER    | $PAGER         |
+
+#+name: environment
+#+begin_src emacs-lisp :var env-definitions=env-definitions
+(message "%s" (mapconcat 'identity  (mapcar
+                                     (lambda (env)
+                                       (format "export %s=\"%s\"" (car env)
+                                               (car (cdr env))))
+                                     env-definitions) "\n"))
+#+end_src
+
+#+begin_src shell :tangle ~/shell/login
+# <<license>>
+<<environment()>>
+#+end_src
+
+** Interactive
+
+An interactive shell is what you get when you boot up a
+terminal. Typically you would want utility-functions, aliases and
+coloring to become available at this point.
+
+To get a goodlooking prompt I use [[https://starship.rs][Starship.]]  It's a fast and
+feature-full command-prompt. It's also very customizable, so I've
+finally scrapped my old hacky personal one.
+#+name: starship
+#+begin_src shell
+eval "$(starship init $SHELL_SHORT)"
+#+end_src
+
+*** Functions
+
+I've added a bunch of functions to my configuration that I've found
+helpfull over the years. Most of these are all available directly from the
+shell as small programs.
+/I haven't kept track of which of these I've created myself or which
+I've found on the great interweb unfortunately./\\
+
+[[https://www-zeuthen.desy.de/~friebel/unix/lesspipe.html][Lesspipe]] is an input-filter for ~less~ that makes it possible to view
+the content of binaries and archives.
+#+name: lesspipe
+#+begin_src shell
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+#+end_src
+\\
+\\
+[[https://github.com/github/hub][Hub]] makes it easier to work with projects that are hosted on
+Github. It is aliased to override the ~git~-command, but everything else
+is git as usual.
+#+name: hub
+#+begin_src shell
+eval "$(hub alias -s)"
+#+end_src
+\\
+\\
+[[https://github.com/nvbn/thefuck][Thefuck]] will try to correct your last run command. Just write ~fuck~ and
+it will do it's best.
+#+name: thefuck
+#+begin_src shell
+eval $(thefuck --alias)
+#+end_src
+\\
+\\
+~o~ is a wrapper of ~open~ on MacOS and ~xdg-open~ on linux. If it's not
+given any arguments, it will open the current directory.
+#+name: o
+#+begin_src shell
+function o() {
+  [[ $(uname -s) == "Darwin" ]] && OPEN=open || OPEN=xdg-open
+  if [[ -n $* ]]; then $OPEN $*
+  else $OPEN .
+  fi
+}
+#+end_src
+\\
+\\
+~mcd~ is a quick way of creating a directory and moving into that
+directory in one go.
+#+name: mcd
+#+begin_src shell
+function mcd() {
+  mkdir -p "$1" && cd "$1"
+}
+#+end_src
+\\
+\\
+~extract~ can be used to extract various types of archives without
+additional arguments.
+#+name: extract
+#+begin_src shell
+extract() {
+    if [ -f $1 ] ; then
+      case $1 in
+        ,*.tar.bz2)   tar xjf $1     ;;
+        ,*.tar.gz)    tar xzf $1     ;;
+        ,*.bz2)       bunzip2 $1     ;;
+        ,*.rar)       unrar e $1     ;;
+        ,*.gz)        gunzip $1      ;;
+        ,*.tar)       tar xf $1      ;;
+        ,*.tbz2)      tar xjf $1     ;;
+        ,*.tgz)       tar xzf $1     ;;
+        ,*.zip)       unzip $1       ;;
+        ,*.Z)         uncompress $1  ;;
+        ,*.7z)        7z x $1        ;;
+        ,*)     echo "'$1' cannot be extracted via extract()" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
+}
+#+end_src
+\\
+\\
+~ip~ will output your local ip-address.
+#+name: ip
+#+begin_src shell
+function ip() {
+    [[ -n $(ipconfig getifaddr en0) ]] \
+        && ipconfig getifaddr en0      \
+        || ipconfig getifaddr en1
+}
+#+end_src
+\\
+\\
+~remoteip~ outputs your remote ip-address
+#+name: remoteip
+#+begin_src shell
+function remoteip() {
+  wget http://ipecho.net/plain -O - -q ; echo
+}
+#+end_src
+\\
+\\
+I hi-jack ~cd~, so that I can easily jump to the root of a git
+repository by issuing ~cd :/~. It will also list the content of the
+directory once changed.
+#+name: cd
+#+begin_src shell
+function cd {
+  case $1 in
+    :/* )
+      # FIXME for some reason globbing doesn't work
+      local dir="$(git root)/${1:2}"
+      builtin cd "$dir" ;;
+    ,* )
+      builtin cd "$@" ;;
+  esac
+  ls -1
+}
+#+end_src
+\\
+\\
+~hide~ sends a process to the background and hides ~std(out|err);~ "deamonize".
+#+name: hide
+#+begin_src shell
+function hide() {
+  local proc=$@
+  eval "$proc &> /dev/null &"
+}
+#+end_src
+\\
+\\
+~ssht~ opens an ssh-connection in a tmux-pane.
+#+name: ssht
+#+begin_src shell
+function ssht(){
+  ssh $* -t 'tmux a || tmux || /bin/bash'
+}
+#+end_src
+\\
+\\
+~auth~ copies my public ssh-key to the active remote ssh.
+#+name: auth
+#+begin_src shell
+function auth() {
+  ssh "$1" 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys' \
+    < ~/.ssh/id_rsa.pub
+}
+#+end_src
+\\
+\\
+~ts~ will tail a file or socket. The second argument should be a regex
+that you would like to highlight.
+#+name: ts
+#+begin_src shell
+ts() {
+  tail -f $1 | perl -pe "s/$2/\e[1;31;43m$&\e[0m/g"
+}
+#+end_src
+\\
+\\
+~j~ is a wrapper of [[https://github.com/rupa/z/][z]] with some additional help from [[https://github.com/junegunn/fzf][fzf]] if you don't
+provide any arguments. Navigating this way is very efficient.
+#+name: j
+#+begin_src shell
+source "/usr/local/etc/profile.d/z.sh"
+
+j() {
+  if [[ -z "$*" ]]; then
+    cd "$(_z -l 2>&1 | fzf +s --tac | sed 's/^[0-9,.]* *//')"
+  else
+    _z "$@"
+  fi
+}
+#+end_src
+\\
+\\
+~fd~ lists all subdirectories. That list is filtered by [[https://github.com/junegunn/fzf][fzf]] and you cd
+into the candidate you choose.
+#+name: fd
+#+begin_src shell
+fd() {
+  local dir
+  dir=$(find ${1:-*} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+#+end_src
+\\
+\\
+At my current workplace, we use Jira. I've made a few functions that
+makes it a little less annoying \\
+~jc~, you can think of as (j)ira-(c)hange. It is for changing the status of a ticket.
+#+name: jc
+#+begin_src shell
+jc() {
+    local id ticket transition
+    ticket=$(jira mine | fzf)
+    id=$(echo $ticket | sed -e "s/:.*//g")
+    if [[ -n $id ]]; then
+      transition=$(jira transitions $id | fzf | sed -e 's/[^:]*://g' -e 's/^[[:space:]]//g')
+      [[ -n $transition ]] && jira transition "$transition" "$id"
+    fi
+}
+#+end_src
+\\
+\\
+~jg~, you can think of as (j)ira-(g)rab. It will list tickets that are
+not assigned to anyone, so you can choose one that you would like to
+work on.
+#+name: jg
+#+begin_src shell
+jg() {
+    local id ticket
+    ticket=$(jira unassigned | fzf)
+    id=$(echo $ticket | sed -e "s/:.*//g")
+    [[ -n $id ]] && jira assign --default "$id"
+}
+#+end_src
+\\
+\\
+~json~ is a wrapper of [[https://stedolan.github.io/jq/][jq]] where giving it just a json-file will output
+it nicely instead of barfing out.
+#+name: json
+#+begin_src shell
+json() {
+  if [[ -e $1 ]]; then
+    jq . $1
+  else
+    jq $*
+  fi
+}
+#+end_src
+\\
+\\
+#+begin_src shell :tangle ~/shell/functions
+# <<license>>
+
+<<o>>
+<<mcd>>
+<<extract>>
+<<ip>>
+<<remote-ip>>
+<<cd>>
+<<hide>>
+<<ssht>>
+<<auth>>
+<<ts>>
+<<j>>
+<<fd>>
+<<jc>>
+<<jg>>
+<<json>>
+#+end_src
+
+*** Aliases
+
+#+name: alias-definitions
+| -- -      | cd -                                               |
+| ..        | cd ..                                              |
+| ....      | cd ../..                                           |
+| ......    | cd ../../..                                        |
+| :q        | exit                                               |
+| _         | sudo                                               |
+| c         | clear                                              |
+| cat       | bat                                                |
+| clip      | nc localhost 8377                                  |
+| cpu-temp  | osx-cpu-temp                                       |
+| df        | df -h                                              |
+| du        | du -ch                                             |
+| du1       | du -ch -d 1                                        |
+| e         | $EDITOR                                            |
+| f         | find . -iname                                      |
+| git       | hub                                                |
+| grep      | grep --color=auto                                  |
+| hr        | echo ; hr -; echo ;                                |
+| ip        | dig +short myip.opendns.com @resolver1.opendns.com |
+| l         | lunchy                                             |
+| la        | ls -la                                             |
+| ll        | ls -l                                              |
+| localip   | ipconfig getifaddr en0                             |
+| ls        | lsd                                                |
+| lt        | ls --tree                                          |
+| manpath   | echo -e ${MANPATH//:/\\n}                          |
+| mkdir     | mkdir -p                                           |
+| mv        | mv -i                                              |
+| path      | echo -e ${PATH//:/\\n}                             |
+| ql        | qlmanage -p                                        |
+| running   | jobs -r                                            |
+| s         | rg -S                                              |
+| sd        | rga                                                |
+| sloc      | sloccount                                          |
+| stopped   | jobs -s                                            |
+| sys       | grc tail -100 "/var/log/system.log"                |
+| timestamp | date "+%s"                                         |
+| tmux      | tmux -2                                            |
+| today     | date "+%Y-%m-%d"                                   |
+| wget      | wget -c                                            |
+| ~         | cd ~                                               |
+
+#+name: aliases
+#+begin_src emacs-lisp :var alias-definitions=alias-definitions
+(message "%s" (mapconcat 'identity  (mapcar
+                                     (lambda (alias)
+                                       (format "alias %s='%s '" (car alias)
+                                               (car (cdr alias))))
+                                     alias-definitions) "\n"))
+#+end_src
+
+
+#+begin_src shell :tangle ~/shell/interactive
+# <<license>>
+
+<<aliases()>>
+
+# FIXME Should be possible to add to the list of aliases
+#     | Using quotes is what breaks the functionality
+alias g=git
+
+<<starship>>
+
+<<lesspipe>>
+
+<<hub>>
+
+<<thefuck>>
+
+source ~/shell/functions
+#+end_src
+
+** Bash :noexport:
+:properties:
+:header-args: :noweb yes :tangle-mode (identity #o444) :comments link :exports none :mkdirp yes
+:end:
+
+#+begin_src shell :tangle ~/.bash_profile
+# <<license>>
+SHELL_SHORT=bash
+source ~/shell/env
+
+BASH_ENV=
+
+source ~/shell/login
+
+if [ "$PS1" ]; then
+    source ~/shell/interactive
+fi
+#+end_src
+
+This is bash's run-command file. It is run in interactive shells and remote shells.
+#+begin_src shell :tangle ~/.bashrc
+# <<license>>
+source ~/shell/env
+source ~/shell/interactive
+
+export HISTCONTROL=erasedups:ignorespace
+export HISTSIZE=10000
+
+# Bash built-in options
+shopt -s nocaseglob
+shopt -s cdspell
+shopt -s histappend
+shopt -s checkwinsize
+shopt -s no_empty_cmd_completion
+shopt -s autocd 2> /dev/null
+shopt -s globstar 2> /dev/null
+
+# Use vi-bindings
+set -o vi
+bind -f ~/.inputrc
+
+# Fzf fuzzy-matcher
+[ -f ~/.fzf.bash ] && . ~/.fzf.bash
+
+[ -f "~/.bashrc.local" ] && source "~/.bashrc.local"
+#+end_src
+
+#+begin_src shell :tangle ~/.inputrc
+# <<license>>
+# Quick tab-completion
+set show-all-if-ambiguous on
+
+# Case in-sensitive completion
+set completion-ignore-case on
+
+# Postfix symlinked directories with `/`
+set mark-symlinked-directories on
+
+# Completions with the use of space; i.e. `!! `
+$if Bash
+  Space: magic-space
+$endif
+
+# Search history using your current input
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+set input-meta on
+set output-meta on
+set convert-meta off
+#+end_src
+
+** Zsh :noexport:
+:properties:
+:header-args: :noweb yes :tangle-mode (identity #o444) :comments link :exports none :mkdirp yes
+:end:
+
+#+begin_src shell :tangle ~/.zshenv
+# <<license>>
+SHELL_SHORT=zsh
+source ~/shell/env
+#+end_src
+
+#+begin_src shell :tangle ~/.zshrc
+# <<license>>
+source ~/shell/interactive
+
+# Only unique history-items
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_append
+setopt auto_cd
+setopt auto_pushd
+
+# Use vi-bindings
+bindkey -v
+
+# Fzf fuzzy-matcher
+[ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
+
+# Fish-like autosuggestions
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Completions
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+# Add some colors
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#+end_src
