@@ -1,6 +1,8 @@
 :root {
   --background: hsl(45,40%,95%);
   --foreground: hsl(0,0%,28%);
+
+  --icon-size: 1.5em;
 }
 
 :root {
@@ -38,8 +40,16 @@ body {
 
 blockquote {
   border-left: 0.5rem solid hsla(30,5%,60%,0.3);
-  margin-left: 0;
+  font-size: 1.5em;
+  margin: 0 auto;
+  max-width: 100rem;
   padding-left: 2em;
+}
+.smiley {
+  display: block;
+  margin: 0 auto;
+  transform: translateX(-5vw) translateY(-25%);
+  margin-bottom: 5em;
 }
 
 #content {
@@ -53,7 +63,6 @@ blockquote {
 
 main {
   grid-area: main;
-  max-width: 80rem;
   margin: 0 auto;
   padding: 0 1vw;
   position: relative;
@@ -92,6 +101,20 @@ main {
   font-size: 0.8em;
   text-transform: uppercase;
 }
+#table-of-contents a::after {
+  background: var(--foreground);
+  border-radius: 1.5px;
+  content: " ";
+  display: block;
+  height: 3px;
+  opacity: 0;
+  transition: opacity 1s ease;
+  width: 100%;
+  will-change: opacity;
+}
+#table-of-contents a:hover::after {
+  opacity: 1;
+}
 #table-of-contents h2 {
   display: none;
 }
@@ -108,6 +131,13 @@ table {
   table-layout: fixed;
   margin-bottom: 2em;
   width: 100%;
+}
+table sub {
+  all: unset;
+}
+table sub::before {
+  display: inline;
+  content: "_";
 }
 th {
   text-align: left;
@@ -127,7 +157,7 @@ ul {
 }
 li {
   display: inline-block;
-  padding: 2em;
+  padding: 3rem;
 }
 
 h1,
@@ -149,7 +179,13 @@ h2 {
 }
 
 .outline-2 {
+  max-width: 80rem;
+  margin: 0 auto;
   position: relative;
+}
+.outline-3 {
+  max-width: 100vw;
+  overflow-x: auto;
 }
 .figure {
   position: absolute;
@@ -172,4 +208,26 @@ pre.src {
 
 .org-comment {
   color: #c57a6d;
+}
+
+.shell::before {
+  background: url('../images/shell.svg');
+}
+.git::before {
+  background: url('../images/git.svg');
+}
+.tmux::before {
+  background: url('../images/tmux.svg');
+}
+
+.shell::before,
+.git::before,
+.tmux::before {
+  background-size: var(--icon-size) var(--icon-size);
+  content: ' ';
+  display: block;
+  height: var(--icon-size);
+  position: absolute;
+  transform: translateX(-150%);
+  width: var(--icon-size);
 }

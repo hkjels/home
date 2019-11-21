@@ -8,10 +8,11 @@ someone extraordinary; such as yourself, come to visit.
 #+html: <main>
 
 #+begin_quote
-Truth be told, my home is under heavy renovation in a transition to
-org-mode. So although the repo is tidy, it's missing a few bits and
-pieces.
+Truth be told; my home is under heavy renovation, transitioning into
+org-mode. So although the repo is tidy, it's missing bits and pieces.
+But.. It's getting there
 #+end_quote
+#+html: <img src="./images/smiley.svg" class="smiley">
 
 #+include: "src/shell.org"
 #+include: "src/git.org"

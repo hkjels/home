@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="71px" height="71px" viewBox="0 0 71 71" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+    <title>tmux</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-424.000000, -581.000000)" fill="#474747">
+            <path d="M458.5,581 L458.5,652 L434,652 C428.477153,652 424,647.522847 424,642 L424,591 C424,585.477153 428.477153,581 434,581 L458.5,581 Z M461.5,618.499 L495,618.5 L495,642 C495,647.522847 490.522847,652 485,652 L461.5,652 L461.5,618.499 Z M485,581 C490.522847,581 495,585.477153 495,591 L495,615.5 L461.5,615.499 L461.5,581 L485,581 Z" id="tmux"></path>
+        </g>
+    </g>
+</svg>

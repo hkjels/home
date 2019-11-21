@@ -1,6 +1,4 @@
 * Git
-#+ATTR_HTML: :width 48px
-[[../images/git.png]]
 
 ** Core
 #+name: core

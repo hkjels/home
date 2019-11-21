@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="76px" height="71px" viewBox="0 0 76 71" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 60.1 (88133) - https://sketch.com -->
+    <title>shell 2d</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-419.000000, -371.000000)" fill="#474747">
+            <g id="shell-2d" transform="translate(419.000000, 371.000000)">
+                <path d="M66,0 C71.5228475,-1.01453063e-15 76,4.4771525 76,10 L76,61 C76,66.5228475 71.5228475,71 66,71 L15,71 C9.4771525,71 5,66.5228475 5,61 L5,39.151 L29.9257098,23.1776086 L5.33616632,7.419338 C6.47407448,3.14725691 10.3694966,3.82930005e-15 15,0 L66,0 Z M48.7894678,44.851204 L16.1572389,44.851204 L16.1572389,51.1734925 L48.7894678,51.1734925 L48.7894678,44.851204 Z M5,13.957 L19.3885623,23.1776086 L5,32.399 L5,13.957 Z" id="Combined-Shape"></path>
+                <path d="M4.99921239,32.398 L4.99921239,39.151 L0.000212389381,42.3552171 L0.000212389381,35.602 L4.99921239,32.398 Z M0.000212389381,4 L5.33589992,7.42033835 C5.11678543,8.2433113 5,9.1080173 5,10 L5,10 L4.99921239,13.956 L0.000212389381,10.752 L0.000212389381,4 Z" id="Combined-Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

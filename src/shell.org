@@ -2,10 +2,17 @@
 :properties:
 :header-args: :noweb yes :tangle-mode (identity #o444) :comments link :exports none :mkdirp yes
 :end:
-Most of my configuration is shared amongst various shell's. I
-typically use ~eshell~, but I like to keep functioning ~bash~ and ~zsh~
-shells around.
-/At the moment, only the shared part is documented./
+Most of my shell-configuration is compatible with various shell's. I
+typically use ~eshell~, but I sometimes dabble with both ~bash~ and ~zsh~,
+so I tend to keep them in parity.
+\\
+All of the shared configuration is tangled to the ~~/shell~ directory,
+where it is split into environment, login and interactive. These are
+then loaded in the order that's required by the specific shell, along
+with more tailored configurations. Each shell will also look for a
+local run-com file that can be used for additional configuration or
+overrides. Meaning, you can use these configurations as a base to
+build-upon.
 
 #+begin_src shell :tangle ~/.profile
 # <<license>>
@@ -16,13 +23,15 @@ source ~/shell/login
 ** Environment
 
 Before doing much, we need some environment-variables set. The most
-important one here is the ~PATH~-variable. It's used by your shell
-whenever your trying to execute a program. It will look for that
-program in all the paths specified in the path-variable.
+important one being the ~PATH~-variable. The ~PATH~ is used by your shell
+whenever your trying to execute a program. It will look for the
+program in all the paths specified in the ~PATH~-variable.
 
-I prefer the old way of maintaning path-variables. Below is the full
-list of paths for my systems. If you're on MacOS only, you might want
-to use ~path_helper~. It's suppose to be easier atleast.
+For MacOS, there's now a utility for maintaining the ~PATH~ named
+~path-helper~. It will look for paths in ~/etc/paths.d~ & ~/etc/manpaths.d~,
+so I think you can have almost automatic ~PATH~-handling by setting that
+up. I do however like having control, so I've created a [[path-definitions][table]] that I
+construct environment-variables from, as you can see below.
 
 #+name: path-definitions
 | ANDROID_HOME | $HOME/Library/Android/sdk                                                                |
@@ -67,9 +76,8 @@ to use ~path_helper~. It's suppose to be easier atleast.
 
 ** Login
 
-Login shell is what you get when you log onto your computer. This is
-when you would like environment variables to be set.
-
+A login shell is the first shell ran with your user-id. So in this
+shell we would only set up environment and don't bother with [[https://en.wikipedia.org/wiki/Text-based_user_interface][tui]].
 #+name: env-definitions
 | EDITOR      | emacsclient -c |
 | VISUAL      | $EDITOR        |
@@ -102,11 +110,12 @@ when you would like environment variables to be set.
 
 An interactive shell is what you get when you boot up a
 terminal. Typically you would want utility-functions, aliases and
-coloring to become available at this point.
+coloring to become available at this point to make a ritcher
+experience.
 
-To get a goodlooking prompt I use [[https://starship.rs][Starship.]]  It's a fast and
-feature-full command-prompt. It's also very customizable, so I've
-finally scrapped my old hacky personal one.
+One such experience is [[https://starship.rs][Starship.]]  It's a fast and feature-full
+command-prompt. It's also very customizable, so I've finally scrapped
+my old hacky personal one.
 #+name: starship
 #+begin_src shell
 eval "$(starship init $SHELL_SHORT)"
@@ -146,7 +155,8 @@ eval $(thefuck --alias)
 \\
 \\
 ~o~ is a wrapper of ~open~ on MacOS and ~xdg-open~ on linux. If it's not
-given any arguments, it will open the current directory.
+given any arguments, it will open the current directory in finder or
+nautilus respectively.
 #+name: o
 #+begin_src shell
 function o() {
@@ -169,7 +179,7 @@ function mcd() {
 \\
 \\
 ~extract~ can be used to extract various types of archives without
-additional arguments.
+having to remember all the various additional arguments.
 #+name: extract
 #+begin_src shell
 extract() {
@@ -215,9 +225,8 @@ function remoteip() {
 #+end_src
 \\
 \\
-I hi-jack ~cd~, so that I can easily jump to the root of a git
-repository by issuing ~cd :/~. It will also list the content of the
-directory once changed.
+I've hi-jacked ~cd~, so that I can easily jump to the root of a git
+repository by issuing ~cd :/~.
 #+name: cd
 #+begin_src shell
 function cd {
@@ -229,7 +238,6 @@ function cd {
     ,* )
       builtin cd "$@" ;;
   esac
-  ls -1
 }
 #+end_src
 \\
@@ -547,8 +555,12 @@ bindkey -v
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Completions
+autoload -Uz compinit
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 # Add some colors
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Local overrides / configurations
+[ -f ~/.zshrc.local ] && . ~/.zshrc.local
 #+end_src

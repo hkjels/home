@@ -4,7 +4,56 @@ with the entire project. Once you load the project into Emacs, some of
 these code-blocks will be executed to handle tangling and publishing
 properly.
 
-* Publishing
+* Tasks
+
+** TODO Add information about installation and extension
+** TODO Make it work on smaller devices
+** TODO Improve writing
+
+* Tangling Functions
+
+These functions allows us to tangle the entire project in one go. You
+execute ~tangle-project~ and that will recursively tangle each org-file
+of the repository.
+Source: [[http://turingmachine.org/bl/2013-05-29-recursively-listing-directories-in-elisp.html][Recursively list directories]]
+#+name: tangle
+#+begin_src emacs-lisp :results silent
+(defun directory-files-recursive (directory match maxdepth)
+  "List files in DIRECTORY and in its sub-directories.
+   Return files that match the regular expression MATCH. Recurse only
+   to depth MAXDEPTH. If zero or negative, then do not recurse"
+  (let* ((files-list '())
+         (current-directory-list
+          (directory-files directory t)))
+    (while current-directory-list
+      (let ((f (car current-directory-list)))
+        (cond
+         ((and
+           (file-regular-p f)
+           (file-readable-p f)
+           (string-match match f))
+          (setq files-list (cons f files-list)))
+         ((and
+           (file-directory-p f)
+           (file-readable-p f)
+           (not (string-equal ".." (substring f -2)))
+           (not (string-equal "." (substring f -1)))
+           (> maxdepth 0))
+          (setq files-list (append files-list (directory-files-recursive f match (- maxdepth -1))))
+          (setq files-list (cons f files-list)))
+         (t)))
+      (setq current-directory-list (cdr current-directory-list)))
+    files-list))
+
+(defun tangle-project ()
+  (interactive)
+  (mapcar (lambda (f)
+            (when (not (file-directory-p f))
+              (org-babel-tangle-file f)))
+          (directory-files-recursive (file-name-directory (buffer-file-name)) "\\.org$" 20)))
+#+end_src
+* Documentation
+** Publishing
 
 To generate the documentation from these org-files, you can execute
 ~org-publish-all~. That will create a ~docs~ directory with a ~pdf~ and a
@@ -51,55 +100,14 @@ some ~html~ . That's it really!
       org-adapt-indentation nil)
 #+end_src
 
-* Tangling Functions
-
-These functions allows us to tangle the entire project in one go. You
-execute ~tangle-project~ and that will recursively tangle each org-file
-of the repository.
-Source: [[http://turingmachine.org/bl/2013-05-29-recursively-listing-directories-in-elisp.html][Recursively list directories]]
-#+name: tangle
-#+begin_src emacs-lisp :results silent
-(defun directory-files-recursive (directory match maxdepth)
-  "List files in DIRECTORY and in its sub-directories.
-   Return files that match the regular expression MATCH. Recurse only
-   to depth MAXDEPTH. If zero or negative, then do not recurse"
-  (let* ((files-list '())
-         (current-directory-list
-          (directory-files directory t)))
-    (while current-directory-list
-      (let ((f (car current-directory-list)))
-        (cond
-         ((and
-           (file-regular-p f)
-           (file-readable-p f)
-           (string-match match f))
-          (setq files-list (cons f files-list)))
-         ((and
-           (file-directory-p f)
-           (file-readable-p f)
-           (not (string-equal ".." (substring f -2)))
-           (not (string-equal "." (substring f -1)))
-           (> maxdepth 0))
-          (setq files-list (append files-list (directory-files-recursive f match (- maxdepth -1))))
-          (setq files-list (cons f files-list)))
-         (t)))
-      (setq current-directory-list (cdr current-directory-list)))
-    files-list))
-
-(defun tangle-project ()
-  (interactive)
-  (mapcar (lambda (f)
-            (when (not (file-directory-p f))
-              (org-babel-tangle-file f)))
-          (directory-files-recursive (file-name-directory (buffer-file-name)) "\\.org$" 20)))
-#+end_src
-* Documentation
 ** Styles
 
 #+begin_src css :tangle docs/css/docs.css :mkdirp yes
 :root {
   --background: hsl(45,40%,95%);
   --foreground: hsl(0,0%,28%);
+
+  --icon-size: 1.5em;
 }
 
 :root {
@@ -137,8 +145,16 @@ body {
 
 blockquote {
   border-left: 0.5rem solid hsla(30,5%,60%,0.3);
-  margin-left: 0;
+  font-size: 1.5em;
+  margin: 0 auto;
+  max-width: 100rem;
   padding-left: 2em;
+}
+.smiley {
+  display: block;
+  margin: 0 auto;
+  transform: translateX(-5vw) translateY(-25%);
+  margin-bottom: 5em;
 }
 
 #content {
@@ -152,7 +168,6 @@ blockquote {
 
 main {
   grid-area: main;
-  max-width: 80rem;
   margin: 0 auto;
   padding: 0 1vw;
   position: relative;
@@ -191,6 +206,20 @@ main {
   font-size: 0.8em;
   text-transform: uppercase;
 }
+#table-of-contents a::after {
+  background: var(--foreground);
+  border-radius: 1.5px;
+  content: " ";
+  display: block;
+  height: 3px;
+  opacity: 0;
+  transition: opacity 1s ease;
+  width: 100%;
+  will-change: opacity;
+}
+#table-of-contents a:hover::after {
+  opacity: 1;
+}
 #table-of-contents h2 {
   display: none;
 }
@@ -207,6 +236,13 @@ table {
   table-layout: fixed;
   margin-bottom: 2em;
   width: 100%;
+}
+table sub {
+  all: unset;
+}
+table sub::before {
+  display: inline;
+  content: "_";
 }
 th {
   text-align: left;
@@ -226,7 +262,7 @@ ul {
 }
 li {
   display: inline-block;
-  padding: 2em;
+  padding: 3rem;
 }
 
 h1,
@@ -248,7 +284,13 @@ h2 {
 }
 
 .outline-2 {
+  max-width: 80rem;
+  margin: 0 auto;
   position: relative;
+}
+.outline-3 {
+  max-width: 100vw;
+  overflow-x: auto;
 }
 .figure {
   position: absolute;
@@ -272,11 +314,43 @@ pre.src {
 .org-comment {
   color: #c57a6d;
 }
+
+.shell::before {
+  background: url('../images/shell.svg');
+}
+.git::before {
+  background: url('../images/git.svg');
+}
+.tmux::before {
+  background: url('../images/tmux.svg');
+}
+
+.shell::before,
+.git::before,
+.tmux::before {
+  background-size: var(--icon-size) var(--icon-size);
+  content: ' ';
+  display: block;
+  height: var(--icon-size);
+  position: absolute;
+  transform: translateX(-150%);
+  width: var(--icon-size);
+}
 #+end_src
+
 ** Scripts
 
 #+begin_src javascript :tangle docs/js/docs.js :mkdirp yes
+function sanetize(str) {
+  return str.toLowerCase().replace(/[^a-z]+/g, "_");
+}
+
 function DOMReady() {
+  let headings = [].slice.call(document.querySelectorAll("h2"));
+  headings.forEach((heading) => {
+    let className = sanetize(heading.innerText);
+    heading.classList.add(className);
+  });
 }
 
 addEventListener('DOMContentLoaded', DOMReady);

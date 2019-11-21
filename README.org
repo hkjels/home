@@ -2,8 +2,7 @@
 
 This repository contains the lion's share of the configuration-files
 that I use on my boxes. It's written in a literate style using
-[[https://orgmode.org][org-mode]], so it can be read in a pleasant mannor if you're
-interested in learning more about *nix configuration.
+[[https://orgmode.org][org-mode]], so it can be read almost like a book.
 
 [[https://hkjels.github.com/home/][Documentation]]
 
