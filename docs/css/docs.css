@@ -38,6 +38,18 @@ body {
   color: var(--foreground);
 }
 
+.github {
+  left: .5em;
+  top: .5em;
+  position: absolute;
+  transition: opacity 1s ease;
+  transform: scale(0.4);
+  opacity: 0.75;
+}
+.github:hover {
+  opacity: 1;
+}
+
 blockquote {
   border-left: 0.5rem solid hsla(30,5%,60%,0.3);
   font-size: 1.5em;

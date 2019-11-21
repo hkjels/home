@@ -5,6 +5,7 @@
 Welcome to my humble home. I like to keep it tidy just in case
 someone extraordinary; such as yourself, come to visit.
 
+#+html: <a title="link to repo" class="github" href="https://github.com/hkjels/home/"><img src="./images/github.png"></a>
 #+html: <main>
 
 #+begin_quote
