@@ -11,8 +11,7 @@ where it is split into environment, login and interactive. These are
 then loaded in the order that's required by the specific shell, along
 with more tailored configurations. Each shell will also look for a
 local run-com file that can be used for additional configuration or
-overrides. Meaning, you can use these configurations as a base to
-build-upon.
+overrides.
 
 #+begin_src shell :tangle ~/.profile
 # <<license>>
@@ -77,7 +76,7 @@ construct environment-variables from, as you can see below.
 ** Login
 
 A login shell is the first shell ran with your user-id. So in this
-shell we would only set up environment and don't bother with [[https://en.wikipedia.org/wiki/Text-based_user_interface][tui]].
+shell we would only set up environment and don't bother with [[https://en.wikipedia.org/wiki/Text-based_user_interface][TUI]].
 #+name: env-definitions
 | EDITOR      | emacsclient -c |
 | VISUAL      | $EDITOR        |
@@ -113,22 +112,27 @@ terminal. Typically you would want utility-functions, aliases and
 coloring to become available at this point to make a ritcher
 experience.
 
-One such experience is [[https://starship.rs][Starship.]]  It's a fast and feature-full
-command-prompt. It's also very customizable, so I've finally scrapped
-my old hacky personal one.
-#+name: starship
-#+begin_src shell
-eval "$(starship init $SHELL_SHORT)"
-#+end_src
-
-*** Functions
-
 I've added a bunch of functions to my configuration that I've found
 helpfull over the years. Most of these are all available directly from the
 shell as small programs.
 /I haven't kept track of which of these I've created myself or which
 I've found on the great interweb unfortunately./\\
 
+[[https://starship.rs][Starship]] is a fast and feature-full command-prompt. It's also very
+customizable, so I've finally scrapped my old hacky personal one.
+#+name: starship
+#+begin_src shell
+eval "$(starship init $SHELL_SHORT)"
+#+end_src
+\\
+\\
+[[https://github.com/junegunn/fzf][Fzf]] is a fast and easy to use fuzzy-matcher.
+#+name: fzf
+#+begin_src shell
+[ -f "~/.fzf.$SHELL_SHORT" ] && . "~/.fzf.$SHELL_SHORT"
+#+end_src
+\\
+\\
 [[https://www-zeuthen.desy.de/~friebel/unix/lesspipe.html][Lesspipe]] is an input-filter for ~less~ that makes it possible to view
 the content of binaries and archives.
 #+name: lesspipe
@@ -355,26 +359,6 @@ json() {
 #+end_src
 \\
 \\
-#+begin_src shell :tangle ~/shell/functions
-# <<license>>
-
-<<o>>
-<<mcd>>
-<<extract>>
-<<ip>>
-<<remote-ip>>
-<<cd>>
-<<hide>>
-<<ssht>>
-<<auth>>
-<<ts>>
-<<j>>
-<<fd>>
-<<jc>>
-<<jg>>
-<<json>>
-#+end_src
-
 *** Aliases
 
 #+name: alias-definitions
@@ -429,7 +413,6 @@ json() {
                                      alias-definitions) "\n"))
 #+end_src
 
-
 #+begin_src shell :tangle ~/shell/interactive
 # <<license>>
 
@@ -441,13 +424,43 @@ alias g=git
 
 <<starship>>
 
+<<fzf>>
+
 <<lesspipe>>
 
 <<hub>>
 
 <<thefuck>>
 
-source ~/shell/functions
+<<o>>
+
+<<mcd>>
+
+<<extract>>
+
+<<ip>>
+
+<<remote-ip>>
+
+<<cd>>
+
+<<hide>>
+
+<<ssht>>
+
+<<auth>>
+
+<<ts>>
+
+<<j>>
+
+<<fd>>
+
+<<jc>>
+
+<<jg>>
+
+<<json>>
 #+end_src
 
 ** Bash :noexport:
@@ -490,9 +503,6 @@ shopt -s globstar 2> /dev/null
 # Use vi-bindings
 set -o vi
 bind -f ~/.inputrc
-
-# Fzf fuzzy-matcher
-[ -f ~/.fzf.bash ] && . ~/.fzf.bash
 
 [ -f "~/.bashrc.local" ] && source "~/.bashrc.local"
 #+end_src

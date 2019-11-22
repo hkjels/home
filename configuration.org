@@ -7,8 +7,6 @@ properly.
 * Tasks
 
 ** TODO Add information about installation and extension
-** TODO Make it work on smaller devices
-** TODO Improve writing
 
 * Tangling Functions
 
@@ -205,16 +203,29 @@ main {
 #content > p {
   font-size: 2em;
   line-height: 1.5em;
-  max-width: 80rem;
+  max-width: 90rem;
   grid-area: subtitle;
   text-align: center;
   margin: 0 auto;
+  padding: 1em;
 }
 
 #table-of-contents {
   grid-area: toc;
 }
+#table-of-contents ul {
+  display: flex;
+  right: 0;
+  position: absolute;
+  max-width: 80rem;
+  width: 100%;
+}
+#table-of-contents li {
+  flex: 1;
+  text-align: center;
+}
 #table-of-contents a {
+  color: var(--foreground);
   font-size: 0.8em;
   text-transform: uppercase;
 }
@@ -234,13 +245,6 @@ main {
 }
 #table-of-contents h2 {
   display: none;
-}
-#table-of-contents ul {
-  position: absolute;
-  right: 2em;
-}
-#table-of-contents a {
-  color: var(--foreground);
 }
 
 table {
@@ -347,6 +351,18 @@ pre.src {
   position: absolute;
   transform: translateX(-150%);
   width: var(--icon-size);
+}
+
+@media screen and (max-width: 1000px) {
+  .github {
+    top: 4em;
+  }
+  .shell::before,
+  .git::before,
+  .tmux::before {
+    right: 0;
+    transform: translateX(0);
+  }
 }
 #+end_src
 

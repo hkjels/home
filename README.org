@@ -4,7 +4,9 @@ This repository contains the lion's share of the configuration-files
 that I use on my boxes. It's written in a literate style using
 [[https://orgmode.org][org-mode]], so it can be read almost like a book.
 
-[[https://hkjels.github.com/home/][Documentation]]
+[[https://hkjels.github.com/home/][Read it?]]
+
+* Get in touch
 
 If you would like to reach out to me about any of this, you can create
 an issue or email me: henrik @ kjerringvag・no
