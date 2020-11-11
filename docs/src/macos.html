@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-04-22 Wed 15:18 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Henrik Kjerringvåg" />
+<link rel="stylesheet" href="css/docs.css"><script src="js/docs.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgf57ba92">MacOS</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf57ba92" class="outline-2">
+<h2 id="orgf57ba92">MacOS</h2>
+<div class="outline-text-2" id="text-orgf57ba92">
+<p>
+Here I've provided some usefull alterations to MacOS à La carte.
+</p>
+
+<p>
+Open the document in Emacs and press <code>C-c C-c</code> on the source-blocks that
+you feel comfortable with applying. Doing it once more will return to
+the previous state.
+</p>
+
+<p>
+Make crash-reports appear in the notification-center
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">defaults write com.apple.CrashReporter UseUNC 1
+</pre>
+</div>
+
+<p>
+Avoid creating .DS<sub>Store</sub> files on network volumes
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-variable-name">VALUE</span>=<span class="org-string">"com.apple.desktopservices DSDontWriteNetworkStores"</span>
+defaults write $<span class="org-variable-name">VALUE</span> -bool $([[ $<span class="org-variable-name">VALUE</span> -eq <span class="org-string">"TRUE"</span> ]] &amp;&amp; <span class="org-builtin">false</span> || <span class="org-builtin">true</span>)
+</pre>
+</div>
+
+<p>
+Allow text-selection in QuickLook
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">defaults write com.apple.finder QLEnableTextSelection -bool true
+</pre>
+</div>
+
+<p>
+Make the dock-icon of hidden applications translucent
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">defaults write com.apple.dock showhidden -bool true
+</pre>
+</div>
+
+<p>
+Disable "natural"-scroll
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+</pre>
+</div>
+
+<p>
+Prevent Time Machine from prompting to use new hard drives as backup volume
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+</pre>
+</div>
+
+<p>
+Set a blazingly fast keyboard repeat rate
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">defaults write NSGlobalDomain KeyRepeat -int 0
+</pre>
+</div>
+
+<p>
+Enable developer-tools in Safari
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">defaults write com.apple.Safari IncludeDevelopMenu -bool true
+</pre>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

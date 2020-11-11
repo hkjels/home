@@ -3,242 +3,36 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-11-22 Fri 17:51 -->
+<!-- 2020-04-22 Wed 15:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Home</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Henrik Kjerringvåg" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
 <link rel="stylesheet" href="css/docs.css"><script src="js/docs.js"></script>
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.cacheClassElem = elem.className;
+         elem.cacheClassTarget = target.className;
+         target.className = "code-highlighted";
+         elem.className   = "code-highlighted";
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(elem.cacheClassElem)
+         elem.className = elem.cacheClassElem;
+       if(elem.cacheClassTarget)
+         target.className = elem.cacheClassTarget;
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -295,16 +89,17 @@ overrides.
 <p>
 Before doing much, we need some environment-variables set. The most
 important one being the <code>PATH</code>-variable. The <code>PATH</code> is used by your shell
-whenever your trying to execute a program. It will look for the
-program in all the paths specified in the <code>PATH</code>-variable.
+whenever you're trying to execute a program without specifying it's
+full path.
 </p>
 
 <p>
 For MacOS, there's now a utility for maintaining the <code>PATH</code> named
 <code>path-helper</code>. It will look for paths in <code>/etc/paths.d</code> &amp; <code>/etc/manpaths.d</code>,
 so I think you can have almost automatic <code>PATH</code>-handling by setting that
-up. I do however like having control, so I've created a <a href="#orgf131934">table</a> that I
-construct environment-variables from, as you can see below.
+up. I do however like having full control and consistent behavior
+between environments. That's why I've created a <a href="#orgf131934">table</a> that I construct
+environment-variables from, as you can see below.
 </p>
 
 <table id="orgf131934" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -328,7 +123,12 @@ construct environment-variables from, as you can see below.
 
 <tr>
 <td class="org-left">CLASSPATH</td>
-<td class="org-left">$HOME/Projects/Github/hkjels/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository</td>
+<td class="org-left">$HOME/java</td>
+</tr>
+
+<tr>
+<td class="org-left">CLASSPATH</td>
+<td class="org-left">$HOME/java/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher<sub>1.5.600.v20191014</sub>-2022.jar</td>
 </tr>
 
 <tr>
@@ -398,6 +198,11 @@ construct environment-variables from, as you can see below.
 
 <tr>
 <td class="org-left">PATH</td>
+<td class="org-left">$HOME/.local/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
 <td class="org-left">$ANDROID<sub>HOME</sub>/platform-tools</td>
 </tr>
 
@@ -463,7 +268,7 @@ shell we would only set up environment and don't bother with <a href="https://en
 <tbody>
 <tr>
 <td class="org-left">EDITOR</td>
-<td class="org-left">emacsclient -c</td>
+<td class="org-left">editor</td>
 </tr>
 
 <tr>
@@ -522,9 +327,16 @@ shell we would only set up environment and don't bother with <a href="https://en
 </tr>
 </tbody>
 </table>
-</div>
-</div>
 
+<p>
+There's a shortcoming in <code>zsh</code> of how it treats <code>$EDITOR</code>, where it cannot
+have any flags or arguments. We circumvent this by calling a
+wrapper-script.
+<i>Notice that the command is also sent to the background to avoid the
+sticky message about waiting for Emacs.</i>
+</p>
+</div>
+</div>
 <div id="outline-container-org81d2b66" class="outline-3">
 <h3 id="org81d2b66">Interactive</h3>
 <div class="outline-text-3" id="text-org81d2b66">
@@ -762,6 +574,11 @@ it nicely instead of barfing out.
 </tr>
 
 <tr>
+<td class="org-left">magit</td>
+<td class="org-left">$EDITOR -e \(magit-status\)</td>
+</tr>
+
+<tr>
 <td class="org-left">manpath</td>
 <td class="org-left">echo -e ${MANPATH//:/\\n}</td>
 </tr>
@@ -814,6 +631,11 @@ it nicely instead of barfing out.
 <tr>
 <td class="org-left">sys</td>
 <td class="org-left">grc tail -100 "/var/log/system.log"</td>
+</tr>
+
+<tr>
+<td class="org-left">syn</td>
+<td class="org-left">synonym</td>
 </tr>
 
 <tr>
@@ -877,6 +699,7 @@ it nicely instead of barfing out.
 </div>
 </div>
 
+
 <div id="outline-container-org58a530f" class="outline-3">
 <h3 id="org58a530f">Alias</h3>
 <div class="outline-text-3" id="text-org58a530f">
@@ -900,7 +723,17 @@ it nicely instead of barfing out.
 </tr>
 
 <tr>
+<td class="org-left">authors</td>
+<td class="org-left">shortlog -sn</td>
+</tr>
+
+<tr>
 <td class="org-left">br</td>
+<td class="org-left">branch</td>
+</tr>
+
+<tr>
+<td class="org-left">bra</td>
 <td class="org-left">branch -a</td>
 </tr>
 
@@ -975,6 +808,11 @@ it nicely instead of barfing out.
 </tr>
 
 <tr>
+<td class="org-left">ls</td>
+<td class="org-left">ls-files</td>
+</tr>
+
+<tr>
 <td class="org-left">m</td>
 <td class="org-left">merge</td>
 </tr>
@@ -1011,7 +849,7 @@ it nicely instead of barfing out.
 
 <tr>
 <td class="org-left">pr</td>
-<td class="org-left">pull &#x2013;rebase</td>
+<td class="org-left">pull-request</td>
 </tr>
 
 <tr>
@@ -1163,6 +1001,7 @@ it nicely instead of barfing out.
 </div>
 </div>
 
+
 <div id="outline-container-orgd28b459" class="outline-3">
 <h3 id="orgd28b459">Color</h3>
 <div class="outline-text-3" id="text-orgd28b459">
@@ -1199,6 +1038,7 @@ it nicely instead of barfing out.
 </div>
 </div>
 
+
 <div id="outline-container-org5650043" class="outline-3">
 <h3 id="org5650043">Credential</h3>
 <div class="outline-text-3" id="text-org5650043">
@@ -1220,9 +1060,32 @@ it nicely instead of barfing out.
 </div>
 </div>
 
-<div id="outline-container-org2fb00a0" class="outline-3">
-<h3 id="org2fb00a0">Diff</h3>
-<div class="outline-text-3" id="text-org2fb00a0">
+
+<div id="outline-container-orga0dc295" class="outline-3">
+<h3 id="orga0dc295">Status</h3>
+<div class="outline-text-3" id="text-orga0dc295">
+<table id="org2c1ee6a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">showUntrackedFiles</td>
+<td class="org-left">all</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org331a526" class="outline-3">
+<h3 id="org331a526">Diff</h3>
+<div class="outline-text-3" id="text-org331a526">
 <table id="orgd66cd91" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1236,10 +1099,16 @@ it nicely instead of barfing out.
 <td class="org-left">mnemonicprefix</td>
 <td class="org-left">true</td>
 </tr>
+
+<tr>
+<td class="org-left">algorithm</td>
+<td class="org-left">histogram</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
+
 
 <div id="outline-container-orge71b6b8" class="outline-3">
 <h3 id="orge71b6b8">Push</h3>
@@ -1257,10 +1126,16 @@ it nicely instead of barfing out.
 <td class="org-left">default</td>
 <td class="org-left">current</td>
 </tr>
+
+<tr>
+<td class="org-left">followTags</td>
+<td class="org-left">true</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
+
 
 <div id="outline-container-org3ec7418" class="outline-3">
 <h3 id="org3ec7418">Pull</h3>
@@ -1283,6 +1158,29 @@ it nicely instead of barfing out.
 </div>
 </div>
 
+
+<div id="outline-container-org9f30117" class="outline-3">
+<h3 id="org9f30117">Commit</h3>
+<div class="outline-text-3" id="text-org9f30117">
+<table id="org3f68377" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">gpgSign</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
 <div id="outline-container-orgd0ca530" class="outline-3">
 <h3 id="orgd0ca530">Fetch</h3>
 <div class="outline-text-3" id="text-orgd0ca530">
@@ -1303,6 +1201,7 @@ it nicely instead of barfing out.
 </table>
 </div>
 </div>
+
 
 <div id="outline-container-org21e1cbb" class="outline-3">
 <h3 id="org21e1cbb">GC</h3>
@@ -1330,6 +1229,7 @@ it nicely instead of barfing out.
 </div>
 </div>
 
+
 <div id="outline-container-orgb638d96" class="outline-3">
 <h3 id="orgb638d96">Branch</h3>
 <div class="outline-text-3" id="text-orgb638d96">
@@ -1351,6 +1251,7 @@ it nicely instead of barfing out.
 </div>
 </div>
 
+
 <div id="outline-container-orgae94795" class="outline-3">
 <h3 id="orgae94795">Github</h3>
 <div class="outline-text-3" id="text-orgae94795">
@@ -1371,6 +1272,7 @@ it nicely instead of barfing out.
 </table>
 </div>
 </div>
+
 
 <div id="outline-container-org8a6ac9c" class="outline-3">
 <h3 id="org8a6ac9c">Grep</h3>
@@ -1397,6 +1299,7 @@ it nicely instead of barfing out.
 </table>
 </div>
 </div>
+
 
 <div id="outline-container-org3e474ac" class="outline-3">
 <h3 id="org3e474ac">Filters</h3>
@@ -1460,6 +1363,7 @@ it nicely instead of barfing out.
 </div>
 </div>
 
+
 <div id="outline-container-org779bd03" class="outline-3">
 <h3 id="org779bd03">Magit</h3>
 <div class="outline-text-3" id="text-org779bd03">
@@ -1480,6 +1384,7 @@ it nicely instead of barfing out.
 </table>
 </div>
 </div>
+
 
 <div id="outline-container-org46a27d6" class="outline-3">
 <h3 id="org46a27d6">Apply</h3>
@@ -1502,9 +1407,32 @@ it nicely instead of barfing out.
 </div>
 </div>
 
-<div id="outline-container-orga754ac1" class="outline-3">
-<h3 id="orga754ac1">Diff</h3>
-<div class="outline-text-3" id="text-orga754ac1">
+
+<div id="outline-container-org7f9c49a" class="outline-3">
+<h3 id="org7f9c49a">Merge</h3>
+<div class="outline-text-3" id="text-org7f9c49a">
+<table id="org80aed28" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">conflictstyle</td>
+<td class="org-left">diff3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-orgbebf432" class="outline-3">
+<h3 id="orgbebf432">Diff</h3>
+<div class="outline-text-3" id="text-orgbebf432">
 <table id="orgf8b8f6f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -1539,6 +1467,7 @@ it nicely instead of barfing out.
 </div>
 </div>
 
+
 <div id="outline-container-org454ed7c" class="outline-3">
 <h3 id="org454ed7c">Include</h3>
 <div class="outline-text-3" id="text-org454ed7c">
@@ -1568,8 +1497,8 @@ it nicely instead of barfing out.
 <h3 id="org946ca45">Configuration</h3>
 <div class="outline-text-3" id="text-org946ca45">
 <div class="org-src-container">
-<pre class="src src-conf"><span class="org-comment-delimiter"># </span><span class="org-comment">Home. *nix configuration files</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Copyright (C) 2019  Henrik Kjerringv&#229;g</span>
+<pre class="src src-conf"><span class="org-comment-delimiter"># </span><span class="org-comment">Home. PC configuration files</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Copyright (C) 2020  Henrik Kjerringv&#229;g</span>
 <span class="org-comment-delimiter"># </span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">This program is free software: you can redistribute it and/or modify</span>
 <span class="org-comment-delimiter"># </span><span class="org-comment">it under the terms of the GNU General Public License as published by</span>
@@ -1645,8 +1574,8 @@ run-shell <span class="org-string">"~/.tmux/plugins/tpm/tpm"</span>
 <h2 id="orgdb86057">License</h2>
 <div class="outline-text-2" id="text-orgdb86057">
 <div class="org-src-container">
-<pre class="src src-text" id="org2da8a9c">Home. *nix configuration files
-Copyright (C) 2019  Henrik Kjerringv&#229;g
+<pre class="src src-text" id="org2da8a9c">Home. PC configuration files
+Copyright (C) 2020  Henrik Kjerringv&#229;g
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

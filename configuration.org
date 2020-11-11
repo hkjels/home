@@ -278,7 +278,7 @@ ul {
 }
 li {
   display: inline-block;
-  padding: 3rem;
+  padding: 1.5rem;
 }
 
 h1,
@@ -353,9 +353,27 @@ pre.src {
   width: var(--icon-size);
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 700px) {
+  blockquote {
+    font-size: 1.2em;
+  }
+  h2 {
+    font-size: 1em;
+  }
+  .smiley {
+    transform: translateY(0);
+  }
+  #table-of-contents {
+    font-size: 4vw;
+  }
+  #content > p {
+    font-size: 4vh;
+  }
   .github {
     top: 4em;
+  }
+  .github img {
+    width: 25vw;
   }
   .shell::before,
   .git::before,

@@ -23,41 +23,45 @@ source ~/shell/login
 
 Before doing much, we need some environment-variables set. The most
 important one being the ~PATH~-variable. The ~PATH~ is used by your shell
-whenever your trying to execute a program. It will look for the
-program in all the paths specified in the ~PATH~-variable.
+whenever you're trying to execute a program without specifying it's
+full path.
 
 For MacOS, there's now a utility for maintaining the ~PATH~ named
-~path-helper~. It will look for paths in ~/etc/paths.d~ & ~/etc/manpaths.d~,
+~path-helper~. It will look for paths in ~/etc/paths,~ ~/etc/paths.d~ & ~/etc/manpaths.d~,
 so I think you can have almost automatic ~PATH~-handling by setting that
-up. I do however like having control, so I've created a [[path-definitions][table]] that I
-construct environment-variables from, as you can see below.
+up. I do however like having full control and consistent behavior
+between environments. That's why I've created a [[path-definitions][table]] that I construct
+environment-variables from, as you can see below.
 
 #+name: path-definitions
-| ANDROID_HOME | $HOME/Library/Android/sdk                                                                |
-| JAVA_HOME    | $(/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java_home)       |
-| CLASSPATH    | $HOME/Projects/Github/hkjels/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository |
-| PATH         | $HOME/bin                                                                                |
-| PATH         | /bin                                                                                     |
-| PATH         | /sbin                                                                                    |
-| PATH         | /usr/bin                                                                                 |
-| PATH         | /usr/sbin                                                                                |
-| PATH         | /usr/X11/bin                                                                             |
-| PATH         | /usr/local/bin                                                                           |
-| PATH         | /usr/local/sbin                                                                          |
-| PATH         | /usr/local/opt/texinfo/bin                                                               |
-| PATH         | /usr/local/opt/libxml2/bin                                                               |
-| PATH         | /Library/TeX/texbin                                                                      |
-| PATH         | /opt/X11/bin                                                                             |
-| PATH         | $HOME/.cargo                                                                             |
-| PATH         | $ANDROID_HOME/platform-tools                                                             |
-| PATH         | $ANDROID_HOME/tools                                                                      |
-| PATH         | $ANDROID_HOME/emulator                                                                   |
-| PATH         | $ANDROID_HOME/tools/bin                                                                  |
-| PATH         | $JAVA_HOME/bin                                                                           |
-| MANPATH      | /usr/share/man                                                                           |
-| MANPATH      | /usr/local/share/man                                                                     |
-| MANPATH      | /opt/X11/share/man                                                                       |
-| MANPATH      | /Library/TeX/Distributions/.DefaultTeX/Contents/Man                                        |
+| ANDROID_HOME | $HOME/Library/Android/sdk                         |
+| JAVA_HOME    | $(/usr/libexec/java_home -v 1.8.0_202)            |
+| PATH         | $HOME/bin                                         |
+| PATH         | /usr/local/lib/ruby/gems/2.7.0/bin                |
+| PATH         | $HOME/.local/bin                                  |
+| PATH         | $JAVA_HOME/bin                                    |
+| PATH         | /usr/local/bin                                    |
+| PATH         | /usr/local/opt/ruby/bin                           |
+| PATH         | /bin                                              |
+| PATH         | /sbin                                             |
+| PATH         | /usr/bin                                          |
+| PATH         | /usr/sbin                                         |
+| PATH         | /usr/X11/bin                                      |
+| PATH         | /usr/local/sbin                                   |
+| PATH         | /usr/local/opt/texinfo/bin                        |
+| PATH         | /usr/local/opt/libxml2/bin                        |
+| PATH         | /Library/TeX/texbin                               |
+| PATH         | /opt/X11/bin                                      |
+| PATH         | /usr/local/opt/llvm/bin                           |
+| PATH         | $HOME/.cargo                                      |
+| PATH         | $ANDROID_HOME/platform-tools                      |
+| PATH         | $ANDROID_HOME/tools                               |
+| PATH         | $ANDROID_HOME/emulator                            |
+| PATH         | $ANDROID_HOME/tools/bin                           |
+| MANPATH      | /usr/share/man                                    |
+| MANPATH      | /usr/local/share/man                              |
+| MANPATH      | /opt/X11/share/man                                |
+| MANPATH      | /Library/TeX/Distributions/.DefaultTeX/Contents/Man |
 
 #+name: paths
 #+begin_src emacs-lisp :var path-definitions=path-definitions
@@ -78,24 +82,25 @@ construct environment-variables from, as you can see below.
 A login shell is the first shell ran with your user-id. So in this
 shell we would only set up environment and don't bother with [[https://en.wikipedia.org/wiki/Text-based_user_interface][TUI]].
 #+name: env-definitions
-| EDITOR      | emacsclient -c |
-| VISUAL      | $EDITOR        |
-| LANG        | en_US.UTF-8    |
-| LC_ALL      | $LANG          |
-| LC_COLLATE  | $LANG          |
-| LC_CTYPE    | $LANG          |
-| LC_MESSAGES | $LANG          |
-| LC_MONETARY | $LANG          |
-| LC_NUMERIC  | $LANG          |
-| LC_TIME     | $LANG          |
-| PAGER       | less -RXFSiw   |
-| MANPAGER    | $PAGER         |
+| EDITOR      | editor       |
+| VISUAL      | $EDITOR      |
+| LANG        | en_US.UTF-8  |
+| LC_ALL      | $LANG        |
+| LC_COLLATE  | $LANG        |
+| LC_CTYPE    | $LANG        |
+| LC_MESSAGES | $LANG        |
+| LC_MONETARY | $LANG        |
+| LC_NUMERIC  | $LANG        |
+| LC_TIME     | $LANG        |
+| PAGER       | less -RXFSiw |
+| MANPAGER    | $PAGER       |
 
 #+name: environment
 #+begin_src emacs-lisp :var env-definitions=env-definitions
 (message "%s" (mapconcat 'identity  (mapcar
                                      (lambda (env)
-                                       (format "export %s=\"%s\"" (car env)
+                                       (format "export %s=\"%s\""
+                                               (car env)
                                                (car (cdr env))))
                                      env-definitions) "\n"))
 #+end_src
@@ -103,6 +108,15 @@ shell we would only set up environment and don't bother with [[https://en.wikipe
 #+begin_src shell :tangle ~/shell/login
 # <<license>>
 <<environment()>>
+#+end_src
+
+There's a shortcoming in ~zsh~ of how it treats ~$EDITOR~, where it cannot
+have any flags or arguments. We circumvent this by calling a
+wrapper-script.
+/Notice that the command is also sent to the background to avoid the
+sticky message about waiting for Emacs./
+#+begin_src shell :tangle ~/bin/editor :tangle-mode (identity #o755)
+emacsclient -c -a emacs "$@" &
 #+end_src
 
 ** Interactive
@@ -138,15 +152,6 @@ the content of binaries and archives.
 #+name: lesspipe
 #+begin_src shell
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-#+end_src
-\\
-\\
-[[https://github.com/github/hub][Hub]] makes it easier to work with projects that are hosted on
-Github. It is aliased to override the ~git~-command, but everything else
-is git as usual.
-#+name: hub
-#+begin_src shell
-eval "$(hub alias -s)"
 #+end_src
 \\
 \\
@@ -377,7 +382,7 @@ json() {
 | du1       | du -ch -d 1                                        |
 | e         | $EDITOR                                            |
 | f         | find . -iname                                      |
-| git       | hub                                                |
+| g         | 'hub '                                             |
 | grep      | grep --color=auto                                  |
 | hr        | echo ; hr -; echo ;                                |
 | ip        | dig +short myip.opendns.com @resolver1.opendns.com |
@@ -385,12 +390,13 @@ json() {
 | la        | ls -la                                             |
 | ll        | ls -l                                              |
 | localip   | ipconfig getifaddr en0                             |
-| ls        | lsd                                                |
 | lt        | ls --tree                                          |
+| magit     | $EDITOR -e \(magit-status\)                        |
 | manpath   | echo -e ${MANPATH//:/\\n}                          |
 | mkdir     | mkdir -p                                           |
 | mv        | mv -i                                              |
 | path      | echo -e ${PATH//:/\\n}                             |
+| classpath | echo -e ${CLASSPATH//:/\\n}                        |
 | ql        | qlmanage -p                                        |
 | running   | jobs -r                                            |
 | s         | rg -S                                              |
@@ -398,10 +404,13 @@ json() {
 | sloc      | sloccount                                          |
 | stopped   | jobs -s                                            |
 | sys       | grc tail -100 "/var/log/system.log"                |
+| syn       | synonym                                            |
 | timestamp | date "+%s"                                         |
 | tmux      | tmux -2                                            |
 | today     | date "+%Y-%m-%d"                                   |
 | wget      | wget -c                                            |
+| hide      | SetFile -a V                                       |
+| show      | SetFile -a v                                       |
 | ~         | cd ~                                               |
 
 #+name: aliases
@@ -418,17 +427,11 @@ json() {
 
 <<aliases()>>
 
-# FIXME Should be possible to add to the list of aliases
-#     | Using quotes is what breaks the functionality
-alias g=git
-
 <<starship>>
 
 <<fzf>>
 
 <<lesspipe>>
-
-<<hub>>
 
 <<thefuck>>
 
@@ -485,11 +488,11 @@ fi
 This is bash's run-command file. It is run in interactive shells and remote shells.
 #+begin_src shell :tangle ~/.bashrc
 # <<license>>
-source ~/shell/env
 source ~/shell/interactive
 
 export HISTCONTROL=erasedups:ignorespace
 export HISTSIZE=10000
+export HISTIGNORE="cd:c:clear:..:exit:l:ls:la:ll:* --help:* --version"
 
 # Bash built-in options
 shopt -s nocaseglob
@@ -546,6 +549,7 @@ source ~/shell/env
 
 #+begin_src shell :tangle ~/.zshrc
 # <<license>>
+source ~/shell/login
 source ~/shell/interactive
 
 # Only unique history-items
@@ -565,7 +569,7 @@ bindkey -v
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Completions
-autoload -Uz compinit
+autoload -Uz compinit && compinit
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 # Add some colors

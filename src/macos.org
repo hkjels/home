@@ -1,0 +1,56 @@
+* MacOS
+:properties:
+:header-args: :results silent
+:end:
+
+Here I've provided some usefull alterations to MacOS à La carte.
+
+Open the document in Emacs and press ~C-c C-c~ on the source-blocks that
+you feel comfortable with applying. Doing it once more will return to
+the previous state.
+
+Make crash-reports appear in the notification-center
+#+begin_src shell
+defaults write com.apple.CrashReporter UseUNC 1
+#+end_src
+
+Avoid creating .DS_Store files on network volumes
+#+begin_src shell
+VALUE="com.apple.desktopservices DSDontWriteNetworkStores"
+defaults write $VALUE -bool $([[ $VALUE -eq "TRUE" ]] && false || true)
+#+end_src
+
+Allow text-selection in QuickLook
+#+begin_src shell
+defaults write com.apple.finder QLEnableTextSelection -bool true
+#+end_src
+
+Make the dock-icon of hidden applications translucent
+#+begin_src shell
+defaults write com.apple.dock showhidden -bool true; killall Dock
+#+end_src
+
+Make the dock hide / show more quickly
+#+begin_src shell
+defaults write com.apple.dock autohide-time-modifier -float 0.4; killall Dock
+#+end_src
+
+Disable "natural"-scroll
+#+begin_src shell
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+#+end_src
+
+Prevent Time Machine from prompting to use new hard drives as backup volume
+#+begin_src shell
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+#+end_src
+
+Set a blazingly fast keyboard repeat rate
+#+begin_src shell
+defaults write NSGlobalDomain KeyRepeat -int 0
+#+end_src
+
+Enable developer-tools in Safari
+#+begin_src shell
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+#+end_src

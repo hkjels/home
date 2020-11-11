@@ -1,15 +1,18 @@
 * Git
 
+
 ** Core
 #+name: core
 | commitGraph | true         |
-| pager       | delta --dark |
+
 
 ** Alias
 #+name: alias
 | amm          | commit -v --amend --no-edit                                                                                                 |
 | appraise     | !git-appraise                                                                                                               |
-| br           | branch -a                                                                                                                   |
+| authors      | shortlog -sn                                                                                                                |
+| br           | branch                                                                                                                      |
+| bra          | branch -a                                                                                                                   |
 | cb           | checkout -b                                                                                                                 |
 | ci           | commit -v                                                                                                                   |
 | cl           | clone --recursive                                                                                                           |
@@ -24,6 +27,7 @@
 | ignored      | check-ignore -v                                                                                                             |
 | lc           | show -s --format="%ct" HEAD                                                                                                 |
 | lg           | log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit |
+| ls           | ls-files                                                                                                                    |
 | m            | merge                                                                                                                       |
 | mt           | mergetool                                                                                                                   |
 | mysprint     | log --since 1.week --author "$(git config user.name)"                                                                       |
@@ -31,7 +35,7 @@
 | p            | pull                                                                                                                        |
 | perfect      | rebase -i @{u}                                                                                                              |
 | pf           | push --force-with-lease                                                                                                     |
-| pr           | pull --rebase                                                                                                               |
+| pr           | pull-request                                                                                                                |
 | rb           | rebase                                                                                                                      |
 | rba          | rebase --abort                                                                                                              |
 | rbc          | rebase --continue                                                                                                           |
@@ -62,6 +66,7 @@
 | unstage      | reset HEAD --                                                                                                               |
 | update       | pull --rebase                                                                                                               |
 
+
 ** Color
 #+name: color
 | ui     | true  |
@@ -69,43 +74,65 @@
 | diff   | auto  |
 | status | auto  |
 
+
 ** Credential
 #+name: credential
 | helper | osxkeychain |
 
+
+** Status
+#+name: status
+|showUntrackedFiles | all |
+
+
 ** Diff
 #+name: diff
-| mnemonicprefix | true  |
+| mnemonicprefix | true      |
+| algorithm      | histogram |
+
 
 ** Push
 #+name: push
-| default | current |
+| default    | current |
+| followTags | true    |
+
 
 ** Pull
 #+name: pull
 | rebase | true  |
 
+
+** Commit
+#+name: commit
+| gpgSign | true |
+
+
 ** Fetch
 #+name: fetch
 | writeCommitGraph | true |
+
 
 ** GC
 #+name: gc
 | auto             |    1 |
 | writeCommitGraph | true |
 
+
 ** Branch
 #+name: branch
 | autosetuprebase | always |
+
 
 ** Github
 #+name: github
 | protocol | https |
 
+
 ** Grep
 #+name: grep
 | extendRegexp | true |
 | lineNumber   | true |
+
 
 ** Filters
 #+name: filter-media
@@ -119,13 +146,21 @@
 | required | true                   |
 | process  | git-lfs filter-process |
 
+
 ** Magit
 #+name: magit
 | hideCampaign | true |
 
+
 ** Apply
 #+name: apply
 | whitespace | nowarn |
+
+
+** Merge
+#+name: merge
+| conflictstyle | diff3 |
+
 
 ** Diff
 #+name: diff-clojure
@@ -134,9 +169,11 @@
 #+name: diff-rust
 | xfuncname | '^[ \t]*(pub¦)[ \t]*((fn¦struct¦enum¦impl¦trait¦mod)[^;]*)$' |
 
+
 ** Include
 #+name: include
 | path | ~/.gitconfig.local |
+
 
 ** Conversion to code                                                 :noexport:
 
@@ -157,8 +194,14 @@
 [color]
   <<key-val(color)>>
 
+[status]
+  <<key-val(status)>>
+
 [credential]
   <<key-val(credential)>>
+
+[merge]
+  <<key-val(merge)>>
 
 [diff]
   <<key-val(diff)>>
@@ -168,6 +211,9 @@
 
 [pull]
   <<key-val(push)>>
+
+[commit]
+  <<key-val(commit)>>
 
 [fetch]
   <<key-val(fetch)>>
