@@ -8,12 +8,40 @@ someone extraordinary; such as yourself, come to visit.
 #+html: <a title="link to repo" class="github" href="https://github.com/hkjels/home/"><img src="./images/github.png"></a>
 #+html: <main>
 
-#+begin_quote
-Truth be told; my home is under heavy renovation, transitioning into
-org-mode. So although the repo is tidy, it's missing bits and pieces.
-But.. It's getting there
-#+end_quote
-#+html: <img src="./images/smiley.svg" class="smiley">
+* Up & running
+
+My home relies heavily on Emacs to tangle code-blocks into sourcefiles
+that can be installed. Evaluating the lines below in your terminal
+will install [[https://brew.sh][Homebrew]] and [[https://emacs.org][Emacs]]. Once those are installed, it will
+issue Emacs to do the rest.
+
+#+begin_src shell
+make install
+#+end_src
+
+* Makefile                                                           :noexport:
+
+#+begin_src makefile
+.PHONY: brew emacs install
+
+CURL=curl -fsSL
+TIC=tic -x
+EMACS=# batch operation
+
+brew:
+	$(CURL) "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+
+libgccjit:
+	brew install $@
+
+emacs: libgccjit
+	emacs/build-emacs-for-macos feature/native-comp
+
+.terminfo: terminfo-24bit
+	$(TIC) -o "$HOME/$@" $<
+
+install: brew emacs .terminfo
+#+end_src
 
 #+include: "src/shell.org"
 #+include: "src/git.org"

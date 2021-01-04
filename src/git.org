@@ -1,5 +1,10 @@
 * Git
 
+These are global git-configurations that people most often set using
+~git config --global~. Since those would be overwritten upon tangling
+this document, I advise against it. Use ~git config --(system|local)~ or
+manually add to ~~/.gitconfig.local~ instead.
+
 
 ** Core
 #+name: core
@@ -82,13 +87,19 @@
 
 ** Status
 #+name: status
-|showUntrackedFiles | all |
+| showUntrackedFiles | all |
 
 
 ** Diff
 #+name: diff
 | mnemonicprefix | true      |
 | algorithm      | histogram |
+
+#+name: diff-clojure
+| xfuncname | (^\\(.* ¦ \\s*\\(defn.*) |
+
+#+name: diff-rust
+| xfuncname | '^[ \t]*(pub¦)[ \t]*((fn¦struct¦enum¦impl¦trait¦mod)[^;]*)$' |
 
 
 ** Push
@@ -121,11 +132,6 @@
 ** Branch
 #+name: branch
 | autosetuprebase | always |
-
-
-** Github
-#+name: github
-| protocol | https |
 
 
 ** Grep
@@ -162,15 +168,15 @@
 | conflictstyle | diff3 |
 
 
-** Diff
-#+name: diff-clojure
-| xfuncname | (^\\(.* ¦ \\s*\\(defn.*) |
-
-#+name: diff-rust
-| xfuncname | '^[ \t]*(pub¦)[ \t]*((fn¦struct¦enum¦impl¦trait¦mod)[^;]*)$' |
-
+** Transfer
+We validate objects and their connection to commits before
+transferring.
+#+name: transfer
+| fsckObjects | true |
 
 ** Include
+We use a separate file for configurations that should not be pushed to
+a remote. Could be for security purposes.
 #+name: include
 | path | ~/.gitconfig.local |
 
@@ -206,6 +212,12 @@
 [diff]
   <<key-val(diff)>>
 
+[diff "clojure"]
+<<key-val(diff-clojure)>>
+
+[diff "rust"]
+<<key-val(diff-rust)>>
+
 [push]
   <<key-val(push)>>
 
@@ -239,11 +251,8 @@
 [magit]
 <<key-val(magit)>>
 
-[diff "clojure"]
-<<key-val(diff-clojure)>>
-
-[diff "rust"]
-<<key-val(diff-rust)>>
+[transfer]
+<<key-val(transfer)>>
 
 [include]
 <<key-val(include)>>

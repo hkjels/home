@@ -364,6 +364,29 @@ json() {
 #+end_src
 \\
 \\
+If you've evaluated ~make install~, this little snippet should have been
+compiled and your terminal will support 24-bit colors.
+#+begin_src shell :tangle ../terminfo-24bit :results silent
+# Use colon separators.
+xterm-24bit|xterm with 24-bit direct color mode,
+  sitm=\E[3m, ritm=\E23m,
+  use=xterm-256color,
+  setb24=\E[48:2:%p1%{65536}%/%d:%p1%{256}%/%{255}%&%d:%p1%{255}%&%dm,
+  setf24=\E[38:2:%p1%{65536}%/%d:%p1%{256}%/%{255}%&%d:%p1%{255}%&%dm,
+# Use semicolon separators.
+xterm-24bits|xterm with 24-bit direct color mode,
+  sitm=\E[3m, ritm=\E23m,
+  use=xterm-256color,
+  setb24=\E[48;2;%p1%{65536}%/%d;%p1%{256}%/%{255}%&%d;%p1%{255}%&%dm,
+  setf24=\E[38;2;%p1%{65536}%/%d;%p1%{256}%/%{255}%&%d;%p1%{255}%&%dm,
+#+end_src
+
+#+name: pretty-colors
+#+begin_src shell
+export TERM=xterm-24bit
+#+end_src
+\\
+\\
 *** Aliases
 
 #+name: alias-definitions
@@ -425,6 +448,8 @@ json() {
 #+begin_src shell :tangle ~/shell/interactive
 # <<license>>
 
+<<pretty-colors>>
+
 <<aliases()>>
 
 <<starship>>
@@ -479,10 +504,6 @@ source ~/shell/env
 BASH_ENV=
 
 source ~/shell/login
-
-if [ "$PS1" ]; then
-    source ~/shell/interactive
-fi
 #+end_src
 
 This is bash's run-command file. It is run in interactive shells and remote shells.
@@ -495,6 +516,7 @@ export HISTSIZE=10000
 export HISTIGNORE="cd:c:clear:..:exit:l:ls:la:ll:* --help:* --version"
 
 # Bash built-in options
+shopt -s extglob 
 shopt -s nocaseglob
 shopt -s cdspell
 shopt -s histappend

@@ -6,51 +6,84 @@
 Here I've provided some usefull alterations to MacOS à La carte.
 
 Open the document in Emacs and press ~C-c C-c~ on the source-blocks that
-you feel comfortable with applying. Doing it once more will return to
-the previous state.
-
-Make crash-reports appear in the notification-center
-#+begin_src shell
-defaults write com.apple.CrashReporter UseUNC 1
+you feel comfortable with applying. If it's a boolean value, doing it
+once more will return it to the previous state. This is achieved with
+the snippet below.
+#+begin_src shell :session defaults
+function toggle-defaults () {
+  property="$1"
+  value=$([[$(defaults read $property) -eq 1]] && false || true)
+  defaults write $property -bool $value
+}
 #+end_src
+/Some of these alterations might require that you log out and back in
+to take effect./
 
-Avoid creating .DS_Store files on network volumes
-#+begin_src shell
-VALUE="com.apple.desktopservices DSDontWriteNetworkStores"
-defaults write $VALUE -bool $([[ $VALUE -eq "TRUE" ]] && false || true)
-#+end_src
-
-Allow text-selection in QuickLook
-#+begin_src shell
-defaults write com.apple.finder QLEnableTextSelection -bool true
-#+end_src
+** Appearance
 
 Make the dock-icon of hidden applications translucent
-#+begin_src shell
-defaults write com.apple.dock showhidden -bool true; killall Dock
+#+begin_src shell :session defaults
+toggle-defaults "com.apple.dock showhidden" && killall Dock
+#+end_src
+
+Make the dock autohide
+#+begin_src shell :session defaults
+toggle-defaults "com.apple.dock autohide" && killall Dock
 #+end_src
 
 Make the dock hide / show more quickly
+/Note that this does not return to it’s default state upon subsequent evaluation./
 #+begin_src shell
-defaults write com.apple.dock autohide-time-modifier -float 0.4; killall Dock
+defaults write com.apple.dock autohide-time-modifier -float 0.4 && killall Dock
 #+end_src
+
+Make the menubar autohide
+#+begin_src shell :session defaults
+toggle-defaults "NSGlobalDomain _HIHideMenuBar"
+#+end_src
+
+** Input
 
 Disable "natural"-scroll
-#+begin_src shell
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
-#+end_src
-
-Prevent Time Machine from prompting to use new hard drives as backup volume
-#+begin_src shell
-defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+#+begin_src shell :session defaults
+toggle-defaults "NSGlobalDomain com.apple.swipescrolldirection"
 #+end_src
 
 Set a blazingly fast keyboard repeat rate
+/Note that this does not return to it’s default state upon subsequent evaluation./
 #+begin_src shell
-defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
 #+end_src
 
-Enable developer-tools in Safari
+** Finder
+
+Sort directories on top
+#+begin_src shell :session defaults
+toggle-defaults "com.apple.finder _FXSortFoldersFirst" && killall Finder
+#+end_src
+
+Show the Library directory
+/Note that this does not return to it’s default state upon subsequent evaluation./
 #+begin_src shell
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
+chflags nohidden ~/Library
+#+end_src
+
+Prevent Time Machine from prompting to use new hard drives as backup volume
+#+begin_src shell :session defaults
+toggle-defaults "com.apple.TimeMachine DoNotOfferNewDisksForBackup" && killall Finder
+#+end_src
+
+
+** Misc
+
+Enable developer-tools in Safari
+#+begin_src shell :session defaults
+toggle-defaults "com.apple.Safari IncludeDevelopMenu"
+#+end_src
+
+Make crash-reports appear in notification-center
+#+begin_src shell :session defaults
+toggle-defaults "com.apple.CrashReporter UseUNC"
 #+end_src
