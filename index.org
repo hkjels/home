@@ -1,3 +1,4 @@
+
 #+title: Home
 #+exclude_tags: noexport
 #+options: toc:1
@@ -21,26 +22,41 @@ make install
 
 * Makefile                                                           :noexport:
 
-#+begin_src makefile
-.PHONY: brew emacs install
+#+begin_src makefile :tangle Makefile
+  .PHONY: install
 
-CURL=curl -fsSL
-TIC=tic -x
-EMACS=# batch operation
+  CFLAGS="-O2 -I/usr/local/opt/libgccjit/include"
+  LDFLAGS="-L/usr/local/opt/libgccjit/lib/gcc/10"
+  LD_LIBRARY_PATH="/usr/local/opt/libgccjit/lib/gcc/10"
 
-brew:
-	$(CURL) "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+  libexec="/usr/local/libexec/emacs/28.0.50"
 
-libgccjit:
-	brew install $@
+  CURL=curl -fsSL
+  TIC=tic -x
+  EMACS="emacs "
 
-emacs: libgccjit
-	emacs/build-emacs-for-macos feature/native-comp
+  brew:
+	  @type -p "$@" >/dev/null 2>&1 || $(CURL) "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
 
-.terminfo: terminfo-24bit
-	$(TIC) -o "$HOME/$@" $<
+  libiconv libgccjit expat: brew
+	  @test -s "$(brew --prefix)y/opt/$@" || brew install $@
 
-install: brew emacs .terminfo
+  emacs: libgccjit
+	  @cd $@
+	  @autogen.sh
+	  @configure --with-json --with-nativecomp
+	  @mkdir -p $libexec
+	  @sudo chown $USER $libexec
+	  @make
+	  @make install
+
+  /Applications/Emacs.app: emacs
+	  @mv emacs/nextstep/Emacs.app $@
+
+  .terminfo: terminfo-24bit
+	  $(TIC) -o "$HOME/$@" $<
+
+  install: /Applications/Emacs.app .terminfo
 #+end_src
 
 #+include: "src/shell.org"
