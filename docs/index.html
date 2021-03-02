@@ -3,33 +3,215 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-04-22 Wed 15:23 -->
+<!-- 2021-03-02 Tue 10:58 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Home</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Henrik Kjerringvåg" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
 <link rel="stylesheet" href="css/docs.css"><script src="js/docs.js"></script>
 <script type="text/javascript">
-// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
      function CodeHighlightOn(elem, id)
      {
        var target = document.getElementById(id);
        if(null != target) {
-         elem.cacheClassElem = elem.className;
-         elem.cacheClassTarget = target.className;
-         target.className = "code-highlighted";
-         elem.className   = "code-highlighted";
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
        }
      }
      function CodeHighlightOff(elem, id)
      {
        var target = document.getElementById(id);
-       if(elem.cacheClassElem)
-         elem.className = elem.cacheClassElem;
-       if(elem.cacheClassTarget)
-         target.className = elem.cacheClassTarget;
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
      }
     /*]]>*///-->
 // @license-end
@@ -42,10 +224,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org22ed588">Shell</a></li>
-<li><a href="#org2135ecf">Git</a></li>
-<li><a href="#org3c44892">Tmux</a></li>
-<li><a href="#orgdb86057">License</a></li>
+<li><a href="#org3ded8bf">Shell</a></li>
+<li><a href="#org4102e83">Git</a></li>
+<li><a href="#org43a2866">Tmux</a></li>
+<li><a href="#org70aadcf">License</a></li>
 </ul>
 </div>
 </div>
@@ -56,19 +238,9 @@ someone extraordinary; such as yourself, come to visit.
 
 <a title="link to repo" class="github" href="https://github.com/hkjels/home/"><img src="./images/github.png"></a>
 <main>
-
-<blockquote>
-<p>
-Truth be told; my home is under heavy renovation, transitioning into
-org-mode. So although the repo is tidy, it's missing bits and pieces.
-But.. It's getting there
-</p>
-</blockquote>
-<img src="./images/smiley.svg" class="smiley">
-
-<div id="outline-container-org22ed588" class="outline-2">
-<h2 id="org22ed588">Shell</h2>
-<div class="outline-text-2" id="text-org22ed588">
+<div id="outline-container-org3ded8bf" class="outline-2">
+<h2 id="org3ded8bf">Shell</h2>
+<div class="outline-text-2" id="text-org3ded8bf">
 <p>
 Most of my shell-configuration is compatible with various shell's. I
 typically use <code>eshell</code>, but I sometimes dabble with both <code>bash</code> and <code>zsh</code>,
@@ -83,9 +255,9 @@ overrides.
 </p>
 </div>
 
-<div id="outline-container-org97b70b9" class="outline-3">
-<h3 id="org97b70b9">Environment</h3>
-<div class="outline-text-3" id="text-org97b70b9">
+<div id="outline-container-org403170c" class="outline-3">
+<h3 id="org403170c">Environment</h3>
+<div class="outline-text-3" id="text-org403170c">
 <p>
 Before doing much, we need some environment-variables set. The most
 important one being the <code>PATH</code>-variable. The <code>PATH</code> is used by your shell
@@ -95,14 +267,14 @@ full path.
 
 <p>
 For MacOS, there's now a utility for maintaining the <code>PATH</code> named
-<code>path-helper</code>. It will look for paths in <code>/etc/paths.d</code> &amp; <code>/etc/manpaths.d</code>,
+<code>path-helper</code>. It will look for paths in <code>/etc/paths,</code> <code>/etc/paths.d</code> &amp; <code>/etc/manpaths.d</code>,
 so I think you can have almost automatic <code>PATH</code>-handling by setting that
 up. I do however like having full control and consistent behavior
-between environments. That's why I've created a <a href="#orgf131934">table</a> that I construct
+between environments. That's why I've created a <a href="#org3fcd4bc">table</a> that I construct
 environment-variables from, as you can see below.
 </p>
 
-<table id="orgf131934" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org3fcd4bc" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -118,22 +290,37 @@ environment-variables from, as you can see below.
 
 <tr>
 <td class="org-left">JAVA<sub>HOME</sub></td>
-<td class="org-left">$(/System/Library/Frameworks/JavaVM.framework/Versions/Current/Commands/java<sub>home</sub>)</td>
-</tr>
-
-<tr>
-<td class="org-left">CLASSPATH</td>
-<td class="org-left">$HOME/java</td>
-</tr>
-
-<tr>
-<td class="org-left">CLASSPATH</td>
-<td class="org-left">$HOME/java/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher<sub>1.5.600.v20191014</sub>-2022.jar</td>
+<td class="org-left">$(/usr/libexec/java<sub>home</sub> -v 1.8.0<sub>202</sub>)</td>
 </tr>
 
 <tr>
 <td class="org-left">PATH</td>
 <td class="org-left">$HOME/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/local/lib/ruby/gems/2.7.0/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$HOME/.local/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$JAVA<sub>HOME</sub>/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/local/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">/usr/local/opt/ruby/bin</td>
 </tr>
 
 <tr>
@@ -163,11 +350,6 @@ environment-variables from, as you can see below.
 
 <tr>
 <td class="org-left">PATH</td>
-<td class="org-left">/usr/local/bin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
 <td class="org-left">/usr/local/sbin</td>
 </tr>
 
@@ -193,12 +375,12 @@ environment-variables from, as you can see below.
 
 <tr>
 <td class="org-left">PATH</td>
-<td class="org-left">$HOME/.cargo</td>
+<td class="org-left">/usr/local/opt/llvm/bin</td>
 </tr>
 
 <tr>
 <td class="org-left">PATH</td>
-<td class="org-left">$HOME/.local/bin</td>
+<td class="org-left">$HOME/.cargo</td>
 </tr>
 
 <tr>
@@ -219,11 +401,6 @@ environment-variables from, as you can see below.
 <tr>
 <td class="org-left">PATH</td>
 <td class="org-left">$ANDROID<sub>HOME</sub>/tools/bin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">$JAVA<sub>HOME</sub>/bin</td>
 </tr>
 
 <tr>
@@ -250,14 +427,14 @@ environment-variables from, as you can see below.
 </div>
 </div>
 
-<div id="outline-container-org17c53b4" class="outline-3">
-<h3 id="org17c53b4">Login</h3>
-<div class="outline-text-3" id="text-org17c53b4">
+<div id="outline-container-orgf3781a0" class="outline-3">
+<h3 id="orgf3781a0">Login</h3>
+<div class="outline-text-3" id="text-orgf3781a0">
 <p>
 A login shell is the first shell ran with your user-id. So in this
 shell we would only set up environment and don't bother with <a href="https://en.wikipedia.org/wiki/Text-based_user_interface">TUI</a>.
 </p>
-<table id="orge12c6fa" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgf9694ee" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -337,9 +514,9 @@ sticky message about waiting for Emacs.</i>
 </p>
 </div>
 </div>
-<div id="outline-container-org81d2b66" class="outline-3">
-<h3 id="org81d2b66">Interactive</h3>
-<div class="outline-text-3" id="text-org81d2b66">
+<div id="outline-container-org1e139f7" class="outline-3">
+<h3 id="org1e139f7">Interactive</h3>
+<div class="outline-text-3" id="text-org1e139f7">
 <p>
 An interactive shell is what you get when you boot up a
 terminal. Typically you would want utility-functions, aliases and
@@ -363,13 +540,13 @@ customizable, so I've finally scrapped my old hacky personal one.
 <a href="https://github.com/junegunn/fzf">Fzf</a> is a fast and easy to use fuzzy-matcher.
 <br />
 <br />
+<a href="https://github.com/roosta/fif">Fif</a> uses a combination of fzf and
+fast grep alternatives to achieve a better search-experience for code
+in the terminal.
+<br />
+<br />
 <a href="https://www-zeuthen.desy.de/~friebel/unix/lesspipe.html">Lesspipe</a> is an input-filter for <code>less</code> that makes it possible to view
 the content of binaries and archives.
-<br />
-<br />
-<a href="https://github.com/github/hub">Hub</a> makes it easier to work with projects that are hosted on
-Github. It is aliased to override the <code>git</code>-command, but everything else
-is git as usual.
 <br />
 <br />
 <a href="https://github.com/nvbn/thefuck">Thefuck</a> will try to correct your last run command. Just write <code>fuck</code> and
@@ -434,12 +611,16 @@ work on.
 it nicely instead of barfing out.
 <br />
 <br />
+If you've evaluated <code>make install</code>, this little snippet should have been
+compiled and your terminal will support 24-bit colors.
+<br />
+<br />
 </p>
 </div>
-<div id="outline-container-org5b99fef" class="outline-4">
-<h4 id="org5b99fef">Aliases</h4>
-<div class="outline-text-4" id="text-org5b99fef">
-<table id="org1f812f1" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgcb9e5f2" class="outline-4">
+<h4 id="orgcb9e5f2">Aliases</h4>
+<div class="outline-text-4" id="text-orgcb9e5f2">
+<table id="orgaefe185" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -524,8 +705,8 @@ it nicely instead of barfing out.
 </tr>
 
 <tr>
-<td class="org-left">git</td>
-<td class="org-left">hub</td>
+<td class="org-left">g</td>
+<td class="org-left">'hub '</td>
 </tr>
 
 <tr>
@@ -549,23 +730,23 @@ it nicely instead of barfing out.
 </tr>
 
 <tr>
+<td class="org-left">ls</td>
+<td class="org-left">exa</td>
+</tr>
+
+<tr>
 <td class="org-left">la</td>
 <td class="org-left">ls -la</td>
 </tr>
 
 <tr>
 <td class="org-left">ll</td>
-<td class="org-left">ls -l</td>
+<td class="org-left">ls -1</td>
 </tr>
 
 <tr>
 <td class="org-left">localip</td>
 <td class="org-left">ipconfig getifaddr en0</td>
-</tr>
-
-<tr>
-<td class="org-left">ls</td>
-<td class="org-left">lsd</td>
 </tr>
 
 <tr>
@@ -596,6 +777,11 @@ it nicely instead of barfing out.
 <tr>
 <td class="org-left">path</td>
 <td class="org-left">echo -e ${PATH//:/\\n}</td>
+</tr>
+
+<tr>
+<td class="org-left">classpath</td>
+<td class="org-left">echo -e ${CLASSPATH//:/\\n}</td>
 </tr>
 
 <tr>
@@ -659,6 +845,16 @@ it nicely instead of barfing out.
 </tr>
 
 <tr>
+<td class="org-left">hide</td>
+<td class="org-left">SetFile -a V</td>
+</tr>
+
+<tr>
+<td class="org-left">show</td>
+<td class="org-left">SetFile -a v</td>
+</tr>
+
+<tr>
 <td class="org-left">~</td>
 <td class="org-left">cd ~</td>
 </tr>
@@ -669,14 +865,127 @@ it nicely instead of barfing out.
 </div>
 </div>
 
-<div id="outline-container-org2135ecf" class="outline-2">
-<h2 id="org2135ecf">Git</h2>
-<div class="outline-text-2" id="text-org2135ecf">
+<div id="outline-container-org4102e83" class="outline-2">
+<h2 id="org4102e83">Git</h2>
+<div class="outline-text-2" id="text-org4102e83">
+<p>
+These are global git-configurations that people most often set using
+<code>git config --global</code>. Since those would be overwritten upon tangling
+this document, I advise against it. Use <code>git config --(system|local)</code> or
+manually add to <code>~/.gitconfig.local</code> instead.
+</p>
 </div>
-<div id="outline-container-org804deca" class="outline-3">
-<h3 id="org804deca">Core</h3>
-<div class="outline-text-3" id="text-org804deca">
-<table id="org4d15b6f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+<div id="outline-container-org763a73a" class="outline-3">
+<h3 id="org763a73a">Custom functionality</h3>
+<div class="outline-text-3" id="text-org763a73a">
+</div>
+<div id="outline-container-org5011206" class="outline-4">
+<h4 id="org5011206">Words diff</h4>
+<div class="outline-text-4" id="text-org5011206">
+<p>
+Will get the number of words that's been changed. This is useful if
+you use a service like ex. Crowdin for translations, where they charge
+for number of words translated.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">#!/bin/sh
+set -euo pipefail
+
+function usage {
+  cat &lt;&lt; EOT
+
+  Usage: git words-diff [options] [&lt;commit&gt;] [--] [&lt;path&gt;...]
+
+  Options:
+
+    -h, --help     output usage information
+
+EOT
+}
+
+function git_words_added {
+    git diff --word-diff=porcelain "$@" | grep -e "^+[^+]" | wc -w | xargs
+}
+
+function git_words_removed {
+    git diff --word-diff=porcelain "$@" | grep -e "^-[^-]" | wc -w | xargs
+}
+
+function git_words_diff {
+    echo $(($(git_words_added "$@") - $(git_words_removed "$@")))
+}
+
+while test $# -ne 0; do
+  arg=$1; shift
+  case $arg in
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Words added:   $(git_words_added $arg $@)"
+      echo "Words removed: $(git_words_removed $arg $@)"
+      echo "Sum:           $(git_words_diff $arg $@)"
+      break;
+      ;;
+  esac
+done
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org70eb1ec" class="outline-4">
+<h4 id="org70eb1ec">Who am I</h4>
+<div class="outline-text-4" id="text-org70eb1ec">
+<p>
+Run <code>git whoami</code> to see what's your user local to the repository you're in.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">#!/bin/sh
+
+# git-whoami
+# Author: Peter Eisentraut &lt;peter@eisentraut.org&gt;
+# Created: 2011-10-27
+# License: WTFPL; see http://sam.zoy.org/wtfpl/
+
+# exact logic in ident.c in git source tree
+
+set -e
+
+get_email() {
+	git config user.email || ( [ -n "$EMAIL" ] &amp;&amp; echo "$EMAIL" ) || echo "$(id -nu)@$(hostname --fqdn)"
+}
+
+get_name() {
+	git config user.name || getent passwd $(id -un) | cut -d : -f 5 | cut -d , -f 1
+}
+
+: ${GIT_AUTHOR_NAME=$(get_name)}
+: ${GIT_COMMITTER_NAME=$(get_name)}
+: ${GIT_AUTHOR_EMAIL=$(get_email)}
+: ${GIT_COMMITTER_EMAIL=$(get_email)}
+
+author="$GIT_AUTHOR_NAME &lt;$GIT_AUTHOR_EMAIL&gt;"
+commit="$GIT_COMMITTER_NAME &lt;$GIT_COMMITTER_EMAIL&gt;"
+
+if [ "$author" = "$commit" ]; then
+	echo "$author"
+else
+	echo "Author: $author"
+	echo "Commit: $commit"
+fi
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6bd0f0a" class="outline-3">
+<h3 id="org6bd0f0a">Core</h3>
+<div class="outline-text-3" id="text-org6bd0f0a">
+<table id="org8b3d43e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -689,21 +998,16 @@ it nicely instead of barfing out.
 <td class="org-left">commitGraph</td>
 <td class="org-left">true</td>
 </tr>
-
-<tr>
-<td class="org-left">pager</td>
-<td class="org-left">delta &#x2013;dark</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
 
 
-<div id="outline-container-org58a530f" class="outline-3">
-<h3 id="org58a530f">Alias</h3>
-<div class="outline-text-3" id="text-org58a530f">
-<table id="orge3e5c36" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org1c0f950" class="outline-3">
+<h3 id="org1c0f950">Alias</h3>
+<div class="outline-text-3" id="text-org1c0f950">
+<table id="org4a6f41d" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1002,10 +1306,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-orgd28b459" class="outline-3">
-<h3 id="orgd28b459">Color</h3>
-<div class="outline-text-3" id="text-orgd28b459">
-<table id="org8f9d46c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orge71ba1c" class="outline-3">
+<h3 id="orge71ba1c">Color</h3>
+<div class="outline-text-3" id="text-orge71ba1c">
+<table id="orgf421b8d" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1039,10 +1343,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-org5650043" class="outline-3">
-<h3 id="org5650043">Credential</h3>
-<div class="outline-text-3" id="text-org5650043">
-<table id="org94c7da2" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org8a2536f" class="outline-3">
+<h3 id="org8a2536f">Credential</h3>
+<div class="outline-text-3" id="text-org8a2536f">
+<table id="org345d417" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1061,10 +1365,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-orga0dc295" class="outline-3">
-<h3 id="orga0dc295">Status</h3>
-<div class="outline-text-3" id="text-orga0dc295">
-<table id="org2c1ee6a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org8057bf5" class="outline-3">
+<h3 id="org8057bf5">Status</h3>
+<div class="outline-text-3" id="text-org8057bf5">
+<table id="org59546c6" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1083,10 +1387,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-org331a526" class="outline-3">
-<h3 id="org331a526">Diff</h3>
-<div class="outline-text-3" id="text-org331a526">
-<table id="orgd66cd91" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org8ccd6fb" class="outline-3">
+<h3 id="org8ccd6fb">Diff</h3>
+<div class="outline-text-3" id="text-org8ccd6fb">
+<table id="orgae60be7" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1106,14 +1410,46 @@ it nicely instead of barfing out.
 </tr>
 </tbody>
 </table>
+
+<table id="org7460c88" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">xfuncname</td>
+<td class="org-left">(^\\(.* ¦ \\s*\\(defn.*)</td>
+</tr>
+</tbody>
+</table>
+
+<table id="org894eeeb" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">xfuncname</td>
+<td class="org-left">'^[ \t]*(pub¦)[ \t]*((fn¦struct¦enum¦impl¦trait¦mod)[^;]*)$'</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
 
-<div id="outline-container-orge71b6b8" class="outline-3">
-<h3 id="orge71b6b8">Push</h3>
-<div class="outline-text-3" id="text-orge71b6b8">
-<table id="org5552897" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org778840a" class="outline-3">
+<h3 id="org778840a">Push</h3>
+<div class="outline-text-3" id="text-org778840a">
+<table id="orgd595d57" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1137,10 +1473,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-org3ec7418" class="outline-3">
-<h3 id="org3ec7418">Pull</h3>
-<div class="outline-text-3" id="text-org3ec7418">
-<table id="org26957b7" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org7a33139" class="outline-3">
+<h3 id="org7a33139">Pull</h3>
+<div class="outline-text-3" id="text-org7a33139">
+<table id="orgd4101be" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1159,10 +1495,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-org9f30117" class="outline-3">
-<h3 id="org9f30117">Commit</h3>
-<div class="outline-text-3" id="text-org9f30117">
-<table id="org3f68377" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org7d732bb" class="outline-3">
+<h3 id="org7d732bb">Commit</h3>
+<div class="outline-text-3" id="text-org7d732bb">
+<table id="org2fb07c6" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1181,10 +1517,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-orgd0ca530" class="outline-3">
-<h3 id="orgd0ca530">Fetch</h3>
-<div class="outline-text-3" id="text-orgd0ca530">
-<table id="org2902e42" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org7b018ec" class="outline-3">
+<h3 id="org7b018ec">Fetch</h3>
+<div class="outline-text-3" id="text-org7b018ec">
+<table id="org0817325" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1203,10 +1539,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-org21e1cbb" class="outline-3">
-<h3 id="org21e1cbb">GC</h3>
-<div class="outline-text-3" id="text-org21e1cbb">
-<table id="org7493691" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org4eb48a9" class="outline-3">
+<h3 id="org4eb48a9">GC</h3>
+<div class="outline-text-3" id="text-org4eb48a9">
+<table id="org8d5366c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1230,10 +1566,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-orgb638d96" class="outline-3">
-<h3 id="orgb638d96">Branch</h3>
-<div class="outline-text-3" id="text-orgb638d96">
-<table id="orgeb20846" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgff0ac24" class="outline-3">
+<h3 id="orgff0ac24">Branch</h3>
+<div class="outline-text-3" id="text-orgff0ac24">
+<table id="org7736d2a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1252,32 +1588,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-orgae94795" class="outline-3">
-<h3 id="orgae94795">Github</h3>
-<div class="outline-text-3" id="text-orgae94795">
-<table id="orga2e93a6" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">protocol</td>
-<td class="org-left">https</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-
-
-<div id="outline-container-org8a6ac9c" class="outline-3">
-<h3 id="org8a6ac9c">Grep</h3>
-<div class="outline-text-3" id="text-org8a6ac9c">
-<table id="orgf502d30" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org7efa4b0" class="outline-3">
+<h3 id="org7efa4b0">Grep</h3>
+<div class="outline-text-3" id="text-org7efa4b0">
+<table id="org1cf800c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1301,10 +1615,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-org3e474ac" class="outline-3">
-<h3 id="org3e474ac">Filters</h3>
-<div class="outline-text-3" id="text-org3e474ac">
-<table id="orgdea0123" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgd2efd6d" class="outline-3">
+<h3 id="orgd2efd6d">Filters</h3>
+<div class="outline-text-3" id="text-orgd2efd6d">
+<table id="orgc1c817a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1330,7 +1644,7 @@ it nicely instead of barfing out.
 </tbody>
 </table>
 
-<table id="orgdcf6dad" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org2e88523" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1364,10 +1678,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-org779bd03" class="outline-3">
-<h3 id="org779bd03">Magit</h3>
-<div class="outline-text-3" id="text-org779bd03">
-<table id="org2e77f49" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgb4782f2" class="outline-3">
+<h3 id="orgb4782f2">Magit</h3>
+<div class="outline-text-3" id="text-orgb4782f2">
+<table id="orge1f6267" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1386,10 +1700,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-org46a27d6" class="outline-3">
-<h3 id="org46a27d6">Apply</h3>
-<div class="outline-text-3" id="text-org46a27d6">
-<table id="org4349263" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgb292b43" class="outline-3">
+<h3 id="orgb292b43">Apply</h3>
+<div class="outline-text-3" id="text-orgb292b43">
+<table id="org0c792cd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1408,10 +1722,10 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-org7f9c49a" class="outline-3">
-<h3 id="org7f9c49a">Merge</h3>
-<div class="outline-text-3" id="text-org7f9c49a">
-<table id="org80aed28" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org3cab773" class="outline-3">
+<h3 id="org3cab773">Merge</h3>
+<div class="outline-text-3" id="text-org3cab773">
+<table id="orgf648125" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1430,10 +1744,14 @@ it nicely instead of barfing out.
 </div>
 
 
-<div id="outline-container-orgbebf432" class="outline-3">
-<h3 id="orgbebf432">Diff</h3>
-<div class="outline-text-3" id="text-orgbebf432">
-<table id="orgf8b8f6f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgd6766c2" class="outline-3">
+<h3 id="orgd6766c2">Transfer</h3>
+<div class="outline-text-3" id="text-orgd6766c2">
+<p>
+We validate objects and their connection to commits before
+transferring.
+</p>
+<table id="org9e6acf4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1443,35 +1761,22 @@ it nicely instead of barfing out.
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">xfuncname</td>
-<td class="org-left">(^\\(.* ¦ \\s*\\(defn.*)</td>
-</tr>
-</tbody>
-</table>
-
-<table id="orgeb2fc57" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">xfuncname</td>
-<td class="org-left">'^[ \t]*(pub¦)[ \t]*((fn¦struct¦enum¦impl¦trait¦mod)[^;]*)$'</td>
+<td class="org-left">fsckObjects</td>
+<td class="org-left">true</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-
-<div id="outline-container-org454ed7c" class="outline-3">
-<h3 id="org454ed7c">Include</h3>
-<div class="outline-text-3" id="text-org454ed7c">
-<table id="org0cccd55" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgfba9252" class="outline-3">
+<h3 id="orgfba9252">Include</h3>
+<div class="outline-text-3" id="text-orgfba9252">
+<p>
+We use a separate file for configurations that should not be pushed to
+a remote. Could be for security purposes.
+</p>
+<table id="orgbcb3cad" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1489,93 +1794,95 @@ it nicely instead of barfing out.
 </div>
 </div>
 </div>
-<div id="outline-container-org3c44892" class="outline-2">
-<h2 id="org3c44892">Tmux</h2>
-<div class="outline-text-2" id="text-org3c44892">
+<div id="outline-container-org43a2866" class="outline-2">
+<h2 id="org43a2866">Tmux</h2>
+<div class="outline-text-2" id="text-org43a2866">
 </div>
-<div id="outline-container-org946ca45" class="outline-3">
-<h3 id="org946ca45">Configuration</h3>
-<div class="outline-text-3" id="text-org946ca45">
+<div id="outline-container-org96486d4" class="outline-3">
+<h3 id="org96486d4">Configuration</h3>
+<div class="outline-text-3" id="text-org96486d4">
 <div class="org-src-container">
-<pre class="src src-conf"><span class="org-comment-delimiter"># </span><span class="org-comment">Home. PC configuration files</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Copyright (C) 2020  Henrik Kjerringv&#229;g</span>
-<span class="org-comment-delimiter"># </span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">This program is free software: you can redistribute it and/or modify</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">it under the terms of the GNU General Public License as published by</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">the Free Software Foundation, either version 3 of the License, or</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">(at your option) any later version.</span>
-<span class="org-comment-delimiter"># </span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">This program is distributed in the hope that it will be useful,</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">GNU General Public License for more details.</span>
-<span class="org-comment-delimiter"># </span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">You should have received a copy of the GNU General Public License</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">along with this program.  If not, see <a href="https://www.gnu.org/licenses/">&lt;https://www.gnu.org/licenses/&gt;</a>.</span>
+<pre class="src src-conf"># Home. PC configuration files
+# Copyright (C) 2021  Henrik Kjerringvåg
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
 
-set -g prefix C-space
-bind Space last-window
+set -g mouse on
 set -g mode-keys vi
 set -g history-limit 10000
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Plugins</span>
-set -g @tpm_plugins <span class="org-string">"                 \</span>
-<span class="org-string">  tmux-plugins/tpm                    \</span>
-<span class="org-string">  tmux-plugins/tmux-copycat           \</span>
-<span class="org-string">  tmux-plugins/tmux-open              \</span>
-<span class="org-string">  tmux-plugins/tmux-pain-control      \</span>
-<span class="org-string">  tmux-plugins/tmux-prefix-highlight  \</span>
-<span class="org-string">  tmux-plugins/tmux-resurrect         \</span>
-<span class="org-string">  tmux-plugins/tmux-sensible          \</span>
-<span class="org-string">  tmux-plugins/tmux-yank              \</span>
-<span class="org-string">"</span>
+# Plugins
+set -g @tpm_plugins "                 \
+  tmux-plugins/tpm                    \
+  tmux-plugins/tmux-copycat           \
+  tmux-plugins/tmux-open              \
+  tmux-plugins/tmux-pain-control      \
+  tmux-plugins/tmux-prefix-highlight  \
+  tmux-plugins/tmux-resurrect         \
+  tmux-plugins/tmux-sensible          \
+  tmux-plugins/tmux-yank              \
+"
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">One indexed panes for easier switching</span>
+set -g @plugin 'roosta/tmux-fuzzback'
+
+# One indexed panes for easier switching
 set -g base-index 1
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Smart pane switching with awareness of vim splits</span>
-bind -n C-h run <span class="org-string">"(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-h) || tmux select-pane -L"</span>
-bind -n C-j run <span class="org-string">"(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-j) || tmux select-pane -D"</span>
-bind -n C-k run <span class="org-string">"(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-k) || tmux select-pane -U"</span>
-bind -n C-l run <span class="org-string">"(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-l) || tmux select-pane -R"</span>
+# Smart pane switching with awareness of vim splits
+bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-h) || tmux select-pane -L"
+bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-j) || tmux select-pane -D"
+bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-k) || tmux select-pane -U"
+bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-l) || tmux select-pane -R"
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Vim clipboard</span>
+# Vim clipboard
 set -g default-shell $SHELL
-set -g default-command <span class="org-string">"reattach-to-user-namespace -l ${SHELL}"</span>
+set -g default-command "reattach-to-user-namespace -l ${SHELL}"
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Synchronize panes</span>
+# Synchronize panes
 bind * set-window-option synchronize-pane
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Refresh tmux</span>
+# Refresh tmux
 bind r source-file ~/.tmux.conf
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Open an ssh-connection in another window</span>
-bind S command-prompt -p ssh: <span class="org-string">"new-window -n %1 'ssh %1'"</span>
+# Open an ssh-connection in another window
+bind S command-prompt -p ssh: "new-window -n %1 'ssh %1'"
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Automatic window-naming</span>
+# Automatic window-naming
 setw -g automatic-rename on
-setw -g automatic-rename-format <span class="org-string">'#{b:pane_current_path}'</span>
+setw -g automatic-rename-format '#{b:pane_current_path}'
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Theme</span>
+# Theme
 set -g status-interval 5
 set -g status-justify centre
-set-window-option -g window-status-current-format <span class="org-string">"| #I:#W "</span>
-set -g status-left <span class="org-string">"#{prefix_highlight}"</span>
-set -g status-right <span class="org-string">""</span>
+set-window-option -g window-status-current-format "| #I:#W "
+set -g status-left "#{prefix_highlight}"
+set -g status-right ""
+set -g status-style fg=white,bg=blue
 
-<span class="org-comment-delimiter"># </span><span class="org-comment">Initialize package-manager</span>
-run-shell <span class="org-string">"~/.tmux/plugins/tpm/tpm"</span>
+# Initialize package-manager
+run-shell "~/.tmux/plugins/tpm/tpm"
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-orgdb86057" class="outline-2">
-<h2 id="orgdb86057">License</h2>
-<div class="outline-text-2" id="text-orgdb86057">
+<div id="outline-container-org70aadcf" class="outline-2">
+<h2 id="org70aadcf">License</h2>
+<div class="outline-text-2" id="text-org70aadcf">
 <div class="org-src-container">
-<pre class="src src-text" id="org2da8a9c">Home. PC configuration files
-Copyright (C) 2020  Henrik Kjerringv&#229;g
+<pre class="src src-text" id="org2f0c435">Home. PC configuration files
+Copyright (C) 2021  Henrik Kjerringvåg
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -1588,7 +1895,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <a href="https://www.gnu.org/licenses/">&lt;https://www.gnu.org/licenses/&gt;</a>.
+along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
 </pre>
 </div>
 </main>

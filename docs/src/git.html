@@ -3,33 +3,215 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-04-22 Wed 15:18 -->
+<!-- 2021-03-02 Tue 10:47 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Henrik Kjerringvåg" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
 <link rel="stylesheet" href="css/docs.css"><script src="js/docs.js"></script>
 <script type="text/javascript">
-// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&amp;dn=gpl-3.0.txt GPL-v3-or-Later
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
      function CodeHighlightOn(elem, id)
      {
        var target = document.getElementById(id);
        if(null != target) {
-         elem.cacheClassElem = elem.className;
-         elem.cacheClassTarget = target.className;
-         target.className = "code-highlighted";
-         elem.className   = "code-highlighted";
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
        }
      }
      function CodeHighlightOff(elem, id)
      {
        var target = document.getElementById(id);
-       if(elem.cacheClassElem)
-         elem.className = elem.cacheClassElem;
-       if(elem.cacheClassTarget)
-         target.className = elem.cacheClassTarget;
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
      }
     /*]]>*///-->
 // @license-end
@@ -41,41 +223,159 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org33b6e61">Git</a>
+<li><a href="#orgc0d0a3e">Git</a>
 <ul>
-<li><a href="#orga54d30e">Core</a></li>
-<li><a href="#org7b1e68b">Alias</a></li>
-<li><a href="#org053a956">Color</a></li>
-<li><a href="#org7bc5658">Credential</a></li>
-<li><a href="#orgda7b8b4">Status</a></li>
-<li><a href="#orgd8b6077">Diff</a></li>
-<li><a href="#orgfa43f5f">Push</a></li>
-<li><a href="#org4f0e595">Pull</a></li>
-<li><a href="#orgf0672fa">Commit</a></li>
-<li><a href="#orga658a4a">Fetch</a></li>
-<li><a href="#orgbbbbb83">GC</a></li>
-<li><a href="#org0ca56d6">Branch</a></li>
-<li><a href="#org814536f">Github</a></li>
-<li><a href="#orgc3d885e">Grep</a></li>
-<li><a href="#org10fa7ea">Filters</a></li>
-<li><a href="#org456f7a5">Magit</a></li>
-<li><a href="#orgd99f76d">Apply</a></li>
-<li><a href="#orgbb77229">Merge</a></li>
-<li><a href="#org5582d58">Diff</a></li>
-<li><a href="#org6e254b6">Include</a></li>
+<li><a href="#org07c6d8c">Custom functionality</a>
+<ul>
+<li><a href="#org5ded1d0">Words diff</a></li>
+<li><a href="#org36f94ed">Who am I</a></li>
+</ul>
+</li>
+<li><a href="#orga623986">Core</a></li>
+<li><a href="#orgb5ae175">Alias</a></li>
+<li><a href="#orgeb5132d">Color</a></li>
+<li><a href="#org5157c00">Credential</a></li>
+<li><a href="#orga144f4e">Status</a></li>
+<li><a href="#org4a21749">Diff</a></li>
+<li><a href="#org3080f5e">Push</a></li>
+<li><a href="#orgcf81e62">Pull</a></li>
+<li><a href="#org8991ef4">Commit</a></li>
+<li><a href="#org3bfde0b">Fetch</a></li>
+<li><a href="#org966ceb8">GC</a></li>
+<li><a href="#orga68ece5">Branch</a></li>
+<li><a href="#orge5004e7">Grep</a></li>
+<li><a href="#orga88a921">Filters</a></li>
+<li><a href="#org28d36b4">Magit</a></li>
+<li><a href="#org714fa25">Apply</a></li>
+<li><a href="#orgc3dcc3a">Merge</a></li>
+<li><a href="#org1fe9403">Transfer</a></li>
+<li><a href="#org9620b92">Include</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org33b6e61" class="outline-2">
-<h2 id="org33b6e61">Git</h2>
-<div class="outline-text-2" id="text-org33b6e61">
+<div id="outline-container-orgc0d0a3e" class="outline-2">
+<h2 id="orgc0d0a3e">Git</h2>
+<div class="outline-text-2" id="text-orgc0d0a3e">
+<p>
+These are global git-configurations that people most often set using
+<code>git config --global</code>. Since those would be overwritten upon tangling
+this document, I advise against it. Use <code>git config --(system|local)</code> or
+manually add to <code>~/.gitconfig.local</code> instead.
+</p>
 </div>
-<div id="outline-container-orga54d30e" class="outline-3">
-<h3 id="orga54d30e">Core</h3>
-<div class="outline-text-3" id="text-orga54d30e">
-<table id="orgef483db" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+<div id="outline-container-org07c6d8c" class="outline-3">
+<h3 id="org07c6d8c">Custom functionality</h3>
+<div class="outline-text-3" id="text-org07c6d8c">
+</div>
+<div id="outline-container-org5ded1d0" class="outline-4">
+<h4 id="org5ded1d0">Words diff</h4>
+<div class="outline-text-4" id="text-org5ded1d0">
+<p>
+Will get the number of words that's been changed. This is useful if
+you use a service like ex. Crowdin for translations, where they charge
+for number of words translated.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">#!/bin/sh
+set -euo pipefail
+
+function usage {
+  cat &lt;&lt; EOT
+
+  Usage: git words-diff [options] [&lt;commit&gt;] [--] [&lt;path&gt;...]
+
+  Options:
+
+    -h, --help     output usage information
+
+EOT
+}
+
+function git_words_added {
+    git diff --word-diff=porcelain "$@" | grep -e "^+[^+]" | wc -w | xargs
+}
+
+function git_words_removed {
+    git diff --word-diff=porcelain "$@" | grep -e "^-[^-]" | wc -w | xargs
+}
+
+function git_words_diff {
+    echo $(($(git_words_added "$@") - $(git_words_removed "$@")))
+}
+
+while test $# -ne 0; do
+  arg=$1; shift
+  case $arg in
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Words added:   $(git_words_added $arg $@)"
+      echo "Words removed: $(git_words_removed $arg $@)"
+      echo "Sum:           $(git_words_diff $arg $@)"
+      break;
+      ;;
+  esac
+done
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org36f94ed" class="outline-4">
+<h4 id="org36f94ed">Who am I</h4>
+<div class="outline-text-4" id="text-org36f94ed">
+<p>
+Run <code>git whoami</code> to see what's your user local to the repository you're in.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">#!/bin/sh
+
+# git-whoami
+# Author: Peter Eisentraut &lt;peter@eisentraut.org&gt;
+# Created: 2011-10-27
+# License: WTFPL; see http://sam.zoy.org/wtfpl/
+
+# exact logic in ident.c in git source tree
+
+set -e
+
+get_email() {
+	git config user.email || ( [ -n "$EMAIL" ] &amp;&amp; echo "$EMAIL" ) || echo "$(id -nu)@$(hostname --fqdn)"
+}
+
+get_name() {
+	git config user.name || getent passwd $(id -un) | cut -d : -f 5 | cut -d , -f 1
+}
+
+: ${GIT_AUTHOR_NAME=$(get_name)}
+: ${GIT_COMMITTER_NAME=$(get_name)}
+: ${GIT_AUTHOR_EMAIL=$(get_email)}
+: ${GIT_COMMITTER_EMAIL=$(get_email)}
+
+author="$GIT_AUTHOR_NAME &lt;$GIT_AUTHOR_EMAIL&gt;"
+commit="$GIT_COMMITTER_NAME &lt;$GIT_COMMITTER_EMAIL&gt;"
+
+if [ "$author" = "$commit" ]; then
+	echo "$author"
+else
+	echo "Author: $author"
+	echo "Commit: $commit"
+fi
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga623986" class="outline-3">
+<h3 id="orga623986">Core</h3>
+<div class="outline-text-3" id="text-orga623986">
+<table id="org88e0df7" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -88,21 +388,16 @@
 <td class="org-left">commitGraph</td>
 <td class="org-left">true</td>
 </tr>
-
-<tr>
-<td class="org-left">pager</td>
-<td class="org-left">delta &#x2013;dark</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
 
 
-<div id="outline-container-org7b1e68b" class="outline-3">
-<h3 id="org7b1e68b">Alias</h3>
-<div class="outline-text-3" id="text-org7b1e68b">
-<table id="orge93a166" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgb5ae175" class="outline-3">
+<h3 id="orgb5ae175">Alias</h3>
+<div class="outline-text-3" id="text-orgb5ae175">
+<table id="org42378c7" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -401,10 +696,10 @@
 </div>
 
 
-<div id="outline-container-org053a956" class="outline-3">
-<h3 id="org053a956">Color</h3>
-<div class="outline-text-3" id="text-org053a956">
-<table id="orge45aa5c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgeb5132d" class="outline-3">
+<h3 id="orgeb5132d">Color</h3>
+<div class="outline-text-3" id="text-orgeb5132d">
+<table id="org592362d" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -438,10 +733,10 @@
 </div>
 
 
-<div id="outline-container-org7bc5658" class="outline-3">
-<h3 id="org7bc5658">Credential</h3>
-<div class="outline-text-3" id="text-org7bc5658">
-<table id="orgdffe1b2" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org5157c00" class="outline-3">
+<h3 id="org5157c00">Credential</h3>
+<div class="outline-text-3" id="text-org5157c00">
+<table id="org523ba60" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -460,10 +755,10 @@
 </div>
 
 
-<div id="outline-container-orgda7b8b4" class="outline-3">
-<h3 id="orgda7b8b4">Status</h3>
-<div class="outline-text-3" id="text-orgda7b8b4">
-<table id="org95f7475" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orga144f4e" class="outline-3">
+<h3 id="orga144f4e">Status</h3>
+<div class="outline-text-3" id="text-orga144f4e">
+<table id="org550fd96" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -482,10 +777,10 @@
 </div>
 
 
-<div id="outline-container-orgd8b6077" class="outline-3">
-<h3 id="orgd8b6077">Diff</h3>
-<div class="outline-text-3" id="text-orgd8b6077">
-<table id="orgce945e2" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org4a21749" class="outline-3">
+<h3 id="org4a21749">Diff</h3>
+<div class="outline-text-3" id="text-org4a21749">
+<table id="org5b92ea4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -505,14 +800,46 @@
 </tr>
 </tbody>
 </table>
+
+<table id="org5b16c32" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">xfuncname</td>
+<td class="org-left">(^\\(.* ¦ \\s*\\(defn.*)</td>
+</tr>
+</tbody>
+</table>
+
+<table id="org87fe198" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">xfuncname</td>
+<td class="org-left">'^[ \t]*(pub¦)[ \t]*((fn¦struct¦enum¦impl¦trait¦mod)[^;]*)$'</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
 
-<div id="outline-container-orgfa43f5f" class="outline-3">
-<h3 id="orgfa43f5f">Push</h3>
-<div class="outline-text-3" id="text-orgfa43f5f">
-<table id="orge31b420" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org3080f5e" class="outline-3">
+<h3 id="org3080f5e">Push</h3>
+<div class="outline-text-3" id="text-org3080f5e">
+<table id="org64676f4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -536,10 +863,10 @@
 </div>
 
 
-<div id="outline-container-org4f0e595" class="outline-3">
-<h3 id="org4f0e595">Pull</h3>
-<div class="outline-text-3" id="text-org4f0e595">
-<table id="orgd8e1a89" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgcf81e62" class="outline-3">
+<h3 id="orgcf81e62">Pull</h3>
+<div class="outline-text-3" id="text-orgcf81e62">
+<table id="orgd8ee321" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -558,10 +885,10 @@
 </div>
 
 
-<div id="outline-container-orgf0672fa" class="outline-3">
-<h3 id="orgf0672fa">Commit</h3>
-<div class="outline-text-3" id="text-orgf0672fa">
-<table id="orgae517c7" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org8991ef4" class="outline-3">
+<h3 id="org8991ef4">Commit</h3>
+<div class="outline-text-3" id="text-org8991ef4">
+<table id="orgc18a051" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -580,10 +907,10 @@
 </div>
 
 
-<div id="outline-container-orga658a4a" class="outline-3">
-<h3 id="orga658a4a">Fetch</h3>
-<div class="outline-text-3" id="text-orga658a4a">
-<table id="orga7e9288" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org3bfde0b" class="outline-3">
+<h3 id="org3bfde0b">Fetch</h3>
+<div class="outline-text-3" id="text-org3bfde0b">
+<table id="org7049c97" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -602,10 +929,10 @@
 </div>
 
 
-<div id="outline-container-orgbbbbb83" class="outline-3">
-<h3 id="orgbbbbb83">GC</h3>
-<div class="outline-text-3" id="text-orgbbbbb83">
-<table id="org585b936" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org966ceb8" class="outline-3">
+<h3 id="org966ceb8">GC</h3>
+<div class="outline-text-3" id="text-org966ceb8">
+<table id="orgedc2dc7" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -629,10 +956,10 @@
 </div>
 
 
-<div id="outline-container-org0ca56d6" class="outline-3">
-<h3 id="org0ca56d6">Branch</h3>
-<div class="outline-text-3" id="text-org0ca56d6">
-<table id="orgfecc51d" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orga68ece5" class="outline-3">
+<h3 id="orga68ece5">Branch</h3>
+<div class="outline-text-3" id="text-orga68ece5">
+<table id="org0d5ef62" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -651,32 +978,10 @@
 </div>
 
 
-<div id="outline-container-org814536f" class="outline-3">
-<h3 id="org814536f">Github</h3>
-<div class="outline-text-3" id="text-org814536f">
-<table id="org7f24f1e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">protocol</td>
-<td class="org-left">https</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-
-
-<div id="outline-container-orgc3d885e" class="outline-3">
-<h3 id="orgc3d885e">Grep</h3>
-<div class="outline-text-3" id="text-orgc3d885e">
-<table id="orgb66b869" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orge5004e7" class="outline-3">
+<h3 id="orge5004e7">Grep</h3>
+<div class="outline-text-3" id="text-orge5004e7">
+<table id="org98e6931" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -700,10 +1005,10 @@
 </div>
 
 
-<div id="outline-container-org10fa7ea" class="outline-3">
-<h3 id="org10fa7ea">Filters</h3>
-<div class="outline-text-3" id="text-org10fa7ea">
-<table id="org3e7d7de" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orga88a921" class="outline-3">
+<h3 id="orga88a921">Filters</h3>
+<div class="outline-text-3" id="text-orga88a921">
+<table id="org1fcfc28" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -729,7 +1034,7 @@
 </tbody>
 </table>
 
-<table id="org030c3eb" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orga3f0ffd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -763,10 +1068,10 @@
 </div>
 
 
-<div id="outline-container-org456f7a5" class="outline-3">
-<h3 id="org456f7a5">Magit</h3>
-<div class="outline-text-3" id="text-org456f7a5">
-<table id="org62730bb" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org28d36b4" class="outline-3">
+<h3 id="org28d36b4">Magit</h3>
+<div class="outline-text-3" id="text-org28d36b4">
+<table id="org5bebb8b" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -785,10 +1090,10 @@
 </div>
 
 
-<div id="outline-container-orgd99f76d" class="outline-3">
-<h3 id="orgd99f76d">Apply</h3>
-<div class="outline-text-3" id="text-orgd99f76d">
-<table id="orge91f8c4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org714fa25" class="outline-3">
+<h3 id="org714fa25">Apply</h3>
+<div class="outline-text-3" id="text-org714fa25">
+<table id="org9b1a464" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -807,10 +1112,10 @@
 </div>
 
 
-<div id="outline-container-orgbb77229" class="outline-3">
-<h3 id="orgbb77229">Merge</h3>
-<div class="outline-text-3" id="text-orgbb77229">
-<table id="orgad29893" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgc3dcc3a" class="outline-3">
+<h3 id="orgc3dcc3a">Merge</h3>
+<div class="outline-text-3" id="text-orgc3dcc3a">
+<table id="org4140415" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -829,10 +1134,14 @@
 </div>
 
 
-<div id="outline-container-org5582d58" class="outline-3">
-<h3 id="org5582d58">Diff</h3>
-<div class="outline-text-3" id="text-org5582d58">
-<table id="org7d0c269" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org1fe9403" class="outline-3">
+<h3 id="org1fe9403">Transfer</h3>
+<div class="outline-text-3" id="text-org1fe9403">
+<p>
+We validate objects and their connection to commits before
+transferring.
+</p>
+<table id="org025fda0" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -842,35 +1151,22 @@
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">xfuncname</td>
-<td class="org-left">(^\\(.* ¦ \\s*\\(defn.*)</td>
-</tr>
-</tbody>
-</table>
-
-<table id="org5b9f29e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">xfuncname</td>
-<td class="org-left">'^[ \t]*(pub¦)[ \t]*((fn¦struct¦enum¦impl¦trait¦mod)[^;]*)$'</td>
+<td class="org-left">fsckObjects</td>
+<td class="org-left">true</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-
-<div id="outline-container-org6e254b6" class="outline-3">
-<h3 id="org6e254b6">Include</h3>
-<div class="outline-text-3" id="text-org6e254b6">
-<table id="org8935c40" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org9620b92" class="outline-3">
+<h3 id="org9620b92">Include</h3>
+<div class="outline-text-3" id="text-org9620b92">
+<p>
+We use a separate file for configurations that should not be pushed to
+a remote. Could be for security purposes.
+</p>
+<table id="org654c420" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>

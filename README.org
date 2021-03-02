@@ -10,3 +10,95 @@ that I use on my boxes. It's written in a literate style using
 
 If you would like to reach out to me about any of this, you can create
 an issue or email me: henrik @ kjerringvag・no
+
+* Up & running
+
+My home relies heavily on Emacs to tangle code-blocks into sourcefiles
+that can be installed. Evaluating the line below in your terminal will
+install [[https://brew.sh][Homebrew]] and the listed dependencies. The only "dotfiles" that
+I keep separate are my editor configurations. I have a set of
+configurations for both Vim and Emacs. I no longer use Vim, so their
+quite dated, but my Emacs configurations are available for inspiration
+at [[https://github.com/hkjels/elan][Elan]].
+#+begin_src shell
+make install
+#+end_src
+
+* Dependencies
+
+#+name: deps
+- aspell
+- autoconf
+- automake
+- babashka
+- bat
+- burl
+- ccls
+- clang-format
+- clj-kondo
+- clojure
+- clojure-lsp
+- ditaa
+- editorconfig
+- exa
+- exiftool
+- fzf
+- git
+- git-fresh
+- git-extras
+- gitleaks
+- grc
+- hr
+- htop
+- hub
+- ispell
+- mcfly
+- nmap
+- ripgrep
+- ripgrep-all
+- rust
+- rust-analyzer
+- sloc
+- starship
+- tmux
+- topgrade
+- trash
+- wtf
+- z
+- zsh
+- zsh-autosuggestions
+- zsh-completions
+- zsh-git-prompt
+- zsh-navigation-tools
+- zsh-syntax-highlighting
+- zydis
+
+#+name: brew
+#+begin_src emacs-lisp :var deps=deps
+(mapconcat 'identity
+	(-map (lambda (dep)
+		(message "%s '%s'" "brew" (car dep))) deps) "\n")
+#+end_src
+
+#+begin_src ruby :tangle Brewfile :noweb yes
+<<brew()>>
+#+end_src
+
+* Makefile                                                           :noexport:
+
+#+begin_src makefile :tangle Makefile
+.PHONY: install bundle
+
+CURL=curl -fsSL
+
+brew:
+	@type -p "$@" >/dev/null 2>&1 || $(CURL) "https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+
+bundle: brew
+	$< $@
+
+.terminfo: terminfo-24bit
+	$(TIC) -o "$HOME/$@" $<
+
+install: .terminfo bundle
+#+end_src
