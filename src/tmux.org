@@ -8,8 +8,7 @@
 #+begin_src conf :tangle ~/.tmux.conf
 # <<license>>
 
-set -g prefix C-space
-bind Space last-window
+set -g mouse on
 set -g mode-keys vi
 set -g history-limit 10000
 
@@ -24,6 +23,8 @@ set -g @tpm_plugins "                 \
   tmux-plugins/tmux-sensible          \
   tmux-plugins/tmux-yank              \
 "
+
+set -g @plugin 'roosta/tmux-fuzzback'
 
 # One indexed panes for easier switching
 set -g base-index 1
@@ -57,6 +58,7 @@ set -g status-justify centre
 set-window-option -g window-status-current-format "| #I:#W "
 set -g status-left "#{prefix_highlight}"
 set -g status-right ""
+set -g status-style fg=white,bg=blue
 
 # Initialize package-manager
 run-shell "~/.tmux/plugins/tpm/tpm"
