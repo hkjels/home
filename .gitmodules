@@ -1,4 +1,0 @@
-[submodule "emacs"]
-	path = emacs
-	url = git://git.savannah.gnu.org/emacs.git
-	branch = feature/native-comp
