@@ -147,6 +147,15 @@ eval "$(starship init $SHELL_SHORT)"
 #+end_src
 \\
 \\
+[[https://github.com/roosta/fif][Fif]] uses a combination of fzf and
+fast grep alternatives to achieve a better search-experience for code
+in the terminal.
+#+name: fif
+#+begin_src shell
+[ -f "~/.fif.$SHELL_SHORT" ] && . "~/.fif.$SHELL_SHORT"
+#+end_src
+\\
+\\
 [[https://www-zeuthen.desy.de/~friebel/unix/lesspipe.html][Lesspipe]] is an input-filter for ~less~ that makes it possible to view
 the content of binaries and archives.
 #+name: lesspipe
@@ -410,8 +419,9 @@ export TERM=xterm-24bit
 | hr        | echo ; hr -; echo ;                                |
 | ip        | dig +short myip.opendns.com @resolver1.opendns.com |
 | l         | lunchy                                             |
+| ls        | exa                                                |
 | la        | ls -la                                             |
-| ll        | ls -l                                              |
+| ll        | ls -1                                              |
 | localip   | ipconfig getifaddr en0                             |
 | lt        | ls --tree                                          |
 | magit     | $EDITOR -e \(magit-status\)                        |
@@ -455,6 +465,8 @@ export TERM=xterm-24bit
 <<starship>>
 
 <<fzf>>
+
+<<fif>>
 
 <<lesspipe>>
 
@@ -583,9 +595,6 @@ setopt auto_pushd
 
 # Use vi-bindings
 bindkey -v
-
-# Fzf fuzzy-matcher
-[ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
 
 # Fish-like autosuggestions
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
