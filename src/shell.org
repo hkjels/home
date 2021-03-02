@@ -35,46 +35,25 @@ environment-variables from, as you can see below.
 
 #+name: path-definitions
 | ANDROID_HOME | $HOME/Library/Android/sdk                         |
-| JAVA_HOME    | $(/usr/libexec/java_home -v 1.8.0_202)            |
-| PATH         | $HOME/bin                                         |
-| PATH         | /usr/local/lib/ruby/gems/2.7.0/bin                |
-| PATH         | $HOME/.local/bin                                  |
-| PATH         | $JAVA_HOME/bin                                    |
-| PATH         | /usr/local/bin                                    |
-| PATH         | /usr/local/opt/ruby/bin                           |
-| PATH         | /bin                                              |
-| PATH         | /sbin                                             |
-| PATH         | /usr/bin                                          |
-| PATH         | /usr/sbin                                         |
-| PATH         | /usr/X11/bin                                      |
-| PATH         | /usr/local/sbin                                   |
-| PATH         | /usr/local/opt/texinfo/bin                        |
-| PATH         | /usr/local/opt/libxml2/bin                        |
-| PATH         | /Library/TeX/texbin                               |
-| PATH         | /opt/X11/bin                                      |
-| PATH         | /usr/local/opt/llvm/bin                           |
-| PATH         | $HOME/.cargo                                      |
 | PATH         | $ANDROID_HOME/platform-tools                      |
 | PATH         | $ANDROID_HOME/tools                               |
 | PATH         | $ANDROID_HOME/emulator                            |
 | PATH         | $ANDROID_HOME/tools/bin                           |
-| MANPATH      | /usr/share/man                                    |
-| MANPATH      | /usr/local/share/man                              |
-| MANPATH      | /opt/X11/share/man                                |
-| MANPATH      | /Library/TeX/Distributions/.DefaultTeX/Contents/Man |
+| PATH         | $HOME/bin                                         |
 
 #+name: paths
 #+begin_src emacs-lisp :var path-definitions=path-definitions
 (mapconcat 'identity
            (mapcar (lambda (path)
            (if (> (safe-length (cdr path)) 1)
-               (format "export %s=%s" (car path) (mapconcat 'identity (mapcar 'car (mapcar 'cdr (cdr path))) ":"))
-             (format "export %s=%s" (car path) (mapconcat 'identity (cdr (cadr path)) "")))) (seq-group-by 'car path-definitions)) "\n")
+               (format "export %s=%s:$%s" (car path) (mapconcat 'identity (mapcar 'car (mapcar 'cdr (cdr path))) ":") (car path))
+             (format "export %s=%s" (car path) (mapconcat 'identity (cdr (cadr path)) "") (car path)))) (seq-group-by 'car path-definitions)) "\n")
 #+end_src
 
 #+begin_src shell :tangle ~/shell/env
 # <<license>>
 <<paths()>>
+eval $(/opt/homebrew/bin/brew shellenv)
 #+end_src
 
 ** Login
