@@ -37,9 +37,7 @@ make install
 - clang-format
 - clj-kondo
 - clojure
-- clojure-lsp
 - ditaa
-- editorconfig
 - exa
 - exiftool
 - fzf
@@ -52,10 +50,9 @@ make install
 - htop
 - hub
 - ispell
-- mcfly
+- mas
 - nmap
 - ripgrep
-- ripgrep-all
 - rust
 - rust-analyzer
 - sloc
@@ -73,15 +70,57 @@ make install
 - zsh-syntax-highlighting
 - zydis
 
+#+name: casks
+- android-studio
+- imageoptim
+- slack
+
+#+name: macapps
+|  424389933 | Final Cut Pro                 |
+| 1289583905 | Pixelmator Pro                |
+|  419330170 | Moom                          |
+| 1482920575 | DuckDuckGo Privacy Essentials |
+|  497799835 | Xcode                         |
+|  990588172 | Gestimer                      |
+
 #+name: brew
 #+begin_src emacs-lisp :var deps=deps
 (mapconcat 'identity
 	(-map (lambda (dep)
-		(message "%s '%s'" "brew" (car dep))) deps) "\n")
+		(message "%s \"%s\"" "brew" (car dep))) deps) "\n")
+#+end_src
+
+#+name: cask
+#+begin_src emacs-lisp :var deps=casks
+(mapconcat 'identity
+	(-map (lambda (dep)
+		(message "%s \"%s\"" "cask" (car dep))) deps) "\n")
+#+end_src
+
+#+name: mas
+#+begin_src emacs-lisp :var deps=macapps
+(mapconcat 'identity
+	   (-map (lambda (dep)
+		   (message "%s \"%s\", id: %s" "mas" (car (cdr dep)) (car dep))) deps) "\n")
 #+end_src
 
 #+begin_src ruby :tangle Brewfile :noweb yes
+tap "homebrew/cask"
+tap "borkdude/brew"
+tap "clojure-lsp/brew"
+
+# Brews are libraries and commandline interfaces
+# Often brews are bottled, meaning installation is just about
+# downloading to a location that's on your PATH
 <<brew()>>
+
+# Casks are executables that can not be found in the Appstore
+# There are also some resources like fonts available as Casks
+<<cask()>>
+
+# With Mas we can download applications from the Appstore from the
+# commandline
+<<mas()>>
 #+end_src
 
 * Makefile                                                           :noexport:
@@ -89,6 +128,7 @@ make install
 #+begin_src makefile :tangle Makefile
 .PHONY: install bundle
 
+TIC=tic
 CURL=curl -fsSL
 
 brew:

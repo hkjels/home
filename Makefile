@@ -1,5 +1,6 @@
 .PHONY: install bundle
 
+TIC=tic
 CURL=curl -fsSL
 
 brew:
