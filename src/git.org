@@ -5,6 +5,96 @@ These are global git-configurations that people most often set using
 this document, I advise against it. Use ~git config --(system|local)~ or
 manually add to ~~/.gitconfig.local~ instead.
 
+** Custom functionality
+
+*** Words diff
+
+Will get the number of words that's been changed. This is useful if
+you use a service like ex. Crowdin for translations, where they charge
+for number of words translated.
+#+begin_src shell :tangle ~/bin/git-words-diff :tangle-mode (identity #o755)
+#!/bin/sh
+set -euo pipefail
+
+function usage {
+  cat << EOT
+
+  Usage: git words-diff [options] [<commit>] [--] [<path>...]
+
+  Options:
+
+    -h, --help     output usage information
+
+EOT
+}
+
+function git_words_added {
+    git diff --word-diff=porcelain "$@" | grep -e "^+[^+]" | wc -w | xargs
+}
+
+function git_words_removed {
+    git diff --word-diff=porcelain "$@" | grep -e "^-[^-]" | wc -w | xargs
+}
+
+function git_words_diff {
+    echo $(($(git_words_added "$@") - $(git_words_removed "$@")))
+}
+
+while test $# -ne 0; do
+  arg=$1; shift
+  case $arg in
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    ,*)
+      echo "Words added:   $(git_words_added $arg $@)"
+      echo "Words removed: $(git_words_removed $arg $@)"
+      echo "Sum:           $(git_words_diff $arg $@)"
+      break;
+      ;;
+  esac
+done
+#+end_src
+
+*** Who am I
+
+Run ~git whoami~ to see what's your user local to the repository you're in.
+#+begin_src shell :tangle ~/bin/git-whoami :tangle-mode (identity #o755)
+#!/bin/sh
+
+# git-whoami
+# Author: Peter Eisentraut <peter@eisentraut.org>
+# Created: 2011-10-27
+# License: WTFPL; see http://sam.zoy.org/wtfpl/
+
+# exact logic in ident.c in git source tree
+
+set -e
+
+get_email() {
+	git config user.email || ( [ -n "$EMAIL" ] && echo "$EMAIL" ) || echo "$(id -nu)@$(hostname --fqdn)"
+}
+
+get_name() {
+	git config user.name || getent passwd $(id -un) | cut -d : -f 5 | cut -d , -f 1
+}
+
+: ${GIT_AUTHOR_NAME=$(get_name)}
+: ${GIT_COMMITTER_NAME=$(get_name)}
+: ${GIT_AUTHOR_EMAIL=$(get_email)}
+: ${GIT_COMMITTER_EMAIL=$(get_email)}
+
+author="$GIT_AUTHOR_NAME <$GIT_AUTHOR_EMAIL>"
+commit="$GIT_COMMITTER_NAME <$GIT_COMMITTER_EMAIL>"
+
+if [ "$author" = "$commit" ]; then
+	echo "$author"
+else
+	echo "Author: $author"
+	echo "Commit: $commit"
+fi
+#+end_src
 
 ** Core
 #+name: core
@@ -235,9 +325,6 @@ a remote. Could be for security purposes.
 
 [branch]
   <<key-val(branch)>>
-
-[hub]
-<<key-val(github)>>
 
 [grep]
 <<key-val(grep)>>
