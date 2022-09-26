@@ -49,6 +49,14 @@ Source: [[http://turingmachine.org/bl/2013-05-29-recursively-listing-directories
             (when (not (file-directory-p f))
               (org-babel-tangle-file f)))
           (directory-files-recursive (file-name-directory (buffer-file-name)) "\\.org$" 20)))
+
+(defun linux (path)
+  (when (eq system-type 'gnu/linux)
+    (expand-file-name path)))
+
+(defun macos (path)
+  (when (eq system-type 'darwin)
+    (expand-file-name path)))
 #+end_src
 * Documentation
 ** Publishing

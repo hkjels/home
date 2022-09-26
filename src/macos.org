@@ -78,6 +78,11 @@ toggle-defaults "com.apple.TimeMachine DoNotOfferNewDisksForBackup" && killall F
 
 ** Misc
 
+Show build duration in X-code
+#+begin_src shell :session defaults
+defaults write com.apple.dt.Xcode ShowBuildOperationDuration YES
+#+end_src
+
 Enable developer-tools in Safari
 #+begin_src shell :session defaults
 toggle-defaults "com.apple.Safari IncludeDevelopMenu"
@@ -86,4 +91,24 @@ toggle-defaults "com.apple.Safari IncludeDevelopMenu"
 Make crash-reports appear in notification-center
 #+begin_src shell :session defaults
 toggle-defaults "com.apple.CrashReporter UseUNC"
+#+end_src
+
+Drag application windows by clicking anywhere inside the window along
+with ~cmd~ & ~ctrl~
+#+begin_src shell :session defaults
+defaults write -g NSWindowShouldDragOnGesture -bool true 
+#+end_src
+
+Quit printer-app once all print-jobs are completed
+#+begin_src shell
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+#+end_src
+
+** Use Apple watch or finger-id for sudo
+
+Manually paste these two lines below the first line in
+~/etc/pam.d/sudo~. Doing so requires sudo-permission.
+#+begin_src conf
+auth       sufficient     pam_watchid.so
+auth       sufficient     pam_tid.so
 #+end_src

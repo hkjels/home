@@ -34,26 +34,55 @@ between environments. That's why I've created a [[path-definitions][table]] that
 environment-variables from, as you can see below.
 
 #+name: path-definitions
-| ANDROID_HOME | $HOME/Library/Android/sdk                         |
-| PATH         | $ANDROID_HOME/platform-tools                      |
-| PATH         | $ANDROID_HOME/tools                               |
-| PATH         | $ANDROID_HOME/emulator                            |
-| PATH         | $ANDROID_HOME/tools/bin                           |
-| PATH         | $HOME/bin                                         |
+| CARGO_HOME       | $HOME/.cargo                                                                              |
+| ANDROID_SDK_ROOT | $HOME/Library/Android/sdk                                                                 |
+| JAVA_HOME        | $(/usr/libexec/java_home -v11)                                                            |
+| RUSTUP_HOME      | $HOME/.rustup                                                                             |
+| CLASSPATH        | $HOME/jdt-language-server/plugins/org.eclipse.equinox.launcher_1.6.200.v20210416-2027.jar |
+| CLASSPATH        | $ANDROID_SDK_ROOT/platforms/android-30/android.jar                                        |
+| PATH             | $ANDROID_SDK_ROOT/emulator                                                                |
+| PATH             | $ANDROID_SDK_ROOT/platform-tools                                                          |
+| PATH             | $ANDROID_SDK_ROOT/tools                                                                   |
+| PATH             | $ANDROID_SDK_ROOT/tools/bin                                                               |
+| PATH             | $HOME/bin                                                                                 |
+| PATH             | $HOME/.local/bin                                                                          |
+| PATH             | $HOME/.ghcup/bin                                                                          |
+| PATH             | $CARGO/bin                                                                                |
+| PATH             | /usr/local/bin                                                                            |
+| MANPATH          | /opt/homebrew/opt/erlang/lib/erlang/man                                                   |
+| GRAB_HOME        | $HOME/Projects                                                                    |
 
 #+name: paths
 #+begin_src emacs-lisp :var path-definitions=path-definitions
 (mapconcat 'identity
            (mapcar (lambda (path)
-           (if (> (safe-length (cdr path)) 1)
-               (format "export %s=%s:$%s" (car path) (mapconcat 'identity (mapcar 'car (mapcar 'cdr (cdr path))) ":") (car path))
-             (format "export %s=%s" (car path) (mapconcat 'identity (cdr (cadr path)) "") (car path)))) (seq-group-by 'car path-definitions)) "\n")
+                     (if (> (safe-length (cdr path)) 1)
+                         (format "export %s=%s:$%s" (car path) (mapconcat 'identity (mapcar 'car (mapcar 'cdr (cdr path))) ":") (car path))
+                       (format "export %s=%s" (car path) (mapconcat 'identity (cdr (cadr path)) "") (car path))))
+                   (seq-group-by 'car path-definitions))
+           "\n")
 #+end_src
 
 #+begin_src shell :tangle ~/shell/env
 # <<license>>
 <<paths()>>
+
 eval $(/opt/homebrew/bin/brew shellenv)
+
+# Ruby
+export PATH="$(brew --prefix)/opt/ruby/bin:$PATH"
+export PATH="$(gem environment gemdir)/bin:$PATH"
+export LDFLAGS="-L$(brew --prefix)/opt/ruby/lib"
+export CPPFLAGS="-I$(brew --prefix)/opt/ruby/include"
+export PKG_CONFIG_PATH="$(brew --prefix)/opt/ruby/lib/pkgconfig"
+
+# Guile
+export GUILE_LOAD_PATH="$(brew --prefix)/share/guile/site/3.0"
+export GUILE_LOAD_COMPILED_PATH="$(brew --prefix)/lib/guile/3.0/site-ccache"
+export GUILE_SYSTEM_EXTENSIONS_PATH="$(brew --prefix)/lib/guile/3.0/extensions"
+
+# Ocaml
+[[ ! -r /Users/henrik/.opam/opam-init/init.zsh ]] || source /Users/henrik/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 #+end_src
 
 ** Login
@@ -61,18 +90,20 @@ eval $(/opt/homebrew/bin/brew shellenv)
 A login shell is the first shell ran with your user-id. So in this
 shell we would only set up environment and don't bother with [[https://en.wikipedia.org/wiki/Text-based_user_interface][TUI]].
 #+name: env-definitions
-| EDITOR      | editor       |
-| VISUAL      | $EDITOR      |
-| LANG        | en_US.UTF-8  |
-| LC_ALL      | $LANG        |
-| LC_COLLATE  | $LANG        |
-| LC_CTYPE    | $LANG        |
-| LC_MESSAGES | $LANG        |
-| LC_MONETARY | $LANG        |
-| LC_NUMERIC  | $LANG        |
-| LC_TIME     | $LANG        |
-| PAGER       | less -RXFSiw |
-| MANPAGER    | $PAGER       |
+| EDITOR      | editor         |
+| VISUAL      | $EDITOR        |
+| LANG        | en_US.UTF-8    |
+| LC_ALL      | $LANG          |
+| LC_COLLATE  | $LANG          |
+| LC_CTYPE    | $LANG          |
+| LC_MESSAGES | $LANG          |
+| LC_MONETARY | $LANG          |
+| LC_NUMERIC  | $LANG          |
+| LC_TIME     | $LANG          |
+| PAGER       | less -RXFSiw   |
+| MANPAGER    | $PAGER         |
+| HISTSIZE    | 10000          |
+| HISTFILE    | $HOME/.history |
 
 #+name: environment
 #+begin_src emacs-lisp :var env-definitions=env-definitions
@@ -91,11 +122,18 @@ shell we would only set up environment and don't bother with [[https://en.wikipe
 
 There's a shortcoming in ~zsh~ of how it treats ~$EDITOR~, where it cannot
 have any flags or arguments. We circumvent this by calling a
-wrapper-script.
-/Notice that the command is also sent to the background to avoid the
-sticky message about waiting for Emacs./
+wrapper-script. This wrapper also allows Emacs to be used when piping
+commands.
 #+begin_src shell :tangle ~/bin/editor :tangle-mode (identity #o755)
-emacsclient -c -a emacs "$@" &
+if [ -z "$1" ]
+then
+    TMP="$(mktemp /tmp/stdin-XXX)"
+    cat >$TMP
+    emacsclient -c -a "" $TMP &
+    rm $TMP &
+else
+    emacsclient -c -a "" "$@"
+fi
 #+end_src
 
 ** Interactive
@@ -122,7 +160,7 @@ eval "$(starship init $SHELL_SHORT)"
 [[https://github.com/junegunn/fzf][Fzf]] is a fast and easy to use fuzzy-matcher.
 #+name: fzf
 #+begin_src shell
-[ -f "~/.fzf.$SHELL_SHORT" ] && . "~/.fzf.$SHELL_SHORT"
+[ -f "$HOME/.fzf.${SHELL_SHORT}" ] && source "$HOME/.fzf.$SHELL_SHORT"
 #+end_src
 \\
 \\
@@ -131,7 +169,7 @@ fast grep alternatives to achieve a better search-experience for code
 in the terminal.
 #+name: fif
 #+begin_src shell
-[ -f "~/.fif.$SHELL_SHORT" ] && . "~/.fif.$SHELL_SHORT"
+[ -f "$HOME/.fif.${SHELL_SHORT}" ] && source "$HOME/.fif.$SHELL_SHORT"
 #+end_src
 \\
 \\
@@ -220,6 +258,7 @@ function remoteip() {
   wget http://ipecho.net/plain -O - -q ; echo
 }
 #+end_src
+
 \\
 \\
 I've hi-jacked ~cd~, so that I can easily jump to the root of a git
@@ -282,7 +321,7 @@ ts() {
 provide any arguments. Navigating this way is very efficient.
 #+name: j
 #+begin_src shell
-source "/usr/local/etc/profile.d/z.sh"
+source "$(brew --prefix)/etc/profile.d/z.sh"
 
 j() {
   if [[ -z "$*" ]]; then
@@ -303,6 +342,14 @@ fd() {
   dir=$(find ${1:-*} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
+}
+#+end_src
+\\
+\\
+~fh~ makes command-history fuzzy-searchable
+#+begin_src shell
+fh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
 }
 #+end_src
 \\
@@ -373,57 +420,106 @@ xterm-24bits|xterm with 24-bit direct color mode,
 #+begin_src shell
 export TERM=xterm-24bit
 #+end_src
+
+#+name: fzf-completions
+#+begin_src shell
+_fzf_complete_git() {
+    ARGS="$@"
+    local branches
+    if [[ $ARGS == 'git co'* ]]; then
+        branches=$(git branch -vv)
+        _fzf_complete --reverse --multi -- "$@" < <(
+            echo $branches
+        )
+    elif [[ $ARGS == 'git add'* ]]; then
+        files=$(git status -s | awk '{print $2}')
+        _fzf_complete --reverse --multi -- "$@" < <(
+            echo $files
+        )
+    else
+        eval "zle ${fzf_default_completion:-expand-or-complete}"
+    fi
+}
+
+_fzf_complete_git_post() {
+    awk '{print $1}'
+}
+
+_fzf_complete_g() {
+    ARGS="$@"
+    local branches
+    if [[ $ARGS == 'g co'* ]]; then
+        branches=$(git branch -vv)
+        _fzf_complete --reverse --multi -- "$@" < <(
+            echo $branches
+        )
+    elif [[ $ARGS == 'g add'* ]]; then
+        files=$(git status -s | awk '{print $2}')
+        _fzf_complete --reverse --multi -- "$@" < <(
+            echo $files
+        )
+    else
+        eval "zle ${fzf_default_completion:-expand-or-complete}"
+    fi
+}
+
+_fzf_complete_g_post() {
+    awk '{print $1}'
+}
+#+end_src
 \\
 \\
 *** Aliases
 
 #+name: alias-definitions
-| -- -      | cd -                                               |
-| ..        | cd ..                                              |
-| ....      | cd ../..                                           |
-| ......    | cd ../../..                                        |
-| :q        | exit                                               |
-| _         | sudo                                               |
-| c         | clear                                              |
-| cat       | bat                                                |
-| clip      | nc localhost 8377                                  |
-| cpu-temp  | osx-cpu-temp                                       |
-| df        | df -h                                              |
-| du        | du -ch                                             |
-| du1       | du -ch -d 1                                        |
-| e         | $EDITOR                                            |
-| f         | find . -iname                                      |
-| g         | 'hub '                                             |
-| grep      | grep --color=auto                                  |
-| hr        | echo ; hr -; echo ;                                |
-| ip        | dig +short myip.opendns.com @resolver1.opendns.com |
-| l         | lunchy                                             |
-| ls        | exa                                                |
-| la        | ls -la                                             |
-| ll        | ls -1                                              |
-| localip   | ipconfig getifaddr en0                             |
-| lt        | ls --tree                                          |
-| magit     | $EDITOR -e \(magit-status\)                        |
-| manpath   | echo -e ${MANPATH//:/\\n}                          |
-| mkdir     | mkdir -p                                           |
-| mv        | mv -i                                              |
-| path      | echo -e ${PATH//:/\\n}                             |
-| classpath | echo -e ${CLASSPATH//:/\\n}                        |
-| ql        | qlmanage -p                                        |
-| running   | jobs -r                                            |
-| s         | rg -S                                              |
-| sd        | rga                                                |
-| sloc      | sloccount                                          |
-| stopped   | jobs -s                                            |
-| sys       | grc tail -100 "/var/log/system.log"                |
-| syn       | synonym                                            |
-| timestamp | date "+%s"                                         |
-| tmux      | tmux -2                                            |
-| today     | date "+%Y-%m-%d"                                   |
-| wget      | wget -c                                            |
-| hide      | SetFile -a V                                       |
-| show      | SetFile -a v                                       |
-| ~         | cd ~                                               |
+| -- -      | cd -                                                   |
+| ..        | cd ..                                                  |
+| ....      | cd ../..                                               |
+| ......    | cd ../../..                                            |
+| :q        | exit                                                   |
+| _         | sudo                                                   |
+| c         | clear                                                  |
+| cat       | bat                                                    |
+| clip      | nc localhost 8377                                      |
+| cpu-temp  | osx-cpu-temp                                           |
+| df        | df -h                                                  |
+| du        | du -ch                                                 |
+| du1       | du -ch -d 1                                            |
+| e         | $EDITOR                                                |
+| f         | fd                                                     |
+| g         | 'hub '                                                 |
+| grep      | grep --color=auto                                      |
+| hr        | echo ; hr -; echo ;                                    |
+| ip        | dig +short myip.opendns.com @resolver1.opendns.com     |
+| l         | lunchy                                                 |
+| ls        | exa                                                    |
+| la        | ls -la                                                 |
+| ll        | ls -1                                                  |
+| localip   | ipconfig getifaddr en0                                 |
+| lt        | ls --tree                                              |
+| magit     | $EDITOR -e \(magit-status\)                            |
+| manpath   | echo -e ${MANPATH//:/\\n}                              |
+| mkdir     | mkdir -p                                               |
+| mv        | mv -i                                                  |
+| path      | echo -e ${PATH//:/\\n}                                 |
+| please    | sudo                                                   |
+| classpath | echo -e ${CLASSPATH//:/\\n}                            |
+| ql        | qlmanage -p                                            |
+| running   | jobs -r                                                |
+| s         | rg -S                                                  |
+| sd        | rga                                                    |
+| sloc      | sloccount                                              |
+| stopped   | jobs -s                                                |
+| sys       | grc tail -100 "/var/log/system.log"                    |
+| syn       | synonym                                                |
+| timestamp | date "+%s"                                             |
+| tmux      | tmux -2                                                |
+| today     | date "+%Y-%m-%d"                                       |
+| wget      | wget -c                                                |
+| hide      | SetFile -a V                                           |
+| show      | SetFile -a v                                           |
+| ~         | cd ~                                                   |
+| deeplink  | adb shell am start -W -a android.intent.action.VIEW -d |
 
 #+name: aliases
 #+begin_src emacs-lisp :var alias-definitions=alias-definitions
@@ -444,6 +540,8 @@ export TERM=xterm-24bit
 <<starship>>
 
 <<fzf>>
+
+<<fzf-completions>>
 
 <<fif>>
 
@@ -489,7 +587,7 @@ export TERM=xterm-24bit
 
 #+begin_src shell :tangle ~/.bash_profile
 # <<license>>
-SHELL_SHORT=bash
+export SHELL_SHORT=bash
 source ~/shell/env
 
 BASH_ENV=
@@ -556,34 +654,39 @@ set convert-meta off
 
 #+begin_src shell :tangle ~/.zshenv
 # <<license>>
-SHELL_SHORT=zsh
+export SHELL_SHORT=zsh
 source ~/shell/env
 #+end_src
 
 #+begin_src shell :tangle ~/.zshrc
 # <<license>>
+export SHELL_SHORT=zsh
 source ~/shell/login
 source ~/shell/interactive
 
 # Only unique history-items
 setopt hist_ignore_dups
 setopt hist_ignore_space
-setopt hist_append
+setopt share_history
 setopt auto_cd
 setopt auto_pushd
 
 # Use vi-bindings
-bindkey -v
+# source "$(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+
+# Enable rustup and all of it's siblings
+source "$CARGO_HOME/env"
 
 # Fish-like autosuggestions
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Completions
 autoload -Uz compinit && compinit
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=("$(brew --prefix)/share/zsh-completions" $fpath)
+fpath+="$HOME/.zfunc"
 
 # Add some colors
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # Local overrides / configurations
 [ -f ~/.zshrc.local ] && . ~/.zshrc.local

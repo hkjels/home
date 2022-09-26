@@ -103,63 +103,66 @@ fi
 
 ** Alias
 #+name: alias
-| amm          | commit -v --amend --no-edit                                                                                                 |
-| appraise     | !git-appraise                                                                                                               |
-| authors      | shortlog -sn                                                                                                                |
-| br           | branch                                                                                                                      |
-| bra          | branch -a                                                                                                                   |
-| cb           | checkout -b                                                                                                                 |
-| ci           | commit -v                                                                                                                   |
-| cl           | clone --recursive                                                                                                           |
-| clone        | clone --recursive                                                                                                           |
-| co           | checkout                                                                                                                    |
-| cp           | !git rev-parse HEAD ¦ tr -d "\\r" ¦ pbcopy                                                                                  |
-| create-graph | commit-graph write --reachable                                                                                              |
-| ctags        | !.git/hooks/ctags                                                                                                           |
-| d            | diff --word-diff                                                                                                            |
-| f            | !git-fresh                                                                                                                  |
-| g            | grep --break --heading --line-number                                                                                        |
-| ignored      | check-ignore -v                                                                                                             |
-| lc           | show -s --format="%ct" HEAD                                                                                                 |
-| lg           | log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit |
-| ls           | ls-files                                                                                                                    |
-| m            | merge                                                                                                                       |
-| mt           | mergetool                                                                                                                   |
-| mysprint     | log --since 1.week --author "$(git config user.name)"                                                                       |
-| next         | !git add -A; git rebase --continue                                                                                          |
-| p            | pull                                                                                                                        |
-| perfect      | rebase -i @{u}                                                                                                              |
-| pf           | push --force-with-lease                                                                                                     |
-| pr           | pull-request                                                                                                                |
-| rb           | rebase                                                                                                                      |
-| rba          | rebase --abort                                                                                                              |
-| rbc          | rebase --continue                                                                                                           |
-| rbi          | rebase -i origin/master                                                                                                     |
-| remotes      | remote -v                                                                                                                   |
-| rm           | remove-commit                                                                                                               |
-| rm-r         | push origin --delete                                                                                                        |
-| root         | !pwd                                                                                                                        |
-| s            | status -sb                                                                                                                  |
-| sa           | submodule add                                                                                                               |
-| sci          | dcommit -v                                                                                                                  |
-| sf           | submodule foreach                                                                                                           |
-| sh           | !git-sh                                                                                                                     |
-| sha          | !fcs                                                                                                                        |
-| sprint       | log --format "[%an] %s" --since 1.week                                                                                      |
-| sr           | submodule remove                                                                                                            |
-| st           | stash                                                                                                                       |
-| sta          | stash apply                                                                                                                 |
-| standup      | log --since "1 day ago" --oneline --author "$(git config user.name)"                                                        |
-| std          | stash drop                                                                                                                  |
-| stls         | stash list                                                                                                                  |
-| stp          | stash pop                                                                                                                   |
-| sts          | stash save                                                                                                                  |
-| stu          | stash unstaged                                                                                                              |
-| tags         | tag -l                                                                                                                      |
-| today        | log --since 7am                                                                                                             |
-| undo         | reset --soft HEAD^                                                                                                          |
-| unstage      | reset HEAD --                                                                                                               |
-| update       | pull --rebase                                                                                                               |
+| amm          | commit -v --amend --no-edit                                                                                                                                  |
+| appraise     | !git-appraise                                                                                                                                                |
+| authors      | shortlog -sn                                                                                                                                                 |
+| br           | branch                                                                                                                                                       |
+| bra          | branch -a                                                                                                                                                    |
+| cb           | checkout -b                                                                                                                                                  |
+| ci           | commit -v                                                                                                                                                    |
+| cl           | clone --recursive                                                                                                                                            |
+| clone        | clone --recursive                                                                                                                                            |
+| co           | checkout                                                                                                                                                     |
+| cp           | !git rev-parse HEAD ¦ tr -d "\\r" ¦ pbcopy                                                                                                                   |
+| create-graph | commit-graph write --reachable                                                                                                                               |
+| ctags        | !.git/hooks/ctags                                                                                                                                            |
+| d            | diff --word-diff                                                                                                                                             |
+| f            | !git-fresh                                                                                                                                                   |
+| g            | grep --break --heading --line-number                                                                                                                         |
+| ignored      | check-ignore -v                                                                                                                                              |
+| lc           | show -s --format="%ct" HEAD                                                                                                                                  |
+| lg           | log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit                                  |
+| ls           | ls-files                                                                                                                                                     |
+| m            | merge                                                                                                                                                        |
+| mt           | mergetool                                                                                                                                                    |
+| mysprint     | log --since 1.week --author "$(git config user.name)"                                                                                                        |
+| next         | !git add -A; git rebase --continue                                                                                                                           |
+| p            | pull                                                                                                                                                         |
+| perfect      | rebase -i @{u}                                                                                                                                               |
+| pf           | push --force-with-lease                                                                                                                                      |
+| pr           | pull-request                                                                                                                                                 |
+| rb           | rebase                                                                                                                                                       |
+| rba          | rebase --abort                                                                                                                                               |
+| rbc          | rebase --continue                                                                                                                                            |
+| rbi          | rebase -i origin/master                                                                                                                                      |
+| remotes      | remote -v                                                                                                                                                    |
+| rm           | remove-commit                                                                                                                                                |
+| rm-r         | push origin --delete                                                                                                                                         |
+| root         | !pwd                                                                                                                                                         |
+| s            | status -sb                                                                                                                                                   |
+| sa           | submodule add                                                                                                                                                |
+| sci          | dcommit -v                                                                                                                                                   |
+| sf           | submodule foreach                                                                                                                                            |
+| sh           | !git-sh                                                                                                                                                      |
+| sha          | !fcs                                                                                                                                                         |
+| sprint       | log --format "[%an] %s" --since 1.week                                                                                                                       |
+| sr           | submodule remove                                                                                                                                             |
+| st           | stash                                                                                                                                                        |
+| sta          | stash apply                                                                                                                                                  |
+| standup      | log --since "1 day ago" --oneline --author "$(git config user.name)"                                                                                         |
+| std          | stash drop                                                                                                                                                   |
+| stls         | stash list                                                                                                                                                   |
+| stp          | stash pop                                                                                                                                                    |
+| sts          | stash save                                                                                                                                                   |
+| stu          | stash unstaged                                                                                                                                               |
+| tags         | tag -l                                                                                                                                                       |
+| today        | log --since 7am                                                                                                                                              |
+| undo         | reset --soft HEAD^                                                                                                                                           |
+| unstage      | reset HEAD --                                                                                                                                                |
+| update       | pull --rebase                                                                                                                                                |
+| fix          | !TARGET=$(git log --oneline ¦ fzf ¦ awk '{print $1}') && git commit --fixup=$TARGET && GIT_SEQUENCE_EDITOR=: git rebase -i --autostash --autosquash $TARGET~ |
+| ico          | !git checkout $(git branch ¦ fzf)                                                                                                                            |
+| icor         | !git checkout $(git branch -r ¦ fzf)                                                                                                                         |
 
 
 ** Color
@@ -182,8 +185,12 @@ fi
 
 ** Diff
 #+name: diff
+| tool           | difftastic          |
 | mnemonicprefix | true      |
 | algorithm      | histogram |
+
+#+name: diff-difftastic
+| cmd | difftastic "$LOCAL" "$REMOTE" |
 
 #+name: diff-clojure
 | xfuncname | (^\\(.* ¦ \\s*\\(defn.*) |
@@ -191,6 +198,10 @@ fi
 #+name: diff-rust
 | xfuncname | '^[ \t]*(pub¦)[ \t]*((fn¦struct¦enum¦impl¦trait¦mod)[^;]*)$' |
 
+
+** Pager
+#+name: pager
+| difftool | true |
 
 ** Push
 #+name: push
@@ -205,7 +216,7 @@ fi
 
 ** Commit
 #+name: commit
-| gpgSign | true |
+| gpgSign | false  |
 
 
 ** Fetch
@@ -256,6 +267,7 @@ fi
 ** Merge
 #+name: merge
 | conflictstyle | diff3 |
+| tool          | ediff |
 
 
 ** Transfer
@@ -263,6 +275,7 @@ We validate objects and their connection to commits before
 transferring.
 #+name: transfer
 | fsckObjects | true |
+
 
 ** Include
 We use a separate file for configurations that should not be pushed to
@@ -299,14 +312,23 @@ a remote. Could be for security purposes.
 [merge]
   <<key-val(merge)>>
 
+[mergetool "ediff"]
+  cmd = emacsclient -c -a \"\"  --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
+
 [diff]
   <<key-val(diff)>>
 
+[difftool "difftastic"]
+  <<key-val(diff-difftastic)>>
+
 [diff "clojure"]
-<<key-val(diff-clojure)>>
+  <<key-val(diff-clojure)>>
 
 [diff "rust"]
-<<key-val(diff-rust)>>
+  <<key-val(diff-rust)>>
+
+[pager]
+  <<key-val(pager)>>
 
 [push]
   <<key-val(push)>>
@@ -327,20 +349,20 @@ a remote. Could be for security purposes.
   <<key-val(branch)>>
 
 [grep]
-<<key-val(grep)>>
+  <<key-val(grep)>>
 
 [filter "media"]
-<<key-val(filter-media)>>
+  <<key-val(filter-media)>>
 
 [filter "lfs"]
-<<key-val(filter-lfs)>>
+  <<key-val(filter-lfs)>>
 
 [magit]
-<<key-val(magit)>>
+  <<key-val(magit)>>
 
 [transfer]
-<<key-val(transfer)>>
+  <<key-val(transfer)>>
 
 [include]
-<<key-val(include)>>
+  <<key-val(include)>>
 #+end_src

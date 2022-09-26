@@ -146,7 +146,6 @@ main {
 
 table {
   border-color: hsl(0,0%,95%);
-  table-layout: fixed;
   margin-bottom: 2em;
   width: 100%;
 }

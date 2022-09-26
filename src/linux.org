@@ -1,0 +1,66 @@
+:properties:
+:header-args: :results silent
+:end:
+* Linux
+
+** Debian
+
+** Dependencies
+
+#+begin_src shell :tangle (linux "~/deps.sh")
+sudo apt-get install           \\
+  firefox                      \\
+  git                          \\
+  picom                        \\
+  sddm                         \\
+  ripgrep                      \\
+  rofi                         \\
+  starship                     \\
+  tldr                         \\
+  ttf-mscorefonts-installer    \\
+  unzip                        \\
+  z
+
+
+mkdir -p $HOME/src/git.suckless.org &&        \\
+    cd !!:$ &&                                \\
+    git clone https://git.suckless.org/dwm && \\
+    cd dwm && make install
+#+end_src
+
+*** X
+
+In order for debian to know how X should be initialized, we need a
+runcom for it. Here, I've hardcoded a path for wallpapers and set [[https://dwm.suckless.org][dwm]]
+as my window-manager.
+#+begin_src shell :tangle (linux "~/.xinitrc")
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
+
+feh --bg-fill $HOME/pictures/wallpaper
+setxkbmap -option caps:escape
+
+exec dwm
+#+end_src
+
+*** SDDM
+
+
+  
+*** DWM
+
+DWM stands for Dynamic Window Manager. It's a window-manger written in
+C with a very deliberate and easy to understand layout. Last window
+spawn, opens as a master window to the left and secondary windows end
+up as a stack to the right. The configuration itself is written in C
+and compiled with the manager, so the performance is near what your
+metal can achieve.
+
+- [ ] Dmenu - Dynamically populated menues
+- [ ] Rofi     - Quick app-switcher
+- [ ] Picom - Animations and visuals
+- [ ] Dunst  - Notifications

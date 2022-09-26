@@ -1,0 +1,294 @@
+* Mail
+:properties:
+:header-args: :mkdirp yes
+:end:
+
+** Accounts
+#+name: accounts
+| Name        | Username                           | Address                            | Inbound host         | Outbound host        |
+|-------------+------------------------------------+------------------------------------+----------------------+----------------------|
+| Privat      | hkjels                             | henrik@kjerringvag.no              | imap.mail.me.com:993 | smtp.mail.me.com:465 |
+| softwarelab | henrik.kjerringvaag@softwarelab.no | henrik.kjerringvaag@softwarelab.no | imap.gmail.com:993   | smtp.gmail.com:587   |
+
+#+begin_src emacs-lisp :var accounts=accounts
+(let ((noted
+       (-map (lambda (account)
+	       `((:name ,(nth 0 account))
+		 (:username ,(nth 1 account))
+		 (:in ,(nth 2 account))
+		 (:out ,(nth 3 account))))
+	     accounts)))
+  (message "%s" noted))
+#+end_src
+
+#+name: personal-mail
+#+begin_src text
+henrik@kjerringvag.no
+#+end_src
+
+#+name: work-mail
+#+begin_src text
+henrik.kjerringvaag@softwarelab.no
+#+end_src
+
+
+** Mbsync
+:properties:
+:header-args:conf: :mkdirp t :tangle ~/.mbsyncrc :comments org
+:end:
+Mbsync is what's used to synchronize mail-directories over IMAP. I've
+set it up to reflect the structure that's on the server, but this is configurable.
+
+*** Password Command
+
+The way to retrieve a password from a secure storage varies from
+OS to OS, so we need to run this little snippet when compiling our
+mbsync preferences to account for the variations.
+#+name: passCmd
+#+begin_src shell :var host="" :var user=""
+case `uname` in
+    'Linux')
+	echo "pass show ${host}"
+	;;
+    'WindowsNT')
+        echo "FIXME: What keychain mechanism can be used for mbsync on windows?"
+        exit 1
+	;;
+    'Darwin') 
+	echo "security find-internet-password -s ${host} -r imap -a ${user} -w"
+	;;
+    ,*)
+	echo "Failed to recognize the operating system."
+	exit 1
+	;;
+esac
+exit 0
+#+end_src
+
+*** General
+#+begin_src conf
+Sync All
+Create Both
+Expunge Both
+SyncState *
+#+end_src
+
+*** Gmail IMAP-account
+#+begin_src conf :noweb yes
+IMAPAccount softwarelab
+Host imap.gmail.com
+Port 993
+User henrik.kjerringvaag@softwarelab.no
+PassCmd "<<passCmd(host='imap.gmail.com', user='henrik.kjerringvaag@softwarelab.no')>>"
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+
+IMAPStore softwarelab-remote
+Account softwarelab
+
+MaildirStore softwarelab-local
+Path ~/mail/softwarelab
+Inbox ~/mail/softwarelab/INBOX
+SubFolders Verbatim
+#+end_src
+
+*** iCloud IMAP-account
+#+begin_src conf :noweb yes
+IMAPAccount icloud
+Host imap.mail.me.com
+User hkjels
+PassCmd "<<passCmd(host='imap.mail.me.com', user='hkjels')>>"
+Port 993
+Timeout 0
+SSLType IMAPS
+SSLVersions TLSv1.2
+AuthMechs LOGIN
+
+IMAPStore icloud-remote
+Account icloud
+
+MaildirStore icloud-local
+Path ~/mail/icloud/
+Inbox ~/mail/icloud/inbox
+Trash Trash
+SubFolders Verbatim
+#+end_src
+
+*** Remote <-> local
+#+begin_src conf  
+Channel icloud-folders
+Far :icloud-remote:
+Near :icloud-local:
+Patterns "INBOX" "Saved" "Drafts" "Archive" "Sent*" "Trash"
+CopyArrivalDate yes
+
+Group icloud
+Channel icloud-folders
+#+end_src
+
+** Notmuch
+
+*** .notmuch-config - Configuration file for the notmuch mail system
+:properties:
+:header-args: :mkdirp yes :tangle ~/.notmuch-config
+:end:
+
+For more information about notmuch, see https://notmuchmail.org
+
+**** Database
+
+The only value supported here is 'path' which should be the top-level
+directory where your mail currently exists and to where mail will be
+delivered in the future. Files should be individual email messages.
+Notmuch will store its database within a sub-directory of the path
+configured here named ".notmuch".
+#+begin_src conf
+[database]
+#+end_src
+
+**** User
+
+Here is where you can let notmuch know how you would like to be
+useressed. Valid settings are
+
+name		        Your full name.
+primary_email	Your primary email useress.
+other_email	        A list (separated by ';') of other email useresses
+		                at which you receive email.
+
+Notmuch will use the various email useresses configured here when
+formatting replies. It will avoid including your own useresses in the
+recipient list of replies, and will set the From useress based on the
+useress to which the original email was useressed.
+#+begin_src conf
+[user]
+name=Henrik Kjerringvåg
+primary_email=henrik@kjerringvag.no
+#+end_src
+
+**** "notmuch new"
+
+The following options are supported here:
+
+tags	A list (separated by ';') of the tags that will be
+	added to all messages incorporated by "notmuch new".
+
+ignore	A list (separated by ';') of file and directory names
+	that will not be searched for messages by "notmuch new".
+
+	NOTE: *Every* file/directory that goes by one of those
+	names will be ignored, independent of its depth/location
+	in the mail store.
+#+begin_src conf  
+[new]
+tags=inbox;unread;
+ignore=
+#+end_src
+
+**** Search
+
+The following option is supported here:
+
+exclude_tags
+	A ;-separated list of tags that will be excluded from
+	search results by default.  Using an excluded tag in a
+	query will override that exclusion.
+#+begin_src conf
+[search]
+exclude_tags=spam
+#+end_src
+
+**** Maildir compatibility
+
+The following option is supported here:
+
+synchronize_flags      Valid values are true and false.
+
+If true, then the following maildir flags (in message filenames)
+will be synchronized with the corresponding notmuch tags:
+
+	Flag	Tag
+	----	-------
+	D	draft
+	F	flagged
+	P	passed
+	R	replied
+	S	unread (added when 'S' flag is not present)
+
+The "notmuch new" command will notice flag changes in filenames
+and update tags, while the "notmuch tag" and "notmuch restore"
+commands will notice tag changes and update flags in filenames
+#+begin_src conf
+[maildir]
+synchronize_flags=true
+#+end_src
+
+**** Index
+
+The following option are supported here:
+
+decrypt      Valid values are false, auto, nostash or true.
+index.header.<prefix>
+
+When indexing an encrypted e-mail message, if this variable is set to
+true, notmuch will try to decrypt the message and index the cleartext,
+stashing a copy of any discovered session keys for the message. If
+auto, it will try to index the cleartext if a stashed session key is
+already known for the message (e.g. from a previous copy), but will
+not try to access your secret keys. Use false to avoid decrypting even
+when a stashed session key is already present.
+
+Define the query prefix <prefix>, based on a mail header. For example
+index.header.List=List-Id will add a probabilistic prefix List: that
+searches the List-Id field. User defined prefixes must not start with
+‘a’…’z’; in particular adding a prefix with same name as a predefined
+prefix is not supported. See notmuch-search-terms for a list of
+existing prefixes, and an explanation of probabilistic prefixes.
+#+begin_src conf
+[index]
+decrypt=true
+#+end_src
+
+*** Hooks
+
+#+begin_src shell :tangle ~/.notmuch/hooks/post-new :noweb yes :chmod :tangle-mode (identity #o755)
+set -e
+notmuch tag +work -- tag:inbox and to:<<work-mail>>
+notmuch tag +emacs-devel -- tag:inbox and "from:*@gnu*org or to:*@gnu*org"
+notmuch tag -new -unread +muted thread:{tag:muted}
+#+end_src
+
+** Mailcap
+
+Having mailcap properly configured is needed to preview content
+externally when working with e-mail in CLI's or Emacs.
+#+begin_src conf :tangle ~/.mailcap
+text/html; open '%s'
+application/pdf; open '%s'
+image/jpeg; open '%s'
+image/png; open '%s'
+#+end_src
+
+** MSMTP
+
+With [[https://marlam.de/msmtp/][MSMTP]] you can specify multiple SMTP servers to be used. You set a
+default account that will be used when you are not replying and you
+set up Emacs to instruct which server to use upon reply. [[https://notmuchmail.org/emacstips/#index11h2][Multiple
+accounts with Notmuch]]
+#+begin_src conf :tangle ~/.msmtprc :noweb yes :comments org
+defaults
+auth on
+protocol smtp
+tls on
+
+account softwarelab
+host smtp.gmail.com
+port 465
+user <<work-mail>>
+passwordeval "<<passCmd(host='imap.gmail.com', user='henrik.kjerringvaag@softwarelab.no')>>"
+tls_starttls off
+from <<work-mail>>
+
+account default : softwarelab
+#+end_src

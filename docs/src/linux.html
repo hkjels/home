@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-09-26 Mon 10:13 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="author" content="Henrik Kjerringvåg" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="css/docs.css"><script src="js/docs.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb342c27">Linux</a>
+<ul>
+<li><a href="#orgc68bbd4">Debian</a></li>
+<li><a href="#orgb0b58e5">Dependencies</a>
+<ul>
+<li><a href="#org1c8e09b">X</a></li>
+<li><a href="#orge4fc812">SDDM</a></li>
+<li><a href="#orgd05065c">DWM</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb342c27" class="outline-2">
+<h2 id="orgb342c27">Linux</h2>
+<div class="outline-text-2" id="text-orgb342c27">
+</div>
+<div id="outline-container-orgc68bbd4" class="outline-3">
+<h3 id="orgc68bbd4">Debian</h3>
+</div>
+
+<div id="outline-container-orgb0b58e5" class="outline-3">
+<h3 id="orgb0b58e5">Dependencies</h3>
+<div class="outline-text-3" id="text-orgb0b58e5">
+<div class="org-src-container">
+<pre class="src src-shell">sudo apt-get install           <span class="org-string">\\</span>
+  firefox                      <span class="org-string">\\</span>
+  git                          <span class="org-string">\\</span>
+  picom                        <span class="org-string">\\</span>
+  sddm                         <span class="org-string">\\</span>
+  ripgrep                      <span class="org-string">\\</span>
+  rofi                         <span class="org-string">\\</span>
+  starship                     <span class="org-string">\\</span>
+  tldr                         <span class="org-string">\\</span>
+  ttf-mscorefonts-installer    <span class="org-string">\\</span>
+  unzip                        <span class="org-string">\\</span>
+  z
+
+
+mkdir -p $<span class="org-variable-name">HOME</span>/src/git.suckless.org &amp;&amp;        <span class="org-string">\\</span>
+    <span class="org-builtin">cd</span> !!:$ &amp;&amp;                                <span class="org-string">\\</span>
+    git clone https://git.suckless.org/dwm &amp;&amp; <span class="org-string">\\</span>
+    <span class="org-builtin">cd</span> dwm &amp;&amp; make install
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org1c8e09b" class="outline-4">
+<h4 id="org1c8e09b">X</h4>
+<div class="outline-text-4" id="text-org1c8e09b">
+<p>
+In order for debian to know how X should be initialized, we need a
+runcom for it. Here, I've hardcoded a path for wallpapers and set <a href="https://dwm.suckless.org">dwm</a>
+as my window-manager.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-keyword">if</span> [ -d /etc/X11/xinit/xinitrc.d ]; <span class="org-keyword">then</span>
+  <span class="org-keyword">for</span> f<span class="org-keyword"> in</span> /etc/X11/xinit/xinitrc.d/*; <span class="org-keyword">do</span>
+    [ -x <span class="org-string">"$f"</span> ] &amp;&amp; . <span class="org-string">"$f"</span>
+  <span class="org-keyword">done</span>
+  <span class="org-builtin">unset</span> f
+<span class="org-keyword">fi</span>
+
+feh --bg-fill $<span class="org-variable-name">HOME</span>/pictures/wallpaper
+setxkbmap -option caps:escape
+
+<span class="org-keyword">exec</span> dwm
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge4fc812" class="outline-4">
+<h4 id="orge4fc812">SDDM</h4>
+</div>
+
+
+
+<div id="outline-container-orgd05065c" class="outline-4">
+<h4 id="orgd05065c">DWM</h4>
+<div class="outline-text-4" id="text-orgd05065c">
+<p>
+DWM stands for Dynamic Window Manager. It's a window-manger written in
+C with a very deliberate and easy to understand layout. Last window
+spawn, opens as a master window to the left and secondary windows end
+up as a stack to the right. The configuration itself is written in C
+and compiled with the manager, so the performance is near what your
+metal can achieve.
+</p>
+
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Dmenu - Dynamically populated menues</li>
+<li class="off"><code>[&#xa0;]</code> Rofi     - Quick app-switcher</li>
+<li class="off"><code>[&#xa0;]</code> Picom - Animations and visuals</li>
+<li class="off"><code>[&#xa0;]</code> Dunst  - Notifications</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

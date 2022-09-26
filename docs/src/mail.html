@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-09-26 Mon 10:13 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="author" content="Henrik Kjerringvåg" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" href="css/docs.css"><script src="js/docs.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org760a2e6">Mail</a>
+<ul>
+<li><a href="#org501048d">Accounts</a></li>
+<li><a href="#org04641a2">Mbsync</a>
+<ul>
+<li><a href="#org60a69fa">Password Command</a></li>
+<li><a href="#org5cde9d8">General</a></li>
+<li><a href="#org59ed2b3">Gmail IMAP-account</a></li>
+<li><a href="#orgbb1ee47">iCloud IMAP-account</a></li>
+<li><a href="#orgf111071">Remote &lt;-&gt; local</a></li>
+</ul>
+</li>
+<li><a href="#orgc675d47">Notmuch</a>
+<ul>
+<li><a href="#org57543fe">.notmuch-config - Configuration file for the notmuch mail system</a></li>
+<li><a href="#orge5bf1e4">Hooks</a></li>
+</ul>
+</li>
+<li><a href="#org40853b9">Mailcap</a></li>
+<li><a href="#orgc5e0c46">MSMTP</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org760a2e6" class="outline-2">
+<h2 id="org760a2e6">Mail</h2>
+<div class="outline-text-2" id="text-org760a2e6">
+</div>
+
+<div id="outline-container-org501048d" class="outline-3">
+<h3 id="org501048d">Accounts</h3>
+<div class="outline-text-3" id="text-org501048d">
+<table id="orgbb0ac45" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Name</th>
+<th scope="col" class="org-left">Username</th>
+<th scope="col" class="org-left">Address</th>
+<th scope="col" class="org-left">Inbound host</th>
+<th scope="col" class="org-left">Outbound host</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Privat</td>
+<td class="org-left">hkjels</td>
+<td class="org-left">henrik@kjerringvag.no</td>
+<td class="org-left">imap.mail.me.com:993</td>
+<td class="org-left">smtp.mail.me.com:465</td>
+</tr>
+
+<tr>
+<td class="org-left">softwarelab</td>
+<td class="org-left">henrik.kjerringvaag@softwarelab.no</td>
+<td class="org-left">henrik.kjerringvaag@softwarelab.no</td>
+<td class="org-left">imap.gmail.com:993</td>
+<td class="org-left">smtp.gmail.com:587</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span class="org-keyword">let</span> ((noted
+       (-map (<span class="org-keyword">lambda</span> (account)
+               `((<span class="org-builtin">:name</span> ,(nth 0 account))
+                 (<span class="org-builtin">:username</span> ,(nth 1 account))
+                 (<span class="org-builtin">:in</span> ,(nth 2 account))
+                 (<span class="org-builtin">:out</span> ,(nth 3 account))))
+             accounts)))
+  (message <span class="org-string">"%s"</span> noted))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-text" id="org768a044">henrik@kjerringvag.no
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-text" id="org3d7608a">henrik.kjerringvaag@softwarelab.no
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org04641a2" class="outline-3">
+<h3 id="org04641a2">Mbsync</h3>
+<div class="outline-text-3" id="text-org04641a2">
+<p>
+Mbsync is what's used to synchronize mail-directories over IMAP. I've
+set it up to reflect the structure that's on the server, but this is configurable.
+</p>
+</div>
+
+<div id="outline-container-org60a69fa" class="outline-4">
+<h4 id="org60a69fa">Password Command</h4>
+<div class="outline-text-4" id="text-org60a69fa">
+<p>
+The way to retrieve a password from a secure storage varies from
+OS to OS, so we need to run this little snippet when compiling our
+mbsync preferences to account for the variations.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell" id="orgeba8b9c"><span class="org-keyword">case</span> <span class="org-sh-quoted-exec">`uname`</span> <span class="org-keyword">in</span>
+    <span class="org-string">'Linux'</span>)
+        <span class="org-builtin">echo</span> <span class="org-string">"pass show ${host}"</span>
+        ;;
+    <span class="org-string">'WindowsNT'</span>)
+        <span class="org-builtin">echo</span> <span class="org-string">"</span><span class="org-string"><span class="custom">FIXME</span></span><span class="org-string">: What keychain mechanism can be used for mbsync on windows?"</span>
+        <span class="org-keyword">exit</span> 1
+        ;;
+    <span class="org-string">'Darwin'</span>) 
+        <span class="org-builtin">echo</span> <span class="org-string">"security find-internet-password -s ${host} -r imap -a ${user} -w"</span>
+        ;;
+    *)
+        <span class="org-builtin">echo</span> <span class="org-string">"Failed to recognize the operating system."</span>
+        <span class="org-keyword">exit</span> 1
+        ;;
+<span class="org-keyword">esac</span>
+<span class="org-keyword">exit</span> 0
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5cde9d8" class="outline-4">
+<h4 id="org5cde9d8">General</h4>
+<div class="outline-text-4" id="text-org5cde9d8">
+<div class="org-src-container">
+<pre class="src src-conf">Sync All
+Create Both
+Expunge Both
+SyncState *
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org59ed2b3" class="outline-4">
+<h4 id="org59ed2b3">Gmail IMAP-account</h4>
+<div class="outline-text-4" id="text-org59ed2b3">
+<div class="org-src-container">
+<pre class="src src-conf">IMAPAccount softwarelab
+Host imap.gmail.com
+Port 993
+User henrik.kjerringvaag@softwarelab.no
+PassCmd <span class="org-string">"security find-internet-password -s imap.gmail.com -r imap -a henrik.kjerringvaag@softwarelab.no -w"</span>
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.2
+
+IMAPStore softwarelab-remote
+Account softwarelab
+
+MaildirStore softwarelab-local
+Path ~/mail/softwarelab
+Inbox ~/mail/softwarelab/INBOX
+SubFolders Verbatim
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbb1ee47" class="outline-4">
+<h4 id="orgbb1ee47">iCloud IMAP-account</h4>
+<div class="outline-text-4" id="text-orgbb1ee47">
+<div class="org-src-container">
+<pre class="src src-conf">IMAPAccount icloud
+Host imap.mail.me.com
+User hkjels
+PassCmd <span class="org-string">"security find-internet-password -s imap.mail.me.com -r imap -a hkjels -w"</span>
+Port 993
+Timeout 0
+SSLType IMAPS
+SSLVersions TLSv1.2
+AuthMechs LOGIN
+
+IMAPStore icloud-remote
+Account icloud
+
+MaildirStore icloud-local
+Path ~/mail/icloud/
+Inbox ~/mail/icloud/inbox
+Trash Trash
+SubFolders Verbatim
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf111071" class="outline-4">
+<h4 id="orgf111071">Remote &lt;-&gt; local</h4>
+<div class="outline-text-4" id="text-orgf111071">
+<div class="org-src-container">
+<pre class="src src-conf">Channel icloud-folders
+Far :icloud-remote:
+Near :icloud-local:
+Patterns <span class="org-string">"INBOX"</span> <span class="org-string">"Saved"</span> <span class="org-string">"Drafts"</span> <span class="org-string">"Archive"</span> <span class="org-string">"Sent*"</span> <span class="org-string">"Trash"</span>
+CopyArrivalDate yes
+
+Group icloud
+Channel icloud-folders
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc675d47" class="outline-3">
+<h3 id="orgc675d47">Notmuch</h3>
+<div class="outline-text-3" id="text-orgc675d47">
+</div>
+<div id="outline-container-org57543fe" class="outline-4">
+<h4 id="org57543fe">.notmuch-config - Configuration file for the notmuch mail system</h4>
+<div class="outline-text-4" id="text-org57543fe">
+<p>
+For more information about notmuch, see <a href="https://notmuchmail.org">https://notmuchmail.org</a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li><a id="orgec2e223"></a>Database<br />
+<div class="outline-text-5" id="text-orgec2e223">
+<p>
+The only value supported here is 'path' which should be the top-level
+directory where your mail currently exists and to where mail will be
+delivered in the future. Files should be individual email messages.
+Notmuch will store its database within a sub-directory of the path
+configured here named ".notmuch".
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">[<span class="org-type">database</span>]
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org47c4724"></a>User<br />
+<div class="outline-text-5" id="text-org47c4724">
+<p>
+Here is where you can let notmuch know how you would like to be
+useressed. Valid settings are
+</p>
+
+<p>
+name		        Your full name.
+primary<sub>email</sub> Your primary email useress.
+other<sub>email</sub>         A list (separated by ';') of other email useresses
+		                at which you receive email.
+</p>
+
+<p>
+Notmuch will use the various email useresses configured here when
+formatting replies. It will avoid including your own useresses in the
+recipient list of replies, and will set the From useress based on the
+useress to which the original email was useressed.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">[<span class="org-type">user</span>]
+<span class="org-variable-name">name</span>=Henrik Kjerringv&#229;g
+<span class="org-variable-name">primary_email</span>=henrik@kjerringvag.no
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org8b375c3"></a>"notmuch new"<br />
+<div class="outline-text-5" id="text-org8b375c3">
+<p>
+The following options are supported here:
+</p>
+
+<p>
+tags	A list (separated by ';') of the tags that will be
+	added to all messages incorporated by "notmuch new".
+</p>
+
+<p>
+ignore	A list (separated by ';') of file and directory names
+	that will not be searched for messages by "notmuch new".
+</p>
+
+<p>
+NOTE: <b>Every</b> file/directory that goes by one of those
+names will be ignored, independent of its depth/location
+in the mail store.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">[<span class="org-type">new</span>]
+<span class="org-variable-name">tags</span>=inbox;unread;
+<span class="org-variable-name">ignore</span>=
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="orge2c117b"></a>Search<br />
+<div class="outline-text-5" id="text-orge2c117b">
+<p>
+The following option is supported here:
+</p>
+
+<p>
+exclude<sub>tags</sub>
+	A ;-separated list of tags that will be excluded from
+	search results by default.  Using an excluded tag in a
+	query will override that exclusion.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">[<span class="org-type">search</span>]
+<span class="org-variable-name">exclude_tags</span>=spam
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="org0eda0c2"></a>Maildir compatibility<br />
+<div class="outline-text-5" id="text-org0eda0c2">
+<p>
+The following option is supported here:
+</p>
+
+<p>
+synchronize<sub>flags</sub>      Valid values are true and false.
+</p>
+
+<p>
+If true, then the following maildir flags (in message filenames)
+will be synchronized with the corresponding notmuch tags:
+</p>
+
+<p>
+Flag	Tag
+-&#x2014;	--&#x2013;&#x2014;
+D	draft
+F	flagged
+P	passed
+R	replied
+S	unread (added when 'S' flag is not present)
+</p>
+
+<p>
+The "notmuch new" command will notice flag changes in filenames
+and update tags, while the "notmuch tag" and "notmuch restore"
+commands will notice tag changes and update flags in filenames
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">[<span class="org-type">maildir</span>]
+<span class="org-variable-name">synchronize_flags</span>=true
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="orge2f55a4"></a>Index<br />
+<div class="outline-text-5" id="text-orge2f55a4">
+<p>
+The following option are supported here:
+</p>
+
+<p>
+decrypt      Valid values are false, auto, nostash or true.
+index.header.&lt;prefix&gt;
+</p>
+
+<p>
+When indexing an encrypted e-mail message, if this variable is set to
+true, notmuch will try to decrypt the message and index the cleartext,
+stashing a copy of any discovered session keys for the message. If
+auto, it will try to index the cleartext if a stashed session key is
+already known for the message (e.g. from a previous copy), but will
+not try to access your secret keys. Use false to avoid decrypting even
+when a stashed session key is already present.
+</p>
+
+<p>
+Define the query prefix &lt;prefix&gt;, based on a mail header. For example
+index.header.List=List-Id will add a probabilistic prefix List: that
+searches the List-Id field. User defined prefixes must not start with
+‘a’…’z’; in particular adding a prefix with same name as a predefined
+prefix is not supported. See notmuch-search-terms for a list of
+existing prefixes, and an explanation of probabilistic prefixes.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">[<span class="org-type">index</span>]
+<span class="org-variable-name">decrypt</span>=true
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-orge5bf1e4" class="outline-4">
+<h4 id="orge5bf1e4">Hooks</h4>
+<div class="outline-text-4" id="text-orge5bf1e4">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-builtin">set</span> -e
+notmuch tag +work -- tag:inbox and to:henrik.kjerringvaag@softwarelab.no
+notmuch tag +emacs-devel -- tag:inbox and <span class="org-string">"from:*@gnu*org or to:*@gnu*org"</span>
+notmuch tag -new -unread +muted thread:{tag:muted}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org40853b9" class="outline-3">
+<h3 id="org40853b9">Mailcap</h3>
+<div class="outline-text-3" id="text-org40853b9">
+<p>
+Having mailcap properly configured is needed to preview content
+externally when working with e-mail in CLI's or Emacs.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">text/html; open <span class="org-string">'%s'</span>
+application/pdf; open <span class="org-string">'%s'</span>
+image/jpeg; open <span class="org-string">'%s'</span>
+image/png; open <span class="org-string">'%s'</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc5e0c46" class="outline-3">
+<h3 id="orgc5e0c46">MSMTP</h3>
+<div class="outline-text-3" id="text-orgc5e0c46">
+<p>
+With <a href="https://marlam.de/msmtp/">MSMTP</a> you can specify multiple SMTP servers to be used. You set a
+default account that will be used when you are not replying and you
+set up Emacs to instruct which server to use upon reply. <a href="https://notmuchmail.org/emacstips/#index11h2">Multiple
+accounts with Notmuch</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">defaults
+auth on
+protocol smtp
+tls on
+
+account softwarelab
+host smtp.gmail.com
+port 465
+user henrik.kjerringvaag@softwarelab.no
+passwordeval <span class="org-string">"security find-internet-password -s imap.gmail.com -r imap -a henrik.kjerringvaag@softwarelab.no -w"</span>
+tls_starttls off
+from henrik.kjerringvaag@softwarelab.no
+
+account default : softwarelab
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

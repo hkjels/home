@@ -1,7 +1,7 @@
 * ~
 
 This repository contains the lion's share of the configuration-files
-that I use on my boxes. It's written in a literate style using
+that I use on my boxes. It's written in a literate style with
 [[https://orgmode.org][org-mode]], so it can be read almost like a book.
 
 [[https://hkjels.github.com/home/][Read it?]]
@@ -27,19 +27,10 @@ make install
 * Dependencies
 
 #+name: deps
-- aspell
 - autoconf
 - automake
-- babashka
 - bat
-- burl
-- ccls
-- clang-format
-- clj-kondo
-- clojure
-- ditaa
 - exa
-- exiftool
 - fzf
 - git
 - git-fresh
@@ -49,17 +40,16 @@ make install
 - hr
 - htop
 - hub
-- ispell
 - mas
 - nmap
-- ripgrep
-- rust
-- rust-analyzer
 - sloc
 - starship
+- thefuck
+- tldr
 - tmux
 - topgrade
 - trash
+- tree
 - wtf
 - z
 - zsh
@@ -71,17 +61,23 @@ make install
 - zydis
 
 #+name: casks
-- android-studio
 - imageoptim
+- numi
+- origami-studio
+- sketch
 - slack
+- sourcetrail
 
 #+name: macapps
-|  424389933 | Final Cut Pro                 |
-| 1289583905 | Pixelmator Pro                |
-|  419330170 | Moom                          |
+| 1287239339 | ColorSlurp                    |
+|  424390742          | Compressor                    |
 | 1482920575 | DuckDuckGo Privacy Essentials |
-|  497799835 | Xcode                         |
+|  424389933 | Final Cut Pro                 |
 |  990588172 | Gestimer                      |
+|  419330170 | Moom                          |
+| 1289583905 | Pixelmator Pro                |
+| 1482454543 | Twitter                       |
+|  497799835 | Xcode                         |
 
 #+name: brew
 #+begin_src emacs-lisp :var deps=deps
@@ -107,19 +103,24 @@ make install
 #+begin_src ruby :tangle Brewfile :noweb yes
 tap "homebrew/cask"
 tap "borkdude/brew"
-tap "clojure-lsp/brew"
+#+end_src
 
-# Brews are libraries and commandline interfaces
-# Often brews are bottled, meaning installation is just about
-# downloading to a location that's on your PATH
+Brews are libraries and commandline interfaces.
+Often brews are bottled, meaning installation is just about
+downloading to a location that's on your ~PATH~.
+#+begin_src ruby  :tangle Brewfile :noweb yes :comments org
 <<brew()>>
+#+end_src
 
-# Casks are executables that can not be found in the Appstore
-# There are also some resources like fonts available as Casks
+Casks are executables that can not be found in the Appstore.
+There are also some resources like fonts available as Casks.
+#+begin_src ruby  :tangle Brewfile :noweb yes :comments org
 <<cask()>>
+#+end_src
 
-# With Mas we can download applications from the Appstore from the
-# commandline
+With using ~Mas~ we can download applications from the Appstore directly
+from the commandline.
+#+begin_src ruby  :tangle Brewfile :noweb yes :comments org
 <<mas()>>
 #+end_src
 

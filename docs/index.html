@@ -3,231 +3,25 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-02 Tue 10:58 -->
+<!-- 2022-09-26 Mon 10:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Home</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="Henrik Kjerringvåg" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
+<meta name="generator" content="Org Mode" />
 <link rel="stylesheet" href="css/docs.css"><script src="js/docs.js"></script>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Home</h1>
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3ded8bf">Shell</a></li>
-<li><a href="#org4102e83">Git</a></li>
-<li><a href="#org43a2866">Tmux</a></li>
-<li><a href="#org70aadcf">License</a></li>
+<li><a href="#org9a99083">Shell</a></li>
+<li><a href="#org347bd56">Git</a></li>
+<li><a href="#org8f10998">Tmux</a></li>
+<li><a href="#org0a855c0">License</a></li>
 </ul>
 </div>
 </div>
@@ -238,9 +32,9 @@ someone extraordinary; such as yourself, come to visit.
 
 <a title="link to repo" class="github" href="https://github.com/hkjels/home/"><img src="./images/github.png"></a>
 <main>
-<div id="outline-container-org3ded8bf" class="outline-2">
-<h2 id="org3ded8bf">Shell</h2>
-<div class="outline-text-2" id="text-org3ded8bf">
+<div id="outline-container-org9a99083" class="outline-2">
+<h2 id="org9a99083">Shell</h2>
+<div class="outline-text-2" id="text-org9a99083">
 <p>
 Most of my shell-configuration is compatible with various shell's. I
 typically use <code>eshell</code>, but I sometimes dabble with both <code>bash</code> and <code>zsh</code>,
@@ -255,9 +49,9 @@ overrides.
 </p>
 </div>
 
-<div id="outline-container-org403170c" class="outline-3">
-<h3 id="org403170c">Environment</h3>
-<div class="outline-text-3" id="text-org403170c">
+<div id="outline-container-org6523df9" class="outline-3">
+<h3 id="org6523df9">Environment</h3>
+<div class="outline-text-3" id="text-org6523df9">
 <p>
 Before doing much, we need some environment-variables set. The most
 important one being the <code>PATH</code>-variable. The <code>PATH</code> is used by your shell
@@ -270,11 +64,11 @@ For MacOS, there's now a utility for maintaining the <code>PATH</code> named
 <code>path-helper</code>. It will look for paths in <code>/etc/paths,</code> <code>/etc/paths.d</code> &amp; <code>/etc/manpaths.d</code>,
 so I think you can have almost automatic <code>PATH</code>-handling by setting that
 up. I do however like having full control and consistent behavior
-between environments. That's why I've created a <a href="#org3fcd4bc">table</a> that I construct
+between environments. That's why I've created a <a href="#orgeaa608b">table</a> that I construct
 environment-variables from, as you can see below.
 </p>
 
-<table id="org3fcd4bc" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgeaa608b" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -284,13 +78,53 @@ environment-variables from, as you can see below.
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">ANDROID<sub>HOME</sub></td>
+<td class="org-left">CARGO<sub>HOME</sub></td>
+<td class="org-left">$HOME/.cargo</td>
+</tr>
+
+<tr>
+<td class="org-left">ANDROID<sub>SDK</sub><sub>ROOT</sub></td>
 <td class="org-left">$HOME/Library/Android/sdk</td>
 </tr>
 
 <tr>
 <td class="org-left">JAVA<sub>HOME</sub></td>
-<td class="org-left">$(/usr/libexec/java<sub>home</sub> -v 1.8.0<sub>202</sub>)</td>
+<td class="org-left">$(/usr/libexec/java<sub>home</sub> -v11)</td>
+</tr>
+
+<tr>
+<td class="org-left">RUSTUP<sub>HOME</sub></td>
+<td class="org-left">$HOME/.rustup</td>
+</tr>
+
+<tr>
+<td class="org-left">CLASSPATH</td>
+<td class="org-left">$HOME/jdt-language-server/plugins/org.eclipse.equinox.launcher<sub>1.6.200.v20210416</sub>-2027.jar</td>
+</tr>
+
+<tr>
+<td class="org-left">CLASSPATH</td>
+<td class="org-left">$ANDROID<sub>SDK</sub><sub>ROOT</sub>/platforms/android-30/android.jar</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$ANDROID<sub>SDK</sub><sub>ROOT</sub>/emulator</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$ANDROID<sub>SDK</sub><sub>ROOT</sub>/platform-tools</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$ANDROID<sub>SDK</sub><sub>ROOT</sub>/tools</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$ANDROID<sub>SDK</sub><sub>ROOT</sub>/tools/bin</td>
 </tr>
 
 <tr>
@@ -300,17 +134,17 @@ environment-variables from, as you can see below.
 
 <tr>
 <td class="org-left">PATH</td>
-<td class="org-left">/usr/local/lib/ruby/gems/2.7.0/bin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
 <td class="org-left">$HOME/.local/bin</td>
 </tr>
 
 <tr>
 <td class="org-left">PATH</td>
-<td class="org-left">$JAVA<sub>HOME</sub>/bin</td>
+<td class="org-left">$HOME/.ghcup/bin</td>
+</tr>
+
+<tr>
+<td class="org-left">PATH</td>
+<td class="org-left">$CARGO/bin</td>
 </tr>
 
 <tr>
@@ -319,122 +153,27 @@ environment-variables from, as you can see below.
 </tr>
 
 <tr>
-<td class="org-left">PATH</td>
-<td class="org-left">/usr/local/opt/ruby/bin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">/bin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">/sbin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">/usr/bin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">/usr/sbin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">/usr/X11/bin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">/usr/local/sbin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">/usr/local/opt/texinfo/bin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">/usr/local/opt/libxml2/bin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">/Library/TeX/texbin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">/opt/X11/bin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">/usr/local/opt/llvm/bin</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">$HOME/.cargo</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">$ANDROID<sub>HOME</sub>/platform-tools</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">$ANDROID<sub>HOME</sub>/tools</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">$ANDROID<sub>HOME</sub>/emulator</td>
-</tr>
-
-<tr>
-<td class="org-left">PATH</td>
-<td class="org-left">$ANDROID<sub>HOME</sub>/tools/bin</td>
-</tr>
-
-<tr>
 <td class="org-left">MANPATH</td>
-<td class="org-left">/usr/share/man</td>
+<td class="org-left">/opt/homebrew/opt/erlang/lib/erlang/man</td>
 </tr>
 
 <tr>
-<td class="org-left">MANPATH</td>
-<td class="org-left">/usr/local/share/man</td>
-</tr>
-
-<tr>
-<td class="org-left">MANPATH</td>
-<td class="org-left">/opt/X11/share/man</td>
-</tr>
-
-<tr>
-<td class="org-left">MANPATH</td>
-<td class="org-left"><i>Library/TeX/Distributions</i>.DefaultTeX/Contents/Man</td>
+<td class="org-left">GRAB<sub>HOME</sub></td>
+<td class="org-left">$HOME/Projects</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-orgf3781a0" class="outline-3">
-<h3 id="orgf3781a0">Login</h3>
-<div class="outline-text-3" id="text-orgf3781a0">
+<div id="outline-container-org0683fb4" class="outline-3">
+<h3 id="org0683fb4">Login</h3>
+<div class="outline-text-3" id="text-org0683fb4">
 <p>
 A login shell is the first shell ran with your user-id. So in this
 shell we would only set up environment and don't bother with <a href="https://en.wikipedia.org/wiki/Text-based_user_interface">TUI</a>.
 </p>
-<table id="orgf9694ee" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orge1c4f23" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -502,21 +241,30 @@ shell we would only set up environment and don't bother with <a href="https://en
 <td class="org-left">MANPAGER</td>
 <td class="org-left">$PAGER</td>
 </tr>
+
+<tr>
+<td class="org-left">HISTSIZE</td>
+<td class="org-left">10000</td>
+</tr>
+
+<tr>
+<td class="org-left">HISTFILE</td>
+<td class="org-left">$HOME/.history</td>
+</tr>
 </tbody>
 </table>
 
 <p>
 There's a shortcoming in <code>zsh</code> of how it treats <code>$EDITOR</code>, where it cannot
 have any flags or arguments. We circumvent this by calling a
-wrapper-script.
-<i>Notice that the command is also sent to the background to avoid the
-sticky message about waiting for Emacs.</i>
+wrapper-script. This wrapper also allows Emacs to be used when piping
+commands.
 </p>
 </div>
 </div>
-<div id="outline-container-org1e139f7" class="outline-3">
-<h3 id="org1e139f7">Interactive</h3>
-<div class="outline-text-3" id="text-org1e139f7">
+<div id="outline-container-orgecd1461" class="outline-3">
+<h3 id="orgecd1461">Interactive</h3>
+<div class="outline-text-3" id="text-orgecd1461">
 <p>
 An interactive shell is what you get when you boot up a
 terminal. Typically you would want utility-functions, aliases and
@@ -597,6 +345,9 @@ provide any arguments. Navigating this way is very efficient.
 into the candidate you choose.
 <br />
 <br />
+<code>fh</code> makes command-history fuzzy-searchable
+<br />
+<br />
 At my current workplace, we use Jira. I've made a few functions that
 makes it a little less annoying <br />
 <code>jc</code>, you can think of as (j)ira-(c)hange. It is for changing the status of a ticket.
@@ -617,10 +368,10 @@ compiled and your terminal will support 24-bit colors.
 <br />
 </p>
 </div>
-<div id="outline-container-orgcb9e5f2" class="outline-4">
-<h4 id="orgcb9e5f2">Aliases</h4>
-<div class="outline-text-4" id="text-orgcb9e5f2">
-<table id="orgaefe185" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org32b6393" class="outline-4">
+<h4 id="org32b6393">Aliases</h4>
+<div class="outline-text-4" id="text-org32b6393">
+<table id="org7098172" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -701,7 +452,7 @@ compiled and your terminal will support 24-bit colors.
 
 <tr>
 <td class="org-left">f</td>
-<td class="org-left">find . -iname</td>
+<td class="org-left">fd</td>
 </tr>
 
 <tr>
@@ -777,6 +528,11 @@ compiled and your terminal will support 24-bit colors.
 <tr>
 <td class="org-left">path</td>
 <td class="org-left">echo -e ${PATH//:/\\n}</td>
+</tr>
+
+<tr>
+<td class="org-left">please</td>
+<td class="org-left">sudo</td>
 </tr>
 
 <tr>
@@ -858,6 +614,11 @@ compiled and your terminal will support 24-bit colors.
 <td class="org-left">~</td>
 <td class="org-left">cd ~</td>
 </tr>
+
+<tr>
+<td class="org-left">deeplink</td>
+<td class="org-left">adb shell am start -W -a android.intent.action.VIEW -d</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -865,9 +626,9 @@ compiled and your terminal will support 24-bit colors.
 </div>
 </div>
 
-<div id="outline-container-org4102e83" class="outline-2">
-<h2 id="org4102e83">Git</h2>
-<div class="outline-text-2" id="text-org4102e83">
+<div id="outline-container-org347bd56" class="outline-2">
+<h2 id="org347bd56">Git</h2>
+<div class="outline-text-2" id="text-org347bd56">
 <p>
 These are global git-configurations that people most often set using
 <code>git config --global</code>. Since those would be overwritten upon tangling
@@ -876,116 +637,116 @@ manually add to <code>~/.gitconfig.local</code> instead.
 </p>
 </div>
 
-<div id="outline-container-org763a73a" class="outline-3">
-<h3 id="org763a73a">Custom functionality</h3>
-<div class="outline-text-3" id="text-org763a73a">
+<div id="outline-container-org0c088a3" class="outline-3">
+<h3 id="org0c088a3">Custom functionality</h3>
+<div class="outline-text-3" id="text-org0c088a3">
 </div>
-<div id="outline-container-org5011206" class="outline-4">
-<h4 id="org5011206">Words diff</h4>
-<div class="outline-text-4" id="text-org5011206">
+<div id="outline-container-org35b68e9" class="outline-4">
+<h4 id="org35b68e9">Words diff</h4>
+<div class="outline-text-4" id="text-org35b68e9">
 <p>
 Will get the number of words that's been changed. This is useful if
 you use a service like ex. Crowdin for translations, where they charge
 for number of words translated.
 </p>
 <div class="org-src-container">
-<pre class="src src-shell">#!/bin/sh
-set -euo pipefail
+<pre class="src src-shell"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">sh</span>
+<span class="org-builtin">set</span> -euo pipefail
 
-function usage {
+<span class="org-keyword">function</span> <span class="org-function-name">usage</span> {
   cat &lt;&lt; EOT
 
-  Usage: git words-diff [options] [&lt;commit&gt;] [--] [&lt;path&gt;...]
+<span class="org-sh-heredoc">  Usage: git words-diff [options] [&lt;commit&gt;] [--] [&lt;path&gt;...]</span>
 
-  Options:
+<span class="org-sh-heredoc">  Options:</span>
 
-    -h, --help     output usage information
+<span class="org-sh-heredoc">    -h, --help     output usage information</span>
 
-EOT
+<span class="org-sh-heredoc">EOT</span>
 }
 
-function git_words_added {
-    git diff --word-diff=porcelain "$@" | grep -e "^+[^+]" | wc -w | xargs
+<span class="org-keyword">function</span> <span class="org-function-name">git_words_added</span> {
+    git diff --word-diff=porcelain <span class="org-string">"$@"</span> | grep -e <span class="org-string">"^+[^+]"</span> | wc -w | xargs
 }
 
-function git_words_removed {
-    git diff --word-diff=porcelain "$@" | grep -e "^-[^-]" | wc -w | xargs
+<span class="org-keyword">function</span> <span class="org-function-name">git_words_removed</span> {
+    git diff --word-diff=porcelain <span class="org-string">"$@"</span> | grep -e <span class="org-string">"^-[^-]"</span> | wc -w | xargs
 }
 
-function git_words_diff {
-    echo $(($(git_words_added "$@") - $(git_words_removed "$@")))
+<span class="org-keyword">function</span> <span class="org-function-name">git_words_diff</span> {
+    <span class="org-builtin">echo</span> $(($(git_words_added <span class="org-string">"$@"</span>) - $(git_words_removed <span class="org-string">"$@"</span>)))
 }
 
-while test $# -ne 0; do
-  arg=$1; shift
-  case $arg in
+<span class="org-keyword">while</span> test $<span class="org-variable-name">#</span> -ne 0; <span class="org-keyword">do</span>
+  <span class="org-variable-name">arg</span>=$<span class="org-variable-name">1</span>; <span class="org-builtin">shift</span>
+  <span class="org-keyword">case</span> $<span class="org-variable-name">arg</span><span class="org-keyword"> in</span>
     -h|--help)
       usage
-      exit 0
+      <span class="org-keyword">exit</span> 0
       ;;
     *)
-      echo "Words added:   $(git_words_added $arg $@)"
-      echo "Words removed: $(git_words_removed $arg $@)"
-      echo "Sum:           $(git_words_diff $arg $@)"
-      break;
+      <span class="org-builtin">echo</span> <span class="org-string">"Words added:   $(git_words_added $arg $@)"</span>
+      <span class="org-builtin">echo</span> <span class="org-string">"Words removed: $(git_words_removed $arg $@)"</span>
+      <span class="org-builtin">echo</span> <span class="org-string">"Sum:           $(git_words_diff $arg $@)"</span>
+      <span class="org-keyword">break</span>;
       ;;
-  esac
-done
+  <span class="org-keyword">esac</span>
+<span class="org-keyword">done</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org70eb1ec" class="outline-4">
-<h4 id="org70eb1ec">Who am I</h4>
-<div class="outline-text-4" id="text-org70eb1ec">
+<div id="outline-container-org68b024b" class="outline-4">
+<h4 id="org68b024b">Who am I</h4>
+<div class="outline-text-4" id="text-org68b024b">
 <p>
 Run <code>git whoami</code> to see what's your user local to the repository you're in.
 </p>
 <div class="org-src-container">
-<pre class="src src-shell">#!/bin/sh
+<pre class="src src-shell"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">sh</span>
 
-# git-whoami
-# Author: Peter Eisentraut &lt;peter@eisentraut.org&gt;
-# Created: 2011-10-27
-# License: WTFPL; see http://sam.zoy.org/wtfpl/
+<span class="org-comment-delimiter"># </span><span class="org-comment">git-whoami</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Author: Peter Eisentraut <a href="mailto:peter%40eisentraut.org">&lt;peter@eisentraut.org&gt;</a></span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Created: 2011-10-27</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">License: WTFPL; see http://sam.zoy.org/wtfpl/</span>
 
-# exact logic in ident.c in git source tree
+<span class="org-comment-delimiter"># </span><span class="org-comment">exact logic in ident.c in git source tree</span>
 
-set -e
+<span class="org-builtin">set</span> -e
 
-get_email() {
-	git config user.email || ( [ -n "$EMAIL" ] &amp;&amp; echo "$EMAIL" ) || echo "$(id -nu)@$(hostname --fqdn)"
+<span class="org-function-name">get_email</span>() {
+        git config user.email || ( [ -n <span class="org-string">"$EMAIL"</span> ] &amp;&amp; <span class="org-builtin">echo</span> <span class="org-string">"$EMAIL"</span> ) || <span class="org-builtin">echo</span> <span class="org-string">"$(id -nu)@$(hostname --fqdn)"</span>
 }
 
-get_name() {
-	git config user.name || getent passwd $(id -un) | cut -d : -f 5 | cut -d , -f 1
+<span class="org-function-name">get_name</span>() {
+        git config user.name || getent passwd $(id -un) | cut -d : -f 5 | cut -d , -f 1
 }
 
-: ${GIT_AUTHOR_NAME=$(get_name)}
-: ${GIT_COMMITTER_NAME=$(get_name)}
-: ${GIT_AUTHOR_EMAIL=$(get_email)}
-: ${GIT_COMMITTER_EMAIL=$(get_email)}
+: ${<span class="org-variable-name">GIT_AUTHOR_NAME</span>=$(get_name)}
+: ${<span class="org-variable-name">GIT_COMMITTER_NAME</span>=$(get_name)}
+: ${<span class="org-variable-name">GIT_AUTHOR_EMAIL</span>=$(get_email)}
+: ${<span class="org-variable-name">GIT_COMMITTER_EMAIL</span>=$(get_email)}
 
-author="$GIT_AUTHOR_NAME &lt;$GIT_AUTHOR_EMAIL&gt;"
-commit="$GIT_COMMITTER_NAME &lt;$GIT_COMMITTER_EMAIL&gt;"
+<span class="org-variable-name">author</span>=<span class="org-string">"$GIT_AUTHOR_NAME &lt;$GIT_AUTHOR_EMAIL&gt;"</span>
+<span class="org-variable-name">commit</span>=<span class="org-string">"$GIT_COMMITTER_NAME &lt;$GIT_COMMITTER_EMAIL&gt;"</span>
 
-if [ "$author" = "$commit" ]; then
-	echo "$author"
-else
-	echo "Author: $author"
-	echo "Commit: $commit"
-fi
+<span class="org-keyword">if</span> [ <span class="org-string">"$author"</span> = <span class="org-string">"$commit"</span> ]; <span class="org-keyword">then</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"$author"</span>
+<span class="org-keyword">else</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"Author: $author"</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"Commit: $commit"</span>
+<span class="org-keyword">fi</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org6bd0f0a" class="outline-3">
-<h3 id="org6bd0f0a">Core</h3>
-<div class="outline-text-3" id="text-org6bd0f0a">
-<table id="org8b3d43e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org5ef8bd0" class="outline-3">
+<h3 id="org5ef8bd0">Core</h3>
+<div class="outline-text-3" id="text-org5ef8bd0">
+<table id="org03b917b" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1004,10 +765,10 @@ fi
 </div>
 
 
-<div id="outline-container-org1c0f950" class="outline-3">
-<h3 id="org1c0f950">Alias</h3>
-<div class="outline-text-3" id="text-org1c0f950">
-<table id="org4a6f41d" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org8617896" class="outline-3">
+<h3 id="org8617896">Alias</h3>
+<div class="outline-text-3" id="text-org8617896">
+<table id="org5b604a3" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1300,16 +1061,31 @@ fi
 <td class="org-left">update</td>
 <td class="org-left">pull &#x2013;rebase</td>
 </tr>
+
+<tr>
+<td class="org-left">fix</td>
+<td class="org-left">!TARGET=$(git log &#x2013;oneline ¦ fzf ¦ awk '{print $1}') &amp;&amp; git commit &#x2013;fixup=$TARGET &amp;&amp; GIT<sub>SEQUENCE</sub><sub>EDITOR</sub>=: git rebase -i &#x2013;autostash &#x2013;autosquash $TARGET~</td>
+</tr>
+
+<tr>
+<td class="org-left">ico</td>
+<td class="org-left">!git checkout $(git branch ¦ fzf)</td>
+</tr>
+
+<tr>
+<td class="org-left">icor</td>
+<td class="org-left">!git checkout $(git branch -r ¦ fzf)</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
 
 
-<div id="outline-container-orge71ba1c" class="outline-3">
-<h3 id="orge71ba1c">Color</h3>
-<div class="outline-text-3" id="text-orge71ba1c">
-<table id="orgf421b8d" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgcf48daa" class="outline-3">
+<h3 id="orgcf48daa">Color</h3>
+<div class="outline-text-3" id="text-orgcf48daa">
+<table id="orgbc39ca3" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1343,10 +1119,10 @@ fi
 </div>
 
 
-<div id="outline-container-org8a2536f" class="outline-3">
-<h3 id="org8a2536f">Credential</h3>
-<div class="outline-text-3" id="text-org8a2536f">
-<table id="org345d417" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org59dd3e7" class="outline-3">
+<h3 id="org59dd3e7">Credential</h3>
+<div class="outline-text-3" id="text-org59dd3e7">
+<table id="org5f0607f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1365,10 +1141,10 @@ fi
 </div>
 
 
-<div id="outline-container-org8057bf5" class="outline-3">
-<h3 id="org8057bf5">Status</h3>
-<div class="outline-text-3" id="text-org8057bf5">
-<table id="org59546c6" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org342b147" class="outline-3">
+<h3 id="org342b147">Status</h3>
+<div class="outline-text-3" id="text-org342b147">
+<table id="orgaf7baf0" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1387,10 +1163,10 @@ fi
 </div>
 
 
-<div id="outline-container-org8ccd6fb" class="outline-3">
-<h3 id="org8ccd6fb">Diff</h3>
-<div class="outline-text-3" id="text-org8ccd6fb">
-<table id="orgae60be7" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orga8ff120" class="outline-3">
+<h3 id="orga8ff120">Diff</h3>
+<div class="outline-text-3" id="text-orga8ff120">
+<table id="org12f8e37" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1399,6 +1175,11 @@ fi
 <col  class="org-left" />
 </colgroup>
 <tbody>
+<tr>
+<td class="org-left">tool</td>
+<td class="org-left">difftastic</td>
+</tr>
+
 <tr>
 <td class="org-left">mnemonicprefix</td>
 <td class="org-left">true</td>
@@ -1411,7 +1192,23 @@ fi
 </tbody>
 </table>
 
-<table id="org7460c88" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org51bb5fd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">cmd</td>
+<td class="org-left">difftastic "$LOCAL" "$REMOTE"</td>
+</tr>
+</tbody>
+</table>
+
+<table id="orga92c8d3" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1427,7 +1224,7 @@ fi
 </tbody>
 </table>
 
-<table id="org894eeeb" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orga194bc7" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1446,10 +1243,31 @@ fi
 </div>
 
 
-<div id="outline-container-org778840a" class="outline-3">
-<h3 id="org778840a">Push</h3>
-<div class="outline-text-3" id="text-org778840a">
-<table id="orgd595d57" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgf7abc7a" class="outline-3">
+<h3 id="orgf7abc7a">Pager</h3>
+<div class="outline-text-3" id="text-orgf7abc7a">
+<table id="org7226cce" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">difftool</td>
+<td class="org-left">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgd79902f" class="outline-3">
+<h3 id="orgd79902f">Push</h3>
+<div class="outline-text-3" id="text-orgd79902f">
+<table id="org9964410" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1473,10 +1291,10 @@ fi
 </div>
 
 
-<div id="outline-container-org7a33139" class="outline-3">
-<h3 id="org7a33139">Pull</h3>
-<div class="outline-text-3" id="text-org7a33139">
-<table id="orgd4101be" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org4b1da26" class="outline-3">
+<h3 id="org4b1da26">Pull</h3>
+<div class="outline-text-3" id="text-org4b1da26">
+<table id="org0d96f30" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1495,10 +1313,10 @@ fi
 </div>
 
 
-<div id="outline-container-org7d732bb" class="outline-3">
-<h3 id="org7d732bb">Commit</h3>
-<div class="outline-text-3" id="text-org7d732bb">
-<table id="org2fb07c6" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgd9eb7ed" class="outline-3">
+<h3 id="orgd9eb7ed">Commit</h3>
+<div class="outline-text-3" id="text-orgd9eb7ed">
+<table id="org8f7281b" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1509,7 +1327,7 @@ fi
 <tbody>
 <tr>
 <td class="org-left">gpgSign</td>
-<td class="org-left">true</td>
+<td class="org-left">false</td>
 </tr>
 </tbody>
 </table>
@@ -1517,10 +1335,10 @@ fi
 </div>
 
 
-<div id="outline-container-org7b018ec" class="outline-3">
-<h3 id="org7b018ec">Fetch</h3>
-<div class="outline-text-3" id="text-org7b018ec">
-<table id="org0817325" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org9c9ba34" class="outline-3">
+<h3 id="org9c9ba34">Fetch</h3>
+<div class="outline-text-3" id="text-org9c9ba34">
+<table id="org7f4266f" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1539,10 +1357,10 @@ fi
 </div>
 
 
-<div id="outline-container-org4eb48a9" class="outline-3">
-<h3 id="org4eb48a9">GC</h3>
-<div class="outline-text-3" id="text-org4eb48a9">
-<table id="org8d5366c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org220e0ea" class="outline-3">
+<h3 id="org220e0ea">GC</h3>
+<div class="outline-text-3" id="text-org220e0ea">
+<table id="org5635c6e" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1566,10 +1384,10 @@ fi
 </div>
 
 
-<div id="outline-container-orgff0ac24" class="outline-3">
-<h3 id="orgff0ac24">Branch</h3>
-<div class="outline-text-3" id="text-orgff0ac24">
-<table id="org7736d2a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org76428b8" class="outline-3">
+<h3 id="org76428b8">Branch</h3>
+<div class="outline-text-3" id="text-org76428b8">
+<table id="org1fa5452" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1588,10 +1406,10 @@ fi
 </div>
 
 
-<div id="outline-container-org7efa4b0" class="outline-3">
-<h3 id="org7efa4b0">Grep</h3>
-<div class="outline-text-3" id="text-org7efa4b0">
-<table id="org1cf800c" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgf7df86e" class="outline-3">
+<h3 id="orgf7df86e">Grep</h3>
+<div class="outline-text-3" id="text-orgf7df86e">
+<table id="org679f307" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1615,10 +1433,10 @@ fi
 </div>
 
 
-<div id="outline-container-orgd2efd6d" class="outline-3">
-<h3 id="orgd2efd6d">Filters</h3>
-<div class="outline-text-3" id="text-orgd2efd6d">
-<table id="orgc1c817a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org5c015d5" class="outline-3">
+<h3 id="org5c015d5">Filters</h3>
+<div class="outline-text-3" id="text-org5c015d5">
+<table id="org6078b70" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1644,7 +1462,7 @@ fi
 </tbody>
 </table>
 
-<table id="org2e88523" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="orgd2515df" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1678,10 +1496,10 @@ fi
 </div>
 
 
-<div id="outline-container-orgb4782f2" class="outline-3">
-<h3 id="orgb4782f2">Magit</h3>
-<div class="outline-text-3" id="text-orgb4782f2">
-<table id="orge1f6267" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-orgcb0aaec" class="outline-3">
+<h3 id="orgcb0aaec">Magit</h3>
+<div class="outline-text-3" id="text-orgcb0aaec">
+<table id="orgd1adbc6" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1700,10 +1518,10 @@ fi
 </div>
 
 
-<div id="outline-container-orgb292b43" class="outline-3">
-<h3 id="orgb292b43">Apply</h3>
-<div class="outline-text-3" id="text-orgb292b43">
-<table id="org0c792cd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org60927d6" class="outline-3">
+<h3 id="org60927d6">Apply</h3>
+<div class="outline-text-3" id="text-org60927d6">
+<table id="org08724dd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1722,10 +1540,10 @@ fi
 </div>
 
 
-<div id="outline-container-org3cab773" class="outline-3">
-<h3 id="org3cab773">Merge</h3>
-<div class="outline-text-3" id="text-org3cab773">
-<table id="orgf648125" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div id="outline-container-org22d2d83" class="outline-3">
+<h3 id="org22d2d83">Merge</h3>
+<div class="outline-text-3" id="text-org22d2d83">
+<table id="org09378c9" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1738,20 +1556,25 @@ fi
 <td class="org-left">conflictstyle</td>
 <td class="org-left">diff3</td>
 </tr>
+
+<tr>
+<td class="org-left">tool</td>
+<td class="org-left">ediff</td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
 
 
-<div id="outline-container-orgd6766c2" class="outline-3">
-<h3 id="orgd6766c2">Transfer</h3>
-<div class="outline-text-3" id="text-orgd6766c2">
+<div id="outline-container-orge2c8161" class="outline-3">
+<h3 id="orge2c8161">Transfer</h3>
+<div class="outline-text-3" id="text-orge2c8161">
 <p>
 We validate objects and their connection to commits before
 transferring.
 </p>
-<table id="org9e6acf4" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org8210bfd" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1769,14 +1592,15 @@ transferring.
 </div>
 </div>
 
-<div id="outline-container-orgfba9252" class="outline-3">
-<h3 id="orgfba9252">Include</h3>
-<div class="outline-text-3" id="text-orgfba9252">
+
+<div id="outline-container-org7743f4a" class="outline-3">
+<h3 id="org7743f4a">Include</h3>
+<div class="outline-text-3" id="text-org7743f4a">
 <p>
 We use a separate file for configurations that should not be pushed to
 a remote. Could be for security purposes.
 </p>
-<table id="orgbcb3cad" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table id="org767b0e9" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1794,95 +1618,82 @@ a remote. Could be for security purposes.
 </div>
 </div>
 </div>
-<div id="outline-container-org43a2866" class="outline-2">
-<h2 id="org43a2866">Tmux</h2>
-<div class="outline-text-2" id="text-org43a2866">
+<div id="outline-container-org8f10998" class="outline-2">
+<h2 id="org8f10998">Tmux</h2>
+<div class="outline-text-2" id="text-org8f10998">
 </div>
-<div id="outline-container-org96486d4" class="outline-3">
-<h3 id="org96486d4">Configuration</h3>
-<div class="outline-text-3" id="text-org96486d4">
+<div id="outline-container-org9b82b88" class="outline-3">
+<h3 id="org9b82b88">Configuration</h3>
+<div class="outline-text-3" id="text-org9b82b88">
 <div class="org-src-container">
-<pre class="src src-conf"># Home. PC configuration files
-# Copyright (C) 2021  Henrik Kjerringvåg
-# 
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-# 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# 
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+<pre class="src src-conf"><span class="org-comment-delimiter"># </span><span class="org-comment">Home. PC configuration files</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Copyright (C) 2022  Henrik Kjerringv&#229;g</span>
+<span class="org-comment-delimiter"># </span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">This program is free software: you can redistribute it and/or modify</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">it under the terms of the GNU General Public License as published by</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">the Free Software Foundation, either version 3 of the License, or</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">(at your option) any later version.</span>
+<span class="org-comment-delimiter"># </span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">This program is distributed in the hope that it will be useful,</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">GNU General Public License for more details.</span>
+<span class="org-comment-delimiter"># </span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">You should have received a copy of the GNU General Public License</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">along with this program.  If not, see <a href="https://www.gnu.org/licenses/">&lt;https://www.gnu.org/licenses/&gt;</a>.</span>
 
 set -g mouse on
 set -g mode-keys vi
 set -g history-limit 10000
 
-# Plugins
-set -g @tpm_plugins "                 \
-  tmux-plugins/tpm                    \
-  tmux-plugins/tmux-copycat           \
-  tmux-plugins/tmux-open              \
-  tmux-plugins/tmux-pain-control      \
-  tmux-plugins/tmux-prefix-highlight  \
-  tmux-plugins/tmux-resurrect         \
-  tmux-plugins/tmux-sensible          \
-  tmux-plugins/tmux-yank              \
-"
+<span class="org-comment-delimiter"># </span><span class="org-comment">Plugins</span>
+set -g @plugin tmux-plugins/tpm
+set -g @plugin tmux-plugins/tmux-copycat
+set -g @plugin tmux-plugins/tmux-open
+set -g @plugin tmux-plugins/tmux-pain-control
+set -g @plugin tmux-plugins/tmux-prefix-highlight
+set -g @plugin tmux-plugins/tmux-resurrect
+set -g @plugin tmux-plugins/tmux-sensible
+set -g @plugin tmux-plugins/tmux-yank
+set -g @plugin roosta/tmux-fuzzback
 
-set -g @plugin 'roosta/tmux-fuzzback'
-
-# One indexed panes for easier switching
+<span class="org-comment-delimiter"># </span><span class="org-comment">One indexed panes for easier switching</span>
 set -g base-index 1
 
-# Smart pane switching with awareness of vim splits
-bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-h) || tmux select-pane -L"
-bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-j) || tmux select-pane -D"
-bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-k) || tmux select-pane -U"
-bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim &amp;&amp; tmux send-keys C-l) || tmux select-pane -R"
-
-# Vim clipboard
+<span class="org-comment-delimiter"># </span><span class="org-comment">MacOS clipboard</span>
 set -g default-shell $SHELL
-set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+set -g default-command <span class="org-string">"reattach-to-user-namespace -l ${SHELL}"</span>
 
-# Synchronize panes
+<span class="org-comment-delimiter"># </span><span class="org-comment">Synchronize panes</span>
 bind * set-window-option synchronize-pane
 
-# Refresh tmux
-bind r source-file ~/.tmux.conf
+<span class="org-comment-delimiter"># </span><span class="org-comment">Open an ssh-connection in another window</span>
+bind S command-prompt -p ssh: <span class="org-string">"new-window -n %1 'ssh %1'"</span>
 
-# Open an ssh-connection in another window
-bind S command-prompt -p ssh: "new-window -n %1 'ssh %1'"
-
-# Automatic window-naming
+<span class="org-comment-delimiter"># </span><span class="org-comment">Automatic window-naming</span>
 setw -g automatic-rename on
-setw -g automatic-rename-format '#{b:pane_current_path}'
+setw -g automatic-rename-format <span class="org-string">'#{b:pane_current_path}'</span>
 
-# Theme
+<span class="org-comment-delimiter"># </span><span class="org-comment">Theme</span>
 set -g status-interval 5
 set -g status-justify centre
-set-window-option -g window-status-current-format "| #I:#W "
-set -g status-left "#{prefix_highlight}"
-set -g status-right ""
-set -g status-style fg=white,bg=blue
+set-window-option -g window-status-current-format <span class="org-string">"| #I:#W "</span>
+set -g status-left <span class="org-string">"#{prefix_highlight}"</span>
+set -g status-right <span class="org-string">""</span>
 
-# Initialize package-manager
-run-shell "~/.tmux/plugins/tpm/tpm"
+<span class="org-comment-delimiter"># </span><span class="org-comment">Initialize package-manager</span>
+run-shell <span class="org-string">"~/.tmux/plugins/tpm/tpm"</span>
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org70aadcf" class="outline-2">
-<h2 id="org70aadcf">License</h2>
-<div class="outline-text-2" id="text-org70aadcf">
+<div id="outline-container-org0a855c0" class="outline-2">
+<h2 id="org0a855c0">License</h2>
+<div class="outline-text-2" id="text-org0a855c0">
 <div class="org-src-container">
-<pre class="src src-text" id="org2f0c435">Home. PC configuration files
-Copyright (C) 2021  Henrik Kjerringvåg
+<pre class="src src-text" id="org507cb37">Home. PC configuration files
+Copyright (C) 2022  Henrik Kjerringv&#229;g
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -1895,7 +1706,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.
+along with this program.  If not, see <a href="https://www.gnu.org/licenses/">&lt;https://www.gnu.org/licenses/&gt;</a>.
 </pre>
 </div>
 </main>
