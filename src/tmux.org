@@ -28,7 +28,7 @@ set -g base-index 1
 
 # MacOS clipboard
 set -g default-shell $SHELL
-set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+# set -g default-command "reattach-to-user-namespace -l ${SHELL}"
 
 # Synchronize panes
 bind * set-window-option synchronize-pane

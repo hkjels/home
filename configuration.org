@@ -133,6 +133,11 @@ h4 {
   line-height: 1.5em;
 }
 
+body,
+p {
+  text-wrap: pretty;
+}
+
 
 ,* {
   box-sizing: border-box;
@@ -292,6 +297,7 @@ h1,
 h2,
 h3,
 h4 {
+  text-wrap: balance;
   margin-top: 2em;
 }
 

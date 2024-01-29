@@ -1,14 +1,18 @@
-* Mail
 :properties:
 :header-args: :mkdirp yes
 :end:
+* Mail
+
 
 ** Accounts
 #+name: accounts
-| Name        | Username                           | Address                            | Inbound host         | Outbound host        |
-|-------------+------------------------------------+------------------------------------+----------------------+----------------------|
-| Privat      | hkjels                             | henrik@kjerringvag.no              | imap.mail.me.com:993 | smtp.mail.me.com:465 |
-| softwarelab | henrik.kjerringvaag@softwarelab.no | henrik.kjerringvaag@softwarelab.no | imap.gmail.com:993   | smtp.gmail.com:587   |
+| Name   | Username                   | Address                    | Inbound host              | Outbound host          |
+|--------+----------------------------+----------------------------+---------------------------+------------------------|
+| Privat | hkjels                     | henrik@kjerringvag.no      | imap.mail.me.com:993      | smtp.mail.me.com:465   |
+
+I haven't been able to set up my work mail due to missing delegate
+permissions. It will likely never happen ;(
+| DNV    | henrik.kjerringvag@dnv.com | henrik.kjerringvag@dnv.com | outlook.office365.com:993 | smtp.office365.com:587 |
 
 #+begin_src emacs-lisp :var accounts=accounts
 (let ((noted
@@ -28,7 +32,7 @@ henrik@kjerringvag.no
 
 #+name: work-mail
 #+begin_src text
-henrik.kjerringvaag@softwarelab.no
+henrik.kjerringvag@dnv.com
 #+end_src
 
 
@@ -73,23 +77,25 @@ Expunge Both
 SyncState *
 #+end_src
 
-*** Gmail IMAP-account
+*** TODO Office365 IMAP-account [0/1]
+
+- [ ] Check with GSS if I can get priveleges to run oauth2ms on our systems
 #+begin_src conf :noweb yes
-IMAPAccount softwarelab
-Host imap.gmail.com
-Port 993
-User henrik.kjerringvaag@softwarelab.no
-PassCmd "<<passCmd(host='imap.gmail.com', user='henrik.kjerringvaag@softwarelab.no')>>"
-AuthMechs LOGIN
-SSLType IMAPS
-SSLVersions TLSv1.2
+IMAPAccount dnv
+Host outlook.office365.com
+User henrik.kjerringvag@dnv.com
+PassCmd "oauth2ms --encode-xoauth2" #  --no-browser
+TLSType IMAPS
+TLSVersions +1.2
+AuthMechs XOAUTH2
 
-IMAPStore softwarelab-remote
-Account softwarelab
+IMAPStore dnv-remote
+Account dnv
 
-MaildirStore softwarelab-local
-Path ~/mail/softwarelab
-Inbox ~/mail/softwarelab/INBOX
+MaildirStore dnv-local
+Path ~/mail/dnv/
+Inbox ~/mail/dnv/INBOX
+Trash Trash
 SubFolders Verbatim
 #+end_src
 
@@ -99,10 +105,8 @@ IMAPAccount icloud
 Host imap.mail.me.com
 User hkjels
 PassCmd "<<passCmd(host='imap.mail.me.com', user='hkjels')>>"
-Port 993
-Timeout 0
-SSLType IMAPS
-SSLVersions TLSv1.2
+TLSType IMAPS
+TLSVersions -1.2
 AuthMechs LOGIN
 
 IMAPStore icloud-remote
@@ -117,6 +121,15 @@ SubFolders Verbatim
 
 *** Remote <-> local
 #+begin_src conf  
+Channel dnv-folders
+Far :dnv-remote:
+Near :dnv-local:
+Patterns "*" "!INBOX.Trash" "!INBOX.Spam" "!INBOX.Drafts"
+CopyArrivalDate yes
+
+Group dnv
+Channel dnv-folders
+
 Channel icloud-folders
 Far :icloud-remote:
 Near :icloud-local:
@@ -252,11 +265,55 @@ decrypt=true
 
 *** Hooks
 
-#+begin_src shell :tangle ~/.notmuch/hooks/post-new :noweb yes :chmod :tangle-mode (identity #o755)
+#+begin_src shell :tangle ~/.config/notmuch/hooks/post-new :noweb yes :chmod :tangle-mode (identity #o755)
 set -e
 notmuch tag +work -- tag:inbox and to:<<work-mail>>
-notmuch tag +emacs-devel -- tag:inbox and "from:*@gnu*org or to:*@gnu*org"
+notmuch tag +emacs-devel -- tag:inbox and "from:*@gnu*org or to:*@gnu*org or emacs-devel"
 notmuch tag -new -unread +muted thread:{tag:muted}
+#+end_src
+
+** Automatically sync changes
+:properties:
+:header-args: :mkdirp yes
+:end:
+
+#+begin_src shell :tangle ~/bin/check-mail :tangle-mode (identity #o744)
+echo "Synchronizing changes\n"
+mbsync -a
+echo ""
+
+echo "Indexing changes from the remote\n"
+notmuch new
+# FIXME Why do I have to explicitly run the post-hook?
+~/.notmuch/hooks/post-new 
+exit 0
+#+end_src
+
+#+begin_src conf :tangle ~/.config/systemd/user/check-mail.service
+[Unit]
+Description=check mail
+RefuseManualStart=no
+RefuseManualStop=yes
+
+[Service]
+Type=oneshot
+ExecStart=/home/bin/check-mail
+#+end_src
+
+#+begin_src conf :tangle ~/.config/systemd/user/check-mail.timer
+[Unit]
+Description=Check Mail every fifteen minutes
+RefuseManualStart=no
+RefuseManualStop=no
+
+[Timer]
+Persistent=false
+OnBootSec= 5min
+OnUnitActiveSec= 15min
+Unit=check-mail.service
+
+[Install]
+WantedBy=default.target
 #+end_src
 
 ** Mailcap
@@ -282,13 +339,13 @@ auth on
 protocol smtp
 tls on
 
-account softwarelab
-host smtp.gmail.com
-port 465
+account dnv
+host smtp.office365.com
+port 587
 user <<work-mail>>
-passwordeval "<<passCmd(host='imap.gmail.com', user='henrik.kjerringvaag@softwarelab.no')>>"
+passwordeval "<<passCmd(host='outlook.office365.com', user='henrik.kjerringvag@dnv.com)>>"
 tls_starttls off
 from <<work-mail>>
 
-account default : softwarelab
+account default : dnv
 #+end_src
